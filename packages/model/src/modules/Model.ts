@@ -9,9 +9,6 @@ import RelationDataInterface 	from "../interfaces/relationData";
 // Types
 import * as dynamicTypes from "../types/index";
 
-// Utils
-import foreignHandler from "../utils/foreignHandler";
-
 export default class Model {
 	// -------------------------------------------------
 	// Properties
@@ -19,7 +16,7 @@ export default class Model {
 
 	// static
 	public static $table		: string;
-	public static $primary		: string = "id";
+	public static $primary		 = "id";
 	public static $fields		: FieldInfoInterface[] = [];
 	public static $relations	: RelationDataInterface[] = [];
 
@@ -64,11 +61,15 @@ export default class Model {
 		return query().table(this.$table).parseResult((result: unknown) => {
 			if (Array.isArray(result)) {
 				return result.map(r => {
-					return new this({...r}, true);
+					const m = new this();
+					m.fill({...r});
+					m;
 				});
 			}
 
-			return new this({...(result as Record<string, unknown>)}, true);
+			const m = new this();
+			m.fill({...result as Record<string, unknown>});
+			return m;
 		}) as unknown as AbstractQuery<I>;
 	}
 
@@ -211,8 +212,12 @@ export default class Model {
 			this.$databaseInitialized = true;
 		}
 
+		const id_user;
+		
+
 		// update fields
-		this.fill(await query().table($table).where($primary, id).first());
+		const updatedFields = await query().table($table).where($primary, id).first();
+		if (updatedFields) this.fill(updatedFields);
 	}
 
 	public async delete () {
@@ -227,7 +232,7 @@ export default class Model {
 	}
 
 	public fill <T extends typeof Model, I = InstanceType<T>> (this:I, fields: Partial<Omit<I, keyof Model>> & {[k in string]: any}) {
-		const $allFields 		= (this.constructor.prototype as {$fields?: FieldInfoInterface[]}).$fields;
+		const $allFields 		= (this.constructor.prototype as {$fields?: FieldInfoInterface[]}).$fields || [];
 		const { $relations } 	= (this.constructor.prototype as {$relations: RelationDataInterface[]});
 		
 		// set fields

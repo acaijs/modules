@@ -5,7 +5,9 @@
 */
 
 // model
+import Model 				from "./src/modules/Model";
 export {default as Model} 	from "./src/modules/Model";
+import Table 				from "./src/modules/ModelDecorator";
 export {default as Table} 	from "./src/modules/ModelDecorator";
 
 // typings

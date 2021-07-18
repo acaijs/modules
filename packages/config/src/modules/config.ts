@@ -11,7 +11,7 @@ export default class ConfigClass {
 	// -------------------------------------------------
 	
 	protected data	: Record<string, any> = {};
-	protected _env	: Record<string, string> = {};
+	protected _env	: Record<string, string | undefined> = {};
 
 	// -------------------------------------------------
 	// Config methods
@@ -71,7 +71,7 @@ export default class ConfigClass {
 	 */
 	public async fetchEnv (preference: string | undefined = undefined, injectIntoConfig = false, suppresLog = false) {
 		// get data
-		let file = path.join(process.cwd(), `.env${ preference ? `.${preference}`:'' }`);
+		let file = path.join(process.cwd(), `.env${ preference ? `.${preference}`:"" }`);
 
 		// fetch env from deno
 		this._env = process.env;
@@ -79,8 +79,8 @@ export default class ConfigClass {
 		// check preference, if not, fallback
 		if (preference) {
 			if (!await fs.existsSync(file)) {
-				if (!suppresLog) console.log(`.env${preference ? `.${preference}`:''} not found, falling back into .env`);
-				file = path.join(process.cwd(), `.env`);
+				if (!suppresLog) console.log(`.env${preference ? `.${preference}`:""} not found, falling back into .env`);
+				file = path.join(process.cwd(), ".env");
 			}
 		}
 

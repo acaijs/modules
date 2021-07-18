@@ -3,6 +3,10 @@
 	"description": "The monorepo responsible for handling all of açaí's modules into a centralized space",
 	"author": "APO Softworks",
 	"license": "BSD-3-Clause",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/AcaiJS/modules"
+	},
 	"private": true,
 	"workspaces": {
 		"packages": [
@@ -10,6 +14,7 @@
 		]
 	},
 	"devDependencies": {
+		"eslint": "^7.31.0",
 		"husky": "^7.0.0",
 		"syncpack": "^5.7.11"
 	},
@@ -23,6 +28,7 @@
 		"stubber": "cd ./packages/stubber",
 		"testing": "cd ./packages/testing",
 		"validator": "cd ./packages/validator",
-		"prepare": "husky install"
+		"prepare": "husky install",
+		"lint": "yarn eslint"
 	}
 }

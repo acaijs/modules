@@ -1,6 +1,0 @@
-.env
-node_modules
-dist
-localtest
-yarn-error.log
-test

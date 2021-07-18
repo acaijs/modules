@@ -8,14 +8,14 @@ const Field = (type = "string", args?: Record<string, string | number | boolean 
 		if (!model.$fields) model.$fields = [];
 
 		const extraargs = {} as Record<string, string | boolean>;
-		if (type.match(/^\w+\?/)) extraargs.nullable 	= true;
-		if (type.match(/^\w+\*/)) extraargs.primary 	= true;
-		if (type.match(/^\w+\!/)) extraargs.unique 		= true;
-		if (type.match(/^\w+\=/)) extraargs.default 	= type.split("=")[1];
+		if (type.match(/^\w+\?/))	extraargs.nullable 	= true;
+		if (type.match(/^\w+\*/))	extraargs.primary 	= true;
+		if (type.match(/^\w+!/))	extraargs.unique 	= true;
+		if (type.match(/^\w+=/))	extraargs.default 	= type.split("=")[1];
 
 		model.$fields.push({
 			name: key as string,
-			type: type.match(/^\w+/)[0],
+			type: (type.match(/^\w+/) as string[])[0],
 			args: {...args, ...extraargs},
 		});
 	}

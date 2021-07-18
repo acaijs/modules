@@ -14,7 +14,7 @@ const BelongsTo = (modelcb:() => typeof Model, foreignKey: string, primaryKey?: 
 
 		const extraargs = {} as Record<string, string | boolean>;
 		if (foreignKey.match(/^\w+\?/)) extraargs.nullable 	= true;
-		if (foreignKey.match(/^\w+\!/)) extraargs.unique 	= true;
+		if (foreignKey.match(/^\w+!/))	extraargs.unique 	= true;
 
 		// add field that will store the relation data
 		thismodel.$fields.push({name: key as string, type: "string", args:extraargs});
@@ -24,8 +24,8 @@ const BelongsTo = (modelcb:() => typeof Model, foreignKey: string, primaryKey?: 
 			model		: modelcb,
 			type		: "belongsTo",
 			name		: key as string,
-			foreignKey	: foreignKey.match(/^\w+/)[0],
-			primaryKey,
+			foreignKey	: (foreignKey.match(/^\w+/) as string[])[0],
+			primaryKey	: primaryKey || "id",
 		});
 	}
 }

@@ -1,0 +1,31 @@
+import GenericModelContent, { ModelContent } from "../../../interfaces/ModelContent";
+import QueryComparison from "../../../interfaces/QueryComparison";
+import PaginatedResponse from "../../../interfaces/PaginatedResponse";
+import JoinClass from "./join";
+export default abstract class QueryClass<T = Record<string, ModelContent>> extends JoinClass<T> {
+    table: (table: string) => this;
+    where: (arg1: string | [string, QueryComparison, GenericModelContent?][], arg2?: QueryComparison | GenericModelContent, arg3?: GenericModelContent) => this;
+    orWhere: (arg1: string | [string, QueryComparison, GenericModelContent?][], arg2?: QueryComparison | GenericModelContent, arg3?: GenericModelContent) => this;
+    whereNull: (field: string) => this;
+    whereNotNull: (field: string) => this;
+    orWhereNull: (field: string) => this;
+    orWhereNotNull: (field: string) => this;
+    whereIn: (field: string, values: any[]) => this;
+    whereNotIn: (field: string, values: any[]) => this;
+    orWhereIn: (field: string, values: any[]) => this;
+    orWhereNotIn: (field: string, values: any[]) => this;
+    orderBy: (by: string, order?: "ASC" | "DESC" | undefined) => this;
+    limit: (quantity: number, offset?: number | undefined) => this;
+    groupBy: (column: string) => this;
+    fields: <ModelConfig = T>(fields: ("*" | keyof ModelConfig)[]) => this;
+    parseResult: <ModelConfig = T>(cb: (result: ModelConfig | ModelConfig[]) => unknown) => this;
+    first: <ModelConfig = T>() => Promise<ModelConfig | undefined>;
+    last: <ModelConfig = T>(fields?: ("*" | keyof ModelConfig)[]) => Promise<ModelConfig | undefined>;
+    get: <ModelConfig = T>(fields?: ("*" | keyof ModelConfig)[] | undefined) => Promise<ModelConfig[]>;
+    paginate: <ModelConfig = T>(page?: string | number | undefined, perPage?: number | string) => Promise<PaginatedResponse<ModelConfig>>;
+    insert: <ModelConfig = T>(fields: ModelConfig) => Promise<string | number>;
+    insertMany: <ModelConfig = T>(rows: ModelConfig[]) => Promise<(string | number)[]>;
+    update: <ModelConfig = T>(fields: ModelConfig) => Promise<string | number>;
+    updateMany: <ModelConfig = T>(rows: ModelConfig[]) => Promise<(string | number)[]>;
+    delete: () => Promise<number>;
+}

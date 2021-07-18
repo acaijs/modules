@@ -37,8 +37,9 @@ export default function foreignHandler(this: Model, foreign: RelationDataInterfa
 		return {
 			create: async (fields?: Record<string, unknown>) => {
 				const model 							= foreign.model();
-				const instance 							= new model(fields);
+				const instance 							= new model();
 				instance.$values[foreign.foreignKey] 	= this.$values[foreign.primaryKey || "id"] as string;
+				if (fields) instance.fill(fields);
 				await instance.save();
 
 				return instance;
@@ -67,8 +68,9 @@ export default function foreignHandler(this: Model, foreign: RelationDataInterfa
 				if (saved) return saved;
 
 				const model 							= foreign.model();
-				const instance 							= new model(fields);
+				const instance 							= new model();
 				instance.$values[foreign.foreignKey] 	= this.$values[foreign.primaryKey || "id"] as string;
+				if (fields) instance.fill(fields);
 				await instance.save();
 
 				return instance;

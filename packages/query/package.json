@@ -21,7 +21,7 @@
     "@acai/testing": "2.4.1",
     "@types/node": "^14.14.28",
     "@types/pg": "^7.14.9",
-    "eslint": "^7.29.0",
+    "eslint": "^7.31.0",
     "ts-node": "^9.1.1",
     "typescript": "^4.1.5"
   },

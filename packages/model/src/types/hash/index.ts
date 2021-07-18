@@ -12,7 +12,7 @@ const hashType = {
 		if (typeof value === "string") {
 			const salt = config ? config.getConfig("APP_KEY", undefined):undefined;
 
-			const hash = new Hasher(undefined, salt || 10);
+			const hash = new Hasher(undefined, salt || "10");
 			hash.hash(value);
 
 			return hash;
@@ -23,8 +23,8 @@ const hashType = {
 	onSave	: ({value}) => {
 		if (!value) return value;
 
-		if (value.toString)
-			return value.toString();
+		if ((value as Hasher).toString)
+			return (value as Hasher).toString();
 
 		return `${value}`;
 	},
@@ -32,8 +32,8 @@ const hashType = {
 		return new Hasher(value as string);
 	},
 	onSerialize	: ({value}) => {
-		if (value.toString)
-			return value.toString();
+		if ((value as Hasher).toString)
+			return (value as Hasher).toString();
 
 		return `${value}`;
 	},

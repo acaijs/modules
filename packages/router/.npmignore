@@ -2,3 +2,4 @@
 .npmrc
 .env
 yarn-error.log
+src

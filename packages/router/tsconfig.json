@@ -3,7 +3,13 @@
 		"outDir": "dist",
 		"declarationDir": "dist"
 	},
-	"extends": "./node_modules/@acai/preset/tsconfig.json",
-	"include": [ "src/**/*" ],
-	"exclude": ["dist/**/*", "node_modules", "**/*.test.*"]
+	"extends": "../preset/tsconfig.json",
+	"include": [
+		"src/**/*"
+	],
+	"exclude": [
+		"dist/**/*",
+		"node_modules",
+		"**/*.test.*"
+	]
 }

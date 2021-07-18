@@ -17,11 +17,11 @@ const HasOne = (modelcb:() => typeof Model, foreignKey: string, primaryKey?: str
 
 		// add relation
 		thismodel.$relations.push({
-			model	: modelcb,
-			type	: "hasOne",
-			name	: key as string,
+			model		: modelcb,
+			type		: "hasOne",
+			name		: key as string,
+			primaryKey	: primaryKey || "id",
 			foreignKey,
-			primaryKey,
 		});
 	}
 }
