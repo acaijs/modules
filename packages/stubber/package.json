@@ -1,36 +1,36 @@
 {
-	"name": "@acai/stubber",
-	"version": "0.1.0",
-	"description": "Stubber is a simple and configurable template engine, helping you create repeated files so you don't have to.",
-	"repository": "https://github.com/AcaiFramework/stubber.git",
-	"author": "Rafael <rafael.chaves98@hotmail.com>",
-	"license": "BSD-3-Clause",
-	"private": false,
-	"files": [
-		"dist/**"
-	],
-	"main": "dist/index.js",
-	"types": "dist/types",
-	"scripts": {
-		"build": "tsc",
-		"test": "ts-node ./test.ts",
-		"start": "ts-node ./index.ts",
-		"prepublishOnly": "yarn build"
-	},
-	"engines": {
-		"node": ">=12.0.0"
-	},
-	"devDependencies": {
-		"@acai/testing": "^0.1.3",
-		"@types/glob": "^7.1.3",
-		"@types/node": "^14.14.25",
-		"typescript": "^4.1.3"
-	},
-	"dependencies": {
-		"glob": "^7.1.6",
-		"ts-node": "^9.1.1"
-	},
-	"peerDependencies": {
-		"ts-node": "^9.1.1"
-	}
+  "name": "@acai/stubber",
+  "version": "0.1.0",
+  "description": "Stubber is a simple and configurable template engine, helping you create repeated files so you don't have to.",
+  "repository": "https://github.com/AcaiFramework/stubber.git",
+  "author": "Rafael <rafael.chaves98@hotmail.com>",
+  "license": "BSD-3-Clause",
+  "private": false,
+  "files": [
+    "dist/**"
+  ],
+  "main": "dist/index.js",
+  "types": "dist/types",
+  "scripts": {
+    "build": "tsc",
+    "test": "ts-node ./test.ts",
+    "start": "ts-node ./index.ts",
+    "prepublishOnly": "yarn build"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "devDependencies": {
+    "@acai/testing": "2.4.1",
+    "@types/glob": "^7.1.3",
+    "@types/node": "^14.14.28",
+    "typescript": "^4.1.5"
+  },
+  "dependencies": {
+    "glob": "^7.1.6",
+    "ts-node": "^9.1.1"
+  },
+  "peerDependencies": {
+    "ts-node": "^9.1.1"
+  }
 }

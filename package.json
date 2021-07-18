@@ -8,5 +8,21 @@
 		"packages": [
 			"packages/*"
 		]
+	},
+	"devDependencies": {
+		"husky": "^7.0.0",
+		"syncpack": "^5.7.11"
+	},
+	"scripts": {
+		"config": "cd ./packages/config",
+		"interfaces": "cd ./packages/interfaces",
+		"model": "cd ./packages/model",
+		"query": "cd ./packages/query",
+		"router": "cd ./packages/router",
+		"server": "cd ./packages/server",
+		"stubber": "cd ./packages/stubber",
+		"testing": "cd ./packages/testing",
+		"validator": "cd ./packages/validator",
+		"prepare": "husky install"
 	}
 }
