@@ -19,15 +19,16 @@
 		"syncpack": "^5.7.11"
 	},
 	"scripts": {
-		"config": "cd ./packages/config",
-		"interfaces": "cd ./packages/interfaces",
-		"model": "cd ./packages/model",
-		"query": "cd ./packages/query",
-		"router": "cd ./packages/router",
-		"server": "cd ./packages/server",
-		"stubber": "cd ./packages/stubber",
-		"testing": "cd ./packages/testing",
-		"validator": "cd ./packages/validator",
+		"aconfig": "cd ./packages/config && yarn",
+		"interfaces": "cd ./packages/interfaces && yarn",
+		"model": "cd ./packages/model && yarn",
+		"preset": "cd ./packages/preset && yarn",
+		"query": "cd ./packages/query && yarn",
+		"router": "cd ./packages/router && yarn",
+		"server": "cd ./packages/server && yarn",
+		"stubber": "cd ./packages/stubber && yarn",
+		"testing": "cd ./packages/testing && yarn",
+		"validator": "cd ./packages/validator && yarn",
 		"prepare": "husky install",
 		"lint": "yarn eslint"
 	}
