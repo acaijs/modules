@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "es2020",
+	"lib": ["ES2020"],
+    "module": "commonjs",
+    "strict": true,
+    "experimentalDecorators": true,
+    "noImplicitAny": false,
+    "outDir": "dist",
+    "sourceMap": true,
+    "declaration": true,
+    "declarationDir": "dist/types",
+    "removeComments": true,
+    "strictNullChecks": true,
+	"skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "noUnusedLocals": false,
+    "noUnusedParameters": true,
+    "esModuleInterop": true
+},
+  "exclude": ["node_modules/**/*", "dist", "test", "src/**/*.{test,tests}.*"]
+}

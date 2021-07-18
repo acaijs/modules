@@ -1,0 +1,48 @@
+{
+	"name": "@acai/server",
+	"version": "2.0.6",
+	"description": "The base server for the açai framework",
+	"repository": "https://gitlab.com/acaijs/modules/server.git",
+	"keywords": [
+		"server",
+		"http",
+		"middleware",
+		"provider",
+		"typescript",
+		"acai",
+		"module"
+	],
+	"author": "Rafael <rafael.chaves98@hotmail.com>",
+	"license": "BSD-3-Clause",
+	"main": "dist",
+	"types": "dist",
+	"private": false,
+	"scripts": {
+		"build": "tsc",
+		"start": "ts-node ./index.ts",
+		"test": "ts-node ./test.ts",
+		"lint": "eslint --quiet **/*",
+		"lint:fix": "eslint --quiet **/* --fix",
+		"prepublishOnly": "yarn build"
+	},
+	"optionalDependencies": {
+		"@acai/router": ">= 2"
+	},
+	"devDependencies": {
+		"@acai/preset": "^0.1.12",
+		"@acai/testing": "^2.3.6",
+		"@types/cookies": "^0.7.6",
+		"@types/node": "^14.14.25",
+		"@types/supertest": "^2.0.11",
+		"eslint": "^7.29.0",
+		"form-data": "^4.0.0",
+		"supertest": "^6.1.3",
+		"typescript": "^4.1.3"
+	},
+	"dependencies": {
+		"@acai/interfaces": "^0.1.2",
+		"body-parser": "^1.19.0",
+		"cookies": "^0.8.0",
+		"ts-node-dev": "^1.1.6"
+	}
+}

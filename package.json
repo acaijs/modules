@@ -1,0 +1,12 @@
+{
+	"name": "acai",
+	"description": "The monorepo responsible for handling all of açaí's modules into a centralized space",
+	"author": "APO Softworks",
+	"license": "BSD-3-Clause",
+	"private": true,
+	"workspaces": {
+		"packages": [
+			"packages/*"
+		]
+	}
+}
