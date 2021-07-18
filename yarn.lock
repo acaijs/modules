@@ -19,18 +19,6 @@
   optionalDependencies:
     pg "^8.5.1"
 
-"@acai/server@^1.1.6":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@acai/server/-/server-1.2.0.tgz#1bdee380c2e75b26f39c86325579fb06ef0fb0c0"
-  integrity sha512-J5/DCAC6Ovnfd/ZGfJVmvk82X1GMbYDm8vM0ZAtTPKAw/JpLmMe1hUwAeXylgPfwCkyBWDV+VaqZnb4VZSdUUg==
-  dependencies:
-    body-parser "^1.19.0"
-    cookies "^0.8.0"
-    formidable "^1.2.2"
-    ts-node-dev "^1.1.6"
-  optionalDependencies:
-    "@acai/router" "*"
-
 "@acai/utils@^0.1.1":
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/@acai/utils/-/utils-0.1.1.tgz#dfa17e4db266fe42ef9227805fa9b58dad2e5644"
@@ -2192,7 +2180,7 @@ tree-kill@^1.2.2:
   resolved "https://registry.yarnpkg.com/tree-kill/-/tree-kill-1.2.2.tgz#4ca09a9092c88b73a7cdc5e8a01b507b0790a0cc"
   integrity sha512-L0Orpi8qGpRG//Nd+H90vFB+3iHnue1zSSGmNOOCh1GLJ7rUKVwV2HvijphGQS2UmhUZewS9VgvxYIdgr+fG1A==
 
-ts-node-dev@^1.1.6, ts-node-dev@^1.1.8:
+ts-node-dev@^1.1.8:
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/ts-node-dev/-/ts-node-dev-1.1.8.tgz#95520d8ab9d45fffa854d6668e2f8f9286241066"
   integrity sha512-Q/m3vEwzYwLZKmV6/0VlFxcZzVV/xcgOt+Tx/VjaaRHyiBcFlV0541yrT09QjzzCxlDZ34OzKjrFAynlmtflEg==
