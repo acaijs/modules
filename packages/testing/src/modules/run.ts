@@ -58,7 +58,7 @@ export default async function run (settings?: RunSettings) {
 	// -------------------------------------------------
 
 	let lastcontext	: string[] = [];
-	let lasttest	: TestInterface;
+	let lasttest	: TestInterface = {} as TestInterface;
 
 	const processStart = process.hrtime();
 
@@ -69,7 +69,7 @@ export default async function run (settings?: RunSettings) {
 		// check context for beforeAll
 		if (!isArrayEquals(lastcontext, test.group)) {
 			try {
-					await Promise.all(test.beforeAll.map( i => i()));
+				await Promise.all(test.beforeAll.map( i => i()));
 			}
 			catch (e) {
 				let ctx = contextFails.find(i => isArrayEquals(i.group, test.group));
@@ -94,7 +94,7 @@ export default async function run (settings?: RunSettings) {
 
 		// check context for before each
 		try {
-				await Promise.all(test.beforeEach.map(i => i()));
+			await Promise.all(test.beforeEach.map(i => i()));
 		}
 		catch (e) {
 			test.assertions.push({
@@ -130,15 +130,15 @@ export default async function run (settings?: RunSettings) {
 
 		// run test
 		try {
-		  await new Promise(async (resolve, reject) => {
-			// timer for timeout
-			const timer = setTimeout(() => { reject(""); }, test.timeout || settings?.timeout || 2000);
+			await new Promise((resolve, reject) => async () => {
+				// timer for timeout
+				const timer = setTimeout(() => { reject(""); }, test.timeout || settings?.timeout || 2000);
 		
-			// test to run
-			await (test as unknown as {callback: () => void}).callback();
-			clearTimeout(timer);
-			resolve("");
-		  });
+				// test to run
+				await (test as unknown as {callback: () => void}).callback();
+				clearTimeout(timer);
+				resolve("");
+			});
 		}
 		catch (e) {
 			test.assertions.push({

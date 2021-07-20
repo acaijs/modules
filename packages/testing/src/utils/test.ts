@@ -40,13 +40,13 @@ export const append = (test: Partial<TestInterface>) => {
 	}
 }
 
-export const add = (pretest: TestArgumentInterface) => {
+export const add = (pretest: Omit<TestArgumentInterface, "fail">) => {
 	// filter for perfomance
 	if (pretest.only) 		only 	= true;
 	if (pretest.except) 	except 	= true;
 
 	// build test
-	const test = {
+	const test: TestInterface = {
 		only		: false,
 		except		: false,
 		fail		: false,
@@ -68,7 +68,7 @@ export const add = (pretest: TestArgumentInterface) => {
 			test.assertions.push({
 				type	: "test",
 				fail	: true,
-				message	: `Exception thrown`,
+				message	: "Exception thrown",
 				name	: e.message,
 				stack	: getStackTrace(1, e),
 			})
