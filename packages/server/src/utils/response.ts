@@ -15,7 +15,7 @@ export default async function smartResponse (payload: string | RequestInterface 
 
 	// prepare headers
 	Object.keys(request.req.headers).forEach((k) => {
-		if (k !== "content-length") headers[k] = request.req.headers[k]; 
+		if (k !== "content-length") headers[k] = request.req.headers[k];
 	});
 
 	// prepare content
@@ -27,7 +27,7 @@ export default async function smartResponse (payload: string | RequestInterface 
 		// bind headers
 		if (data.headers) {
 			Object.keys(data.headers).forEach(key => {
-				headers[key] = data.headers[key]; 
+				headers[key] = data.headers[key];
 			});
 		}
 

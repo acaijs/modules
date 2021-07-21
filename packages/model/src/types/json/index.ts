@@ -6,7 +6,7 @@ const toJson = ({value}) => {
 		return JSON.parse(value);
 	if (value === undefined)
 		return {};
-		
+
 	return value;
 };
 

@@ -30,7 +30,7 @@ else if (action === "help") {
 	console.log("To create your stubs, the first thing you will need is a directory to them. Stubber defaults to `/stubs`, but you can overwrite it using `--stubDir=/path/to/dir`, each folder inside of it will be considered a different stub, and all of them require a file called `stub.config.json`, where it's name and identifier can be found.");
 	console.log("You need two keys: name and targetPath, that's where the stub will be place when called. Behaviour that you can overwrite using `--target=/new/path`, every other file inside of the stub, will be copied to the target path, meaning you can write variables inside of them.");
 	console.log("To declare those variables, you will enclose them within double brackets, like this: `{{ variableName }}`, there are many types of variables and you can read about them in our documentation. The variable name defaults to the name you give your stub.");
-	
+
 	console.log("\nUsing them\n");
 	console.log("You can call this package within your terminal, we recommend saving it in your package.json, so you can alias it to a smaller form. Let's say for example you have a stub called Component and wants to use it, just call: `yarn stub spawn Component MyComponent` and there you have it.");
 	console.log("");

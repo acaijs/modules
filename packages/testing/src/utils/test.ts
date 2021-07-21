@@ -26,7 +26,7 @@ export const get = (tag: string[], filter = false) => {
 
 			if (test1.group.length > test2.group.length)
 				return test1.group.filter((item, index) => item === test2.group[index]).length - 1;
-			
+
 			return test2.group.filter((item, index) => item === test1.group[index]).length + 1;
 		});
 }

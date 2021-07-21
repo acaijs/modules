@@ -13,7 +13,7 @@ const toDate = ({value}) => {
 		return DateTime.fromMillis(value);
 	if (value instanceof Date)
 		return DateTime.fromJSDate(value);
-		
+
 	return value;
 };
 
@@ -25,7 +25,7 @@ const toSerializeDate = ({value, args}) => {
 			return _value.toFormat(args.format);
 		}
 	}
-		
+
 	return _value.toISODate();
 };
 

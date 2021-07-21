@@ -8,7 +8,7 @@ import Model from "./Model";
 const BelongsTo = (modelcb:() => typeof Model, foreignKey: string, primaryKey?: string): PropertyDecorator => {
 	return (target, key) => {
 		const thismodel 	= target.constructor.prototype as { $fields?: FieldInfoInterface[], $relations?: RelationDataInterface[] };
-		
+
 		if (!thismodel.$fields) 	thismodel.$fields 		= [];
 		if (!thismodel.$relations)	thismodel.$relations 	= [];
 

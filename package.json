@@ -13,17 +13,21 @@
 	],
 	"devDependencies": {
 		"eslint": "^7.31.0",
-		"husky": "^7.0.0",
 		"lerna": "^4.0.0",
-		"syncpack": "^5.7.11"
+		"lint-staged": "^11.0.1",
+		"syncpack": "^5.7.11",
+		"husky": "^7.0.0"
 	},
 	"scripts": {
+		"pre-commit": "lint-staged",
 		"all:publish": "yarn lerna publish from-git --yes",
 		"all:test": "yarn lerna run test --stream",
 		"all:version": "yarn lerna version",
 		"config:build": "yarn workspace @acai/config build",
 		"config:prepublishOnly": "yarn workspace @acai/config prepublishOnly",
 		"config:test": "yarn workspace @acai/config test",
+		"delete:node_modules": "find . -name \"node_modules\" -exec rm -rf '{}' +",
+		"format": "eslint --fix --ext .js,jsx,.ts,.tsx .",
 		"interfaces:build": "yarn workspace @acai/interfaces build",
 		"interfaces:lint:fix": "yarn workspace @acai/interfaces lint:fix",
 		"interfaces:lint": "yarn workspace @acai/interfaces lint",

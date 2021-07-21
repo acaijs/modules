@@ -28,7 +28,7 @@ export default function foreignHandler(this: Model, foreign: RelationDataInterfa
 			}
 		}
 	}
-	
+
 	// -------------------------------------------------
 	// hasMany
 	// -------------------------------------------------

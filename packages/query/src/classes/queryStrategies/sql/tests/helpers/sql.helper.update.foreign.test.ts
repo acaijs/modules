@@ -10,7 +10,7 @@ test.group("sql tests", () => {
 			// -------------------------------------------------
 			// tests
 			// -------------------------------------------------
-	
+
 			test("Test nothing to change", async (assert) => {
 				const result = smartUpdate(
 					"table",
@@ -33,14 +33,14 @@ test.group("sql tests", () => {
 						}
 					}
 				);
-	
+
 				assert(result[1]).toBe("");
 			});
 
 			// -------------------------------------------------
 			// name related
 			// -------------------------------------------------
-	
+
 			test("Test custom name change", async (assert) => {
 				const result = smartUpdate(
 					"table",
@@ -63,10 +63,10 @@ test.group("sql tests", () => {
 						}
 					}
 				);
-	
+
 				assert(result[1]).toBe("ALTER TABLE table DROP FOREIGN KEY test2, ADD CONSTRAINT test FOREIGN KEY (id) REFERENCES foreign_table (id)");
 			});
-	
+
 			test("Test change without name", async (assert) => {
 				const result = smartUpdate(
 					"table",
@@ -88,7 +88,7 @@ test.group("sql tests", () => {
 						}
 					}
 				);
-	
+
 				assert(result[1]).toBe("ALTER TABLE table DROP FOREIGN KEY test2, ADD FOREIGN KEY (id) REFERENCES foreign_table (id)");
 			});
 		}).tag(["foreign", "update"]);

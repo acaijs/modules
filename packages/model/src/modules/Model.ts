@@ -150,12 +150,12 @@ export default class Model {
 					if (foreign.name === field.name) {
 						// unset field because we won't be using it
 						delete fields[field.name];
-	
+
 						if (foreign.type === "belongsTo") {
 							const primary 		= foreign.primaryKey || foreign.model().$primary;
 							const primaryType 	= (foreign.model().prototype as any).$fields.find(i => i.name === primary);
 							const typeObj 		= {...(dynamicTypes.get(primaryType.type).type || {type: "string"}), ...field.args};
-		
+
 							// add foreign key
 							fields[foreign.foreignKey] = {
 								...typeObj,
@@ -213,7 +213,7 @@ export default class Model {
 		}
 
 		const id_user;
-		
+
 
 		// update fields
 		const updatedFields = await query().table($table).where($primary, id).first();
@@ -234,7 +234,7 @@ export default class Model {
 	public fill <T extends typeof Model, I = InstanceType<T>> (this:I, fields: Partial<Omit<I, keyof Model>> & {[k in string]: any}) {
 		const $allFields 		= (this.constructor.prototype as {$fields?: FieldInfoInterface[]}).$fields || [];
 		const { $relations } 	= (this.constructor.prototype as {$relations: RelationDataInterface[]});
-		
+
 		// set fields
 		for (let i = 0; i < $allFields.length; i++) {
 			const field 	= $allFields[i];

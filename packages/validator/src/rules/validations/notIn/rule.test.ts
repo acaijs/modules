@@ -44,11 +44,11 @@ test.group("NotIn rule tests", () => {
 	test.group("NotIn working with string", () => {
 		test("Test success rule through validator (string)", (expect) => {
 			const validator = TestValidator.validate({fieldString: "notthatthing"});
-	
+
 			expect(validator.errors).toBeUndefined();
 			expect(validator.validated.fieldString).toBe("notthatthing");
 		});
-	
+
 		test("Test fail rule contain through validator (string)", (expect) => {
 			const validator = TestValidator.validate({fieldString: "valuecontain"});
 
@@ -56,10 +56,10 @@ test.group("NotIn rule tests", () => {
 			expect(validator.validated.fieldArray).toBeUndefined();
 			expect(validator.errors.errors.fieldString).toBe(["fieldString should not include values: value"]);
 		});
-	
+
 		test("Test fail rule through validator (string)", (expect) => {
 			const validator = TestValidator.validate({fieldString: "value"});
-	
+
 			expect(validator.errors).toBeDefined();
 			expect(validator.validated.fieldArray).toBeUndefined();
 			expect(validator.errors.errors.fieldString).toBe(["fieldString should not include values: value"]);
@@ -124,22 +124,22 @@ test.group("NotIn rule tests", () => {
 	test.group("NotIn working with number", () => {
 		test("Test success rule through validator (number)", (expect) => {
 			const validator = TestValidator.validate({fieldNumber: 20});
-	
+
 			expect(validator.errors).toBeUndefined();
 			expect(validator.validated.fieldNumber).toBe(20);
 		});
-	
+
 		test("Test fail rule contain through validator (number)", (expect) => {
 			const validator = TestValidator.validate({fieldNumber: 210});
-	
+
 			expect(validator.errors).toBeDefined();
 			expect(validator.validated.fieldArray).toBeUndefined();
 			expect(validator.errors.errors.fieldNumber).toBe(["fieldNumber should not include values: 10"]);
 		});
-	
+
 		test("Test fail rule through validator (number)", (expect) => {
 			const validator = TestValidator.validate({fieldNumber: 10});
-	
+
 			expect(validator.errors).toBeDefined();
 			expect(validator.validated.fieldArray).toBeUndefined();
 			expect(validator.errors.errors.fieldNumber).toBe(["fieldNumber should not include values: 10"]);

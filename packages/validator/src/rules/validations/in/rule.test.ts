@@ -44,21 +44,21 @@ test.group("In rule tests", () => {
 	test.group("In working with string", () => {
 		test("Test success rule through validator (string)", (expect) => {
 			const validator = TestValidator.validate({fieldString: "value"});
-	
+
 			expect(validator.errors).toBeUndefined();
 			expect(validator.validated.fieldString).toBe("value");
 		});
-	
+
 		test("Test success rule contain through validator (string)", (expect) => {
 			const validator = TestValidator.validate({fieldString: "valuecontain"});
-	
+
 			expect(validator.errors).toBeUndefined();
 			expect(validator.validated.fieldString).toBe("valuecontain");
 		});
-	
+
 		test("Test fail rule through validator (string)", (expect) => {
 			const validator = TestValidator.validate({fieldString: "nottrue"});
-	
+
 			expect(validator.errors).toBeDefined();
 			expect(validator.validated.fieldArray).toBeUndefined();
 			expect(validator.errors.errors.fieldString).toBe(["fieldString does not include values: value"]);
@@ -122,21 +122,21 @@ test.group("In rule tests", () => {
 	test.group("In working with number", () => {
 		test("Test success rule through validator (number)", (expect) => {
 			const validator = TestValidator.validate({fieldNumber: 10});
-	
+
 			expect(validator.errors).toBeUndefined();
 			expect(validator.validated.fieldNumber).toBe(10);
 		});
-	
+
 		test("Test success rule contain through validator (number)", (expect) => {
 			const validator = TestValidator.validate({fieldNumber: 210});
-	
+
 			expect(validator.errors).toBeUndefined();
 			expect(validator.validated.fieldNumber).toBe(210);
 		});
-	
+
 		test("Test fail rule through validator (number)", (expect) => {
 			const validator = TestValidator.validate({fieldNumber: 30});
-	
+
 			expect(validator.errors).toBeDefined();
 			expect(validator.validated.fieldArray).toBeUndefined();
 			expect(validator.errors.errors.fieldNumber).toBe(["fieldNumber does not include values: 10"]);

@@ -9,7 +9,7 @@ const rule = {
 	onValidate	: ({ value, args })	=> {
 		if (args && args[0])
 			return DateTime.fromFormat(value as string, args[0]).isValid;
-		
+
 		return DateTime.fromISO(value as string).isValid;
 	},
 	onError		: ({ key }) 	=> `${key} is not a valid date`,

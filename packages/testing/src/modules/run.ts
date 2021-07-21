@@ -38,7 +38,7 @@ export default async function run (settings?: RunSettings) {
 	// -------------------------------------------------
 	// Run tests
 	// -------------------------------------------------
-	
+
 	const states = [ "─", "\\", "|", "/" ];
 	let testsrun = 0;
 	let laststep = 0;
@@ -47,7 +47,7 @@ export default async function run (settings?: RunSettings) {
 		if (settings?.spinner !== false) {
 			console.clear();
 			console.log(`\n ${states[laststep]} (${testsrun}/${tests.length}) Running tests`);
-	
+
 			if (laststep + 2 > states.length) laststep = 0;
 			else laststep++;
 		}
@@ -103,7 +103,7 @@ export default async function run (settings?: RunSettings) {
 				stack	: getStackTrace(1, e),
 				fail	: true,
 			});
-			
+
 			let ctx = contextFails.find(i => isArrayEquals(i.group, test.group));
 
 			if (!ctx) {
@@ -133,7 +133,7 @@ export default async function run (settings?: RunSettings) {
 			await new Promise((resolve, reject) => async () => {
 				// timer for timeout
 				const timer = setTimeout(() => { reject(""); }, test.timeout || settings?.timeout || 2000);
-		
+
 				// test to run
 				await (test as unknown as {callback: () => void}).callback();
 				clearTimeout(timer);
@@ -161,7 +161,7 @@ export default async function run (settings?: RunSettings) {
 				stack	: getStackTrace(1, e),
 				fail	: true,
 			});
-			
+
 			let ctx = contextFails.find(i => isArrayEquals(i.group, test.group));
 
 			if (!ctx) {
@@ -187,7 +187,7 @@ export default async function run (settings?: RunSettings) {
 		try {
 			await Promise.all(lasttest.afterAll.map( i => i()));
 		}
-		catch (e) {			
+		catch (e) {
 			let ctx = contextFails.find(i => isArrayEquals(i.group, lasttest.group));
 
 			if (!ctx) {
@@ -212,6 +212,6 @@ export default async function run (settings?: RunSettings) {
 	if (settings?.spinner !== false) {
 		console.clear();
 	}
-	
+
 	return [tests, contextFails, processEnd] as [TestInterface[], ContextErrorInterface[], [number, number]];
 }

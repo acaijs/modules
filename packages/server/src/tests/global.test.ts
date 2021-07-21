@@ -74,7 +74,7 @@ test.group("Server global middleware tests", (group) => {
 			lastcalled = "first";
 			return n(r);
 		});
-		
+
 		server.addGlobal((r, n) => {
 			lastcalled = "last";
 			return n(r);

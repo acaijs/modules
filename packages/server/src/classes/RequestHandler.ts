@@ -56,7 +56,7 @@ export default class RequestHandler {
 			curry = async (fluxRequest: RequestInterface) => {
 				const [name, method] 	= [request.controller, request.method];
 				const pathString 		= typeof name === "string" ? path.join(`${process.cwd()}`, this.server.config.filePrefix || "", name):name;
-	
+
 				return findController(pathString, method, fluxRequest)
 					.then(async response => {
 						return [(typeof response === "function" ? (await response(fluxRequest)):response), fluxRequest];
@@ -131,14 +131,14 @@ export default class RequestHandler {
 
 		// build query params
 		const query 	= {} as Record<string, string | number | boolean>;
-		
+
 		if (params) {
 			const prequery 	= (params || "").split("&").map(i => i.split("="));
 
 			for (let i = 0; i < prequery.length; i ++) {
 				const [_key, value] = prequery[i];
 				const key = decodeURI(_key);
-	
+
 				if (!value) {
 					query[key] = true;
 				}

@@ -17,7 +17,7 @@ export default function getStubs(stubFilesPath: string) {
 
 	// read its content
 	const stubsAvailable = fs.readdirSync(stubpath, {withFileTypes: true}).filter( i => i.isDirectory());
-	
+
 
 	for (let i = 0; i < stubsAvailable.length; i++) {
 		const item 				= stubsAvailable[i];

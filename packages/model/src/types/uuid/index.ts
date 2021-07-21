@@ -7,7 +7,7 @@ import ModelTypeInterface from "../../interfaces/modelType";
 const toUuid = ({value, key, args, model}) => {
 	// field is not primary key, should not auto generate
 	if (model.$primary !== key) return value;
-	
+
 	if (value !== undefined && value !== null && args.nullable !== true)
 		return `${value}`;
 	else

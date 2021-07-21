@@ -9,11 +9,11 @@ export default abstract class MigrationClass<T = Record<string, ModelContent>> e
 	// -------------------------------------------------
 	// migration methods
 	// -------------------------------------------------
-	
+
 	public static addMigration (table: string, columns: Record<string, ColumnOptions>) {
 		this.adapter.addMigration(table, columns);
 	}
-	
+
 	public static async runMigrations () {
 		await this.adapter.runMigrations();
 	}

@@ -9,7 +9,7 @@ export default function adapterRelationUpdateTests (name: string, adapter: typeo
 		// -------------------------------------------------
 		// setup
 		// -------------------------------------------------
-	
+
 		context.beforeEach(async () => {
 			await adapter.toggleSettings(settings);
 
@@ -44,17 +44,17 @@ export default function adapterRelationUpdateTests (name: string, adapter: typeo
 				}
 			});
 		});
-	
+
 		context.afterEach(async () => {
 			await adapter.table("test").dropTable();
 			await adapter.table("base").dropTable();
 			await adapter.table("base2").dropTable();
 		});
-	
+
 		// -------------------------------------------------
 		// tests
 		// -------------------------------------------------
-	
+
 		test("Test field basic constraint name change", async (assert) => {
 			adapter.addMigration("test", {
 				id: {
@@ -71,15 +71,15 @@ export default function adapterRelationUpdateTests (name: string, adapter: typeo
 			});
 
 			await adapter.runMigrations();
-	
+
 			const table = await adapter.table("test").getColumns();
-	
+
 			assert(table.id_base.foreign).toBeDefined();
 			assert(table.id_base.foreign?.name).toBe("customname");
 			assert(table.id_base.foreign?.table).toBe("base");
 			assert(table.id_base.foreign?.column).toBe("id");
 		});
-	
+
 		test("Test field basic constraint table change", async (assert) => {
 			adapter.addMigration("test", {
 				id: {
@@ -95,14 +95,14 @@ export default function adapterRelationUpdateTests (name: string, adapter: typeo
 			});
 
 			await adapter.runMigrations();
-	
+
 			const table = await adapter.table("test").getColumns();
-	
+
 			assert(table.id_base.foreign).toBeDefined();
 			assert(table.id_base.foreign?.table).toBe("base2");
 			assert(table.id_base.foreign?.column).toBe("id");
 		});
-	
+
 		test("Test field basic constraint column change", async (assert) => {
 			adapter.addMigration("test", {
 				id: {
@@ -119,9 +119,9 @@ export default function adapterRelationUpdateTests (name: string, adapter: typeo
 			});
 
 			await adapter.runMigrations();
-	
+
 			const table = await adapter.table("test").getColumns();
-	
+
 			assert(table.id_base.foreign).toBeDefined();
 			assert(table.id_base.foreign?.table).toBe("base2");
 			assert(table.id_base.foreign?.column).toBe("code");

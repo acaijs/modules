@@ -8,7 +8,7 @@ const toString = ({value, args}) => {
 		if (args.max && args.max < format.length)
 			return format.substring(0, args.max);
 	}
-		
+
 	return format;
 };
 

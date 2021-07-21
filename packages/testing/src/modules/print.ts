@@ -14,7 +14,7 @@ export default async function run (tests: TestInterface[], contextErrors: Contex
 	// -------------------------------------------------
 
 	console.log("===============================");
-	console.log(` Tests ran`);
+	console.log(" Tests ran");
 	console.log("===============================");
 	console.log();
 
@@ -53,7 +53,7 @@ export default async function run (tests: TestInterface[], contextErrors: Contex
 	if (total !== success) {
 		console.log();
 		console.log("===============================");
-		console.log(` Tests failed`);
+		console.log(" Tests failed");
 		console.log("===============================");
 		console.log();
 
@@ -94,7 +94,7 @@ export default async function run (tests: TestInterface[], contextErrors: Contex
 	if (tests.find(i => i.messages.length > 0)) {
 		console.log();
 		console.log("===============================");
-		console.log(` Tests messages`);
+		console.log(" Tests messages");
 		console.log("===============================");
 		console.log();
 
@@ -121,7 +121,7 @@ export default async function run (tests: TestInterface[], contextErrors: Contex
 
 	console.log();
 	console.log("===============================");
-	console.log(` Tests results`);
+	console.log(" Tests results");
 	console.log("===============================");
 	console.log();
 	console.log(` Total tests:\t\t${total}`);

@@ -10,7 +10,7 @@ const toFloat = ({value, args}) => {
 		if (args.min && args.min > format)
 			return args.min;
 	}
-		
+
 	return format;
 };
 

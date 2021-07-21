@@ -164,7 +164,7 @@ export default abstract class QueryClass<T = Record<string, ModelContent>> exten
 		const total = await this.count();
 		const npp 	= parseInt(perPage as string);
 		const np 	= parseInt(page as string);
-		
+
 		const entries = await this.getAdapter().querySelect<ModelConfig>(
 			this.tableName,
 			this.fieldsList as (keyof ModelConfig | "*")[],

@@ -18,10 +18,12 @@ module.exports = {
 	ignorePatterns: [ "stubs/**/*", "**/*.html", "**/logs/*", "*.lock", "LICENSE", "**/*.md", "**/*.map", "**/*.txt", "dist/**/*", "**/*.log" ],
 	rules: {
 		// Eslint
+		// "semi"                      : [2, "always"],
 		"quotes"					: ["error", "double"],
 		"no-mixed-spaces-and-tabs"	: "error",
 		"no-tabs"					: 0,
-		"no-prototype-builtins"		: 0,
+		"no-prototype-builtins"     : 0,
+		"no-trailing-spaces"		: "error",
 		"indent"					: ["error", "tab", {
 			SwitchCase: 1,
 		}],

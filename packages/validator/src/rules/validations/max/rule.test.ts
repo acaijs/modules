@@ -41,14 +41,14 @@ test.group("Max rule tests", () => {
 	test.group("Max working with string", () => {
 		test("Test success rule through validator (string)", (expect) => {
 			const validator = TestValidator.validate({fieldString: "value"});
-	
+
 			expect(validator.errors).toBeUndefined();
 			expect(validator.validated.fieldString).toBe("value");
 		});
-	
+
 		test("Test fail rule through validator (string)", (expect) => {
 			const validator = TestValidator.validate({fieldString: "valueMax"});
-	
+
 			expect(validator.errors).toBeDefined();
 			expect(validator.validated.fieldArray).toBeUndefined();
 			expect(validator.errors.errors.fieldString).toBe(["fieldString has more characters than the allowed: 5"]);
@@ -98,16 +98,16 @@ test.group("Max rule tests", () => {
 	test.group("Max working with number", () => {
 		test("Test success rule through validator (number)", (expect) => {
 			const validator = TestValidator.validate({fieldNumber: 10});
-	
+
 			validator.getSchema();
-	
+
 			expect(validator.errors).toBeUndefined();
 			expect(validator.validated.fieldNumber).toBe(10);
 		});
-	
+
 		test("Test fail rule through validator (number)", (expect) => {
 			const validator = TestValidator.validate({fieldNumber: 15});
-	
+
 			expect(validator.errors).toBeDefined();
 			expect(validator.validated.fieldArray).toBeUndefined();
 			expect(validator.errors.errors.fieldNumber).toBe(["fieldNumber is more than the allowed: 10"]);

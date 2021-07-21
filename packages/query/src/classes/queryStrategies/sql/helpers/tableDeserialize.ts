@@ -11,7 +11,7 @@ export default function tableDeserialize (tableString: string): Record<string, C
 
 	tableString.split("\n").splice(1).slice(0, -1).map( i => i.replace(/,$/g, "")).forEach(line => {
 		const parts = line.split(" ").filter(i => i !== "");
-		
+
 		// columns
 		if (parts[0].match(/^`.+`$/)) {
 			const [type, length] 	= parts[1].split("(");
