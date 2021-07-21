@@ -10,7 +10,7 @@ export default async function queryResolver (client: Client.Connection, queryStr
 			client.query(queryString, params,
 				(error, results) => {
 					if (error) reject(error);
-	
+
 					resolve(results);
 				});
 		});

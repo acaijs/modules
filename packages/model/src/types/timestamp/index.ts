@@ -13,14 +13,14 @@ const toDate = ({value}) => {
 		return DateTime.fromMillis(value);
 	if (value instanceof Date)
 		return DateTime.fromJSDate(value);
-		
+
 	return value;
 };
 
 const toSerializeDate = ({value}) => {
 	if (value) {
 		const format = DateTime.isDateTime(value) ? value : DateTime.fromJSDate(value);
-			
+
 		return format.toFormat("yyyy-LL-dd HH:mm:ss");
 	}
 };

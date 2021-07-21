@@ -104,7 +104,7 @@ test.group("Server middleware tests", (group) => {
 			lastcalled = "first";
 			return n(r);
 		});
-		
+
 		server.addMiddleware("test2", (r, n) => {
 			lastcalled = "last";
 			return n(r);
@@ -136,7 +136,7 @@ test.group("Server middleware tests", (group) => {
 			lastcalled = "first";
 			return n(r);
 		});
-		
+
 		server.addMiddleware("test2", (r, n) => {
 			lastcalled = "last";
 			return n(r);

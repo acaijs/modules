@@ -12,4 +12,4 @@ export default function joinClauseBuilder (joinClause: JoinClauseInterface) {
 	const type = types[joinClause.type];
 
 	return `${type} JOIN ${joinClause.table} ON ${joinClause.firstColumn}${joinClause.operator}${joinClause.secondColumn}`;
-} 
+}

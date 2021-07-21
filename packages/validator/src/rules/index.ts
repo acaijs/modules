@@ -37,7 +37,7 @@ let ruleList: Record<string, RuleInterface> = {
 	"notIn"		: notInRule,
 	"min"		: minRule,
 	"max"		: maxRule,
-	
+
 	// type
 	"object"	: objectRule,
 	"string"	: stringRule,

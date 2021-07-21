@@ -20,5 +20,5 @@ interface StringToTypeMap {
 }
 
 type StringToType<T extends string> = StringToTypeMap[Extract<T, keyof StringToTypeMap>];
-	
+
 export default StringToType;

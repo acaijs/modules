@@ -7,7 +7,7 @@ function valueType (value: unknown) {
 		return "";
 	if (Array.isArray(value))
 		return " (?)";
-	
+
 	return " ?";
 }
 
@@ -18,7 +18,7 @@ export default function resolveQueryPart (queryBuild: QueryPart) {
 			if ((subitem as QueryPart).type) {
 				return `(${resolveQueryPart(subitem as QueryPart)})`;
 			}
-			
+
 			const arrayitem = subitem as [string, string, ModelContent];
 			if (arrayitem[2] !== null && arrayitem[2] !== undefined) values.push(arrayitem[2]);
 			return `${arrayitem[0]} ${arrayitem[1]}${valueType(arrayitem[2])}`;

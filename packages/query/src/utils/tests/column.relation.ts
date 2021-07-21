@@ -9,20 +9,20 @@ export default function adapterColumnRelationTests (name: string, adapter: typeo
 		// -------------------------------------------------
 		// setup
 		// -------------------------------------------------
-	
+
 		context.beforeAll(async () => {
 			await adapter.toggleSettings(settings);
 		});
-	
+
 		context.afterEach(async () => {
 			await adapter.table("test").dropTable();
 			await adapter.table("base").dropTable();
 		});
-	
+
 		// -------------------------------------------------
 		// tests
 		// -------------------------------------------------
-	
+
 		test("Test field basic constraint", async (assert) => {
 			await adapter.table("base").createTable({
 				id: {
@@ -30,7 +30,7 @@ export default function adapterColumnRelationTests (name: string, adapter: typeo
 					primary: true,
 				},
 			});
-	
+
 			await adapter.table("test").createTable({
 				id: {
 					type: "int",
@@ -43,14 +43,14 @@ export default function adapterColumnRelationTests (name: string, adapter: typeo
 					}
 				}
 			});
-	
+
 			const table = await adapter.table("test").getColumns();
-	
+
 			assert(table.id_base.foreign).toBeDefined();
 			assert(table.id_base.foreign?.table).toBe("base");
 			assert(table.id_base.foreign?.column).toBe("id");
 		});
-	
+
 		test("Test field foreign key cascade on delete", async (assert) => {
 			await adapter.table("base").createTable({
 				id: {
@@ -58,7 +58,7 @@ export default function adapterColumnRelationTests (name: string, adapter: typeo
 					primary: true,
 				},
 			});
-	
+
 			await adapter.table("test").createTable({
 				id: {
 					type: "int",
@@ -72,15 +72,15 @@ export default function adapterColumnRelationTests (name: string, adapter: typeo
 					}
 				}
 			});
-	
+
 			const table = await adapter.table("test").getColumns();
-	
+
 			assert(table.id_base.foreign).toBeDefined();
 			assert(table.id_base.foreign?.table).toBe("base");
 			assert(table.id_base.foreign?.column).toBe("id");
 			assert(table.id_base.foreign?.onDelete).toBe("CASCADE");
 		});
-	
+
 		test("Test field foreign key cascade on update", async (assert) => {
 			await adapter.table("base").createTable({
 				id: {
@@ -88,7 +88,7 @@ export default function adapterColumnRelationTests (name: string, adapter: typeo
 					primary: true,
 				},
 			});
-	
+
 			await adapter.table("test").createTable({
 				id: {
 					type: "int",
@@ -102,15 +102,15 @@ export default function adapterColumnRelationTests (name: string, adapter: typeo
 					}
 				}
 			});
-	
+
 			const table = await adapter.table("test").getColumns();
-	
+
 			assert(table.id_base.foreign).toBeDefined();
 			assert(table.id_base.foreign?.table).toBe("base");
 			assert(table.id_base.foreign?.column).toBe("id");
 			assert(table.id_base.foreign?.onUpdate).toBe("CASCADE");
 		});
-	
+
 		test("Test field foreign key cascade on update and delete", async (assert) => {
 			await adapter.table("base").createTable({
 				id: {
@@ -118,7 +118,7 @@ export default function adapterColumnRelationTests (name: string, adapter: typeo
 					primary: true,
 				},
 			});
-	
+
 			await adapter.table("test").createTable({
 				id: {
 					type: "int",
@@ -133,9 +133,9 @@ export default function adapterColumnRelationTests (name: string, adapter: typeo
 					}
 				}
 			});
-	
+
 			const table = await adapter.table("test").getColumns();
-	
+
 			assert(table.id_base.foreign).toBeDefined();
 			assert(table.id_base.foreign?.table).toBe("base");
 			assert(table.id_base.foreign?.column).toBe("id");

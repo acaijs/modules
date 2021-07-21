@@ -69,7 +69,7 @@ function calculateColumns (oldColumns: Record<string, ColumnOptions>, updatedCol
 				response.push(columnSerialize(key, column)[0]);
 				// column position
 				if (fpos !== spos && spos + 1 !== Object.keys(updatedColumns).length) response.push(pos);
-				
+
 				responseColumns.push(response.join(" "));
 			}
 		}

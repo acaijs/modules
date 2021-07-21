@@ -3,7 +3,7 @@ import ModelTypeInterface from "../../interfaces/modelType";
 
 const toInt = ({value}) => {
 	const format = parseInt(value);
-		
+
 	return format;
 };
 

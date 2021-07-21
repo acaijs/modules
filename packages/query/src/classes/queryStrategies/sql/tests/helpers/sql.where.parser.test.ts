@@ -31,6 +31,6 @@ test.group("sql tests", () => {
 			expect(data[0]).toBe("id = ? OR name = ? AND age = ?");
 			expect(data[1]).toBe([2, "John", 20]);
 		});
-		
+
 	}).tag(["sql", "helper", "parser"]);
 });

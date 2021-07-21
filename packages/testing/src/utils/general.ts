@@ -1,15 +1,15 @@
 export const getStackTrace = (index = 4, prestack?) => {
-	var stack = prestack?.stack;
-  
+	let stack = prestack?.stack;
+
 	if (!stack) {
 		try {
-			throw new Error('');
+			throw new Error("");
 		}
 		catch (error) {
-			stack = error.stack || '';
+			stack = error.stack || "";
 		}
 	}
-	
+
 	return stack.split("\n").slice(index).join("\n");
 };
 

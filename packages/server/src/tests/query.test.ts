@@ -15,7 +15,7 @@ test.group("Server body request tests", (group) => {
 	// make sure no server instances are kept running after each test
 	group.afterEach(async () => { if (server) await server.stop() });
 	group.afterEach(route.clear);
-	
+
 	test("correctly send query params", async (expect) => {
 		let fields;
 		server = new Server();
@@ -35,7 +35,7 @@ test.group("Server body request tests", (group) => {
 
 		expect(fields).toBe({ module: "server" });
 	});
-	
+
 	test("decode from url properly", async (expect) => {
 		let fields;
 		server = new Server();
@@ -55,7 +55,7 @@ test.group("Server body request tests", (group) => {
 
 		expect(fields).toBe({ module: "açaí" });
 	});
-	
+
 	test("convert numbers from string to number", async (expect) => {
 		let fields;
 		server = new Server();
@@ -75,7 +75,7 @@ test.group("Server body request tests", (group) => {
 
 		expect(fields).toBe({ version: 2 });
 	});
-	
+
 	test("keys without values will turn into true booleans", async (expect) => {
 		let fields;
 		server = new Server();

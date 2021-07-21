@@ -28,7 +28,7 @@ export const getStackTrace = (index = 4, error?: Error) => {
 			stack = error.stack || "";
 		}
 	}
-	
+
 	stack = stack.split("\n").map(function (line: string) { return line.trim(); });
 	return stack[index];
 };

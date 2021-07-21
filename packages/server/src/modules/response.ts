@@ -3,10 +3,10 @@ import ResponseUtilityOptions from "../interfaces/responseUtility";
 
 /**
  * ### Response utility
- * 
+ *
  * This is a general utility response that helps bundle your data in an easy format for the server to build a response
- * 
- * @param {ResponseUtilityOptions?} options 
+ *
+ * @param {ResponseUtilityOptions?} options
  */
 export default function response (options?: Partial<ResponseUtilityOptions>) {
 	const preparedoptions = options || {};

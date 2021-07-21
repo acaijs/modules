@@ -24,7 +24,7 @@ export default interface QueryStrategy {
 	getColumns		<T = Record<string, ModelContent>>	(table: string, fields?: (keyof T | "*")[])										: Promise<Record<string, ColumnOptions>>;
 	alterTable		<T = Record<string, ModelContent>>	(table: string, fields: Record<keyof T, ColumnOptions>, smartUpdate?: boolean)	: Promise<boolean>;
 	dropTable											(table: string)																	: Promise<boolean>;
-	
+
 	// migration
 	addMigration <T = Record<string, ModelContent>> (table: string, fields: Record<keyof T, ColumnOptions>)	: void;
 	runMigrations									()														: Promise<void>;

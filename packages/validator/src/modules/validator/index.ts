@@ -59,15 +59,15 @@ export default class Validator<
 					if (!rule) {
 						throw new InvalidRuleException(`Rule ${name} on validator ${this.constructor.name} doesn't exist`);
 					}
-	
+
 					// validation failed
 					if (rule.onValidate && !rule.onValidate({value: fieldValue, key: fieldName, fields: this._fields, args, rules: rulesNames})) {
 						passes = false;
 						const error = rule.onError && rule.onError({value: fieldValue, key: fieldName, fields: this._fields, args, rules: rulesNames}) || `${name} failed validation`;
-	
+
 						// instance it
 						if (!this._errors[fieldName]) this._errors[fieldName] = [];
-	
+
 						// push
 						if (Array.isArray(error))
 							error.forEach(i => this._errors[fieldName].push(i));
@@ -105,7 +105,7 @@ export default class Validator<
 	// -------------------------------------------------
 
 	public getSchema(): Readonly<Record<Keys, readonly string[]>> {
-		throw new Error(`Schema not implemented`);
+		throw new Error("Schema not implemented");
 	}
 
 	public printErrors () {

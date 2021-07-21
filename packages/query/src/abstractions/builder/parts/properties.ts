@@ -63,10 +63,10 @@ export default abstract class Properties<T = Record<string, ModelContent>> {
 				return [[arg1, "=", arg2 as string]];
 			}
 		}
-		
+
 		return (arg1 as unknown as any).reduce((prev: [keyof ModelConfig, QueryComparison, ModelContent][], item: [keyof ModelConfig, QueryComparison, ModelContent]) => {
 			const items = this.buildQueryPart(...item);
- 
+
 			items.forEach((v) => prev.push(v as unknown as any));
 
 			return prev;

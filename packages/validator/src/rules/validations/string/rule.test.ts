@@ -10,7 +10,7 @@ import rule from "./index";
 // concrete validator class
 class TestValidator extends Validator {
 	public throwable = false;
-	
+
 	public getSchema() {
 		return {
 			field: ["string"]

@@ -12,6 +12,7 @@ export default interface TestInterface {
 	timeout?: number;
 
 	// result
+	fail: boolean;
 	messages: [any, string?][];
 	assertions: {
 		type	 : (keyof ExpectInterface) | "test" | "beforeAll" | "beforeEach" | "afterAll" | "afterEach" | "timeout";
@@ -30,7 +31,7 @@ export default interface TestInterface {
 	beforeEach	: (() => Promise<void> | void)[],
 	afterAll	: (() => Promise<void> | void)[],
 	afterEach	: (() => Promise<void> | void)[],
-};
+}
 
 export interface TestArgumentInterface {
 	callback: (expect: ExpectAssertionInterface) => Promise<void> | void;
@@ -43,6 +44,7 @@ export interface TestArgumentInterface {
 	timeout?: number;
 
 	// result
+	fail: boolean;
 	messages?: [any, string?][];
 	assertions?: {
 		type	 : (keyof ExpectInterface) | "test" | "beforeAll" | "beforeEach" | "afterAll" | "afterEach";

@@ -27,7 +27,7 @@ const buildTestAssertion = (test: TestInterface) => {
 				test.assertions.push(buildResponse(
 					"toBe",
 					passes,
-					`${typeof valueToAssert ? JSON.stringify(valueToAssert):valueToAssert} is not equal to ${typeof valueToTest ? JSON.stringify(valueToTest):valueToTest}`
+					`${typeof valueToAssert !== "undefined" ? JSON.stringify(valueToAssert):valueToAssert} is not equal to ${typeof valueToTest !== "undefined" ? JSON.stringify(valueToTest):valueToTest}`
 				));
 
 				return this;
@@ -137,7 +137,7 @@ const buildTestAssertion = (test: TestInterface) => {
 				let passes = false;
 
 				try {
-					(valueToAssert as () => {})();
+					(valueToAssert as () => any)();
 				}
 				catch (e) {
 					passes = true;
@@ -167,7 +167,7 @@ const buildTestAssertion = (test: TestInterface) => {
 			// -------------------------------------------------
 
 			this.toContain = (contain: string | string[]) => {
-				let remains: string[];
+				let remains: string[] = [];
 
 				if (Array.isArray(valueToAssert)) {
 					const compare = Array.isArray(contain) ? contain:[contain];
@@ -175,7 +175,7 @@ const buildTestAssertion = (test: TestInterface) => {
 					remains = compare.filter(i => valueToAssert.find(x => x !== i));
 				}
 				else if (typeof valueToAssert === "object") {
-					const keys = Object.keys(valueToAssert);
+					const keys = Object.keys(valueToAssert || {});
 					const compare = Array.isArray(contain) ? contain:[contain];
 
 					remains = compare.filter(i => keys.find(x => x !== i));

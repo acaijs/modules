@@ -26,7 +26,7 @@ export default class Server implements ServerInterface {
 	protected _config	: Partial<ServerConfigInterface> = {};
 	protected routes	: RouteInterface[] = [];
 	protected server	: http.Server;
-	
+
 	// extra config
 	protected providers		: ProviderInterface[] 					= [];
 	protected middlewares	: Record<string, MiddlewareInterface> 	= {};
@@ -42,7 +42,7 @@ export default class Server implements ServerInterface {
 		// prepare server instance
 		this.server = http.createServer();
 	}
-	
+
 	public setConfig (config: Partial<ServerConfigInterface>) {
 		this._config = {...this._config, ...config};
 	}
@@ -140,11 +140,11 @@ export default class Server implements ServerInterface {
 				await r.proccess(flux, curry);
 			}
 			else {
-				respond(res, { 
+				respond(res, {
 					body: "<h1>404 - Not Found</h1>",
 					status: 200,
 				});
-				
+
 				// respond to server
 				res.end();
 			}

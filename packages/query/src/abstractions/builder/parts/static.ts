@@ -36,12 +36,12 @@ export default abstract class StaticClass<T = Record<string, ModelContent>> exte
 	public static async close () {
 		await this.adapter.close();
 	}
-	
+
 	public static table<model = Record<string, ModelContent>> (table: string) {
 		const query = new (this as any)();
-		
+
 		query.table(table);
-		
+
 		return query as queryInterface<model>;
 	}
 }

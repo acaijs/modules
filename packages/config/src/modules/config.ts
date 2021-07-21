@@ -9,7 +9,7 @@ export default class ConfigClass {
 	// -------------------------------------------------
 	// Properties
 	// -------------------------------------------------
-	
+
 	protected data	: Record<string, any> = {};
 	protected _env	: Record<string, string | undefined> = {};
 
@@ -27,7 +27,7 @@ export default class ConfigClass {
 	/**
 	 * ## getConfig
 	 * Retrieves information from the config value
-	 * 
+	 *
 	 * @param {string} key nested key that can be used to retrieve data
 	 * @param {any?} defaultValue default value in case the key doesn't match
 	 * @returns {any}
@@ -39,7 +39,7 @@ export default class ConfigClass {
 	/**
 	 * ## setConfig
 	 * Sets information from the config value
-	 * 
+	 *
 	 * @param {string} key nested key that can be used to retrieve data
 	 * @param {any} value value to be placed
 	 * @returns {any}
@@ -62,11 +62,11 @@ export default class ConfigClass {
 
 	/**
 	 * ## fetchEnv
-	 * 
+	 *
 	 * Method responsible for finding an env file inside of of your project
-	 * 
-	 * @param {string?} preference Env preference, such as production, testing, etc  
-	 * @param {boolean?} injectIntoConfig Should the env variables be injected into the config as well 
+	 *
+	 * @param {string?} preference Env preference, such as production, testing, etc
+	 * @param {boolean?} injectIntoConfig Should the env variables be injected into the config as well
 	 * @param {boolean?} suppresLog Suppress any errors when trying to fetch the env file
 	 */
 	public async fetchEnv (preference: string | undefined = undefined, injectIntoConfig = false, suppresLog = false) {

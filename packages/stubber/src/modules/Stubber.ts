@@ -24,7 +24,7 @@ export default class Stubber {
 	// Constructor
 	// -------------------------------------------------
 
-	public constructor (args: string[], stubFilesPath: string = "", overwriteTargetPath?: string) {
+	public constructor (args: string[], stubFilesPath = "", overwriteTargetPath?: string) {
 		const stubpath = path.join(process.cwd(), stubFilesPath);
 
 		// find stubs directory
@@ -49,7 +49,7 @@ export default class Stubber {
 			const configFilePath 	= path.join(stubpath, item.name, "stub.config.json");
 
 			// load config file
-			let config = JSON.parse(fs.readFileSync(configFilePath, {encoding: "utf-8"})) as StubConfigInterface;
+			const config = JSON.parse(fs.readFileSync(configFilePath, {encoding: "utf-8"})) as StubConfigInterface;
 
 			if (config.name === this.callArgs.stubName) {
 				this.stubConfig 	= config;
@@ -88,7 +88,7 @@ export default class Stubber {
 			const shouldBeRenamed	= !!(this.stubConfig.renameToNameFiles && this.stubConfig.renameToNameFiles.find(i => i === item.replace(/(\\|\/)/g, "/").replace(this.stubOriginPath, "").split("/").splice(1).join("/")));
 			const relativepath 		= item.replace(/(\\|\/)/g, "/").replace(this.stubOriginPath, "").replace(shouldBeRenamed ? /\/\w+\./:"", shouldBeRenamed ? `/${this.callArgs.stubArgs.name}.`:"");
 			const targetfinalpath	= path.join(process.cwd(), targetPath, relativepath).replace(/(\\|\/)/g, "/");
-			
+
 			// skip config, we don't want to copy that
 			if (relativepath === "/stub.config.json") return;
 

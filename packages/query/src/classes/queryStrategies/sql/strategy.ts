@@ -60,7 +60,7 @@ class SqlStrategy implements queryStrategy {
 
 	public async sum (table: string, column: string, condition?: QueryPart) {
 		const stringcondition = condition && resolveQueryPart(condition);
-		
+
 		return await queryResolver(
 			this.client,
 			`SELECT SUM(${column}) FROM ${table}${ stringcondition ? ` WHERE ${stringcondition[0]}`:"" }`,
@@ -70,7 +70,7 @@ class SqlStrategy implements queryStrategy {
 
 	public async avg (table: string, column: string, condition?: QueryPart) {
 		const stringcondition = condition && resolveQueryPart(condition);
-		
+
 		return await queryResolver(
 			this.client,
 			`SELECT AVG(${column}) FROM ${table}${ stringcondition ? ` WHERE ${stringcondition[0]}`:"" }`,
@@ -80,7 +80,7 @@ class SqlStrategy implements queryStrategy {
 
 	public async count (table: string, column: string, condition?: QueryPart) {
 		const stringcondition = condition && resolveQueryPart(condition);
-		
+
 		return Object.values((await queryResolver(
 			this.client,
 			`SELECT COUNT(${column}) FROM ${table}${ stringcondition ? ` WHERE ${stringcondition[0]}`:"" }`,
@@ -202,10 +202,10 @@ class SqlStrategy implements queryStrategy {
 		await Promise.all(Object.keys(this.migrations).map(tableName => {
 			const c = async () => {
 				const updatedtable 	= this.migrations[tableName];
-				
+
 				// update table
 				if (await this.existsTable(tableName)) {
-					const oldtable 					= await this.getColumns(tableName);	
+					const oldtable 					= await this.getColumns(tableName);
 					const [_columns, _constraints] 	= smartUpdate(tableName, oldtable, updatedtable);
 
 					columns.push(_columns);
@@ -216,12 +216,12 @@ class SqlStrategy implements queryStrategy {
 					const key = Object.keys(updatedtable).find(k => updatedtable[k].primary);
 					const _columns 	= [] as string[];
 					const foreign 	= [] as string[];
-			
+
 					Object.keys(updatedtable).map(key => {
 						const column = columnSerialize(key, updatedtable[key]);
-			
+
 						_columns.push(column[0] as string);
-			
+
 						if (column[1]) foreign.push(column[1]);
 					});
 
@@ -311,7 +311,7 @@ class SqlStrategy implements queryStrategy {
 		);
 	}
 
-	public async queryAdd<T = Record<string, ModelContent>>(table: string, fields: Partial<T>) {		
+	public async queryAdd<T = Record<string, ModelContent>>(table: string, fields: Partial<T>) {
 		const response = await queryResolver(
 			this.client,
 			`INSERT INTO ${table}(${Object.keys(fields).join(", ")}) VALUES (${Object.values(fields).map(() => "?").join(", ")})`,

@@ -9,7 +9,7 @@ export default abstract class TableClass<T = Record<string, ModelContent>> exten
 	// -------------------------------------------------
 	// table methods
 	// -------------------------------------------------
-	
+
 	public getColumns = async <ModelConfig = T>() => {
 		const result = await this.getAdapter().getColumns<ModelConfig>(this.tableName);
 		return result;
