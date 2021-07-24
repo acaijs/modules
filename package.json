@@ -8,9 +8,11 @@
 		"url": "https://github.com/AcaiJS/modules"
 	},
 	"private": true,
-	"workspaces": [
-		"packages/*"
-	],
+	"workspaces": {
+		"packages": [
+			"packages/*"
+		]
+	},
 	"devDependencies": {
 		"eslint": "^7.31.0",
 		"husky": "^7.0.0",

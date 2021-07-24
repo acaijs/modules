@@ -22,6 +22,7 @@ export default interface ServerInterface {
 	 * @param {ProviderInterface} provider provider class (not instance)
 	 */
 	addProvider (provider: ProviderInterface) : void;
+
 	/**
 	 * ### Add providers
 	 * 
@@ -30,6 +31,7 @@ export default interface ServerInterface {
 	 * @param {ProviderInterface} provider provider class (not instance)
 	 */
 	addProviders (providers: ProviderInterface[]) : void;
+	
 	/**
 	 * ### Get providers
 	 * 
