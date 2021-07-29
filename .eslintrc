@@ -1,3 +1,3 @@
 {
-	"extends": "./packages/preset/.eslintrc"
+	"extends": "./packages/u_preset/.eslintrc"
 }

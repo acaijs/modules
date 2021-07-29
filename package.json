@@ -22,6 +22,7 @@
 		"all:publish": "yarn lerna publish from-git --yes",
 		"all:test": "yarn lerna run test --stream",
 		"all:version": "yarn lerna version",
+		"all:build": "yarn lerna run build",
 		"delete:node_modules": "find . -name \"node_modules\" -exec rm -rf '{}' +",
 		"format": "eslint --fix --ext .js,jsx,.ts,.tsx .",
 		"lerna": "./node_modules/.bin/lerna",
