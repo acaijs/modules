@@ -1,4 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-yarn syncpack fix-mismatches
+yarn pre-commit
+git add .
