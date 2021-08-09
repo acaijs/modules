@@ -6,7 +6,7 @@ import * as fs 					from "fs"
 import { RequestInterface } 	from "@acai/interfaces"
 import { ResponseInterface } 	from "@acai/interfaces"
 import ResponseUtilityOptions 	from "../interfaces/responseUtility"
-import { ServerRequest }		from "../interfaces/serverRequest"
+import { ServerRequest }		from "../interfaces/httpServerRequest"
 
 export default async function smartResponse (payload: string | RequestInterface | ResponseInterface | Record<string, unknown> | (() => ResponseUtilityOptions), request: ServerRequest, viewPrefix?: string) {
 	const headers = {} as Record<string, any>

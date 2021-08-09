@@ -2,7 +2,7 @@
 import * as http	from "http"
 
 // Interfaces
-import AdapterInterface from "../interfaces/adapter"
+import { AdapterInterface } from "@acai/interfaces"
 
 class HTTPAdapter implements AdapterInterface {
 	protected config: any;

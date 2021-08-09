@@ -10,6 +10,7 @@ import GroupAuxiliaryInterface 	from "../interfaces/groupAuxiliary"
 import TestInterface 			from "../interfaces/testQueue"
 import ContextErrorInterface 	from "../interfaces/contextError"
 import RunSettings 				from "../interfaces/runSettings"
+import cache from "./cache"
 
 let currTest
 export const getCurr = () => currTest
@@ -62,6 +63,10 @@ export default async function run (settings?: RunSettings) {
 
 	const processStart = process.hrtime()
 
+	// set console log to cache it inside as default message
+	const defaultLog = console.log
+	console.log = cache
+
 	for (let i = 0; i < tests.length; i++) {
 		const test = tests[i]
 		currTest = test
@@ -88,6 +93,7 @@ export default async function run (settings?: RunSettings) {
 					type	: "beforeAll",
 					message	: "An error has occured while running beforeAll callback",
 					stack	: getStackTrace(1, e),
+					data	: [],
 				})
 			}
 		}
@@ -102,6 +108,7 @@ export default async function run (settings?: RunSettings) {
 				message	: "An error has occured while running beforeEach callback",
 				stack	: getStackTrace(1, e),
 				fail	: true,
+				data	: [],
 			})
 
 			let ctx = contextFails.find(i => isArrayEquals(i.group, test.group))
@@ -120,6 +127,7 @@ export default async function run (settings?: RunSettings) {
 				type	: "beforeEach",
 				message	: "An error has occured while running beforeEach callback",
 				stack	: getStackTrace(1, e),
+				data	: [],
 			})
 		}
 
@@ -130,15 +138,15 @@ export default async function run (settings?: RunSettings) {
 
 		// run test
 		try {
-			await new Promise((resolve, reject) => async () => {
+			await new Promise((resolve, reject) => (async () => {
 				// timer for timeout
 				const timer = setTimeout(() => { reject("") }, test.timeout || settings?.timeout || 2000)
 
 				// test to run
 				await (test as unknown as {callback: () => void}).callback()
 				clearTimeout(timer)
-				resolve("")
-			})
+				resolve(true)
+			})())
 		}
 		catch (e) {
 			test.assertions.push({
@@ -147,6 +155,7 @@ export default async function run (settings?: RunSettings) {
 				name	: "Your test has thrown an timeout after it has been unnresponsive for 2 seconds, you can change this time by changing the run settings timeout or changing the test timeout",
 				stack	: "",
 				fail	: true,
+				data	: [],
 			})
 		}
 
@@ -160,6 +169,7 @@ export default async function run (settings?: RunSettings) {
 				message	: "An error has occured while running afterEach callback",
 				stack	: getStackTrace(1, e),
 				fail	: true,
+				data	: [],
 			})
 
 			let ctx = contextFails.find(i => isArrayEquals(i.group, test.group))
@@ -178,9 +188,13 @@ export default async function run (settings?: RunSettings) {
 				type	: "afterEach",
 				message	: "An error has occured while running afterEach callback",
 				stack	: getStackTrace(1, e),
+				data	: [],
 			})
 		}
 	}
+
+	// Return default console log to it's original state
+	console.log = defaultLog
 
 	// check context for after All
 	if (lasttest) {
@@ -204,6 +218,7 @@ export default async function run (settings?: RunSettings) {
 				type	: "afterAll",
 				message	: "An error has occured while running afterAll callback",
 				stack	: getStackTrace(1, e),
+				data	: [],
 			})
 		}
 	}

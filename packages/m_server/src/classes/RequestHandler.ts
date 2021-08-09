@@ -9,7 +9,7 @@ import { ServerInterface }			from "@acai/interfaces"
 import { RequestInterface } 		from "@acai/interfaces"
 import { ResponseInterface }		from "@acai/interfaces"
 import { MiddlewareInterface }		from "@acai/interfaces"
-import { ServerRequest } 			from "../interfaces/serverRequest"
+import { ServerRequest } 			from "../interfaces/httpServerRequest"
 
 // Modules
 import response 					from "../modules/response"

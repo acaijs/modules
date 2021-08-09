@@ -4,13 +4,15 @@ import ExpectInterface 	from "../interfaces/expect"
 
 // Utils
 import { getStackTrace } 	from "./general"
+import deepCompare from "./deepCompare"
 
-const buildResponse = (type: keyof ExpectInterface, success: boolean, message?: string) => {
+const buildResponse = (type: keyof ExpectInterface, success: boolean, message?: string, data: any[] = []) => {
 	return {
 		type,
 		fail: !success,
 		message: success ? undefined:message,
 		stack: success ? undefined:getStackTrace(),
+		data,
 	}
 }
 const buildTestAssertion = (test: TestInterface) => {
@@ -22,12 +24,13 @@ const buildTestAssertion = (test: TestInterface) => {
 			// -------------------------------------------------
 
 			this.toBe = (valueToTest) => {
-				const passes = typeof valueToAssert === "object" ? (JSON.stringify(valueToAssert) === JSON.stringify(valueToTest)) : valueToAssert === valueToTest
+				const passes = deepCompare(valueToAssert, valueToTest)
 
 				test.assertions.push(buildResponse(
 					"toBe",
 					passes,
-					`${typeof valueToAssert !== "undefined" ? JSON.stringify(valueToAssert):valueToAssert} is not equal to ${typeof valueToTest !== "undefined" ? JSON.stringify(valueToTest):valueToTest}`,
+					`${typeof valueToAssert} is not equal to ${typeof valueToTest}`,
+					[["expected", valueToTest], ["received", valueToAssert]],
 				))
 
 				return this

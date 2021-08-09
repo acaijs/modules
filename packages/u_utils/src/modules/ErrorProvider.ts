@@ -1,4 +1,5 @@
 // Packages
+import { response } from "@acai/server"
 import { ProviderInterface, RequestInterface, CustomExceptionInterface } from "@acai/interfaces"
 
 // Utils
@@ -41,7 +42,7 @@ export default class ErrorProvider {
 
 		// Turns off server is error is critical
 		if (error.critical) {
-			server.close()
+			server.stop()
 		}
 
 		return response().headers({ "content-type": "text/html" }).data(`

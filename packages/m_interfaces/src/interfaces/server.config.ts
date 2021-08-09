@@ -11,4 +11,7 @@ export default interface ServerConfigInterface {
 	hostname: string;
 	/** Specific port for the domain */
 	port: number;
+
+	/** Generic configuration an adapter may have */
+	[key: string]: any;
 }

@@ -3,7 +3,7 @@ import * as Cookies			from "cookies"
 import { IncomingMessage } 	from "http"
 
 // Classes
-import { ServerRequest } from "./vanilla.request.interface"
+import { ServerRequest } from "./vanilla.request"
 
 export default interface RequestInterface {
 	/** Request headers */

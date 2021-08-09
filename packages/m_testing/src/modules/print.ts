@@ -27,10 +27,11 @@ export default async function run (tests: TestInterface[], contextErrors: Contex
 		tests.forEach(test => {
 			// print test group
 			if (!isArrayEquals(test.group, lastgroup)) {
+				console.log()
 				test.group.forEach((item, index) => {
 					if (lastgroup[index] !== item) {
 						const fails = (contextErrors.find(i => isArrayEquals(i.group, test.group))?.fails || []).map(i => `\x1b[31m${i.type}\x1b[37m`).join(",")
-						console.log(`\n${repeatString("\t", index)} ${item}${fails ? ` (${fails})`:""}`)
+						console.log(`${repeatString("    ", index)} ${item}${fails ? ` (${fails})`:""}`)
 					}
 				})
 
@@ -39,8 +40,8 @@ export default async function run (tests: TestInterface[], contextErrors: Contex
 
 			// prepare assertions print
 			const fail = !!test.assertions.find(a => a.fail)
-			const assertions = test.assertions.map(i => `${i.fail ? "\x1b[31m":"\x1b[32m"}${i.type}\x1b[37m`).join(", ")
-			console.log(`${repeatString("\t", lastgroup.length - 1)} ${lastgroup.length !== 0 ? " ":""}${fail ? "\x1b[31mx":"\x1b[32m√\x1b[37m"}\x1b[37m - ${test.title} (${assertions ? assertions: "no assertions made"})`)
+			const assertions = fail ? test.assertions.map(i => `${i.fail ? "\x1b[31m":"\x1b[32m"}${i.type}\x1b[37m`).join(", ") : `\x1b[32m${test.assertions.length} assertions\x1b[37m`
+			console.log(`${repeatString("    ", lastgroup.length - 1)} ${lastgroup.length !== 0 ? " ":""}${fail ? "\x1b[31mx":"\x1b[32m√\x1b[37m"}\x1b[37m - ${test.title} (${assertions ? assertions: "no assertions made"})`)
 		})
 	}
 
@@ -60,12 +61,14 @@ export default async function run (tests: TestInterface[], contextErrors: Contex
 		tests.forEach(test => {
 			test.assertions.forEach(assertion => {
 				if (assertion.fail) {
-					console.log(` \x1b[31mx\x1b[37m - ${test.group.join(" \x1b[36m>\x1b[37m ")}${test.group.length > 0 ? "\x1b[36m>\x1b[37m ":""}${test.title}`)
+					console.log(` \x1b[31mx\x1b[37m - ${test.group.join(" \x1b[36m>\x1b[37m ")}${test.group.length > 0 ? "\x1b[36m >\x1b[37m ":""}${test.title}`)
 					console.log("\x1b[31m")
-					console.log(`  ${assertion.message}`)
-					console.log(`    ${assertion.name}`)
+					console.log(`\x1b[31m${assertion.message}\n`)
+					if (assertion.name) console.log(`    ${assertion.name}`)
 					console.log(`${assertion.stack}`)
 					console.log("\x1b[37m")
+					assertion.data.forEach((data, index) => console.log(`- ${data[1] ? data[0] : index} `, data[1] || data[0]))
+					if (assertion.data.length > 0) console.log()
 				}
 			})
 		})
@@ -78,7 +81,8 @@ export default async function run (tests: TestInterface[], contextErrors: Contex
 			group.fails.forEach((fail) => {
 				console.log(` \x1b[31mx\x1b[37m - ${group.group.join(" \x1b[36m>\x1b[37m ")}`)
 				console.log("\x1b[31m")
-				console.log(`  ${fail.message}`)
+				console.log(fail.message)
+				fail.data.forEach(data => console.log(data))
 				console.log()
 				console.log(fail.title)
 				console.log(` ${fail.stack}`)
@@ -101,9 +105,9 @@ export default async function run (tests: TestInterface[], contextErrors: Contex
 		tests.forEach(test => {
 			if (test.messages.length > 0) {
 				test.messages.forEach(message => {
-					console.log(`•${test.group.join(" \x1b[36m>\x1b[37m ")} ${test.group.length > 0 ? "\x1b[36m>\x1b[37m ":""}${test.title}`)
+					console.log(`• ${test.group.join(" \x1b[36m>\x1b[37m ")} ${test.group.length > 0 ? "\x1b[36m>\x1b[37m ":""}${test.title}`)
 					if (message[1]) console.log(`message: ${message[1]}`)
-					console.log("value:", message[0])
+					console.log(message[0])
 					console.log()
 				})
 			}
@@ -124,9 +128,9 @@ export default async function run (tests: TestInterface[], contextErrors: Contex
 	console.log(" Tests results")
 	console.log("===============================")
 	console.log()
-	console.log(` Total tests:\t\t${total}`)
-	console.log(` Successful tests:\t${success}`)
-	console.log(` Total time elapsed:\t${minutes ? `${minutes}m `:""}${seconds ? `${seconds}s `:""}${milisec}ms`)
+	console.log(` Total tests\t\t: ${total}`)
+	console.log(` Successful tests\t: ${success}`)
+	console.log(` Total time elapsed\t: ${minutes ? `${minutes}m `:""}${seconds ? `${seconds}s `:""}${milisec}ms`)
 	console.log()
 
 	if (total !== success) process.exit(1)

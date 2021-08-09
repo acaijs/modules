@@ -20,6 +20,7 @@ export default interface TestInterface {
 		fail	 : boolean;
 		stack	?: string;
 		name	?: string;
+		data	 : any[];
 	}[];
 
 	// filter
@@ -52,6 +53,7 @@ export interface TestArgumentInterface {
 		fail	 : boolean;
 		stack	?: string;
 		name	?: string;
+		data	: [];
 	}[];
 
 	// filter

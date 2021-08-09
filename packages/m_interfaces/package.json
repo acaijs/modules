@@ -17,6 +17,7 @@
 		"dist/**"
 	],
 	"types": "dist",
+	"main": "dist/index.js",
 	"scripts": {
 		"build": "tsc --project ./tsconfig.json",
 		"lint": "eslint --quiet **/*",

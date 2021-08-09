@@ -4,10 +4,11 @@
 * found in the LICENSE file.
 */
 
-export { default as CustomExceptionInterface }	from "./exception.interface"
-export { default as MiddlewareInterface } 		from "./middleware.interface"
-export { default as ProviderInterface } 		from "./provider.interface"
-export { default as RequestInterface }	 		from "./request.interface"
-export { default as ResponseInterface }	 		from "./response.interface"
-export { default as ServerConfigInterface }		from "./server.config.interface"
-export { default as ServerInterface }			from "./server.interface"
+export { default as CustomExceptionInterface }	from "./interfaces/exception"
+export { default as MiddlewareInterface } 		from "./interfaces/middleware"
+export { default as ProviderInterface } 		from "./interfaces/provider"
+export { default as RequestInterface }	 		from "./interfaces/request"
+export { default as ResponseInterface }	 		from "./interfaces/response"
+export { default as ServerConfigInterface }		from "./interfaces/server.config"
+export { default as ServerInterface }			from "./interfaces/server"
+export { default as AdapterInterface }			from "./interfaces/adapter"
