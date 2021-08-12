@@ -1,7 +1,7 @@
 // Interfaces
-import ServerInterface			from "./server"
-import RequestInterface			from "./request"
+import RequestInterface from "./request"
 import CustomExceptionInterface	from "./exception"
+import SerializedAdapterInterface from "./adapter.serialized"
 
 export default interface ProviderInterface {
 	/**
@@ -9,7 +9,7 @@ export default interface ProviderInterface {
 	 *
 	 * @param {ServerInterface} server current server instance
 	 */
-	boot? (server: ServerInterface): Promise<void> | void;
+	boot? (server: SerializedAdapterInterface): Promise<void> | void;
 
 	/**
 	 * Allows you to handle specific errors in their provider scope, for example. You could create
@@ -17,5 +17,5 @@ export default interface ProviderInterface {
 	 *
 	 * @param data
 	 */
-	onError? (data: {error: CustomExceptionInterface; request: RequestInterface; server: ServerInterface}): Promise<unknown> | unknown;
+	onError? (data: {error: CustomExceptionInterface; request: RequestInterface; server: SerializedAdapterInterface}): Promise<unknown> | unknown;
 }

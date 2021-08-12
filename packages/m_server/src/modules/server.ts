@@ -1,13 +1,16 @@
 // Interfaces
-import SerializedAdapterInterface from "../interfaces/serializedAdapter"
-import { ProviderInterface, AdapterInterface, MiddlewareInterface, ServerConfigInterface, ServerInterface } from "@acai/interfaces"
+import { AdapterInterface, SerializedAdapterInterface } from "@acai/interfaces"
+import { ProviderInterface, MiddlewareInterface } from "@acai/interfaces"
+import { ServerConfigInterface, ServerInterface } from "@acai/interfaces"
 
 // Utils
 import deepMerge from "../utils/deepMerge"
 
 // Exceptions
 import AdapterNotFound from "../exceptions/adapterNotFound"
-import { Provider } from "../../dist"
+
+// Classes
+import AdapterHandler from "../classes/AdapterHandler"
 
 export default class Server implements ServerInterface {
 	// -------------------------------------------------
@@ -85,7 +88,7 @@ export default class Server implements ServerInterface {
 	public addProvider(adapterOrProvider: string | string[] | ProviderInterface, providerOrNone?: ProviderInterface): void {
 		// normalize instances
 		const adapters = providerOrNone && (typeof adapterOrProvider === "string" ? [adapterOrProvider] : adapterOrProvider as string[])
-		const provider = providerOrNone || adapterOrProvider as Provider
+		const provider = providerOrNone || adapterOrProvider as ProviderInterface
 
 		if (adapters) {
 			// make sure all adapters referenced exist
@@ -282,6 +285,7 @@ export default class Server implements ServerInterface {
 			providers: [],
 			globals: [],
 			config: config ? deepMerge(this._config, config) : this._config,
+			running: false,
 		}
 	}
 
@@ -303,8 +307,14 @@ export default class Server implements ServerInterface {
 	// Main methods
 	// -------------------------------------------------
 
-	public async run(): Promise<void> {
+	public async run(adaptersToRun?: string[]): Promise<void> {
+		const adapters = adaptersToRun || Object.keys(this.adapters)
 
+		await Promise.all(adapters.map(name => (async () => {
+			const handler = new AdapterHandler(this.adapters[name])
+
+			await handler.boot()
+		})()))
 	}
 
 	public async stop() {
