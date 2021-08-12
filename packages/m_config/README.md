@@ -1,14 +1,14 @@
-<p align="center"><img src="https://api.aposoftworks.com/storage/image/ehRdFIz6tqiERXID1SIXAeu0mmTBKLdixIXsNj9s.png" width="256"></p>
+<div align="center"><img src="https://github.com/AcaiJS/ref_documentation/blob/production/public/img/logo.svg" width="128"></div>
 
 # Açai Config Module
 
- [![Support](https://img.shields.io/badge/Patreon-Support-orange.svg?logo=Patreon&style=for-the-badge)](https://www.patreon.com/rafaelcorrea) ![https://www.npmjs.com/package/@acai/config](https://img.shields.io/npm/dm/@acai/config?color=%238033BC&style=for-the-badge) ![NPM](https://img.shields.io/npm/l/@acai/query?style=for-the-badge)
+[![Support](https://img.shields.io/badge/Patreon-Support-orange.svg?logo=Patreon&style=for-the-badge)](https://www.patreon.com/rafaelcorrea) ![https://www.npmjs.com/package/@acai/config](https://img.shields.io/npm/dm/@acai/config?color=%238033BC&style=for-the-badge) ![NPM](https://img.shields.io/npm/l/@acai/query?style=for-the-badge)
 
 Açai config module is a small tool that helps you handle data inside of your application. It exports a global config by default, and an option to create a scoped config.
 
 ## Usage
 
-``` typescript
+```typescript
 import config from "https://deno.land/x/acai_config/mod.ts";
 
 // access your env variables with
@@ -31,7 +31,7 @@ If you wish to bind your env variables with your config variables, you can call 
 
 By default, config will try to fetch from `.env`, but you can pass a preset to try. If not found, it will alert on the console and try to fetch .env instead.
 
-``` typescript
+```typescript
 import config from "https://deno.land/x/acai_config/mod.ts";
 
 // will fetch env from .env.testing

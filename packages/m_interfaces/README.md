@@ -1,4 +1,4 @@
-<div align="center"><img src="https://docs-d5w44.ondigitalocean.app/assets/logo.0c850f36.svg" width="256"></div>
+<div align="center"><img src="https://github.com/AcaiJS/ref_documentation/blob/production/public/img/logo.svg" width="128"></div>
 
 # Açai Interfaces Module
 
@@ -7,4 +7,5 @@
 This package is responsible for containing all the conventions used as interface contracts to be shared across all the modules of the Açaí JS framework. Don't forget to check our [wiki] (https://github.com/AcaiJS/modules/wiki).
 
 ## Contributing
+
 You can checkout about how to contribute [here](https://github.com/AcaiJS/modules/wiki/contributing)
