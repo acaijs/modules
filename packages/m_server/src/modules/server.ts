@@ -311,6 +311,7 @@ export default class Server implements ServerInterface {
 		const adapters = adaptersToRun || Object.keys(this.adapters)
 
 		await Promise.all(adapters.map(name => (async () => {
+			// handler responsible for talking with adapter
 			const handler = new AdapterHandler(this.adapters[name])
 
 			await handler.boot()

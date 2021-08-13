@@ -5,7 +5,7 @@ import * as fs 					from "fs"
 // Interfaces
 import { RequestInterface } 	from "@acai/interfaces"
 import { ResponseInterface } 	from "@acai/interfaces"
-import ResponseUtilityOptions 	from "../interfaces/responseUtility"
+import ResponseUtilityOptions 	from "../../../u_utils/src/interfaces/responseUtility"
 import { ServerRequest }		from "../interfaces/httpServerRequest"
 
 export default async function smartResponse (payload: string | RequestInterface | ResponseInterface | Record<string, unknown> | (() => ResponseUtilityOptions), request: ServerRequest, viewPrefix?: string) {

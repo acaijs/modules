@@ -1,6 +1,8 @@
 // Packages
-import { response } from "@acai/server"
 import { ProviderInterface, RequestInterface, CustomExceptionInterface } from "@acai/interfaces"
+
+// Modules
+import response from "../modules/response"
 
 // Utils
 import isApi			from "../utils/isApi"
@@ -42,7 +44,7 @@ export default class ErrorProvider {
 
 		// Turns off server is error is critical
 		if (error.critical) {
-			server.stop()
+			await server.adapter.shutdown()
 		}
 
 		return response().headers({ "content-type": "text/html" }).data(`
@@ -61,7 +63,7 @@ export default class ErrorProvider {
 		// arrange data
 		const data = {
 			message	: error.message,
-			trace	: error.stack.split("\n").splice(1).map(i => i.trim().replace("at ", "")),
+			trace	: error.stack?.split("\n").splice(1).map(i => i.trim().replace("at ", "")),
 			... error.data,
 		}
 
@@ -103,7 +105,7 @@ export default class ErrorProvider {
 				query	: error.query,
 				message	: error.sqlMessage,
 				state	: error.sqlState,
-				trace	: error.stack.split("\n").splice(1).map(i => i.trim().replace("at ", "")),
+				trace	: error.stack?.split("\n").splice(1).map(i => i.trim().replace("at ", "")),
 				model 	: error.model,
 			}
 

@@ -1,5 +1,5 @@
 // Packages
-import { CustomException } from "@acai/server"
+import { CustomException } from "@acai/utils"
 
 export default class InvalidRuleException extends CustomException {
 	shouldReport = true;

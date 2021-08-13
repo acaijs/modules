@@ -1,6 +1,6 @@
 import * as fs from "fs"
 import * as path from "path"
-import crypto from "crypto"
+import * as crypto from "crypto"
 
 function getEnv () {
 	if (fs.existsSync(path.join(process.cwd(), ".env.example"))) {

@@ -1,14 +1,13 @@
 // Interfaces
-import { ServerInterface } 			from "@acai/interfaces"
-import { RequestInterface } 		from "@acai/interfaces"
+import { SerializedAdapterInterface } from "@acai/interfaces"
+import { RequestInterface } from "@acai/interfaces"
 import { CustomExceptionInterface }	from "@acai/interfaces"
 
 // Utils
 import logError 		from "./log"
 
 // Modules
-import response			from "../modules/response"
-import CustomException	from "../modules/CustomException"
+import response			from "../../../u_utils/src/modules/response"
 
 // -------------------------------------------------
 // Helper methods
@@ -66,20 +65,20 @@ export const handleException = (e: CustomExceptionInterface, request: RequestInt
 // Main exports
 // -------------------------------------------------
 
-export async function onErrorProvider (server: ServerInterface, request: RequestInterface, error: CustomException) {
+export async function onErrorProvider (server: SerializedAdapterInterface, request: RequestInterface, error: CustomExceptionInterface) {
 	return onErrorGeneral("Exception thrown when running provider", server, request, error)
 }
 
-export async function onErrorMiddleware (server: ServerInterface, request: RequestInterface, error: CustomException) {
+export async function onErrorMiddleware (server: SerializedAdapterInterface, request: RequestInterface, error: CustomExceptionInterface) {
 	return onErrorGeneral("Exception thrown when running middleware", server, request, error)
 }
 
-export async function onErrorController (server: ServerInterface, request: RequestInterface, error: CustomException & {type:string}) {
+export async function onErrorController (server: SerializedAdapterInterface, request: RequestInterface, error: CustomExceptionInterface & {type:string}) {
 	return onErrorGeneral("Exception thrown when running controller", server, request, error)
 }
 
-export async function onErrorGeneral (type: string, server: ServerInterface, request: RequestInterface, error: CustomException & {type: string}) {
-	const providers = server.getProviders()
+export async function onErrorGeneral (type: string, server: SerializedAdapterInterface, request: RequestInterface, error: CustomExceptionInterface) {
+	const providers = server.providers
 
 	for (let i = 0; i < providers.length; i++) {
 		const provider = providers[i]

@@ -24,6 +24,10 @@ class HTTPAdapter implements AdapterInterface {
 		return false
 	}
 
+	public async shutdown () {
+		await new Promise(r => this.conn.close(r))
+	}
+
 	public async onRequest (cb) {
 		this.requestCb = cb
 	}

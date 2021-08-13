@@ -11,7 +11,7 @@ type request = {
 	files	   ?: unknown;
 };
 
-export default interface CustomExceptionInterface {
+export default interface CustomExceptionInterface extends Error {
 	/**
 	 * Reports error to the server console.
 	 */

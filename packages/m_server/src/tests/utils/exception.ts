@@ -1,5 +1,5 @@
 // Modules
-import CustomException from "../../modules/CustomException"
+import { CustomException } from "@acai/utils"
 
 export default class Exception extends CustomException {
 	public status = 200;

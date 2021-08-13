@@ -5,10 +5,12 @@
 	},
 	"extends": "../u_preset/tsconfig.json",
 	"include": [
-		"src/**/*"
+		"src/**/*",
+		"../u_utils/src/interfaces/responseUtility.ts",
+		"../u_utils/src/modules/response.ts"
 	],
 	"exclude": [
-		"dist",
+		"dist/**/*",
 		"node_modules",
 		"**/*.test.*"
 	]

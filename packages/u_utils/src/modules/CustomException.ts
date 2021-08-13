@@ -1,7 +1,7 @@
 // Interfaces
-import CustomExceptionInterface from "../interfaces/CustomException"
+import { CustomExceptionInterface } from "@acai/interfaces"
 
-export default abstract class Exception extends Error implements CustomExceptionInterface {
+export default class Exception extends Error implements CustomExceptionInterface {
 	// -------------------------------------------------
 	// Properties
 	// -------------------------------------------------
@@ -29,7 +29,7 @@ export default abstract class Exception extends Error implements CustomException
 	}
 
 	public report () {
-		return this.message
+		console.log(this.message)
 	}
 
 	// -------------------------------------------------
