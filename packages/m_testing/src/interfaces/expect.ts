@@ -55,11 +55,11 @@ export default interface ExpectInterface {
 	toNotBeNull 	(): ExpectInterface;
 
 	/**
-	 * ### To throw
+	 * ### To throw error
 	 *
-	 * Assertion value should be a callable variable.
+	 * Assertion value should be a callable variable. Expects the error to contain the same values if an error is passed
 	 */
-	toThrow 	(): ExpectInterface;
+	toThrow 	(error?: Record<string, any>): ExpectInterface;
 
 	/**
 	 * ### Cache

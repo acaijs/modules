@@ -25,6 +25,8 @@ test.group("Server tests", () => {
 				providers: [],
 				globals: [],
 				config: {},
+				handler: undefined,
+				running: false,
 			})
 		})
 
@@ -49,6 +51,8 @@ test.group("Server tests", () => {
 				config: {
 					testConfig: true,
 				},
+				handler: undefined,
+				running: false,
 			})
 		})
 

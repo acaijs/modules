@@ -5,7 +5,7 @@ import ColumnOptions from "../../../../interfaces/ColumnOptions"
 import typeMaps from "./typeMaps"
 
 export default function columnSerialize (key: string, data: ColumnOptions) {
-	const length = data.length !== undefined ? data.length : ["string", "float", "int"].indexOf(data.type) + 1 > 0 ? 255: undefined
+	const length = data.length !== undefined ? data.length : ["string", "int"].indexOf(data.type) + 1 > 0 ? 255: undefined
 	const column	: Array<string> = []
 	const constraint: Array<string> = []
 
@@ -16,7 +16,7 @@ export default function columnSerialize (key: string, data: ColumnOptions) {
 	// column name
 	column.push(key)
 	// column type and length/enum args
-	column.push(`${typeMaps[data.type].toLowerCase()}${length ? `(${length})`:""}`)
+	column.push(`${typeMaps[data.type].toLowerCase()}${length ? `(${typeof length === "number" ? length : length.map(i => `"${i}"`).join(",")})`:""}`)
 	// column nullable
 	column.push(data.nullable ? "NULL":"NOT NULL")
 	// column unique

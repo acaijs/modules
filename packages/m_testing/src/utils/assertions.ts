@@ -136,21 +136,33 @@ const buildTestAssertion = (test: TestInterface) => {
 			// toThrow
 			// -------------------------------------------------
 
-			this.toThrow = () => {
-				let passes = false
+			this.toThrow = (error?: any) => {
+				const obj = {} as any
 
-				try {
-					(valueToAssert as () => any)()
-				}
-				catch (e) {
-					passes = true
-				}
+				obj.async = (async function () {
+					let fails = true as any
+					let errorThrown
 
-				test.assertions.push(buildResponse(
-					"toThrow",
-					passes,
-					`"${valueToAssert}" dind't throw an exception`,
-				))
+					try {
+						await (valueToAssert as () => void | Promise<void>)()
+					}
+					catch (e) {
+						errorThrown = e
+						if (error) fails = deepCompare(e, error) ? false : `"${valueToAssert}" didn't match the exception ${error}`
+						else fails = false
+					}
+
+					const response = buildResponse(
+						"toThrow",
+						!fails,
+						fails || `"${valueToAssert}" dind't throw an exception`,
+						error ? [["expected", error], ["received", errorThrown]] : undefined,
+					)
+
+					Object.keys(response).forEach(key => obj[key] = response[key])
+				})
+
+				test.assertions.push(obj)
 
 				return this
 			}

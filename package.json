@@ -39,6 +39,7 @@
 		"server": "yarn workspace @acai/server",
 		"stubber": "yarn workspace @acai/stubber",
 		"testing": "yarn workspace @acai/testing",
-		"validator": "yarn workspace @acai/validator"
+		"validator": "yarn workspace @acai/validator",
+		"utils": "yarn workspace @acai/utils"
 	}
 }

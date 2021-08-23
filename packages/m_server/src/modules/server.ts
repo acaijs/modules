@@ -1,5 +1,5 @@
 // Interfaces
-import { AdapterInterface, SerializedAdapterInterface } from "@acai/interfaces"
+import { AdapterInterface, ClassType, SerializedAdapterInterface } from "@acai/interfaces"
 import { ProviderInterface, MiddlewareInterface } from "@acai/interfaces"
 import { ServerConfigInterface, ServerInterface } from "@acai/interfaces"
 
@@ -8,6 +8,9 @@ import deepMerge from "../utils/deepMerge"
 
 // Exceptions
 import AdapterNotFound from "../exceptions/adapterNotFound"
+
+// Adapters
+import HttpAdapter from "../adapters/http"
 
 // Classes
 import AdapterHandler from "../classes/AdapterHandler"
@@ -18,7 +21,7 @@ export default class Server implements ServerInterface {
 	// -------------------------------------------------
 
 	protected _config: Partial<ServerConfigInterface>;
-	protected adapters: Record<string, SerializedAdapterInterface> = {};
+	protected adapters: Record<string, SerializedAdapterInterface & {handler?: AdapterHandler}> = {};
 
 	// -------------------------------------------------
 	// Boot methods
@@ -26,6 +29,7 @@ export default class Server implements ServerInterface {
 
 	public constructor (config?: Partial<ServerConfigInterface>) {
 		this._config = config || {}
+		this.addAdapter("http", HttpAdapter)
 	}
 
 	public setConfig (config: Partial<ServerConfigInterface>): void;
@@ -277,15 +281,16 @@ export default class Server implements ServerInterface {
 	// Adapter methods
 	// -------------------------------------------------
 
-	public addAdapter (name: string, adapter: AdapterInterface, config?: Partial<ServerConfigInterface>) {
+	public addAdapter (name: string, adapter: ClassType<AdapterInterface> | AdapterInterface, config?: Partial<ServerConfigInterface>) {
 		this.adapters[name] = {
 			name,
-			adapter,
+			adapter: (adapter.constructor && (adapter as any).prototype?.constructor === adapter ? new (adapter as ClassType<AdapterInterface>)() : adapter) as AdapterInterface,
 			middlewares: {},
 			providers: [],
 			globals: [],
 			config: config ? deepMerge(this._config, config) : this._config,
 			running: false,
+			handler: undefined,
 		}
 	}
 
@@ -307,18 +312,38 @@ export default class Server implements ServerInterface {
 	// Main methods
 	// -------------------------------------------------
 
-	public async run(adaptersToRun?: string[]): Promise<void> {
-		const adapters = adaptersToRun || Object.keys(this.adapters)
+	public async run(adaptersToRun?: string[] | string): Promise<void> {
+		const adapters = (typeof adaptersToRun === "string" ? [adaptersToRun] : adaptersToRun) || Object.keys(this.adapters)
 
 		await Promise.all(adapters.map(name => (async () => {
+			// check handler exists
+			if (!this.adapters[name]) return console.log(`Adapter ${name} was not found, skipping.`)
+
 			// handler responsible for talking with adapter
-			const handler = new AdapterHandler(this.adapters[name])
+			const handler = this.adapters[name].handler = new AdapterHandler(this.adapters[name])
+			this.adapters[name].handler = handler
+			this.adapters[name].running = true
 
 			await handler.boot()
 		})()))
 	}
 
-	public async stop() {
+	public async stop(adaptersToStop?: string[] | string) {
+		const adapters = (typeof adaptersToStop === "string" ? [adaptersToStop] : adaptersToStop) || Object.keys(this.adapters)
 
+		await Promise.all(adapters.map(name => (async () => {
+			if (this.adapters[name]) {
+				await this.adapters[name].handler?.shutdown()
+
+				this.adapters[name].handler = undefined
+				this.adapters[name].running = false
+			}
+		})()))
+	}
+
+	public async isRunning(adaptersToCheck?: string | string[]) {
+		const adapters = (typeof adaptersToCheck === "string" ? [adaptersToCheck] : adaptersToCheck) || Object.keys(this.adapters)
+
+		return adapters.filter(adapter => this.adapters[adapter].running).length
 	}
 }

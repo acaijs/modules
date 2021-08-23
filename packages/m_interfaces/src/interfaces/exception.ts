@@ -1,17 +1,17 @@
 // Interfaces
-import { IncomingMessage } from "http"
+import SerializedAdapterInterface from "./adapter.serialized"
 
-type request = {
-	headers		: IncomingMessage["headers"];
-	params		: Record<string, string | string[]>;
-	query		: Record<string, string | number | boolean>;
-	route		: string;
-	options		: Record<string, number | string | string[] | Record<string, string> | undefined>;
-	fields 	   ?: Record<string, unknown>;
-	files	   ?: unknown;
-};
+export default interface CustomExceptionInterface<Request = any> extends Error {
+	/**
+	 * Request data in case the exception was thrown during it. Only applicable during exceptions thrown during request.
+	 */
+	request?: Request;
 
-export default interface CustomExceptionInterface extends Error {
+	/**
+	 * Extra data to be sent along exception
+	 */
+	data?: any;
+
 	/**
 	 * Reports error to the server console.
 	 */
@@ -41,10 +41,10 @@ export default interface CustomExceptionInterface extends Error {
 	/**
 	 * Method that overwrites the server original error dump to the console
 	 */
-	report? (info: request): void;
+	report?(info: {server: SerializedAdapterInterface; error: CustomExceptionInterface; request: Request}): void;
 
 	/**
 	 * Responsible for rendering a response to the user
 	 */
-	render? (info: request): unknown;
+	render?(info: {server: SerializedAdapterInterface; error: CustomExceptionInterface; request: Request}): unknown;
 }

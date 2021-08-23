@@ -1,5 +1,5 @@
 // Packages
-import { ProviderInterface, RequestInterface, CustomExceptionInterface } from "@acai/interfaces"
+import { ProviderInterface, RequestInterface, CustomExceptionInterface, SerializedAdapterInterface } from "@acai/interfaces"
 
 // Modules
 import response from "../modules/response"
@@ -34,7 +34,7 @@ export default class ErrorProvider {
 
 		// default error message
 		if (!data) {
-			data = this.genericError.bind(this)(error as any, request)
+			data = this.genericError.bind(this)(error as any, request, server)
 		}
 
 		// Handle display
@@ -47,19 +47,21 @@ export default class ErrorProvider {
 			await server.adapter.shutdown()
 		}
 
-		return response().headers({ "content-type": "text/html" }).data(`
-			<h1>${data.message || "An error has occured"}</h1>
-			<pre>
-				${JSON.stringify(data)}
-			</pre>
-		`)
+		return response()
+			.headers({ "Content-Type": "text/html" })
+			.status(error.status || 500)
+			.data(`
+			<h1>Error thrown: ${data.message || "An error has occured"}</h1>
+			<h2>Trace</h2>
+			<ul>${data.trace.map(i => `<li>${i}</li>`).join("")}</ul>
+			${data.data ? `<h2>Data</h2>${JSON.stringify(data.data, null, 4)}`:""}`)
 	}
 
 	// -------------------------------------------------
 	// Error type methods
 	// -------------------------------------------------
 
-	private genericError (error: CustomExceptionInterface & {[_ in string]: any}, request: RequestInterface) {
+	private genericError (error: CustomExceptionInterface & {[_ in string]: any}, request: RequestInterface, server: SerializedAdapterInterface) {
 		// arrange data
 		const data = {
 			message	: error.message,
@@ -68,10 +70,10 @@ export default class ErrorProvider {
 		}
 
 		// try custom exceptions report
-		if (error.shouldReport) {
+		if (error.shouldReport !== false) {
 			// custom error report
 			if (error.report) {
-				error.report(request)
+				error.report({request, error, server})
 			}
 			// default error report
 			else {
@@ -86,7 +88,7 @@ export default class ErrorProvider {
 
 		// try custom exception render
 		if (error.render) {
-			return error.render(request)
+			return error.render({error, request, server})
 		}
 
 		// default fallback render

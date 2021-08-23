@@ -1,8 +1,30 @@
+// Interfaces
+import ServerConfigInterface from "./server.config"
+
 export default interface AdapterInterface {
-	boot (config: Record<string, any>): Promise<boolean> | boolean;
+	/**
+	 * ### Boot
+	 *
+	 * Request of the server to the adapter boot, use this to actually start the adapter, do not use constructor for that!
+	 *
+	 * @param config
+	 */
+	boot (config: Partial<ServerConfigInterface>): Promise<boolean> | boolean;
+
+	/**
+	 * ### Shutdown
+	 *
+	 * Shutdown adapter and remove any pending services online
+	 */
 	shutdown (): Promise<void> | void;
 
-	onRequest (req: (() => any)): Promise<void> | void;
-
-	onParse (response: any): any;
+	/**
+	 * ### On request
+	 *
+	 * This method allows you to bind a callback that you can call everytime you receive a request,
+	 * booting the main server. The return of this callback will be the response to be sent by the server.
+	 *
+	 * @param callback Call this function when you receive a request from the server
+	 */
+	onRequest(requestCallback: ((request: any, controller: string | ((...args: any[]) => any | Promise<any>), middlewares?: string[]) => any)): Promise<void> | void;
 }

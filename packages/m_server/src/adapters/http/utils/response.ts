@@ -5,8 +5,9 @@ import * as fs 					from "fs"
 // Interfaces
 import { RequestInterface } 	from "@acai/interfaces"
 import { ResponseInterface } 	from "@acai/interfaces"
-import ResponseUtilityOptions 	from "../../../u_utils/src/interfaces/responseUtility"
-import { ServerRequest }		from "../interfaces/httpServerRequest"
+import ResponseUtilityOptions 	from "../../../../../u_utils/src/interfaces/responseUtility"
+import { ServerRequest }		from "../../../interfaces/httpServerRequest"
+import censor from "../../../utils/censor"
 
 export default async function smartResponse (payload: string | RequestInterface | ResponseInterface | Record<string, unknown> | (() => ResponseUtilityOptions), request: ServerRequest, viewPrefix?: string) {
 	const headers = {} as Record<string, any>
@@ -50,11 +51,15 @@ export default async function smartResponse (payload: string | RequestInterface 
 			body = body.toObject()
 		}
 	}
-	else {
+	else if (!headers["Content-Type"]) {
 		headers["Accept"]		= "text/plain"
 		headers["Content-Type"] = "text/plain"
 	}
 
 	// respond
-	return {body: typeof body === "object" ? JSON.stringify(body) : body, headers, status }
+	return {
+		body: typeof body === "object" ? censor(body) : body,
+		headers,
+		status,
+	}
 }

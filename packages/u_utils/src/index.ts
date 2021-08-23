@@ -13,6 +13,7 @@ export { default as response } from "./modules/response"
 
 // Utils
 export { default as FileHandler } from "./utils/FileHandler"
+export { default as exceptionLog } from "./utils/logError"
 
 // Interfaces
 export { default as ResponseUtilityInterface } from "./interfaces/responseUtility"

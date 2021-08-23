@@ -16,6 +16,8 @@ let currTest
 export const getCurr = () => currTest
 
 export default async function run (settings?: RunSettings) {
+	process.env.testing = "true"
+
 	// -------------------------------------------------
 	// Run all groups
 	// -------------------------------------------------
@@ -40,6 +42,10 @@ export default async function run (settings?: RunSettings) {
 	// Run tests
 	// -------------------------------------------------
 
+	// set console log to cache it inside as default message
+	const defaultLog = console.log
+	console.log = cache
+
 	const states = [ "─", "\\", "|", "/" ]
 	let testsrun = 0
 	let laststep = 0
@@ -47,7 +53,7 @@ export default async function run (settings?: RunSettings) {
 	const waitProcess = setInterval(() => {
 		if (settings?.spinner !== false) {
 			console.clear()
-			console.log(`\n ${states[laststep]} (${testsrun}/${tests.length}) Running tests`)
+			defaultLog(`\n ${states[laststep]} (${testsrun}/${tests.length}) Running tests`)
 
 			if (laststep + 2 > states.length) laststep = 0
 			else laststep++
@@ -62,10 +68,6 @@ export default async function run (settings?: RunSettings) {
 	let lasttest	: TestInterface = {} as TestInterface
 
 	const processStart = process.hrtime()
-
-	// set console log to cache it inside as default message
-	const defaultLog = console.log
-	console.log = cache
 
 	for (let i = 0; i < tests.length; i++) {
 		const test = tests[i]
@@ -147,6 +149,9 @@ export default async function run (settings?: RunSettings) {
 				clearTimeout(timer)
 				resolve(true)
 			})())
+
+			// run any async assertions
+			await Promise.all(test.assertions.filter(t => t.async).map(t => t.async))
 		}
 		catch (e) {
 			test.assertions.push({
@@ -199,7 +204,7 @@ export default async function run (settings?: RunSettings) {
 	// check context for after All
 	if (lasttest) {
 		try {
-			await Promise.all(lasttest.afterAll.map( i => i()))
+			if (lasttest.afterAll) await Promise.all(lasttest.afterAll.map( i => i()))
 		}
 		catch (e) {
 			let ctx = contextFails.find(i => isArrayEquals(i.group, lasttest.group))
@@ -223,6 +228,7 @@ export default async function run (settings?: RunSettings) {
 		}
 	}
 	const processEnd = process.hrtime(processStart)
+	process.env.testing = "false"
 	clearInterval(waitProcess)
 	if (settings?.spinner !== false) {
 		console.clear()

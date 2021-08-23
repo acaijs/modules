@@ -1,7 +1,7 @@
 // Interfaces
 import FieldInfoInterface from "../interfaces/fieldInfo"
 
-const Field = (type = "string", args?: Record<string, string | number | boolean | string[]>): PropertyDecorator => {
+const Field = (type = "string", args?: Record<string, string | number | boolean | string[]> | string[]): PropertyDecorator => {
 	return (target, key) => {
 		const model = target.constructor.prototype as { $fields?: FieldInfoInterface[] }
 
@@ -16,7 +16,7 @@ const Field = (type = "string", args?: Record<string, string | number | boolean 
 		model.$fields.push({
 			name: key as string,
 			type: (type.match(/^\w+/) as string[])[0],
-			args: {...args, ...extraargs},
+			args: {...(Array.isArray(args) ? {length:args}: args), ...extraargs},
 		})
 	}
 }

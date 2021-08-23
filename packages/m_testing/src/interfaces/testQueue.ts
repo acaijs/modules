@@ -21,6 +21,7 @@ export default interface TestInterface {
 		stack	?: string;
 		name	?: string;
 		data	 : any[];
+		async	?: () => Promise<void>;
 	}[];
 
 	// filter

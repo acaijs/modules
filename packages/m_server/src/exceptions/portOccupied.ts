@@ -1,13 +1,13 @@
 // Packages
 import { CustomException } from "@acai/utils"
 
-export default class ExceptionThrown extends CustomException {
+export default class PortOccupied extends CustomException {
 	// -------------------------------------------------
 	// Properties
 	// -------------------------------------------------
 
 	// Custom settings
-	public adapter: string;
+	public port: number;
 
 	// Base class override
 	public critical = true;
@@ -18,8 +18,8 @@ export default class ExceptionThrown extends CustomException {
 	// Main methods
 	// -------------------------------------------------
 
-	public constructor (adapterName: string) {
-		super("server.adapter", `Adapter ${adapterName} was not found when initializing server`)
-		this.adapter = adapterName
+	public constructor (portOccupied: number) {
+		super("server.port", `Port ${portOccupied} is already being used`)
+		this.port = portOccupied
 	}
 }

@@ -79,7 +79,7 @@ export default async function run (tests: TestInterface[], contextErrors: Contex
 
 		contextErrors.forEach((group) => {
 			group.fails.forEach((fail) => {
-				console.log(` \x1b[31mx\x1b[37m - ${group.group.join(" \x1b[36m>\x1b[37m ")}`)
+				console.log(` \x1b[31mx\x1b[37m - ${group.group?.join(" \x1b[36m>\x1b[37m ")}`)
 				console.log("\x1b[31m")
 				console.log(fail.message)
 				fail.data.forEach(data => console.log(data))

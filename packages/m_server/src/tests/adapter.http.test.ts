@@ -25,6 +25,8 @@ test.group("Adapter tests", () => {
 				providers: [],
 				globals: [],
 				config: {},
+				running: false,
+				handler: undefined,
 			})
 		})
 	}).tag(["http", "adapter"])

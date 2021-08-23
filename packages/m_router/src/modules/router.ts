@@ -13,11 +13,11 @@ import RouterConfigInterface 	from "../interfaces/routerConfig"
  * @param {RouteInterface[]} routes list of available routes that can be matched
  * @param {RouterConfigInterface?} config extra config options to customize the router behaviour
  */
-const routerModule = <Options = Record<string, string>> (path: string, method: MethodTypes, routes: RouteInterface[], config?: RouterConfigInterface) => {
+const routerModule = <Options = Record<string, string>> (path: string, method: MethodTypes, routes: RouteInterface[], config: RouterConfigInterface = {}) => {
 	// prepare data
 	const sanitizedpath 		= path.replace(/(\\|\/)^/, "")
-	const variablematch 		= new RegExp(`${config?.variableEnclose || "{"}\\s*\\S+\\??\\s*${config?.variableEnclose || "}"}`)
-	const optionalVariableMatch = new RegExp(`\\?{1}\\s*${config?.variableEnclose || "}"}`)
+	const variablematch 		= new RegExp(`${config.variableEnclose || "{"}\\s*\\S+\\??\\s*${config.variableEnclose || "}"}`)
+	const optionalVariableMatch = new RegExp(`\\?{1}\\s*${config.variableEnclose || "}"}`)
 	let variables	 			= {} as Record<string, string | string[]>
 
 	// Match routes
@@ -27,7 +27,7 @@ const routerModule = <Options = Record<string, string>> (path: string, method: M
 		const possibleMatch = sanitizedpath.split("/").filter(i => i !== "")
 
 		// check route http method
-		if (method !== route.method && !(method === "OPTIONS") && route.method !== "ANY") return false
+		if (method !== route.method && !(method === "OPTIONS" && config.allowOptionsMatch !== false) && route.method !== "ANY") return false
 
 		// check by length
 		if (possibleMatch.length > splitpath.length && splitpath[splitpath.length - 1] !== "*") {
@@ -38,7 +38,7 @@ const routerModule = <Options = Record<string, string>> (path: string, method: M
 		const matches = splitpath.filter((part, index) => {
 			const isVar 		= variablematch.test(part)
 			const isOptionalVar = optionalVariableMatch.test(part)
-			const varName 		= part.replace(new RegExp(`${config?.variableEnclose || "{"}\\s*`), "").replace(new RegExp(`\\??\\s*${config?.variableEnclose || "}"}`), "")
+			const varName 		= part.replace(new RegExp(`${config.variableEnclose || "{"}\\s*`), "").replace(new RegExp(`\\??\\s*${config.variableEnclose || "}"}`), "")
 
 			if (isVar) {
 				if (possibleMatch[index]) {

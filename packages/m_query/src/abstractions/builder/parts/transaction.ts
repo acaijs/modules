@@ -5,7 +5,7 @@ import { ModelContent } from "../../../interfaces/ModelContent"
 import TableClass from "./table"
 
 export default abstract class TransactionClass<T = Record<string, ModelContent>> extends TableClass<T> {
-	public async transact (callback: (config: any) => Promise<void>) {
+	public static async transact (callback: (config: any) => Promise<void>) {
 		await this.startTransaction()
 		try {
 			await callback({
@@ -20,23 +20,23 @@ export default abstract class TransactionClass<T = Record<string, ModelContent>>
 		await this.commitTransaction()
 	}
 
-	public async startTransaction () {
-		await this.getAdapter().startTransaction()
+	public static async startTransaction () {
+		await this.adapter.startTransaction()
 	}
 
-	public async savepointTransaction (name: string) {
-		await this.getAdapter().savepointTransaction(name)
+	public static async savepointTransaction (name: string) {
+		await this.adapter.savepointTransaction(name)
 	}
 
-	public async releaseTransaction (name: string) {
-		await this.getAdapter().releaseTransaction(name)
+	public static async releaseTransaction (name: string) {
+		await this.adapter.releaseTransaction(name)
 	}
 
-	public async rollbackTransaction () {
-		await this.getAdapter().rollbackTransaction()
+	public static async rollbackTransaction () {
+		await this.adapter.rollbackTransaction()
 	}
 
-	public async commitTransaction () {
-		await this.getAdapter().commitTransaction()
+	public static async commitTransaction () {
+		await this.adapter.commitTransaction()
 	}
 }

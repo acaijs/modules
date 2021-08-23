@@ -2,7 +2,7 @@
 import { ServerResponse }		from "http"
 import { ResponseInterface }	from "@acai/interfaces"
 
-export default function respond (res: ServerResponse, { body, headers, status }: ResponseInterface) {
+export default function respond (res: ServerResponse, { body, headers, status }: ResponseInterface = {}) {
 	// Status
 	if (status)	res.statusCode = status
 
@@ -15,7 +15,7 @@ export default function respond (res: ServerResponse, { body, headers, status }:
 	}
 
 	// Set body
-	if (body) res.write(body)
+	if (body) res.write(body || "")
 
 	// respond to server
 	res.end()

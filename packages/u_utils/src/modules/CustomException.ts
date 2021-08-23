@@ -28,10 +28,6 @@ export default class Exception extends Error implements CustomExceptionInterface
 		this._message 	= message
 	}
 
-	public report () {
-		console.log(this.message)
-	}
-
 	// -------------------------------------------------
 	// Acessor methods
 	// -------------------------------------------------

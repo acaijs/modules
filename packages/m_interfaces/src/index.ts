@@ -4,6 +4,7 @@
 * found in the LICENSE file.
 */
 
+// Interfaces
 export { default as CustomExceptionInterface } from "./interfaces/exception"
 export { default as MiddlewareInterface } from "./interfaces/middleware"
 export { default as ProviderInterface } from "./interfaces/provider"
@@ -13,3 +14,6 @@ export { default as ServerConfigInterface } from "./interfaces/server.config"
 export { default as ServerInterface } from "./interfaces/server"
 export { default as AdapterInterface } from "./interfaces/adapter"
 export { default as SerializedAdapterInterface } from "./interfaces/adapter.serialized"
+
+// Types
+export { default as ClassType } from "./types/ClassType"

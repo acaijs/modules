@@ -1,15 +1,14 @@
 import Server from "../src"
+import { ErrorProvider } from "@acai/utils"
+import { route } from "@acai/router"
 
 async function main () {
-	const server = new Server()
+	const server = new Server({ port: 3000, hostname: "localhost" })
 
-	const adapter = {
-		boot: () => { console.log("Server booted"); return true },
-		onRequest: () => console.log("Request made"),
-		onParse: () => console.log("Parse request"),
-	}
+	server.addProvider(new ErrorProvider)
 
-	server.addAdapter("test", adapter)
+	route.post("/", (t) => t)
+	route("/hi", () => "hi")
 
 	await server.run()
 }

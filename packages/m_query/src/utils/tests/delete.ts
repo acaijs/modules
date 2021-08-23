@@ -4,18 +4,14 @@ import test from "@acai/testing"
 // Abstractions
 import QueryAbstract from "../../abstractions/builder"
 
-export default function adapterDeleteTests (name: string, adapter: typeof QueryAbstract, _settings: any) {
+export default function adapterDeleteTests (name: string, adapter: typeof QueryAbstract, settings: any) {
 	test.group(`Test ${name} delete query methods`, (context) => {
 		// -------------------------------------------------
 		// setup
 		// -------------------------------------------------
 
 		context.beforeAll(async () => {
-			await adapter.toggleSettings({
-				user		: "root",
-				password	: "",
-				database	: "acai_query",
-			})
+			await adapter.toggleSettings(settings)
 		})
 
 		context.beforeEach(async () => {

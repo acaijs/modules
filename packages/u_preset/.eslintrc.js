@@ -18,6 +18,7 @@ module.exports = {
 	ignorePatterns: [ "stubs/**/*", "**/*.html", "**/logs/*", "*.lock", "LICENSE", "**/*.md", "**/*.map", "**/*.txt", "dist/**/*", "**/*.log" ],
 	rules: {
 		// Eslint
+		"no-empty"					: 0,
 		"semi"                      : ["error", "never"],
 		"quotes"					: ["error", "double"],
 		"no-mixed-spaces-and-tabs"	: "error",
