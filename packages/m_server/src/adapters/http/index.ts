@@ -8,6 +8,8 @@ import { AdapterInterface, SerializedAdapterInterface } from "@acai/interfaces"
 // Exceptions
 import PortOccupied from "../../exceptions/portOccupied"
 import RouteNotFound from "../../exceptions/routeNotFound"
+
+// Utils
 import respond from "./utils/respond"
 import smartResponse from "./utils/response"
 
@@ -34,7 +36,8 @@ export default class HttpAdapter implements AdapterInterface {
 
 		await new Promise(r => void this.conn.on("listening", () => r(true)))
 
-		console.log(`Server running on ${hostname}:${port}`)
+		if (process.env.testing !== "true")
+			console.log(`Server running on ${hostname}:${port}`)
 
 		return true
 	}
@@ -45,21 +48,21 @@ export default class HttpAdapter implements AdapterInterface {
 		}
 	}
 
-	public async onRequest (cb) {
+	public onRequest: AdapterInterface["onRequest"] = async (makeRequest, requestSafeThread) => {
 		this.conn.on("request", async (req, res) => {
-			const response = await cb(async onRequest => {
-				const [ path ] = this.getPath(req.url || "")
-				const match = this.getMatch(path, req)
+			const response = await requestSafeThread(async () => {
+				const url = req.url || ""
+				const match = this.getMatch(url || "", req)
 
-				if (!match) throw new RouteNotFound(path, req.method || "")
+				if (!match) throw new RouteNotFound(url.split("?")[0], req.method || "")
 
-				const request = this.getParsedRequest(req)
+				const request = {...match, ...this.getParsedRequest(req)}
 				const file = req.method === "OPTIONS" ? () => "" : match.file
 
-				return await onRequest(request, file, match.middlewares)
+				return await makeRequest(request, file, match.middlewares)
 			})
 
-			const parsedResponse = await smartResponse(response, {req: req as any, res})
+			const parsedResponse = await smartResponse(response, req as any)
 			respond(res, parsedResponse)
 		})
 	}
@@ -69,9 +72,11 @@ export default class HttpAdapter implements AdapterInterface {
 	// -------------------------------------------------
 
 	protected getParsedRequest (req: http.IncomingMessage) {
-		const [ path, ...prequery ] = (req.url || "").split("?")
-		const query = prequery.join("?").split("&").map(item => item.split("=")).reduce((prev, curr) => ({...prev, [curr[0]]: curr[1]}), {})
-		const request = {raw: req, headers: req.headers, method: req.method, status: req.statusCode, url: path, query}
+		const [ path ] = (req.url || "").split("?")
+		const headers = Object.keys(req.headers).reduce((prev, curr) => ({...prev, [curr.toLowerCase()]: req.headers[curr]}), {})
+
+		// gather all data
+		const request = {raw: req, headers, method: req.method, status: req.statusCode, url: path}
 
 		// prevent raw request to show in any serialization
 		Object.defineProperty(request, "raw", { enumerable: false })
@@ -85,9 +90,9 @@ export default class HttpAdapter implements AdapterInterface {
 		// route not found
 		if (!match) return
 
-		const { file, options } = match
+		const { file, options, variables, query } = match
 
-		return match ? { file, middlewares: options.middleware || [] } : undefined
+		return match ? { file, middlewares: (options.middleware || []) as string[], params: variables, query } : undefined
 	}
 
 	public getPath (prepath: string) {

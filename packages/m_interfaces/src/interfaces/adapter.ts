@@ -26,5 +26,8 @@ export default interface AdapterInterface {
 	 *
 	 * @param callback Call this function when you receive a request from the server
 	 */
-	onRequest(requestCallback: ((request: any, controller: string | ((...args: any[]) => any | Promise<any>), middlewares?: string[]) => any)): Promise<void> | void;
+	onRequest(
+		onRequestStart: (request: any, controller: string | ((...args: any[]) => any | Promise<any>), middlewares?: string[]) => any,
+		safeThread: (cb: () => Promise<any>) => Promise<any>,
+	): Promise<void> | void;
 }

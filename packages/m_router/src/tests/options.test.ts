@@ -76,7 +76,7 @@ test.group("Options group route tests", (group) => {
 		expect(routes.options.middleware).toBeDefined().toBe(["test", "auth"])
 	})
 
-	test.only("test add options array with many options", expect => {
+	test("test add options array with many options", expect => {
 		// create route
 		route.options({middleware: ["test1", "test2"]}, () => {
 			route.options({middleware: ["test3", "test4"]}, () => {

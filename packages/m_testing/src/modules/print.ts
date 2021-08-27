@@ -67,7 +67,7 @@ export default async function run (tests: TestInterface[], contextErrors: Contex
 					if (assertion.name) console.log(`    ${assertion.name}`)
 					console.log(`${assertion.stack}`)
 					console.log("\x1b[37m")
-					assertion.data.forEach((data, index) => console.log(`- ${data[1] ? data[0] : index} `, data[1] || data[0]))
+					assertion.data.forEach((data, index) => console.log(`- ${data[1] !== undefined ? data[0] : index} `, data[1] !== undefined ? data[1] : data[0]))
 					if (assertion.data.length > 0) console.log()
 				}
 			})

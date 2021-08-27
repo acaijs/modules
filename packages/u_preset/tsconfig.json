@@ -1,27 +1,35 @@
 {
 	"compilerOptions": {
-		"module": "commonjs",
-		"target": "ES2015",
-		"strict": true,
 		"experimentalDecorators": true,
 		"noImplicitAny": false,
-		"outDir": "../../dist",
-		"sourceMap": true,
 		"declaration": true,
-		"declarationDir": "../../dist/types",
 		"removeComments": false,
-		"moduleResolution": "node",
 		"strictNullChecks": true,
-		"strictPropertyInitialization": false
+		"strictPropertyInitialization": false,
+		"target": "ESNext",
+		"module": "ESNext",
+		"lib": [
+			"ESNext",
+			"DOM"
+		],
+		"moduleResolution": "Node",
+		"strict": true,
+		"sourceMap": true,
+		"resolveJsonModule": true,
+		"esModuleInterop": true,
+		"noEmit": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noImplicitReturns": true,
+		"outDir": "dist",
+		"declarationDir": "dist"
 	},
 	"include": [
-		"src/**/*"
+		"./src"
 	],
 	"exclude": [
-		"node_modules/**",
-		"**/*.{test,tests}.*",
 		"dist/**/*",
-		"LICENSE",
-		"**/*.md"
+		"node_modules",
+		"**/*.test.*"
 	]
 }

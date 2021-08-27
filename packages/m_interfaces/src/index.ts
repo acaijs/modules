@@ -8,7 +8,6 @@
 export { default as CustomExceptionInterface } from "./interfaces/exception"
 export { default as MiddlewareInterface } from "./interfaces/middleware"
 export { default as ProviderInterface } from "./interfaces/provider"
-export { default as RequestInterface } from "./interfaces/request"
 export { default as ResponseInterface } from "./interfaces/response"
 export { default as ServerConfigInterface } from "./interfaces/server.config"
 export { default as ServerInterface } from "./interfaces/server"

@@ -29,7 +29,7 @@ const buildTestAssertion = (test: TestInterface) => {
 				test.assertions.push(buildResponse(
 					"toBe",
 					passes,
-					`${typeof valueToAssert} is not equal to ${typeof valueToTest}`,
+					`${valueToAssert} is not equal to ${valueToTest}`,
 					[["expected", valueToTest], ["received", valueToAssert]],
 				))
 

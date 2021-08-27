@@ -11,7 +11,7 @@ test.group("Server tests", () => {
 	// -------------------------------------------------
 
 		test("Adapter correctly added to server", (assert) => {
-		// arrange
+			// arrange
 			const server = new Server()
 
 			// act
@@ -35,7 +35,7 @@ test.group("Server tests", () => {
 		// -------------------------------------------------
 
 		test("Adapter correctly added with config to server", (assert) => {
-		// arrange
+			// arrange
 			const server = new Server()
 
 			// act
@@ -61,7 +61,7 @@ test.group("Server tests", () => {
 		// -------------------------------------------------
 
 		test("Adapter correctly removed from server", (assert) => {
-		// arrange
+			// arrange
 			const server = new Server()
 			server.addAdapter("test", {} as any)
 
@@ -77,7 +77,7 @@ test.group("Server tests", () => {
 		// -------------------------------------------------
 
 		test("Adapter correctly merged config from instance", (assert) => {
-		// arrange
+			// arrange
 			const server = new Server()
 			server.addAdapter("test", {} as any, { configOne: true })
 
@@ -94,7 +94,7 @@ test.group("Server tests", () => {
 		// -------------------------------------------------
 
 		test("Adapter correctly merged config from method", (assert) => {
-		// arrange
+			// arrange
 			const server = new Server()
 			server.addAdapter("test", {} as any)
 
@@ -112,7 +112,7 @@ test.group("Server tests", () => {
 		// -------------------------------------------------
 
 		test("Add config to all adapters", (assert) => {
-		// arrange
+			// arrange
 			const server = new Server()
 			server.addAdapter("test", {} as any)
 			server.addAdapter("test2", {} as any)
@@ -130,7 +130,7 @@ test.group("Server tests", () => {
 		// -------------------------------------------------
 
 		test("Add config to specific adapter using string", (assert) => {
-		// arrange
+			// arrange
 			const server = new Server()
 			server.addAdapter("test", {} as any)
 			server.addAdapter("test2", {} as any)
@@ -148,7 +148,7 @@ test.group("Server tests", () => {
 		// -------------------------------------------------
 
 		test("Add config to specific adapter using array", (assert) => {
-		// arrange
+			// arrange
 			const server = new Server()
 			server.addAdapter("test", {} as any)
 			server.addAdapter("test2", {} as any)
@@ -166,7 +166,7 @@ test.group("Server tests", () => {
 		// -------------------------------------------------
 
 		test("Add config to a group of adapters", (assert) => {
-		// arrange
+			// arrange
 			const server = new Server()
 			server.addAdapter("test", {} as any)
 			server.addAdapter("test2", {} as any)
@@ -179,6 +179,28 @@ test.group("Server tests", () => {
 			assert(server.getAdapter("test")?.config).toBeDefined().toBe({ configOne: true })
 			assert(server.getAdapter("test2")?.config).toBeDefined().toBe({})
 			assert(server.getAdapter("test3")?.config).toBeDefined().toBe({ configOne: true })
+		})
+
+		// -------------------------------------------------
+		// Test 10
+		// -------------------------------------------------
+
+		test("Boot, request and shutdown correctly called on run", async (assert) => {
+			// arrange
+			const data = {boot:false, request: false, shutdown: false}
+			const server = new Server()
+			server.addAdapter("test", {
+				boot: () => { data.boot = true; return true },
+				onRequest: () => { data.request = true },
+				shutdown: () => {},
+			})
+
+			// act
+			await server.run("test")
+
+			// assert
+			assert(data.boot).toBe(true)
+			assert(data.request).toBe(true)
 		})
 	}).tag(["server", "adapter"])
 })

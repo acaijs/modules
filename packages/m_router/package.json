@@ -17,6 +17,13 @@
 		"dist/**"
 	],
 	"main": "dist",
+	"module": "dist",
+	"exports": {
+		".": {
+			"import": "./dist",
+			"require": "./dist"
+		}
+	},
 	"types": "dist",
 	"scripts": {
 		"build": "tsc",

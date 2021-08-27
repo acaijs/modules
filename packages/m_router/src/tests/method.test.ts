@@ -4,9 +4,6 @@ import test from "@acai/testing"
 // Modules
 import { route, router } from ".."
 
-// Interfaces
-import RouteInterface from "../interfaces/route"
-
 test.group("Simple router type methods", (group) => {
 	group.beforeEach(route.clear)
 
@@ -20,7 +17,7 @@ test.group("Simple router type methods", (group) => {
 
 		// get match
 		const routes 	= route.build()
-		const match 	= router("/", "GET", routes) as RouteInterface
+		const match 	= router("/", "GET", routes)!
 
 		// assertions
 		expect(match).toBeDefined()
@@ -38,7 +35,7 @@ test.group("Simple router type methods", (group) => {
 
 		// get match
 		const routes 	= route.build()
-		const match 	= router("/", "POST", routes) as RouteInterface
+		const match 	= router("/", "POST", routes)!
 
 		// assertions
 		expect(match).toBeDefined()
@@ -56,7 +53,7 @@ test.group("Simple router type methods", (group) => {
 
 		// get match
 		const routes 	= route.build()
-		const match 	= router("/", "PUT", routes) as RouteInterface
+		const match 	= router("/", "PUT", routes)!
 
 		// assertions
 		expect(match).toBeDefined()
@@ -74,7 +71,7 @@ test.group("Simple router type methods", (group) => {
 
 		// get match
 		const routes 	= route.build()
-		const match 	= router("/", "PATCH", routes) as RouteInterface
+		const match 	= router("/", "PATCH", routes)!
 
 		// assertions
 		expect(match).toBeDefined()
@@ -92,7 +89,7 @@ test.group("Simple router type methods", (group) => {
 
 		// get match
 		const routes 	= route.build()
-		const match 	= router("/", "DELETE", routes) as RouteInterface
+		const match 	= router("/", "DELETE", routes)!
 
 		// assertions
 		expect(match).toBeDefined()
@@ -109,7 +106,7 @@ test.group("Simple router type methods", (group) => {
 
 		// get match
 		const routes 	= route.build()
-		const match 	= router("/", "DELETE", routes) as RouteInterface
+		const match 	= router("/", "DELETE", routes)!
 
 		// assertions
 		expect(match).toBeDefined()

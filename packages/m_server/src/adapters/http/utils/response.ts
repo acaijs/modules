@@ -3,20 +3,21 @@ import * as path 				from "path"
 import * as fs 					from "fs"
 
 // Interfaces
-import { RequestInterface } 	from "@acai/interfaces"
-import { ResponseInterface } 	from "@acai/interfaces"
-import ResponseUtilityOptions 	from "../../../../../u_utils/src/interfaces/responseUtility"
-import { ServerRequest }		from "../../../interfaces/httpServerRequest"
+import { ResponseInterface } from "@acai/interfaces"
+import { ResponseUtilityInterface }	from "@acai/utils"
+import RequestInterface, { ICustomIncomingMessage } from "../../../interfaces/httpServerRequest"
+
+// Utils
 import censor from "../../../utils/censor"
 
-export default async function smartResponse (payload: string | RequestInterface | ResponseInterface | Record<string, unknown> | (() => ResponseUtilityOptions), request: ServerRequest, viewPrefix?: string) {
+export default async function smartResponse (payload: string | RequestInterface | ResponseInterface | Record<string, unknown> | (() => ResponseUtilityInterface), request: ICustomIncomingMessage, viewPrefix?: string) {
 	const headers = {} as Record<string, any>
 	let body 	= "" as string | Record<string, unknown>
 	let status 	= 200
 
 	// prepare headers
-	Object.keys(request.req.headers).forEach((k) => {
-		if (k !== "content-length") headers[k] = request.req.headers[k]
+	Object.keys(request.headers).forEach((k) => {
+		if (k !== "content-length") headers[k] = request.headers[k]
 	})
 
 	// prepare content

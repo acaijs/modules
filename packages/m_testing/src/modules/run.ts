@@ -16,6 +16,7 @@ let currTest
 export const getCurr = () => currTest
 
 export default async function run (settings?: RunSettings) {
+	// Setup enviromnent test
 	process.env.testing = "true"
 
 	// -------------------------------------------------
@@ -233,6 +234,9 @@ export default async function run (settings?: RunSettings) {
 	if (settings?.spinner !== false) {
 		console.clear()
 	}
+
+	// Test finished, booting down env
+	process.env.testing = "false"
 
 	return [tests, contextFails, processEnd] as [TestInterface[], ContextErrorInterface[], [number, number]]
 }

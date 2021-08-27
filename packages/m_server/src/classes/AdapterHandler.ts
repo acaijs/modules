@@ -1,10 +1,14 @@
 // Interfaces
-import { CustomExceptionInterface, SerializedAdapterInterface } from "@acai/interfaces"
+import { CustomExceptionInterface, MiddlewareInterface, SerializedAdapterInterface } from "@acai/interfaces"
 
 // Utils
 import findController from "../utils/findController"
 import composeMiddlewares from "../utils/composeMiddlewares"
 import safeHandle from "../utils/safeHandle"
+
+// Exceptions
+import MiddlewareNotFound from "../exceptions/middlewareNotFound"
+
 
 export default class AdapterHandler {
 	// -------------------------------------------------
@@ -35,8 +39,9 @@ export default class AdapterHandler {
 		// Setup request callback
 		await safeHandle(
 			() => this.adapter.adapter.onRequest(
+				this.onRequest.bind(this),
 				async (cb) => await safeHandle(
-					() => cb(this.onRequest.bind(this)),
+					() => cb(),
 					this,
 				),
 			),
@@ -67,16 +72,22 @@ export default class AdapterHandler {
 	}
 
 	public async onRequest (data: any, path: string | ((...args: any[]) => any), middlewareNames: string[] = []) {
-		const globals = this.adapter.globals
-		const middlewares = middlewareNames.map(name => this.adapter.middlewares[name])
+		return await safeHandle(async () => {
+			// check if all middlewares are available
+			middlewareNames.map(name => name.split(":")[0]).forEach(name => { if (!this.adapter.middlewares[name]) throw new MiddlewareNotFound(name, `${path}`) })
 
-		// Get controller method
-		const request = await safeHandle(() => findController(path, data), this)
+			// gather compose middlewares
+			const globals = this.adapter.globals.map(item => [item, undefined])
+			const middlewares = middlewareNames.map(name => name.split(":")).map(([name, ...data]) => [this.adapter.middlewares[name], (data || "").join(":").split(",")])
 
-		// Pass through middlewares
-		const composition = composeMiddlewares([...globals, ...middlewares])(request)
-		const response = await safeHandle(() => composition(data), this)
+			// Get controller method
+			const request = await safeHandle(() => findController(path, data), this)
 
-		return response
+			// Pass through middlewares
+			const composition = composeMiddlewares([...globals, ...middlewares] as ([MiddlewareInterface, string[] | undefined])[])(request)
+			const response = await safeHandle(() => composition(data), this)
+
+			return response
+		}, this)
 	}
 }

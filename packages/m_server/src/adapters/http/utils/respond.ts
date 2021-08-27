@@ -15,7 +15,7 @@ export default function respond (res: ServerResponse, { body, headers, status }:
 	}
 
 	// Set body
-	if (body) res.write(body || "")
+	if (body) res.write(typeof body === "string" ? body : JSON.stringify(body) || "")
 
 	// respond to server
 	res.end()

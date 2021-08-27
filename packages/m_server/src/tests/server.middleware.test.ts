@@ -4,6 +4,9 @@ import test from "@acai/testing"
 // Modules
 import Server from "../modules/server"
 
+// Adapters
+import MockAdapter from "../adapters/mock"
+
 test.group("Server tests", () => {
 	test.group("Middlewares", () => {
 	// -------------------------------------------------
@@ -11,7 +14,7 @@ test.group("Server tests", () => {
 	// -------------------------------------------------
 
 		test("Middleware correctly added to single adapter", (assert) => {
-		// arrange
+			// arrange
 			const middleware = v => v
 			const server = new Server()
 			server.addAdapter("test", {} as any)
@@ -28,7 +31,7 @@ test.group("Server tests", () => {
 		// -------------------------------------------------
 
 		test("Middleware correctly added to all adapters", (assert) => {
-		// arrange
+			// arrange
 			const middleware = v => v
 			const server = new Server()
 			server.addAdapter("test", {} as any)
@@ -47,7 +50,7 @@ test.group("Server tests", () => {
 		// -------------------------------------------------
 
 		test("Middleware correctly added to a group of adapters", (assert) => {
-		// arrange
+			// arrange
 			const middleware = v => v
 			const server = new Server()
 			server.addAdapter("test", {} as any)
@@ -68,7 +71,7 @@ test.group("Server tests", () => {
 		// -------------------------------------------------
 
 		test("Middlewares correctly added to single adapter", (assert) => {
-		// arrange
+			// arrange
 			const middleware = v => v
 			const server = new Server()
 			server.addAdapter("test", {} as any)
@@ -87,7 +90,7 @@ test.group("Server tests", () => {
 		// -------------------------------------------------
 
 		test("Middlewares correctly added to all adapters", (assert) => {
-		// arrange
+			// arrange
 			const middleware = v => v
 			const server = new Server()
 			server.addAdapter("test", {} as any)
@@ -106,7 +109,7 @@ test.group("Server tests", () => {
 		// -------------------------------------------------
 
 		test("Middlewares correctly added to a group of adapters", (assert) => {
-		// arrange
+			// arrange
 			const middleware = v => v
 			const server = new Server()
 			server.addAdapter("test", {} as any)
@@ -127,7 +130,7 @@ test.group("Server tests", () => {
 		// -------------------------------------------------
 
 		test("Remove single middleware (using string) from a single adapter", (assert) => {
-		// arrange
+			// arrange
 			const middleware = v => v
 			const server = new Server()
 			server.addAdapter("test", {} as any)
@@ -145,7 +148,7 @@ test.group("Server tests", () => {
 		// -------------------------------------------------
 
 		test("Remove single middleware (using array) from a single adapter", (assert) => {
-		// arrange
+			// arrange
 			const middleware = v => v
 			const server = new Server()
 			server.addAdapter("test", {} as any)
@@ -163,7 +166,7 @@ test.group("Server tests", () => {
 		// -------------------------------------------------
 
 		test("Remove multiple middlewares from a single adapter", (assert) => {
-		// arrange
+			// arrange
 			const middleware = v => v
 			const server = new Server()
 			server.addAdapter("test", {} as any)
@@ -182,7 +185,7 @@ test.group("Server tests", () => {
 		// -------------------------------------------------
 
 		test("Remove single middleware from all adapters", (assert) => {
-		// arrange
+			// arrange
 			const middleware = v => v
 			const server = new Server()
 			server.addAdapter("test", {} as any)
@@ -203,7 +206,7 @@ test.group("Server tests", () => {
 		// -------------------------------------------------
 
 		test("Remove multiple middlewares from all adapters", (assert) => {
-		// arrange
+			// arrange
 			const middleware = v => v
 			const server = new Server()
 			server.addAdapter("test", {} as any)
@@ -228,7 +231,7 @@ test.group("Server tests", () => {
 		// -------------------------------------------------
 
 		test("Add middleware as instance", (assert) => {
-		// arrange
+			// arrange
 			class Middleware { public onApply (r, n) { return n(r) }  }
 			const server = new Server()
 			server.addAdapter("test", {} as any)
@@ -245,7 +248,7 @@ test.group("Server tests", () => {
 		// -------------------------------------------------
 
 		test("Add middleware as object", (assert) => {
-		// arrange
+			// arrange
 			const server = new Server()
 			server.addAdapter("test", {} as any)
 
@@ -261,7 +264,7 @@ test.group("Server tests", () => {
 		// -------------------------------------------------
 
 		test("Add middleware as callback", (assert) => {
-		// arrange
+			// arrange
 			const server = new Server()
 			server.addAdapter("test", {} as any)
 
@@ -270,6 +273,67 @@ test.group("Server tests", () => {
 
 			// assert
 			assert(server.getAdapter("test")?.middlewares.test).toBeDefined()
+		})
+
+		// -------------------------------------------------
+		// Test 15
+		// -------------------------------------------------
+
+		test("Middlewares run in the correct order", async (assert) => {
+			// arrange
+			const adapter = new MockAdapter()
+			const data = { m1: null, m2: null }
+			const server = new Server()
+			server.addAdapter("test", adapter)
+			server.addMiddleware("test1", (r, n) => {data.m1 = r.n; r.n++; return n(r)})
+			server.addMiddleware("test2", (r, n) => {data.m2 = r.n; r.n++; return n(r)})
+			await server.run("test")
+
+			// act
+			await adapter.makeRequest({n: 0}, (r) => r, ["test1", "test2"])
+
+			// assert
+			assert(data.m1).toBe(0)
+			assert(data.m2).toBe(1)
+		})
+
+		// -------------------------------------------------
+		// Test 16
+		// -------------------------------------------------
+
+		test("Check forwarded request data injection through middlewares", async (assert) => {
+			// arrange
+			const adapter = new MockAdapter()
+			const server = new Server()
+			server.addAdapter("test", adapter)
+			server.addMiddleware("test1", (r, n) => {r.n++; return n(r)})
+			await server.run("test")
+
+			// act
+			const response = await adapter.makeRequest({n: 0}, (r) => r, ["test1"])
+
+			// assert
+			assert(response.n).toBe(1)
+		})
+
+		// -------------------------------------------------
+		// Test 17
+		// -------------------------------------------------
+
+		test("Use args in middleware", async (assert) => {
+			// arrange
+			const data = {args: null as any}
+			const adapter = new MockAdapter()
+			const server = new Server()
+			server.addAdapter("test", adapter)
+			server.addMiddleware("test1", (r, n, args) => {data.args = args; return n(r)})
+			await server.run("test")
+
+			// act
+			await adapter.makeRequest({n: 0}, (r) => r, ["test1:2,5"])
+
+			// assert
+			assert(data.args).toBe(["2", "5"])
 		})
 	}).tag(["server", "middleware"])
 })

@@ -1,7 +1,10 @@
 // Interfaces
-import RouteInterface 			from "../interfaces/route"
-import MethodTypes	 			from "../interfaces/method"
-import RouterConfigInterface 	from "../interfaces/routerConfig"
+import RouteInterface from "../interfaces/route"
+import MethodTypes from "../interfaces/method"
+import RouterConfigInterface from "../interfaces/routerConfig"
+
+// Utils
+import buildQueryParams from "../utils/buildQueryParams"
 
 /**
  * # Router
@@ -15,16 +18,17 @@ import RouterConfigInterface 	from "../interfaces/routerConfig"
  */
 const routerModule = <Options = Record<string, string>> (path: string, method: MethodTypes, routes: RouteInterface[], config: RouterConfigInterface = {}) => {
 	// prepare data
-	const sanitizedpath 		= path.replace(/(\\|\/)^/, "")
-	const variablematch 		= new RegExp(`${config.variableEnclose || "{"}\\s*\\S+\\??\\s*${config.variableEnclose || "}"}`)
+	const sanitizedpath = path.replace(/(\\|\/)^/, "")
+	const [clearpath, queryParams] = buildQueryParams(sanitizedpath)
+	const variablematch = new RegExp(`${config.variableEnclose || "{"}\\s*\\S+\\??\\s*${config.variableEnclose || "}"}`)
 	const optionalVariableMatch = new RegExp(`\\?{1}\\s*${config.variableEnclose || "}"}`)
-	let variables	 			= {} as Record<string, string | string[]>
+	let variables = {} as Record<string, string | string[]>
 
 	// Match routes
 	const route = routes.find((route) => {
 		variables = {}
 		const splitpath = route.path.split("/").filter(i => i !== "")
-		const possibleMatch = sanitizedpath.split("/").filter(i => i !== "")
+		const possibleMatch = clearpath.split("/").filter(i => i !== "")
 
 		// check route http method
 		if (method !== route.method && !(method === "OPTIONS" && config.allowOptionsMatch !== false) && route.method !== "ANY") return false
@@ -66,7 +70,7 @@ const routerModule = <Options = Record<string, string>> (path: string, method: M
 	})
 
 	if (route)
-		return {...route, options: route.options as Options, variables}
+		return {...route, options: route.options as Options, variables, query: queryParams}
 }
 
 export default routerModule

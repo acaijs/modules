@@ -2,9 +2,6 @@
 import * as fs from "fs"
 import * as path from "path"
 
-// Interfaces
-import { RequestInterface } from "@acai/interfaces"
-
 // Exceptions
 import ControllerNotFoundException from "../exceptions/controllerNotFound"
 
@@ -30,7 +27,7 @@ function findFile (filepath: string): string | undefined {
 // Main method
 // -------------------------------------------------
 
-export default async function findController(path: string | ((req: RequestInterface) => any), request: RequestInterface) {
+export default async function findController(path: string | ((req: any) => any), request: any) {
 	// controller itself is the callback
 	if (typeof path !== "string") {
 		return path

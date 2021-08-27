@@ -12,7 +12,7 @@ test.group("Server tests", () => {
 	// -------------------------------------------------
 
 		test("Add provider to a single adapter using string", (assert) => {
-		// arrange
+			// arrange
 			const server = new Server()
 			server.addAdapter("test", {} as any)
 			server.addAdapter("test2", {} as any)
@@ -30,7 +30,7 @@ test.group("Server tests", () => {
 		// -------------------------------------------------
 
 		test("Add provider to a single adapter using array", (assert) => {
-		// arrange
+			// arrange
 			const server = new Server()
 			server.addAdapter("test", {} as any)
 			server.addAdapter("test2", {} as any)
@@ -48,7 +48,7 @@ test.group("Server tests", () => {
 		// -------------------------------------------------
 
 		test("Add provider to all adapters", (assert) => {
-		// arrange
+			// arrange
 			const server = new Server()
 			server.addAdapter("test", {} as any)
 			server.addAdapter("test2", {} as any)
@@ -66,7 +66,7 @@ test.group("Server tests", () => {
 		// -------------------------------------------------
 
 		test("Add provider to a group of adapters", (assert) => {
-		// arrange
+			// arrange
 			const server = new Server()
 			server.addAdapter("test", {} as any)
 			server.addAdapter("test2", {} as any)
@@ -86,7 +86,7 @@ test.group("Server tests", () => {
 		// -------------------------------------------------
 
 		test("Add multiple providers to a single adapter using string", (assert) => {
-		// arrange
+			// arrange
 			const server = new Server()
 			server.addAdapter("test", {} as any)
 			server.addAdapter("test2", {} as any)
@@ -104,7 +104,7 @@ test.group("Server tests", () => {
 		// -------------------------------------------------
 
 		test("Add multiple providers to a single adapter using array", (assert) => {
-		// arrange
+			// arrange
 			const server = new Server()
 			server.addAdapter("test", {} as any)
 			server.addAdapter("test2", {} as any)
@@ -122,7 +122,7 @@ test.group("Server tests", () => {
 		// -------------------------------------------------
 
 		test("Add multiple providers to a group of adapters", (assert) => {
-		// arrange
+			// arrange
 			const server = new Server()
 			server.addAdapter("test", {} as any)
 			server.addAdapter("test2", {} as any)
@@ -142,7 +142,7 @@ test.group("Server tests", () => {
 		// -------------------------------------------------
 
 		test("Add multiple providers to all adapters", (assert) => {
-		// arrange
+			// arrange
 			const server = new Server()
 			server.addAdapter("test", {} as any)
 			server.addAdapter("test2", {} as any)
@@ -162,7 +162,7 @@ test.group("Server tests", () => {
 		// -------------------------------------------------
 
 		test("Clear providers from a single adapter using string", (assert) => {
-		// arrange
+			// arrange
 			const server = new Server()
 			server.addAdapter("test", {} as any)
 			server.addAdapter("test2", {} as any)
@@ -181,7 +181,7 @@ test.group("Server tests", () => {
 		// -------------------------------------------------
 
 		test("Clear providers from a single adapter using array", (assert) => {
-		// arrange
+			// arrange
 			const server = new Server()
 			server.addAdapter("test", {} as any)
 			server.addAdapter("test2", {} as any)
@@ -200,7 +200,7 @@ test.group("Server tests", () => {
 		// -------------------------------------------------
 
 		test("Clear providers from all adapters", (assert) => {
-		// arrange
+			// arrange
 			const server = new Server()
 			server.addAdapter("test", {} as any)
 			server.addAdapter("test2", {} as any)
@@ -219,7 +219,7 @@ test.group("Server tests", () => {
 		// -------------------------------------------------
 
 		test("Clear providers from a group of adapters", (assert) => {
-		// arrange
+			// arrange
 			const server = new Server()
 			server.addAdapter("test", {} as any)
 			server.addAdapter("test2", {} as any)
@@ -240,7 +240,7 @@ test.group("Server tests", () => {
 		// -------------------------------------------------
 
 		test("Add provider as object", (assert) => {
-		// arrange
+			// arrange
 			const provider = { boot: async () => void {} }
 			const server = new Server()
 			server.addAdapter("test", {} as any)
@@ -257,7 +257,7 @@ test.group("Server tests", () => {
 		// -------------------------------------------------
 
 		test("Add provider as instance", (assert) => {
-		// arrange
+			// arrange
 			class Provider implements ProviderInterface {
 				public async onError () {}
 			}

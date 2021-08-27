@@ -21,7 +21,7 @@ export default async function safeHandle (callback: (... args: any[]) => any | P
 		// if providers don't handle error, fallback to default handling
 		if (response === undefined) {
 			// print to console
-			if (error.shouldReport !== false) {
+			if (error.shouldReport !== false && process.env.testing !== "true") {
 				if (error.report) error.report({ error, server: handler.adapter, request: error.request })
 				else exceptionLog(error.message, error.stack?.split("\n"), error.data)
 			}

@@ -2,10 +2,13 @@
 import * as Cookies			from "cookies"
 import { IncomingMessage } 	from "http"
 
-// Classes
-import { ServerRequest } from "./vanilla.request"
+interface ICustomIncomingMessage extends IncomingMessage {
+	method	: "GET" | "POST" | "PATCH" | "PUT" | "DELETE" | "ANY" | "OPTIONS";
+	url		: string;
+	headers	: Record<string, string>;
+  }
 
-export default interface RequestInterface {
+export default interface HtppRequest {
 	/** Request headers */
 	headers		: IncomingMessage["headers"];
 	/** Url dynamic variables */
@@ -29,5 +32,5 @@ export default interface RequestInterface {
 	/** Method to lookup inside controller */
 	method?		: string;
 	/** Raw request coming from the http server */
-	raw			: ServerRequest["req"];
+	raw			: ICustomIncomingMessage;
 }

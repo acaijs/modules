@@ -4,9 +4,6 @@ import test from "@acai/testing"
 // Modules
 import { route, router } from ".."
 
-// Interfaces
-import RouteInterface from "../interfaces/route"
-
 test.group("Simple router methods", (group) => {
 	group.beforeEach(route.clear)
 
@@ -17,7 +14,7 @@ test.group("Simple router methods", (group) => {
 
 		// get match
 		const routes 	= route.build()
-		const match 	= router("/", "GET", routes) as RouteInterface
+		const match 	= router("/", "GET", routes)!
 
 		// assertions
 		expect(match).toBeDefined()
@@ -32,7 +29,7 @@ test.group("Simple router methods", (group) => {
 
 		// get match
 		const routes 	= route.build()
-		const match 	= router("/non", "GET", routes) as RouteInterface
+		const match 	= router("/non", "GET", routes)!
 
 		// assertions
 		expect(match).toBeDefined()
@@ -46,7 +43,7 @@ test.group("Simple router methods", (group) => {
 
 		// get match
 		const routes 	= route.build()
-		const match 	= router("/id", "GET", routes) as RouteInterface
+		const match 	= router("/id", "GET", routes)!
 
 		// assertions
 		expect(match).toBeDefined()
@@ -60,7 +57,7 @@ test.group("Simple router methods", (group) => {
 
 		// get match
 		const routes 	= route.build()
-		const match 	= router("/value", "GET", routes)
+		const match 	= router("/value", "GET", routes)!
 
 		// assertions
 		expect(match).toBeDefined()
@@ -73,7 +70,7 @@ test.group("Simple router methods", (group) => {
 
 		// get match
 		const routes 	= route.build()
-		const match 	= router("/", "GET", routes)
+		const match 	= router("/", "GET", routes)!
 
 		// assertions
 		expect(match).toBeDefined()
@@ -88,7 +85,7 @@ test.group("Simple router methods", (group) => {
 
 		// get match
 		const routes 	= route.build()
-		const match 	= router("/", "GET", routes)
+		const match 	= router("/", "GET", routes)!
 
 		// assertions
 		expect(match).toBeDefined()
@@ -103,7 +100,7 @@ test.group("Simple router methods", (group) => {
 
 		// get match
 		const routes 	= route.build()
-		const match 	= router("/", "GET", routes)
+		const match 	= router("/", "GET", routes)!
 
 		// assertions
 		expect(match).toBeDefined()
@@ -118,7 +115,7 @@ test.group("Simple router methods", (group) => {
 
 		// get match
 		const routes 	= route.build()
-		const match 	= router("/", "GET", routes)
+		const match 	= router("/", "GET", routes)!
 
 		// assertions
 		expect(match).toBeDefined()
@@ -132,7 +129,7 @@ test.group("Simple router methods", (group) => {
 
 		// get match
 		const routes 	= route.build()
-		const match 	= router("/", "GET", routes)
+		const match 	= router("/", "GET", routes)!
 
 		// assertions
 		expect(match).toBeDefined()
