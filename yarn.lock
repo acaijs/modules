@@ -10,14 +10,32 @@
     glob "^7.1.6"
     ts-node "^9.1.1"
 
-"@acai/query@^0.5.13":
-  version "0.5.13"
-  resolved "https://registry.yarnpkg.com/@acai/query/-/query-0.5.13.tgz#4179270744776223f74ec5b8066119c4680f14dd"
-  integrity sha512-UbH8FwL+aIxodb45FTMYIP0dJK2LJ40wdLezQ6ZcEOOZhqprs7WAbBWSBSvubgP3M4Q3GAcnF5thJmytrZq10A==
+"@acai/interfaces@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@acai/interfaces/-/interfaces-0.1.2.tgz#efe28ff394a13bd41bd5b6ba3bdbe9ae8aa68ea0"
+  integrity sha512-pCu44rR3lcCNDwyaC40oJx+zNEy6v/MXqavYusoenKtgkx+LQN4PTmuf4gmXFDeGNcCvbwYsIHiN6BNczDmVeg==
+
+"@acai/server@^2.0.0":
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/@acai/server/-/server-2.0.6.tgz#cf365ff2f96d7e0c34e44013ea1b9af5dc378355"
+  integrity sha512-g5MnwgcZrGcfYQ/LBJBMCwRNB7Plov00f/gKm9Ri72E6xxO8bKf4mil0g8ZIZHS9quqKVpZV+JGHzZw/uY825w==
   dependencies:
-    mysql2 "^2.2.5"
+    "@acai/interfaces" "^0.1.2"
+    body-parser "^1.19.0"
+    cookies "^0.8.0"
+    ts-node-dev "^1.1.6"
   optionalDependencies:
-    pg "^8.5.1"
+    "@acai/router" ">= 2"
+
+"@acai/utils@0.6.1":
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/@acai/utils/-/utils-0.6.1.tgz#e0893251947689e761fe7387b20228eb7b3122b6"
+  integrity sha512-UXVcmJn6kewm/mEMSxbB7qTxLPDCV3uQVFSF/xX60+AoIQgMmbyuxhtlV1TE6CTjA8SX0bnW+gkAnrxvjGTbMg==
+  dependencies:
+    "@acai/config" "^1.0.*"
+    "@acai/server" "^2.0.0"
+    formidable "^1.2.2"
+    ts-node "^9.1.1"
 
 "@babel/code-frame@7.12.11":
   version "7.12.11"
@@ -5466,7 +5484,7 @@ trim-off-newlines@^1.0.0:
   resolved "https://registry.yarnpkg.com/trim-off-newlines/-/trim-off-newlines-1.0.1.tgz#9f9ba9d9efa8764c387698bcbfeb2c848f11adb3"
   integrity sha1-n5up2e+odkw4dpi8v+sshI8RrbM=
 
-ts-node-dev@^1.1.8:
+ts-node-dev@^1.1.6, ts-node-dev@^1.1.8:
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/ts-node-dev/-/ts-node-dev-1.1.8.tgz#95520d8ab9d45fffa854d6668e2f8f9286241066"
   integrity sha512-Q/m3vEwzYwLZKmV6/0VlFxcZzVV/xcgOt+Tx/VjaaRHyiBcFlV0541yrT09QjzzCxlDZ34OzKjrFAynlmtflEg==
@@ -5482,7 +5500,7 @@ ts-node-dev@^1.1.8:
     ts-node "^9.0.0"
     tsconfig "^7.0.0"
 
-ts-node@*, ts-node@^10.2.1:
+ts-node@*:
   version "10.2.1"
   resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-10.2.1.tgz#4cc93bea0a7aba2179497e65bb08ddfc198b3ab5"
   integrity sha512-hCnyOyuGmD5wHleOQX6NIjJtYVIO8bPP8F2acWkB4W06wdlkgyvJtubO/I9NkI88hCFECbsEgoLc0VNkYmcSfw==
