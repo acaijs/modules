@@ -39,7 +39,7 @@
 		"@acai/router": ">= 2"
 	},
 	"devDependencies": {
-		"@acai/interfaces": "^0.1.2",
+		"@acai/interfaces": "0.2.0-alpha",
 		"@acai/preset": "^0.1.14",
 		"@acai/testing": "2.4.1",
 		"@types/cookies": "^0.7.6",
