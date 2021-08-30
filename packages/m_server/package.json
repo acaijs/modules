@@ -1,6 +1,6 @@
 {
 	"name": "@acai/server",
-	"version": "3.0.0-alpha2",
+	"version": "3.0.0-alpha3",
 	"description": "The base server for the açai framework",
 	"repository": "https://gitlab.com/acaijs/modules/server.git",
 	"keywords": [
@@ -36,7 +36,7 @@
 		"prepublishOnly": "yarn build"
 	},
 	"optionalDependencies": {
-		"@acai/router": "2.2.0-alpha"
+		"@acai/router": "^2.2.0-alpha2"
 	},
 	"devDependencies": {
 		"@acai/interfaces": "0.2.0-alpha",
