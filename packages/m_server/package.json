@@ -1,6 +1,6 @@
 {
 	"name": "@acai/server",
-	"version": "3.0.0-alpha4",
+	"version": "3.0.0-alpha5",
 	"description": "The base server for the açai framework",
 	"repository": "https://gitlab.com/acaijs/modules/server.git",
 	"keywords": [

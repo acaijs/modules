@@ -29,19 +29,19 @@ function findFile (filepath: string): string | undefined {
 // Main method
 // -------------------------------------------------
 
-export default async function findController(path: string | ((req: any) => any), request: any) {
+export default async function findController(controllerPath: string | ((req: any) => any), request: any) {
 	// controller itself is the callback
-	if (typeof path !== "string") {
-		return path
+	if (typeof controllerPath !== "string") {
+		return controllerPath
 	}
 
-	const [controller, method] = path
-	const pathString = findFile(controller) || controller
-	const controllerPath = pathString.split(/(\\|\/)/).reverse()[0].split("@")[0]
+	const [controller, method] = controllerPath.split("@")
+	const pathString = findFile(path.join(process.cwd(), controller)) || controller
+	const sanitizedControllerPath = pathString.split(/(\\|\/)/).reverse()[0].split("@")[0]
 
 	// controller requested doesn't exist
 	if (!fs.existsSync(pathString)) {
-		throw new ControllerNotFoundException(controllerPath, request.route)
+		throw new ControllerNotFoundException(sanitizedControllerPath, request.route)
 	}
 
 	const file = (await import(pathString)).default
@@ -55,7 +55,7 @@ export default async function findController(path: string | ((req: any) => any),
 			if (instance[method])
 				return instance[method].bind(instance)
 			else {
-				throw new ControllerNotFoundException(controllerPath, request.route, method)
+				throw new ControllerNotFoundException(sanitizedControllerPath, request.route, method)
 			}
 		}
 
@@ -67,7 +67,7 @@ export default async function findController(path: string | ((req: any) => any),
 		if (file[method])
 			return file[method]
 
-		throw new ControllerNotFoundException(controllerPath, request.route, method)
+		throw new ControllerNotFoundException(sanitizedControllerPath, request.route, method)
 	}
 
 	return file

@@ -81,7 +81,7 @@ export default class AdapterHandler {
 			const middlewares = middlewareNames.map(name => name.split(":")).map(([name, ...data]) => [this.adapter.middlewares[name], (data || "").join(":").split(",")])
 
 			// Get controller method
-			const request = await safeHandle(() => findController(path, data), this)
+			const request = await safeHandle(() => findController(`${this.adapter.config.filePrefix || ""}/${path}`, data), this)
 
 			// Pass through middlewares
 			const composition = composeMiddlewares([...globals, ...middlewares] as ([MiddlewareInterface, string[] | undefined])[])(request)
