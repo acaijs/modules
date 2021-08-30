@@ -41,6 +41,7 @@
 		"testing": "yarn workspace @acai/testing",
 		"validator": "yarn workspace @acai/validator",
 		"runtime": "yarn workspace @acai/runtime",
+		"preset": "yarn workspace @acai/preset",
 		"utils": "yarn workspace @acai/utils"
 	}
 }
