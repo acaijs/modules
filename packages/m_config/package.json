@@ -1,43 +1,43 @@
 {
-	"name": "@acai/config",
-	"version": "1.0.0",
-	"description": "Config is a base module that helps you organize data through your application",
-	"repository": "https://github.com/AcaiFramework/config.git",
-	"author": "Rafael <rafael.chaves98@hotmail.com>",
-	"license": "BSD-3-Clause",
-	"private": false,
-	"types": "dist/types",
-	"scripts": {
-		"build": "node ../m_runtime/dist/cli.js && tsc --declaration --emitDeclarationOnly",
-		"test": "ts-node ./test.ts",
-		"prepublishOnly": "yarn build"
-	},
-	"engines": {
-		"node": ">=12.0.0"
-	},
-	"devDependencies": {
-		"@acai/testing": "2.4.1",
-		"@types/glob": "^7.1.3",
-		"@types/node": "^14.14.28",
-		"ts-node-dev": "^1.1.8",
-		"typescript": "^4.1.5"
-	},
-	"dependencies": {
-		"glob": "^7.1.6"
-	},
-	"module": "dist/index.esm.js",
-	"main": "dist/index.cjs.js",
-	"typings": "dist/index.d.ts",
-	"files": [
-		"dist"
-	],
-	"exports": {
-		".": {
-			"import": "./dist/index.esm.js",
-			"require": "./dist/index.cjs.js"
-		}
-	},
-	"peerDependencies": {
-		"ts-node-dev": "^1.1.8"
-	}
+  "name": "@acai/config",
+  "version": "1.0.0",
+  "description": "Config is a base module that helps you organize data through your application",
+  "repository": "https://github.com/AcaiFramework/config.git",
+  "author": "Rafael <rafael.chaves98@hotmail.com>",
+  "license": "BSD-3-Clause",
+  "private": false,
+  "types": "dist/types",
+  "scripts": {
+    "build": "node ../m_runtime/dist/cli.js && tsc --declaration --emitDeclarationOnly",
+    "test": "ts-node ./test.ts",
+    "prepublishOnly": "yarn build"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "devDependencies": {
+    "@acai/testing": "3.0.0-alpha",
+    "@types/glob": "^7.1.3",
+    "@types/node": "^14.14.28",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.1.5"
+  },
+  "dependencies": {
+    "glob": "^7.1.6"
+  },
+  "module": "dist/index.esm.js",
+  "main": "dist/index.cjs.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.cjs.js"
+    }
+  },
+  "peerDependencies": {
+    "ts-node-dev": "^1.1.8"
+  }
 }
