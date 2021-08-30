@@ -1,5 +1,5 @@
 // Packages
-import { ProviderInterface, RequestInterface, CustomExceptionInterface, SerializedAdapterInterface } from "@acai/interfaces"
+import { ProviderInterface, CustomExceptionInterface, SerializedAdapterInterface } from "@acai/interfaces"
 
 // Modules
 import response from "../modules/response"
@@ -61,7 +61,7 @@ export default class ErrorProvider {
 	// Error type methods
 	// -------------------------------------------------
 
-	private genericError (error: CustomExceptionInterface & {[_ in string]: any}, request: RequestInterface, server: SerializedAdapterInterface) {
+	private genericError (error: CustomExceptionInterface & {[_ in string]: any}, request: any, server: SerializedAdapterInterface) {
 		// arrange data
 		const data = {
 			message	: error.message,
@@ -130,5 +130,7 @@ export default class ErrorProvider {
 				}
 			}
 		}
+
+		return undefined
 	}
 }

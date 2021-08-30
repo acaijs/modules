@@ -1,5 +1,5 @@
 // Interfaces
-import { Model } from "../.."
+import { Model } from "../"
 import modelActions from "./modelActions"
 
 type ModelArgsSignature = {value: unknown; row: Record<string, unknown>; args?: any; model: typeof Model; key: string};

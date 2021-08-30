@@ -69,7 +69,7 @@ export const add = (pretest: Omit<TestArgumentInterface, "fail">) => {
 				type	: "test",
 				fail	: true,
 				message	: "Exception thrown",
-				name	: e.message,
+				name	: (e as any).message,
 				stack	: getStackTrace(1, e),
 				data	: [],
 			})

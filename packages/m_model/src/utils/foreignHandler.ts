@@ -1,4 +1,4 @@
-import { Model } from "../.."
+import { Model } from "../"
 
 // Interfaces
 import RelationDataInterface from "../interfaces/relationData"
@@ -86,4 +86,6 @@ export default function foreignHandler(this: Model, foreign: RelationDataInterfa
 			},
 		}
 	}
+
+	return undefined
 }

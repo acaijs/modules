@@ -1,39 +1,50 @@
 {
-  "name": "@acai/model",
-  "version": "0.7.11",
-  "description": "Models are a easy way to group your data with methods to format it, save and other crud operations.",
-  "repository": "https://github.com/AcaiFramework/config.git",
-  "author": "Rafael <rafael.chaves98@hotmail.com>",
-  "license": "BSD-3-Clause",
-  "private": false,
-  "main": "dist/index.js",
-  "scripts": {
-    "build": "tsc --project ./tsconfig.json",
-    "start": "ts-node ./yay.ts",
-    "test": "ts-node ./test.ts",
-    "prepublishOnly": "yarn build"
-  },
-  "dependencies": {
-    "@acai/query": "^0.5.13",
-    "@acai/utils": "0.6.1",
-    "bcrypt": "^5.0.0",
-    "luxon": "^1.26.0",
-    "uuid": "^8.3.2"
-  },
-  "peerDependencies": {
-    "@acai/query": "^0.5.13",
-    "ts-node-dev": "^1.1.8",
-    "luxon": "^1.26.0"
-  },
-  "devDependencies": {
-    "@acai/testing": "2.4.1",
-    "@types/bcrypt": "^3.0.0",
-    "@types/luxon": "^1.26.5",
-    "@types/node": "^14.14.28",
-    "ts-node-dev": "^1.1.8",
-    "typescript": "^4.1.5"
-  },
-  "optionalDependencies": {
-    "@acai/config": "^0.1.2"
-  }
+	"name": "@acai/model",
+	"version": "0.7.11",
+	"description": "Models are a easy way to group your data with methods to format it, save and other crud operations.",
+	"repository": "https://github.com/AcaiFramework/config.git",
+	"author": "Rafael <rafael.chaves98@hotmail.com>",
+	"license": "BSD-3-Clause",
+	"private": false,
+	"module": "dist/index.esm.js",
+	"main": "dist/index.cjs.js",
+	"typings": "dist/index.d.ts",
+	"files": [
+		"dist"
+	],
+	"exports": {
+		".": {
+			"import": "./dist/index.esm.js",
+			"require": "./dist/index.cjs.js"
+		}
+	},
+	"scripts": {
+		"build": "node ../m_runtime/dist/cli.js && tsc --declaration --emitDeclarationOnly --project tsconfig.json",
+		"start": "ts-node ./yay.ts",
+		"test": "ts-node ./test.ts",
+		"prepublishOnly": "yarn build"
+	},
+	"dependencies": {
+		"@acai/query": "^0.5.13",
+		"@acai/utils": "0.6.1",
+		"bcrypt": "^5.0.0",
+		"luxon": "^1.26.0",
+		"uuid": "^8.3.2"
+	},
+	"peerDependencies": {
+		"@acai/query": "^0.5.13",
+		"ts-node-dev": "^1.1.8",
+		"luxon": "^1.26.0"
+	},
+	"devDependencies": {
+		"@acai/testing": "2.4.1",
+		"@types/bcrypt": "^3.0.0",
+		"@types/luxon": "^1.26.5",
+		"@types/node": "^14.14.28",
+		"ts-node-dev": "^1.1.8",
+		"typescript": "^4.1.5"
+	},
+	"optionalDependencies": {
+		"@acai/config": "^0.1.2"
+	}
 }

@@ -50,6 +50,8 @@ const rule = {
 
 			return `${key} should not include values: ${(args || []).filter(a => `${value}`.match(a)).join(", ")}`
 		}
+
+		return undefined
 	},
 } as RuleInterface
 

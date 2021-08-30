@@ -6,7 +6,7 @@ export const getStackTrace = (index = 4, prestack?) => {
 			throw new Error("")
 		}
 		catch (error) {
-			stack = error.stack || ""
+			stack = (error as any).stack || ""
 		}
 	}
 

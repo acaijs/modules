@@ -10,22 +10,21 @@
 		"module": "ESNext",
 		"lib": [
 			"ESNext",
-			"DOM"
+			"DOM",
 		],
-		"moduleResolution": "Node",
+		"moduleResolution": "node",
 		"strict": true,
 		"sourceMap": true,
 		"resolveJsonModule": true,
 		"esModuleInterop": true,
-		"noEmit": true,
+		"noEmit": false,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"noImplicitReturns": true,
-		"outDir": "dist",
-		"declarationDir": "dist"
+		"outDir": "dist"
 	},
 	"include": [
-		"./src"
+		"src"
 	],
 	"exclude": [
 		"dist/**/*",

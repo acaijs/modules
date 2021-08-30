@@ -1,7 +1,7 @@
 // Interfaces
-import { CustomExceptionInterface } from "@acai/interfaces"
+import { CustomException } from "@acai/utils"
 
-export default class QueryException extends Error implements CustomExceptionInterface {
+export default class QueryException extends CustomException {
 	// main error properties
     public shouldReport		= true;
     public shouldSerialize	= true;
@@ -13,7 +13,7 @@ export default class QueryException extends Error implements CustomExceptionInte
 	public readonly state: string;
 
 	public constructor (message: string, state: string, query: string) {
-		super(message)
+		super("query", message, {state, query})
 
 		this.query = query
 		this.state = state

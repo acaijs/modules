@@ -16,8 +16,8 @@ export default async function queryResolver (client: Client.Connection, queryStr
 		})
 	}
 	catch (e) {
-		if (e.sqlMessage || e.sqlState) {
-			throw new QueryException(e.sqlMessage, e.sqlState, queryString)
+		if ((e as any).sqlMessage || (e as any).sqlState) {
+			throw new QueryException((e as any).sqlMessage, (e as any).sqlState, queryString)
 		}
 	}
 

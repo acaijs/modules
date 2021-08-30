@@ -34,6 +34,7 @@ module.exports = {
 		],
 
 		// Typescript eslint
+		"@typescript-eslint/no-var-requires"				: 0,
 		"@typescript-eslint/explicit-module-boundary-types"	: 0,
 		"@typescript-eslint/no-misused-new"					: 0,
 		"@typescript-eslint/no-empty-function"				: 0,

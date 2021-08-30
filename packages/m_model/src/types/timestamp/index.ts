@@ -23,6 +23,8 @@ const toSerializeDate = ({value}) => {
 
 		return format.toFormat("yyyy-LL-dd HH:mm:ss")
 	}
+
+	return value
 }
 
 const timestampType = {

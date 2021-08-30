@@ -4,7 +4,7 @@
 * found in the LICENSE file.
 */
 
-import configModule from "./src/modules/config"
+import configModule from "./modules/config"
 
 const instance = new configModule()
 export default instance

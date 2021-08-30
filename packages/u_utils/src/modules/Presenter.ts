@@ -57,6 +57,8 @@ export default abstract class BasePresenter {
 			return data.data
 		if (data.rows && Array.isArray(data.rows))
 			return data.rows
+
+		return undefined
 	}
 
 	protected async preparePresent (model: GenericObject, extraData?: GenericObject, formatType?: string) {

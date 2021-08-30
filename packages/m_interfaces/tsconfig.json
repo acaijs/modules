@@ -1,7 +1,6 @@
 {
 	"compilerOptions": {
-		"outDir": "dist",
-		"declarationDir": "dist"
+		"outDir": "dist"
 	},
 	"extends": "../u_preset/tsconfig.json",
 	"include": [

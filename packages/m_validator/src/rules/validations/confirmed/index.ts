@@ -11,6 +11,8 @@ const rule = {
 		if (fields[`${key}_confirmation`] !== value) {
 			return `${key} confirmation does not match`
 		}
+
+		return undefined
 	},
 } as RuleInterface
 

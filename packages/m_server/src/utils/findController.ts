@@ -21,6 +21,8 @@ function findFile (filepath: string): string | undefined {
 		if (files[i].isFile() && files[i].name.match(new RegExp(`^${name}`)))
 			return path.join(dir, files[i].name)
 	}
+
+	return undefined
 }
 
 // -------------------------------------------------

@@ -5,6 +5,7 @@ export default class MockAdapter implements AdapterInterface {
 	private onRequestData = () => {}
 
 	public boot () {
+		this.onRequestData()
 		return true
 	}
 

@@ -50,6 +50,8 @@ const rule = {
 
 			return `${key} is less than the allowed: ${(args || [])[0]}`
 		}
+
+		return undefined
 	},
 } as RuleInterface
 

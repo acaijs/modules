@@ -1,6 +1,6 @@
 {
 	"name": "@acai/interfaces",
-	"version": "0.1.2",
+	"version": "0.2.0-alpha",
 	"description": "General use typescript interfaces for use across all the Açaí modules.",
 	"repository": "https://gitlab.com/acaijs/modules/interfaces.git",
 	"author": "Rafael <rafael.correa@aposoftworks.com>",
@@ -13,13 +13,20 @@
 		"modules"
 	],
 	"private": false,
+	"module": "dist/index.esm.js",
+	"main": "dist/index.cjs.js",
+	"typings": "dist/index.d.ts",
 	"files": [
-		"dist/**"
+		"dist"
 	],
-	"types": "dist",
-	"main": "dist/index.js",
+	"exports": {
+		".": {
+			"import": "./dist/index.esm.js",
+			"require": "./dist/index.cjs.js"
+		}
+	},
 	"scripts": {
-		"build": "tsc --project ./tsconfig.json",
+		"build": "node ../m_runtime/dist/cli.js && tsc --declaration --emitDeclarationOnly",
 		"lint": "eslint --quiet **/*",
 		"lint:fix": "eslint --quiet **/* --fix",
 		"prepublishOnly": "yarn build"

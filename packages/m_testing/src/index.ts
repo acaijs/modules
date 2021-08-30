@@ -1,17 +1,20 @@
+// Packages
+import tsnode from "ts-node"
+
 // Modules
-import runMethod 			from "./src/modules/run"
-import testMethod			from "./src/modules/test"
-import findMethod 			from "./src/modules/find"
-import cacheMethod 			from "./src/modules/cache"
-import groupMethod 			from "./src/modules/group"
-import onlyMethod 			from "./src/modules/only"
-import exceptMethod 		from "./src/modules/except"
-import tagMethod 			from "./src/modules/tag"
-import printMethod 			from "./src/modules/print"
-import runAndPrintMethod 	from "./src/modules/runAndPrint"
+import runMethod 			from "./modules/run"
+import testMethod			from "./modules/test"
+import findMethod 			from "./modules/find"
+import cacheMethod 			from "./modules/cache"
+import groupMethod 			from "./modules/group"
+import onlyMethod 			from "./modules/only"
+import exceptMethod 		from "./modules/except"
+import tagMethod 			from "./modules/tag"
+import printMethod 			from "./modules/print"
+import runAndPrintMethod 	from "./modules/runAndPrint"
 
 // Interfaces
-import TestModuleInterface from "./src/interfaces/testModule"
+import TestModuleInterface from "./interfaces/testModule"
 
 // build
 const test 			= testMethod as TestModuleInterface
@@ -29,6 +32,8 @@ test.runAndPrint	= runAndPrintMethod
 export default test
 
 async function main () {
+	tsnode.register()
+
 	const path 	= process.argv.includes("--path") 		&& process.argv[process.argv.indexOf("--path") + 1]
 	const tags 	= `${process.argv.includes("--tags") 	&& process.argv[process.argv.indexOf("--tags") + 1] || ""}`.split(",").filter(i => i)
 	const all	= process.argv.includes("--all")

@@ -1,7 +1,7 @@
 // Interfaces
-import { CustomExceptionInterface } from "@acai/interfaces"
+import { CustomException } from "@acai/utils"
 
-export default class ConnectionException extends Error implements CustomExceptionInterface {
+export default class ConnectionException extends CustomException {
 	// main error properties
     public shouldReport		= true;
     public shouldSerialize	= true;

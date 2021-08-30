@@ -40,6 +40,7 @@
 		"stubber": "yarn workspace @acai/stubber",
 		"testing": "yarn workspace @acai/testing",
 		"validator": "yarn workspace @acai/validator",
+		"runtime": "yarn workspace @acai/runtime",
 		"utils": "yarn workspace @acai/utils"
 	}
 }

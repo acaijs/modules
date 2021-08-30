@@ -1,52 +1,63 @@
 {
-  "name": "@acai/server",
-  "version": "2.0.6",
-  "description": "The base server for the açai framework",
-  "repository": "https://gitlab.com/acaijs/modules/server.git",
-  "keywords": [
-    "server",
-    "http",
-    "middleware",
-    "provider",
-    "typescript",
-    "acai",
-    "module"
-  ],
-  "author": "Rafael <rafael.chaves98@hotmail.com>",
-  "license": "BSD-3-Clause",
-  "main": "dist",
-  "types": "dist",
-  "private": false,
-  "scripts": {
-    "build": "tsc",
-    "start": "ts-node ./index.ts",
-    "test": "ts-node ./test.ts",
-    "lint": "eslint --quiet **/*",
-    "lint:fix": "eslint --quiet **/* --fix",
-    "prepublishOnly": "yarn build"
-  },
-  "optionalDependencies": {
-    "@acai/router": ">= 2"
-  },
-  "devDependencies": {
-    "@acai/interfaces": "^0.1.2",
-    "@acai/preset": "^0.1.14",
-    "@acai/testing": "2.4.1",
-    "@types/cookies": "^0.7.6",
-    "@types/node": "^14.14.28",
-    "@types/supertest": "^2.0.11",
-    "eslint": "^7.31.0",
-    "form-data": "^4.0.0",
-    "supertest": "^6.1.3",
-    "ts-node-dev": "^1.1.8",
-    "typescript": "^4.1.5"
-  },
-  "dependencies": {
-    "@acai/utils": "0.6.1",
-    "body-parser": "^1.19.0",
-    "cookies": "^0.8.0"
-  },
-  "peerDependencies": {
-    "ts-node-dev": "^1.1.8"
-  }
+	"name": "@acai/server",
+	"version": "2.0.6",
+	"description": "The base server for the açai framework",
+	"repository": "https://gitlab.com/acaijs/modules/server.git",
+	"keywords": [
+		"server",
+		"http",
+		"middleware",
+		"provider",
+		"typescript",
+		"acai",
+		"module"
+	],
+	"author": "Rafael <rafael.chaves98@hotmail.com>",
+	"license": "BSD-3-Clause",
+	"module": "dist/index.esm.js",
+	"main": "dist/index.cjs.js",
+	"typings": "dist/index.d.ts",
+	"files": [
+		"dist"
+	],
+	"exports": {
+		".": {
+			"import": "./dist/index.esm.js",
+			"require": "./dist/index.cjs.js"
+		}
+	},
+	"private": false,
+	"scripts": {
+		"build": "node ../m_runtime/dist/cli.js && tsc --declaration --emitDeclarationOnly",
+		"start": "ts-node ./index.ts",
+		"test": "ts-node ./test.ts",
+		"lint": "eslint --quiet **/*",
+		"lint:fix": "eslint --quiet **/* --fix",
+		"prepublishOnly": "yarn build"
+	},
+	"optionalDependencies": {
+		"@acai/router": ">= 2"
+	},
+	"devDependencies": {
+		"@acai/interfaces": "^0.1.2",
+		"@acai/preset": "^0.1.14",
+		"@acai/testing": "2.4.1",
+		"@types/cookies": "^0.7.6",
+		"@types/node": "^14.14.28",
+		"@types/supertest": "^2.0.11",
+		"eslint": "^7.31.0",
+		"form-data": "^4.0.0",
+		"supertest": "^6.1.3",
+		"ts-node-dev": "^1.1.8",
+		"typescript": "^4.1.5",
+		"@acai/runtime": "0.1.0"
+	},
+	"dependencies": {
+		"@acai/utils": "0.6.1",
+		"body-parser": "^1.19.0",
+		"cookies": "^0.8.0"
+	},
+	"peerDependencies": {
+		"ts-node-dev": "^1.1.8"
+	}
 }

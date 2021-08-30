@@ -6,13 +6,20 @@
 	"author": "Rafael <rafael.chaves98@hotmail.com>",
 	"license": "BSD-3-Clause",
 	"private": false,
+	"module": "dist/index.esm.js",
+	"main": "dist/index.cjs.js",
+	"typings": "dist/index.d.ts",
 	"files": [
-		"dist/**"
+		"dist"
 	],
-	"main": "dist/index.js",
-	"types": "",
+	"exports": {
+		".": {
+			"import": "./dist/index.esm.js",
+			"require": "./dist/index.cjs.js"
+		}
+	},
 	"scripts": {
-		"build": "tsc --project ./tsconfig.json",
+		"build": "node ../m_runtime/dist/cli.js && tsc --declaration --emitDeclarationOnly",
 		"test": "ts-node ./test.ts",
 		"prepublishOnly": "yarn build"
 	},

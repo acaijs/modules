@@ -16,7 +16,7 @@ export default async function safeHandle (callback: (... args: any[]) => any | P
 		const error = e as CustomExceptionInterface
 
 		// check if provider is going to handle errors
-		const response = await handler.onException(e)
+		const response = await handler.onException(e as any)
 
 		// if providers don't handle error, fallback to default handling
 		if (response === undefined) {

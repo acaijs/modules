@@ -6,9 +6,20 @@
 	"author": "Rafael <rafael.chaves98@hotmail.com>",
 	"license": "BSD-3-Clause",
 	"private": false,
-	"main": "dist/index.js",
+	"module": "dist/index.esm.js",
+	"main": "dist/index.cjs.js",
+	"typings": "dist/index.d.ts",
+	"files": [
+		"dist"
+	],
+	"exports": {
+		".": {
+			"import": "./dist/index.esm.js",
+			"require": "./dist/index.cjs.js"
+		}
+	},
 	"scripts": {
-		"build": "tsc",
+		"build": "node ../m_runtime/dist/cli.js && tsc --declaration --emitDeclarationOnly",
 		"test": "ts-node ./test.ts",
 		"start": "ts-node ./localtest.ts",
 		"lint": "eslint --quiet **/*",

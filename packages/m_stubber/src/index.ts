@@ -4,8 +4,8 @@
 * found in the LICENSE file.
 */
 
-import Stubber 		from "./src/modules/Stubber"
-import listStubs 	from "./src/utils/listStubs"
+import Stubber 		from "./modules/Stubber"
+import listStubs 	from "./utils/listStubs"
 
 const [action, ...args] = process.argv.splice(2)
 

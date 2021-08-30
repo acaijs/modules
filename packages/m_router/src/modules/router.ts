@@ -71,6 +71,8 @@ const routerModule = <Options = Record<string, string>> (path: string, method: M
 
 	if (route)
 		return {...route, options: route.options as Options, variables, query: queryParams}
+
+	return undefined
 }
 
 export default routerModule

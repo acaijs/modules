@@ -92,7 +92,7 @@ export default async function run (settings?: RunSettings) {
 				}
 
 				ctx.fails.push({
-					title	: e.message,
+					title	: (e as any).message,
 					type	: "beforeAll",
 					message	: "An error has occured while running beforeAll callback",
 					stack	: getStackTrace(1, e),
@@ -126,7 +126,7 @@ export default async function run (settings?: RunSettings) {
 			}
 
 			ctx.fails.push({
-				title	: e.message,
+				title	: (e as any).message,
 				type	: "beforeEach",
 				message	: "An error has occured while running beforeEach callback",
 				stack	: getStackTrace(1, e),
@@ -190,7 +190,7 @@ export default async function run (settings?: RunSettings) {
 			}
 
 			ctx.fails.push({
-				title	: e.message,
+				title	: (e as any).message,
 				type	: "afterEach",
 				message	: "An error has occured while running afterEach callback",
 				stack	: getStackTrace(1, e),
@@ -220,7 +220,7 @@ export default async function run (settings?: RunSettings) {
 			}
 
 			ctx.fails.push({
-				title	: e.message,
+				title	: (e as any).message,
 				type	: "afterAll",
 				message	: "An error has occured while running afterAll callback",
 				stack	: getStackTrace(1, e),
