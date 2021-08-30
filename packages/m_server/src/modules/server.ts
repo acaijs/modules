@@ -14,6 +14,7 @@ import HttpAdapter from "../adapters/http"
 
 // Classes
 import AdapterHandler from "../classes/AdapterHandler"
+import instanciable from "../utils/instanciable"
 
 export default class Server implements ServerInterface {
 	// -------------------------------------------------
@@ -98,12 +99,12 @@ export default class Server implements ServerInterface {
 			// make sure all adapters referenced exist
 			adapters.forEach(adapter => {if (!this.adapters[adapter]) throw new AdapterNotFound(adapter)})
 
-			adapters.forEach(adapter => this.adapters[adapter].providers.push(provider))
+			adapters.forEach(adapter => this.adapters[adapter].providers.push(instanciable(provider)))
 			return
 		}
 
 		// push to all adapters
-		Object.values(this.adapters).forEach(adapter => adapter.providers.push(provider))
+		Object.values(this.adapters).forEach(adapter => adapter.providers.push(instanciable(provider)))
 	}
 
 	public addProviders (providers: ProviderInterface[]) : void;
@@ -163,12 +164,12 @@ export default class Server implements ServerInterface {
 			adapters.forEach(adapter => {if (!this.adapters[adapter]) throw new AdapterNotFound(adapter)})
 
 
-			adapters.forEach(adapter => this.adapters[adapter].middlewares[id] = middleware)
+			adapters.forEach(adapter => this.adapters[adapter].middlewares[id] = instanciable(middleware))
 			return
 		}
 
 		// push to all adapters
-		Object.values(this.adapters).forEach(adapter => adapter.middlewares[id] = middleware as MiddlewareInterface)
+		Object.values(this.adapters).forEach(adapter => adapter.middlewares[id] = instanciable(middleware) as MiddlewareInterface)
 	}
 
 	public addMiddlewares (middlewares: Record<string, MiddlewareInterface>) : void;
@@ -233,12 +234,12 @@ export default class Server implements ServerInterface {
 			// make sure all adapters referenced exist
 			adapters.forEach(adapter => {if (!this.adapters[adapter]) throw new AdapterNotFound(adapter)})
 
-			adapters.forEach(adapter => this.adapters[adapter].globals.push(callback))
+			adapters.forEach(adapter => this.adapters[adapter].globals.push(instanciable(callback)))
 			return
 		}
 
 		// push to all adapters
-		Object.values(this.adapters).forEach(adapter => adapter.globals.push(callback))
+		Object.values(this.adapters).forEach(adapter => adapter.globals.push(instanciable(callback)))
 	}
 
 	public addGlobals (middlewares: MiddlewareInterface[]) : void;
@@ -284,7 +285,7 @@ export default class Server implements ServerInterface {
 	public addAdapter (name: string, adapter: ClassType<AdapterInterface> | AdapterInterface, config?: Partial<ServerConfigInterface>) {
 		this.adapters[name] = {
 			name,
-			adapter: (adapter.constructor && (adapter as any).prototype?.constructor === adapter ? new (adapter as ClassType<AdapterInterface>)() : adapter) as AdapterInterface,
+			adapter: instanciable(adapter),
 			middlewares: {},
 			providers: [],
 			globals: [],
