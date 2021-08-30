@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "@acai/interfaces": "0.2.0-alpha",
-    "@acai/preset": "^0.1.14",
+    "@acai/preset": "0.2.0-alpha",
     "@acai/testing": "2.4.1",
     "@types/node": "^14.14.28",
     "@types/pg": "^7.14.9",
