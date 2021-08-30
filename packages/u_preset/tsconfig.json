@@ -6,8 +6,6 @@
 		"removeComments": false,
 		"strictNullChecks": true,
 		"strictPropertyInitialization": false,
-		"target": "ESNext",
-		"module": "ESNext",
 		"lib": [
 			"ESNext",
 			"DOM",
