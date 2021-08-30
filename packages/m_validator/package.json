@@ -1,46 +1,46 @@
 {
-  "name": "@acai/validator",
-  "version": "0.3.2",
-  "description": "A customizable validator for the Açaí framework. You can easily add your own rules and extend the capabilities of our validator.",
-  "repository": "https://github.com/AcaiFramework/validator.git",
-  "author": "Rafael <rafael.chaves98@hotmail.com>",
-  "license": "BSD-3-Clause",
-  "private": false,
-  "module": "dist/index.esm.js",
-  "main": "dist/index.cjs.js",
-  "typings": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
-  "exports": {
-    ".": {
-      "import": "./dist/index.esm.js",
-      "require": "./dist/index.cjs.js"
-    }
-  },
-  "scripts": {
-    "build": "node ../m_runtime/dist/cli.js && tsc --declaration --emitDeclarationOnly",
-    "test": "ts-node ./test.ts",
-    "prepublishOnly": "yarn build"
-  },
-  "engines": {
-    "node": ">=12.0.0"
-  },
-  "devDependencies": {
-    "@acai/preset": "0.2.0-alpha",
-    "@acai/testing": "3.0.0-alpha",
-    "@types/glob": "^7.1.3",
-    "@types/luxon": "^1.26.5",
-    "@types/node": "^14.14.28",
-    "ts-node-dev": "^1.1.8",
-    "typescript": "^4.1.5"
-  },
-  "dependencies": {
-    "@acai/server": "2.0.6",
-    "glob": "^7.1.6",
-    "luxon": "^1.26.0"
-  },
-  "peerDependencies": {
-    "ts-node-dev": "^1.1.8"
-  }
+	"name": "@acai/validator",
+	"version": "0.3.2",
+	"description": "A customizable validator for the Açaí framework. You can easily add your own rules and extend the capabilities of our validator.",
+	"repository": "https://github.com/AcaiFramework/validator.git",
+	"author": "Rafael <rafael.chaves98@hotmail.com>",
+	"license": "BSD-3-Clause",
+	"private": false,
+	"module": "dist/index.esm.js",
+	"main": "dist/index.cjs.js",
+	"typings": "dist/index.d.ts",
+	"files": [
+		"dist"
+	],
+	"exports": {
+		".": {
+			"import": "./dist/index.esm.js",
+			"require": "./dist/index.cjs.js"
+		}
+	},
+	"scripts": {
+		"build": "node ../m_runtime/dist/cli.js && tsc --declaration --emitDeclarationOnly",
+		"test": "ts-node ./test.ts",
+		"prepublishOnly": "yarn build"
+	},
+	"engines": {
+		"node": ">=12.0.0"
+	},
+	"devDependencies": {
+		"@acai/preset": "0.2.0-alpha",
+		"@acai/testing": "3.0.0-alpha",
+		"@types/glob": "^7.1.3",
+		"@types/luxon": "^1.26.5",
+		"@types/node": "^14.14.28",
+		"ts-node-dev": "^1.1.8",
+		"typescript": "^4.1.5"
+	},
+	"dependencies": {
+		"@acai/server": "3.0.0-alpha",
+		"glob": "^7.1.6",
+		"luxon": "^1.26.0"
+	},
+	"peerDependencies": {
+		"ts-node-dev": "^1.1.8"
+	}
 }
