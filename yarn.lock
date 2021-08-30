@@ -15,6 +15,25 @@
   resolved "https://registry.yarnpkg.com/@acai/interfaces/-/interfaces-0.1.2.tgz#efe28ff394a13bd41bd5b6ba3bdbe9ae8aa68ea0"
   integrity sha512-pCu44rR3lcCNDwyaC40oJx+zNEy6v/MXqavYusoenKtgkx+LQN4PTmuf4gmXFDeGNcCvbwYsIHiN6BNczDmVeg==
 
+"@acai/router@>= 2":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@acai/router/-/router-2.1.0.tgz#66b1daab0aff9465f9631a98a513ff302d0a0798"
+  integrity sha512-2rYYJ5kqb+TGwlU7pnNpw7LoUPCyh3UAbmSzEDkUHijV+kGJCqrctYN/qCt4riR/p2Y5GuaEgsk0DshPI3HzrA==
+  dependencies:
+    "@acai/testing" "^2.3.1"
+    ts-node "^9.1.1"
+
+"@acai/server@3.0.0-alpha":
+  version "3.0.0-alpha"
+  resolved "https://registry.yarnpkg.com/@acai/server/-/server-3.0.0-alpha.tgz#c080a62d8c0d0989ccf60032ff4f2ee1b3445e26"
+  integrity sha512-KoRjsAbrOWj/TDAdeRMZgj0gvG2zHG/Ua0kZ8fNmNU/DC+rS3cR1c0QeTbqPrXLbHNMLvZHx0VunNUEREwc2eA==
+  dependencies:
+    "@acai/utils" "0.6.1"
+    body-parser "^1.19.0"
+    cookies "^0.8.0"
+  optionalDependencies:
+    "@acai/router" ">= 2"
+
 "@acai/server@^2.0.0":
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/@acai/server/-/server-2.0.6.tgz#cf365ff2f96d7e0c34e44013ea1b9af5dc378355"
@@ -26,6 +45,14 @@
     ts-node-dev "^1.1.6"
   optionalDependencies:
     "@acai/router" ">= 2"
+
+"@acai/testing@^2.3.1":
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/@acai/testing/-/testing-2.4.1.tgz#b60a963685d54ce59e3b6eb0748e28efbb5559bb"
+  integrity sha512-pV2TKuedAuIr/fmT5lF7P++rsC/HVBLJDatRKnAYgeUJBTUhxlsBCMI0lAb4Es+ohdr5LqC5LuZ+3SpyxoeHaQ==
+  dependencies:
+    glob "^7.1.6"
+    ts-node-dev "^1.1.6"
 
 "@acai/utils@0.6.1":
   version "0.6.1"
