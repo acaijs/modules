@@ -28,7 +28,7 @@
 	},
 	"private": false,
 	"scripts": {
-		"build": "node ../m_runtime/dist/cli.js && tsc --declaration --emitDeclarationOnly",
+		"build": "node ../m_runtime/build.js",
 		"start": "ts-node ./index.ts",
 		"test": "ts-node ./test.ts",
 		"lint": "eslint --quiet **/*",

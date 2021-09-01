@@ -11,7 +11,7 @@ import BodyParseConfig from "../interfaces/bodyParserConfig"
 import FileHandler from "../utils/FileHandler"
 
 export default function buildBodyParserMiddleware (config?: Partial<BodyParseConfig>) {
-	const BodyParserMiddleware: MiddlewareInterface = async (r, n) => {
+	const BodyParserMiddleware: MiddlewareInterface = async (request, n) => {
 		return n(await new Promise(resolve => {
 			const uploadpath = path.join(process.cwd(), config?.uploadDir || "storage/tmp")
 
@@ -24,7 +24,7 @@ export default function buildBodyParserMiddleware (config?: Partial<BodyParseCon
 				keepExtensions: true,
 				multiples: true,
 			})
-				.parse(r.raw, (_, fields, prefiles) => {
+				.parse(request.raw, (_, fields, prefiles) => {
 				// wrap files in helper class
 					const files = {}
 
@@ -33,7 +33,7 @@ export default function buildBodyParserMiddleware (config?: Partial<BodyParseCon
 					})
 
 					resolve({
-						...r,
+						...request,
 						fields,
 						files,
 					})

@@ -40,7 +40,7 @@ export default async function findController(controllerPath: string | ((req: any
 	const sanitizedControllerPath = pathString.split(/(\\|\/)/).reverse()[0].split("@")[0]
 
 	// controller requested doesn't exist
-	if (!fs.existsSync(pathString)) {
+	if (!pathString || !fs.existsSync(pathString)) {
 		throw new ControllerNotFoundException(sanitizedControllerPath, request.route)
 	}
 
