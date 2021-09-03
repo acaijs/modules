@@ -1,7 +1,7 @@
 {
   "name": "@acai/query",
   "description": "An adaptable query builder that allows extension and is easy to use.",
-  "version": "0.7.0-alpha",
+  "version": "0.7.0-alpha2",
   "repository": "https://github.com/AcaiFramework/query.git",
   "author": "Rafael <rafael.chaves98@hotmail.com>",
   "license": "BSD-3-Clause",
