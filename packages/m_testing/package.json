@@ -1,6 +1,6 @@
 {
 	"name": "@acai/testing",
-	"version": "3.0.0-alpha",
+	"version": "3.0.0-alpha2",
 	"description": "A complete solution toolkit for your test suite.",
 	"repository": "https://gitlab.com/acaijs/tester.git",
 	"author": "Rafael <rafael.chaves98@hotmail.com>",
