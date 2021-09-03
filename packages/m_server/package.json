@@ -41,7 +41,7 @@
   "devDependencies": {
     "@acai/interfaces": "0.2.0-alpha2",
     "@acai/preset": "0.2.0-alpha",
-    "@acai/testing": "3.0.0-alpha",
+    "@acai/testing": "3.0.0-alpha2",
     "@types/cookies": "^0.7.6",
     "@types/node": "^14.14.28",
     "@types/supertest": "^2.0.11",
