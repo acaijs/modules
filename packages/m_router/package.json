@@ -1,6 +1,6 @@
 {
   "name": "@acai/router",
-  "version": "2.2.0-alpha2",
+  "version": "2.2.0-alpha3",
   "description": "An agnostic router that is part of the Açaí Framework ecosytem that can be easily extended to be used both on the backend and frontend.",
   "repository": "https://gitlab.com/acaijs/router.git",
   "author": "Rafael <rafael.chaves98@hotmail.com>",
