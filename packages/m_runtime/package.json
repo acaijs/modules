@@ -1,28 +1,13 @@
 {
-	"name": "@acai/runtime",
-	"version": "0.1.0",
-	"description": "A tiny package to handle live server and module compile",
-	"repository": "https://github.com/AcaiJS/modules",
-	"author": "Rafael Corrêa Chaves",
-	"license": "BSD-3-Clause",
-	"private": false,
-	"bin": "./dist/cli.js",
-	"scripts": {
-		"build": "node esbuild.config.js && tsc --declaration --emitDeclarationOnly --outFile dist/index.d.ts"
-	},
+	"name": "runtime",
+	"version": "2.2.0-alpha2",
 	"devDependencies": {
-		"@swc/core": "^1.2.83"
-	},
-	"module": "dist/index.esm.js",
-	"main": "dist/index.cjs.js",
-	"typings": "dist/index.d.ts",
-	"files": [
-		"dist"
-	],
-	"exports": {
-		".": {
-			"import": "./dist/index.esm.js",
-			"require": "./dist/index.cjs.js"
-		}
+		"esbuild": "^0.12.25",
+		"eslint": "^7.31.0",
+		"rollup": "^2.56.3",
+		"rollup-plugin-esbuild": "^4.5.0",
+		"rollup-plugin-ts": "^1.4.1",
+		"tslib": "2.3.1",
+		"typescript": "^4.1.5"
 	}
 }

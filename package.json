@@ -15,12 +15,13 @@
 	},
 	"devDependencies": {
 		"eslint": "^7.31.0",
+		"husky": "^7.0.0",
 		"lerna": "^4.0.0",
 		"lint-staged": "^11.0.1",
-		"syncpack": "^5.7.11",
-		"husky": "^7.0.0"
+		"syncpack": "^5.7.11"
 	},
 	"scripts": {
+		"sync": "yarn run syncpack fix-mismatches",
 		"all:publish": "yarn lerna publish from-git --yes",
 		"all:test": "yarn lerna run test --stream",
 		"all:version": "yarn lerna version",

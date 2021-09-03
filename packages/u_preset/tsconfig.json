@@ -18,6 +18,7 @@
 		"noEmit": false,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
+		"target": "esnext",
 		"noImplicitReturns": true,
 		"outDir": "dist"
 	},

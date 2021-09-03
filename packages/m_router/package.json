@@ -13,20 +13,20 @@
 	],
 	"license": "BSD-3-Clause",
 	"private": false,
-	"module": "dist/index.esm.js",
-	"main": "dist/index.cjs.js",
+	"module": "dist/index.mjs",
+	"main": "dist/index.js",
 	"typings": "dist/index.d.ts",
 	"files": [
 		"dist"
 	],
 	"exports": {
 		".": {
-			"import": "./dist/index.esm.js",
-			"require": "./dist/index.cjs.js"
+			"import": "./dist/index.mjs",
+			"require": "./dist/index.js"
 		}
 	},
 	"scripts": {
-		"build": "node ../m_runtime/dist/cli.js && tsc --declaration --emitDeclarationOnly",
+		"build": "rollup --config ../m_runtime/rollup.config.js",
 		"test": "ts-node ./test.ts --path \"./src/**/*.{test,tests}.{js,ts}\"",
 		"lint": "eslint --quiet **/*",
 		"lint:fix": "eslint --quiet **/* --fix",
