@@ -1,6 +1,3 @@
-// Packages
-import tsnode from "ts-node"
-
 // Modules
 import runMethod 			from "./modules/run"
 import testMethod			from "./modules/test"
@@ -30,24 +27,3 @@ test.runAndPrint	= runAndPrintMethod
 
 // export
 export default test
-
-async function main () {
-	tsnode.register()
-
-	const path 	= process.argv.includes("--path") 		&& process.argv[process.argv.indexOf("--path") + 1]
-	const tags 	= `${process.argv.includes("--tags") 	&& process.argv[process.argv.indexOf("--tags") + 1] || ""}`.split(",").filter(i => i)
-	const all	= process.argv.includes("--all")
-	const print	= !process.argv.includes("--no-print")
-
-	await test.find(path || "./**/*.{test,tests}.{js,ts}")
-	await test.runAndPrint({
-		tags	: tags,
-		forceAll: all,
-		spinner	: print,
-	})
-}
-
-// run from command line
-if (process.argv.includes("--run")) {
-	main()
-}

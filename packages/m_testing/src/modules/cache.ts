@@ -1,5 +1,5 @@
 // Utils
-import { getCurr } from "./run"
+import { getCurr } from "../utils/curr"
 
 export default function cache (arg1: string | any, arg2?: any) {
 	if (!getCurr()) throw new Error("Trying to use cache outside of a test context")

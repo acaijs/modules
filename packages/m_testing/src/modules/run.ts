@@ -3,6 +3,7 @@ import * as GroupQueue 					from "../utils/group"
 import * as TestQueue 					from "../utils/test"
 import * as ContextQueue 				from "../utils/context"
 import { getStackTrace, isArrayEquals } from "../utils/general"
+import { setCurr } 						from "../utils/curr"
 
 // Interfaces
 import ContextInterface 		from "../interfaces/context"
@@ -10,10 +11,9 @@ import GroupAuxiliaryInterface 	from "../interfaces/groupAuxiliary"
 import TestInterface 			from "../interfaces/testQueue"
 import ContextErrorInterface 	from "../interfaces/contextError"
 import RunSettings 				from "../interfaces/runSettings"
-import cache from "./cache"
 
-let currTest
-export const getCurr = () => currTest
+// Modules
+import cache from "./cache"
 
 export default async function run (settings?: RunSettings) {
 	// Setup enviromnent test
@@ -72,7 +72,7 @@ export default async function run (settings?: RunSettings) {
 
 	for (let i = 0; i < tests.length; i++) {
 		const test = tests[i]
-		currTest = test
+		setCurr(test)
 
 		// check context for beforeAll
 		if (!isArrayEquals(lastcontext, test.group)) {

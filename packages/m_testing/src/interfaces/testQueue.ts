@@ -15,13 +15,13 @@ export default interface TestInterface {
 	fail: boolean;
 	messages: [any, string?][];
 	assertions: {
-		type	 : (keyof ExpectInterface) | "test" | "beforeAll" | "beforeEach" | "afterAll" | "afterEach" | "timeout";
-		message	?: string;
-		fail	 : boolean;
-		stack	?: string;
-		name	?: string;
-		data	 : any[];
-		async	?: () => Promise<void>;
+		type: (keyof ExpectInterface) | "test" | "beforeAll" | "beforeEach" | "afterAll" | "afterEach" | "timeout";
+		message?: string;
+		fail: boolean;
+		stack?: string;
+		name?: string;
+		data: any[];
+		async?: () => Promise<void>;
 	}[];
 
 	// filter
@@ -29,10 +29,10 @@ export default interface TestInterface {
 	except: boolean;
 
 	// callbacks
-	beforeAll	: (() => Promise<void> | void)[];
-	beforeEach	: (() => Promise<void> | void)[];
-	afterAll	: (() => Promise<void> | void)[];
-	afterEach	: (() => Promise<void> | void)[];
+	beforeAll: (() => Promise<void> | void)[];
+	beforeEach: (() => Promise<void> | void)[];
+	afterAll: (() => Promise<void> | void)[];
+	afterEach: (() => Promise<void> | void)[];
 }
 
 export interface TestArgumentInterface {
@@ -49,12 +49,12 @@ export interface TestArgumentInterface {
 	fail: boolean;
 	messages?: [any, string?][];
 	assertions?: {
-		type	 : (keyof ExpectInterface) | "test" | "beforeAll" | "beforeEach" | "afterAll" | "afterEach";
-		message	?: string;
-		fail	 : boolean;
-		stack	?: string;
-		name	?: string;
-		data	: [];
+		type : (keyof ExpectInterface) | "test" | "beforeAll" | "beforeEach" | "afterAll" | "afterEach";
+		message?: string;
+		fail: boolean;
+		stack?: string;
+		name?: string;
+		data: [];
 	}[];
 
 	// filter
@@ -62,8 +62,8 @@ export interface TestArgumentInterface {
 	except?: boolean;
 
 	// callbacks
-	beforeAll	: (() => Promise<void> | void)[];
-	beforeEach	: (() => Promise<void> | void)[];
-	afterAll	: (() => Promise<void> | void)[];
-	afterEach	: (() => Promise<void> | void)[];
+	beforeAll: (() => Promise<void> | void)[];
+	beforeEach: (() => Promise<void> | void)[];
+	afterAll: (() => Promise<void> | void)[];
+	afterEach: (() => Promise<void> | void)[];
 }

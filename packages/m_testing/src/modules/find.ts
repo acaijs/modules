@@ -1,6 +1,6 @@
 // Packages
 import * as glob from "glob"
-import * as path from "path"
+import { join } from "path"
 
 const findMethod = async (regex?: string) => {
 	const files = glob.sync(regex || "./**/*.{test,tests}.{ts,js}", {
@@ -9,7 +9,7 @@ const findMethod = async (regex?: string) => {
 		ignore	: [ "./node_modules/**/*" ],
 	})
 
-	files.forEach(async file => await import(path.join(process.cwd(), file)))
+	files.forEach(async file => await import(join(process.cwd(), file)))
 }
 
 export default findMethod

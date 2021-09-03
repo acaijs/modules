@@ -41,7 +41,7 @@
 		"m:stubber": "yarn workspace @acai/stubber",
 		"m:testing": "yarn workspace @acai/testing",
 		"m:validator": "yarn workspace @acai/validator",
-		"m:runtime": "yarn workspace @acai/runtime",
+		"m:runtime": "yarn workspace runtime",
 		"m:preset": "yarn workspace @acai/preset",
 		"m:utils": "yarn workspace @acai/utils"
 	}
