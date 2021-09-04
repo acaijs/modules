@@ -1,6 +1,6 @@
 {
 	"name": "@acai/config",
-	"version": "1.1.0-alpha",
+	"version": "1.1.0-alpha2",
 	"description": "Config is a base module that helps you organize data through your application",
 	"repository": "https://github.com/AcaiFramework/config.git",
 	"author": "Rafael <rafael.chaves98@hotmail.com>",
@@ -16,7 +16,7 @@
 		"node": ">=12.0.0"
 	},
 	"devDependencies": {
-		"@acai/testing": "3.0.0-alpha2",
+		"@acai/testing": "3.0.0-alpha4",
 		"@types/glob": "^7.1.3",
 		"@types/node": "^14.14.28",
 		"ts-node-dev": "^1.1.8",

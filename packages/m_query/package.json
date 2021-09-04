@@ -29,7 +29,7 @@
   "devDependencies": {
     "@acai/interfaces": "0.2.0-alpha2",
     "@acai/preset": "0.2.0-alpha",
-    "@acai/testing": "3.0.0-alpha2",
+    "@acai/testing": "3.0.0-alpha4",
     "@types/node": "^14.14.28",
     "@types/pg": "^7.14.9",
     "eslint": "^7.31.0",

@@ -1,6 +1,6 @@
 // Packages
-import * as fs from "fs"
-import * as path from "path"
+import { existsSync, readFileSync } from "fs"
+import { join } from "path"
 
 // Interfaces
 import storageTypes from "../interfaces/types"
@@ -71,23 +71,23 @@ export default class ConfigClass {
 	 */
 	public async fetchEnv (preference: string | undefined = undefined, injectIntoConfig = false, suppresLog = false) {
 		// get data
-		let file = path.join(process.cwd(), `.env${ preference ? `.${preference}`:"" }`)
+		let file = join(process.cwd(), `.env${ preference ? `.${preference}`:"" }`)
 
 		// fetch env from deno
 		this._env = process.env
 
 		// check preference, if not, fallback
 		if (preference) {
-			if (!await fs.existsSync(file)) {
+			if (!await existsSync(file)) {
 				if (!suppresLog) console.log(`.env${preference ? `.${preference}`:""} not found, falling back into .env`)
-				file = path.join(process.cwd(), ".env")
+				file = join(process.cwd(), ".env")
 			}
 		}
 
 		// check file exists
-		if (await fs.existsSync(file)) {
+		if (await existsSync(file)) {
 			// fetch into env
-			const text = await fs.readFileSync(file, "utf-8")
+			const text = await readFileSync(file, "utf-8")
 			text.split("\n").forEach(i => {
 				const [key, value] 	= i.split("=")
 				this._env[key] 		= value
