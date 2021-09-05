@@ -8,7 +8,7 @@
 	"private": false,
 	"types": "dist/types",
 	"scripts": {
-		"build": "rollup --config ../m_runtime/rollup.config.js",
+		"build": "rollup -c",
 		"test": "ts-node ./test.ts",
 		"prepublishOnly": "yarn build"
 	},
