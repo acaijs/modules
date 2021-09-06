@@ -27,7 +27,7 @@
   "dependencies": {
     "@acai/config": "1.1.0-alpha3",
     "@acai/query": "0.7.0-alpha2",
-    "@acai/utils": "0.7.0-alpha2",
+    "@acai/utils": "0.7.0-alpha3",
     "bcrypt": "^5.0.0",
     "luxon": "^1.26.0",
     "uuid": "^8.3.2"

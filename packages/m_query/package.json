@@ -41,7 +41,7 @@
     "pg": "^8.5.1"
   },
   "dependencies": {
-    "@acai/utils": "0.7.0-alpha2"
+    "@acai/utils": "0.7.0-alpha3"
   },
   "peerDependencies": {
     "mysql2": "^2.2.5",

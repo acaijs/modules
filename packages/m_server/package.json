@@ -52,7 +52,7 @@
 		"typescript": "^4.1.5"
 	},
 	"dependencies": {
-		"@acai/utils": "0.7.0-alpha2",
+		"@acai/utils": "0.7.0-alpha3",
 		"body-parser": "^1.19.0",
 		"cookies": "^0.8.0"
 	},
