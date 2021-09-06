@@ -171,7 +171,7 @@ export default class Model {
 			}
 		})
 
-		query().addMigration(this.$table, fields)
+		query().table(this.$table).addMigration(this.$table, fields)
 	}
 
 	// -------------------------------------------------

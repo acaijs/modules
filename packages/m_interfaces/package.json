@@ -1,6 +1,6 @@
 {
 	"name": "@acai/interfaces",
-	"version": "0.2.0-alpha3",
+	"version": "0.2.0-alpha4",
 	"description": "General use typescript interfaces for use across all the Açaí modules.",
 	"repository": "https://gitlab.com/acaijs/modules/interfaces.git",
 	"author": "Rafael <rafael.correa@aposoftworks.com>",
@@ -13,20 +13,20 @@
 		"modules"
 	],
 	"private": false,
-	"module": "dist/index.mjs",
+	"module": "dist/index.es.js",
 	"main": "dist/index.js",
-	"typings": "dist/index.d.ts",
+	"typings": "dist",
 	"files": [
 		"dist"
 	],
 	"exports": {
 		".": {
-			"import": "./dist/index.mjs",
+			"import": "./dist/index.es.js",
 			"require": "./dist/index.js"
 		}
 	},
 	"scripts": {
-		"build": "rollup --config ../m_runtime/rollup.config.js",
+		"build": "rollup -c",
 		"lint": "eslint --quiet **/*",
 		"lint:fix": "eslint --quiet **/* --fix",
 		"prepublishOnly": "yarn build"

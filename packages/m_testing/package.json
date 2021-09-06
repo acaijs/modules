@@ -13,20 +13,20 @@
 		"typescript"
 	],
 	"private": false,
-	"module": "dist/index.mjs",
+	"module": "dist/index.es.js",
 	"main": "dist/index.js",
-	"typings": "dist/index.d.ts",
+	"typings": "dist",
 	"files": [
 		"dist"
 	],
 	"exports": {
 		".": {
-			"import": "./dist/index.mjs",
+			"import": "./dist/index.es.js",
 			"require": "./dist/index.js"
 		}
 	},
 	"scripts": {
-		"build": "rollup --config ../m_runtime/rollup.config.js",
+		"build": "rollup -c",
 		"test": "ts-node-dev . --run"
 	},
 	"engines": {

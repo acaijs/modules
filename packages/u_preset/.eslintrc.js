@@ -26,12 +26,7 @@ module.exports = {
 		"no-prototype-builtins"     : 0,
 		"no-trailing-spaces"		: "error",
 		"comma-dangle"				: ["error", "always-multiline"],
-		"indent"					: [
-			"error",
-			"tab", {
-				SwitchCase: 1,
-			},
-		],
+		"indent"					: 0,
 
 		// Typescript eslint
 		"@typescript-eslint/no-var-requires"				: 0,
@@ -41,6 +36,12 @@ module.exports = {
 		"@typescript-eslint/member-delimiter-style"			: ["error"],
 		"@typescript-eslint/no-explicit-any"				: 0,
 		"@typescript-eslint/no-non-null-assertion"			: 0,
+		"@typescript-eslint/indent"							: [
+			"error",
+			"tab", {
+				SwitchCase: 1,
+			},
+		],
 		"@typescript-eslint/no-unused-vars"					: [
 			"error",
 			{

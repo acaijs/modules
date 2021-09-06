@@ -6,20 +6,20 @@
   "author": "Rafael <rafael.chaves98@hotmail.com>",
   "license": "BSD-3-Clause",
   "private": false,
-  "module": "dist/index.mjs",
+  "module": "dist/index.es.js",
   "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "typings": "dist",
   "files": [
     "dist"
   ],
   "exports": {
     ".": {
-      "import": "./dist/index.mjs",
+      "import": "./dist/index.es.js",
       "require": "./dist/index.js"
     }
   },
   "scripts": {
-    "build": "rollup --config ../m_runtime/rollup.config.js",
+    "build": "rollup -c",
     "test": "ts-node ./test.ts",
     "prepublishOnly": "yarn build"
   },
@@ -36,6 +36,7 @@
     "typescript": "^4.1.5"
   },
   "dependencies": {
+    "@acai/utils": "0.7.0-alpha2",
     "@acai/server": "3.0.0-alpha7",
     "glob": "^7.1.6",
     "luxon": "^1.26.0"

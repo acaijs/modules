@@ -3,42 +3,64 @@ import esbuild from "rollup-plugin-esbuild"
 import nodeResolve from "@rollup/plugin-node-resolve"
 import globals from "rollup-plugin-node-globals"
 import {uglify} from "rollup-plugin-uglify"
+import banner from "rollup-plugin-banner2"
+
+const bannerText = "/**\n * Copyright (c) 2020 The Nuinalp and APO Softworks Authors. All rights reserved.\n * Use of this source code is governed by a BSD-style license that can be\n * found in the LICENSE file.\n **/"
 
 const buildProduction = (bundles = [], buildDefault = true) => {
 	const standard = buildDefault && buildProduction([{entry: "index.ts"}], false)
 	const response = standard || []
 
-	bundles.map(bundle => [
-		{
-			input: `src/${bundle.entry || "index.ts"}`,
-			plugins: [nodeResolve({ preferBuiltins: true }), esbuild({
-				minify: true,
-				experimentalBundling: true,
-			}), globals(), uglify()],
-			output: [
-				{
-					file: `dist/${bundle.output || bundle.entry || "index"}.js`,
-					format: "cjs",
-					sourcemap: true,
-					exports: "named",
-				},
-				{
-					file: `dist/${bundle.output || bundle.entry || "index"}.es.js`,
-					format: "es",
-					sourcemap: true,
-					exports: "named",
-				},
-			],
-		},
-		{
-			input: `src/${bundle.entry || "index.ts"}`,
-			plugins: [globals(), nodeResolve({ preferBuiltins: true }), dts()],
-			output: {
-				file: `dist/${bundle.output || bundle.entry || "index"}.d.ts`,
-				format: "es",
+	bundles.map(bundle => {
+		const { entry, output, ...config } = bundle
+
+		return [
+			{
+				...config,
+				input: `src/${entry || "index.ts"}`,
+				plugins: [
+					nodeResolve({ preferBuiltins: true }),
+					esbuild({
+						minify: true,
+						experimentalBundling: true,
+					}),
+					globals(),
+					uglify(),
+					banner(() => bannerText, { sourcemap: true }),
+				],
+				output: [
+					{
+						file: `dist/${output || entry.split(".")[0] || "index"}.js`,
+						format: "cjs",
+						sourcemap: true,
+						exports: "named",
+					},
+					{
+						file: `dist/${output || entry.split(".")[0] || "index"}.es.js`,
+						format: "es",
+						sourcemap: true,
+						exports: "named",
+					},
+				],
 			},
-		},
-	]).forEach(i => {response.push(i[0]); response.push(i[1])})
+			{
+				...config,
+				input: `src/${entry || "index.ts"}`,
+				plugins: [
+					nodeResolve({ preferBuiltins: true }),
+					globals(),
+					dts(),
+					banner(() => bannerText),
+				],
+				output: {
+					file: `dist/${output || entry.split(".")[0] || "index"}.d.ts`,
+					format: "es",
+					exports: "named",
+					sourcemap: false,
+				},
+			},
+		]
+	}).forEach(i => {response.push(i[0]); response.push(i[1])})
 
 	return response
 }

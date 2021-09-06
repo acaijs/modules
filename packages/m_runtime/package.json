@@ -7,6 +7,7 @@
 		"esbuild": "^0.12.25",
 		"eslint": "^7.31.0",
 		"rollup": "^2.56.3",
+		"rollup-plugin-banner2": "^1.2.2",
 		"rollup-plugin-esbuild": "^4.5.0",
 		"rollup-plugin-node-builtins": "^2.1.2",
 		"rollup-plugin-node-globals": "^1.4.0",

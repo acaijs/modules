@@ -2,6 +2,13 @@
 # yarn lockfile v1
 
 
+"@acai/config@1.1.0-alpha":
+  version "1.1.0-alpha"
+  resolved "https://registry.yarnpkg.com/@acai/config/-/config-1.1.0-alpha.tgz#8cb5ee060e21eab8ce3189660d69897c9d75c0fb"
+  integrity sha512-aKUyY1BH+iLmBcPAbthV5d4OG2/aH9nyw8FVr443lbz21580Xg8KEw79DCVkA/XRbQ+AYvtgAoFVzxWVXmMaew==
+  dependencies:
+    glob "^7.1.6"
+
 "@acai/interfaces@0.2.0-alpha2":
   version "0.2.0-alpha2"
   resolved "https://registry.yarnpkg.com/@acai/interfaces/-/interfaces-0.2.0-alpha2.tgz#b4553a53bd36ce840820712b5d6588094a869560"
@@ -1998,6 +2005,13 @@
     "@types/express-serve-static-core" "^4.17.18"
     "@types/qs" "*"
     "@types/serve-static" "*"
+
+"@types/formidable@^1.2.3":
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/@types/formidable/-/formidable-1.2.3.tgz#99ee5fd4eafbaa95448c8b670e5e8e389f2af380"
+  integrity sha512-Ibu3TyzldPvzTK1yus5+uPDwN5m6pXCcO0c0rPKA1uce5ERjqP5AX9reKEqQFVlCScqjbQgitIQEOLlb6qd7Sw==
+  dependencies:
+    "@types/node" "*"
 
 "@types/glob@^7.1.3":
   version "7.1.4"
@@ -6666,6 +6680,13 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
   dependencies:
     hash-base "^3.0.0"
     inherits "^2.0.1"
+
+rollup-plugin-banner2@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-banner2/-/rollup-plugin-banner2-1.2.2.tgz#a73323035800c7af11c34514f1a55298684bff47"
+  integrity sha512-ShlyRFlJfh7fxHT0rkmIxBv+lIWfdvaWcZmra7xAQFGAHHnd7f93zoa0wdDWHrguR9vR+BxWKToabR6DJQHC9g==
+  dependencies:
+    magic-string "^0.25.7"
 
 rollup-plugin-esbuild@^4.5.0:
   version "4.5.0"

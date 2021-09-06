@@ -10,6 +10,7 @@ import BodyParseConfig from "../interfaces/bodyParserConfig"
 // Utils
 import FileHandler from "../utils/FileHandler"
 
+
 export default function buildBodyParserMiddleware (config?: Partial<BodyParseConfig>) {
 	const BodyParserMiddleware: MiddlewareInterface = async (request, n) => {
 		return n(await new Promise(resolve => {

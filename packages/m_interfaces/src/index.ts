@@ -5,14 +5,14 @@
 */
 
 // Interfaces
-export { default as CustomExceptionInterface } from "./interfaces/exception"
-export { default as MiddlewareInterface } from "./interfaces/middleware"
-export { default as ProviderInterface } from "./interfaces/provider"
-export { default as ResponseInterface } from "./interfaces/response"
-export { default as ServerConfigInterface } from "./interfaces/server.config"
-export { default as ServerInterface } from "./interfaces/server"
-export { default as AdapterInterface } from "./interfaces/adapter"
-export { default as SerializedAdapterInterface } from "./interfaces/adapter.serialized"
+export type { default as CustomExceptionInterface } from "./interfaces/exception"
+export type { default as MiddlewareInterface } from "./interfaces/middleware"
+export type { default as ProviderInterface } from "./interfaces/provider"
+export type { default as ResponseInterface } from "./interfaces/response"
+export type { default as ServerConfigInterface } from "./interfaces/server.config"
+export type { default as ServerInterface } from "./interfaces/server"
+export type { default as AdapterInterface } from "./interfaces/adapter"
+export type { default as SerializedAdapterInterface } from "./interfaces/adapter.serialized"
 
 // Types
-export { default as ClassType } from "./types/ClassType"
+export type { default as ClassType } from "./types/ClassType"
