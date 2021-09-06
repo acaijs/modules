@@ -34,13 +34,13 @@
     "typescript": "^4.1.5"
   },
   "dependencies": {
-    "@acai/config": "1.1.0-alpha2",
+    "@acai/config": "1.1.0-alpha3",
     "@acai/interfaces": "0.2.0-alpha4",
     "formidable": "^1.2.2",
     "ts-node": "*"
   },
   "peerDependencies": {
-    "@acai/config": "1.1.0-alpha2",
+    "@acai/config": "1.1.0-alpha3",
     "ts-node": "*"
   }
 }
