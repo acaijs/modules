@@ -1,6 +1,6 @@
 {
 	"name": "@acai/server",
-	"version": "3.0.0-alpha8",
+	"version": "3.0.0-alpha9",
 	"description": "The base server for the açai framework",
 	"repository": "https://gitlab.com/acaijs/modules/server.git",
 	"keywords": [
@@ -35,9 +35,6 @@
 		"lint:fix": "eslint --quiet **/* --fix",
 		"prepublishOnly": "yarn build"
 	},
-	"optionalDependencies": {
-		"@acai/router": "^2.2.0-alpha4"
-	},
 	"devDependencies": {
 		"@acai/interfaces": "0.2.0-alpha4",
 		"@acai/preset": "0.2.0-alpha",
@@ -57,6 +54,7 @@
 		"cookies": "^0.8.0"
 	},
 	"peerDependencies": {
+		"@acai/router": "^2.2.0-alpha4",
 		"ts-node-dev": "^1.1.8"
 	}
 }

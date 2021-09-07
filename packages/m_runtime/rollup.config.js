@@ -21,7 +21,7 @@ const buildProduction = (bundles = [], buildDefault = true) => {
 				plugins: [
 					nodeResolve({ preferBuiltins: true }),
 					esbuild({
-						minify: true,
+						// minify: true,
 						experimentalBundling: true,
 					}),
 					globals(),
