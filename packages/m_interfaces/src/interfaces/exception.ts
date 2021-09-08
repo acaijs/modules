@@ -1,7 +1,8 @@
 // Interfaces
+import ServerRequest from "./request"
 import SerializedAdapterInterface from "./adapter.serialized"
 
-export default interface CustomExceptionInterface<Request = any> extends Error {
+export default interface CustomExceptionInterface<Request = ServerRequest> extends Error {
 	/**
 	 * Request data in case the exception was thrown during it. Only applicable during exceptions thrown during request.
 	 */

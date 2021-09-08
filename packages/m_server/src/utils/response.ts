@@ -8,18 +8,22 @@ import ResponseUtilityOptions from "../interfaces/responseUtility"
  *
  * @param {ResponseUtilityOptions?} options
  */
-export default function response (options?: Partial<ResponseUtilityOptions>) {
+function response (options?: Partial<ResponseUtilityOptions>) {
 	const preparedoptions = options || {}
 
 	function responseUtility () {
 		return preparedoptions
 	}
 
+	// Hard bind response utility name so it's not lost during production build
+	(responseUtility as unknown as {utility: string}).utility = "response"
+
 	responseUtility.headers	= (append: Record<string, string>)	=> {preparedoptions.headers	= append; 	return responseUtility}
 	responseUtility.view 	= (name: string) 					=> {preparedoptions.view 	= name; 	return responseUtility}
 	responseUtility.status 	= (status: number) 					=> {preparedoptions.status 	= status; 	return responseUtility}
-	responseUtility.data 	= (data: unknown) 					=> {preparedoptions.data 	= data; 	return responseUtility}
-	responseUtility.json 	= (json: Record<string, unknown>) 	=> {preparedoptions.json 	= json;		return responseUtility}
+	responseUtility.body 	= (body: unknown) 					=> {preparedoptions.body 	= body; 	return responseUtility}
 
 	return responseUtility
 }
+
+export default response

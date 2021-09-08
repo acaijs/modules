@@ -2,18 +2,6 @@
 # yarn lockfile v1
 
 
-"@acai/config@1.1.0-alpha":
-  version "1.1.0-alpha"
-  resolved "https://registry.yarnpkg.com/@acai/config/-/config-1.1.0-alpha.tgz#8cb5ee060e21eab8ce3189660d69897c9d75c0fb"
-  integrity sha512-aKUyY1BH+iLmBcPAbthV5d4OG2/aH9nyw8FVr443lbz21580Xg8KEw79DCVkA/XRbQ+AYvtgAoFVzxWVXmMaew==
-  dependencies:
-    glob "^7.1.6"
-
-"@acai/interfaces@0.2.0-alpha2":
-  version "0.2.0-alpha2"
-  resolved "https://registry.yarnpkg.com/@acai/interfaces/-/interfaces-0.2.0-alpha2.tgz#b4553a53bd36ce840820712b5d6588094a869560"
-  integrity sha512-e3Ou4NvaZXiduyUo65N0xXnHL2iKQ/UFe5QmwvgkMp3SttKkbLr1zquUYwdcpciocgELV7s3ShKVbiNVhf3n/A==
-
 "@acai/preset@0.2.0-alpha":
   version "0.2.0-alpha"
   resolved "https://registry.yarnpkg.com/@acai/preset/-/preset-0.2.0-alpha.tgz#28ac46d3459c726fb0af1d3cc645cdf4a3b5a439"
@@ -22,6 +10,17 @@
     "@typescript-eslint/eslint-plugin" "^4.27.0"
     "@typescript-eslint/parser" "^4.27.0"
     eslint "^7.31.0"
+
+"@acai/server@3.0.0-alpha8":
+  version "3.0.0-alpha8"
+  resolved "https://registry.yarnpkg.com/@acai/server/-/server-3.0.0-alpha8.tgz#65edbd632d44899ce094bc35282769861684bb86"
+  integrity sha512-Rb3+SeOMBBZ2FtTNYBM58MgGp6IfVwSsZKyL531Uh8/rZ2ICndzmhcKi+YvuZxdmckP7dEk83ZiT21SQrA4MCA==
+  dependencies:
+    "@acai/utils" "0.7.0-alpha3"
+    body-parser "^1.19.0"
+    cookies "^0.8.0"
+  optionalDependencies:
+    "@acai/router" "^2.2.0-alpha4"
 
 "@babel/code-frame@7.12.11":
   version "7.12.11"

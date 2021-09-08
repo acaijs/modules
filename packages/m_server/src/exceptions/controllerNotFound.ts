@@ -21,7 +21,7 @@ export default class ControllerNotFoundException extends CustomException {
 	// -------------------------------------------------
 
 	public constructor (controller: string, route: string, method?: string) {
-		super("adapter.route.controller", "", { controller, route, method })
+		super("adapter.route.controller", `Method ${method} of the controller ${controller} in the route ${route} was not found`, { controller, route, method })
 
 		if (method) this._message = `Method ${method} of the controller ${controller} in the route ${route} was not found`
 		else this._message = `Controller ${controller} for route ${route} not found`

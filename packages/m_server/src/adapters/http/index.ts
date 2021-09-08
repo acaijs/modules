@@ -57,7 +57,7 @@ export default class HttpAdapter implements AdapterInterface {
 				if (!match) throw new RouteNotFound(url.split("?")[0], req.method || "")
 
 				const request = {...match, ...this.getParsedRequest(req)}
-				const file = req.method === "OPTIONS" ? () => "" : match.file
+				const file = req.method === "OPTIONS" ? () => "" : match.controller
 
 				return await makeRequest(request, file, match.middlewares)
 			})
@@ -76,7 +76,7 @@ export default class HttpAdapter implements AdapterInterface {
 		const headers = Object.keys(req.headers).reduce((prev, curr) => ({...prev, [curr.toLowerCase()]: req.headers[curr]}), {})
 
 		// gather all data
-		const request = {raw: req, headers, method: req.method, status: req.statusCode, url: path}
+		const request = {raw: req, headers, method: req.method, status: req.statusCode, url: path, body: {}}
 
 		// prevent raw request to show in any serialization
 		Object.defineProperty(request, "raw", { enumerable: false })
@@ -92,7 +92,12 @@ export default class HttpAdapter implements AdapterInterface {
 
 		const { file, options, variables, query } = match
 
-		return match ? { file, middlewares: (options.middleware || []) as string[], params: variables, query } : undefined
+		return match ? {
+			controller: file,
+			middlewares: (options.middleware || []) as string[],
+			params: variables as Record<string, string>,
+			query,
+		} : undefined
 	}
 
 	public getPath (prepath: string) {

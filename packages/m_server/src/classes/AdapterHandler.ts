@@ -71,17 +71,17 @@ export default class AdapterHandler {
 		}
 	}
 
-	public async onRequest (data: any, path: string | ((...args: any[]) => any), middlewareNames: string[] = []) {
+	public async onRequest (data: any, controller: string | ((...args: any[]) => any), middlewareNames: string[] = []) {
 		return await safeHandle(async () => {
 			// check if all middlewares are available
-			middlewareNames.map(name => name.split(":")[0]).forEach(name => { if (!this.adapter.middlewares[name]) throw new MiddlewareNotFound(name, `${path}`) })
+			middlewareNames.map(name => name.split(":")[0]).forEach(name => { if (!this.adapter.middlewares[name]) throw new MiddlewareNotFound(name, `${controller}`) })
 
 			// gather compose middlewares
 			const globals = this.adapter.globals.map(item => [item, undefined])
 			const middlewares = middlewareNames.map(name => name.split(":")).map(([name, ...data]) => [this.adapter.middlewares[name], (data || "").join(":").split(",")])
 
 			// Get controller method
-			const request = await safeHandle(() => findController(`${this.adapter.config.filePrefix || ""}/${path}`, data), this)
+			const request = await safeHandle(() => findController(typeof controller === "string" ? `${this.adapter.config.filePrefix || ""}/${controller}`:controller, data), this)
 
 			// Pass through middlewares
 			const composition = composeMiddlewares([...globals, ...middlewares] as ([MiddlewareInterface, string[] | undefined])[])(request)

@@ -2,5 +2,11 @@
 import Server from "./modules/server"
 export default Server
 
-// Auxiliary modules
+// Interfaces
+export type { ServerRequest } from "@acai/interfaces"
+
+// Utilities
+export { default as response } from "./utils/response"
+
+// Adapters
 export { default as HttpAdapter } from "./adapters/http"

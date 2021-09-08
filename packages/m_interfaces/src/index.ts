@@ -5,6 +5,7 @@
 */
 
 // Interfaces
+export type { default as ServerRequest } from "./interfaces/request"
 export type { default as CustomExceptionInterface } from "./interfaces/exception"
 export type { default as MiddlewareInterface } from "./interfaces/middleware"
 export type { default as ProviderInterface } from "./interfaces/provider"

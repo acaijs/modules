@@ -20,10 +20,10 @@ export default async function smartResponse (payload: string | RequestInterface 
 	})
 
 	// prepare content
-	if (typeof payload === "function" && (payload as unknown as {name: string}).name === "responseUtility") {
+	if (typeof payload === "function" && (payload as unknown as {utility: string}).utility === "response") {
 		const data 	= payload()
 		status 		= data.status || 200
-		body		= (data.data as string) || ""
+		body		= (data.body as string) || ""
 
 		// bind headers
 		if (data.headers) {

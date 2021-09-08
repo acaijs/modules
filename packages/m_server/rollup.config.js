@@ -5,7 +5,6 @@ const deps = [...Object.keys({...pckg.dependencies, ...pckg.peerDependencies, ..
 
 const build = buildProduction([
 	{entry: "index.ts", output: "index", external: deps},
-	{entry: "httpAdapter.ts", output: "http", external: deps},
 ], false)
 
 export default build

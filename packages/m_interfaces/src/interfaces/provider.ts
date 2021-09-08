@@ -1,6 +1,7 @@
 // Interfaces
 import CustomExceptionInterface	from "./exception"
 import SerializedAdapterInterface from "./adapter.serialized"
+import ServerRequest from "./request"
 
 export default interface ProviderInterface {
 	/**
@@ -30,5 +31,5 @@ export default interface ProviderInterface {
 	 *
 	 * @param data
 	 */
-	onError? (data: {error: CustomExceptionInterface; request: any; server: SerializedAdapterInterface}): Promise<unknown> | unknown;
+	onError? (data: {error: CustomExceptionInterface; request: ServerRequest; server: SerializedAdapterInterface}): Promise<unknown> | unknown;
 }

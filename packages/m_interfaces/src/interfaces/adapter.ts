@@ -1,4 +1,5 @@
 // Interfaces
+import { ServerRequest } from ".."
 import ServerConfigInterface from "./server.config"
 
 export default interface AdapterInterface {
@@ -27,7 +28,7 @@ export default interface AdapterInterface {
 	 * @param callback Call this function when you receive a request from the server
 	 */
 	onRequest(
-		onRequestStart: (request: any, controller: string | ((...args: any[]) => any | Promise<any>), middlewares?: string[]) => any,
+		onRequestStart: (request: ServerRequest, controller: string | ((req: ServerRequest) => any | Promise<any>), middlewares?: string[]) => any,
 		safeThread: (cb: () => Promise<any>) => Promise<any>,
 	): Promise<void> | void;
 }
