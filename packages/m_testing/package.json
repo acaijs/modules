@@ -1,6 +1,6 @@
 {
 	"name": "@acai/testing",
-	"version": "3.0.0-beta.0",
+	"version": "3.0.0-beta.1",
 	"description": "A complete solution toolkit for your test suite.",
 	"repository": "https://github.com/AcaiJS/modules.git",
 	"author": "Rafael <rafael.chaves98@hotmail.com>",
