@@ -164,12 +164,12 @@ export default class Server implements ServerInterface {
 			adapters.forEach(adapter => {if (!this.adapters[adapter]) throw new AdapterNotFound(adapter)})
 
 
-			adapters.forEach(adapter => this.adapters[adapter].middlewares[id] = instanciable(middleware))
+			adapters.forEach(adapter => this.adapters[adapter].middlewares[id] = middleware)
 			return
 		}
 
 		// push to all adapters
-		Object.values(this.adapters).forEach(adapter => adapter.middlewares[id] = instanciable(middleware) as MiddlewareInterface)
+		Object.values(this.adapters).forEach(adapter => adapter.middlewares[id] = middleware)
 	}
 
 	public addMiddlewares (middlewares: Record<string, MiddlewareInterface>) : void;
@@ -234,12 +234,12 @@ export default class Server implements ServerInterface {
 			// make sure all adapters referenced exist
 			adapters.forEach(adapter => {if (!this.adapters[adapter]) throw new AdapterNotFound(adapter)})
 
-			adapters.forEach(adapter => this.adapters[adapter].globals.push(instanciable(callback)))
+			adapters.forEach(adapter => this.adapters[adapter].globals.push(callback))
 			return
 		}
 
 		// push to all adapters
-		Object.values(this.adapters).forEach(adapter => adapter.globals.push(instanciable(callback)))
+		Object.values(this.adapters).forEach(adapter => adapter.globals.push(callback))
 	}
 
 	public addGlobals (middlewares: MiddlewareInterface[]) : void;

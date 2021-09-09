@@ -230,23 +230,6 @@ test.group("Server tests", () => {
 		// Test 12
 		// -------------------------------------------------
 
-		test("Add middleware as instance", (assert) => {
-			// arrange
-			class Middleware { public onApply (r, n) { return n(r) }  }
-			const server = new Server()
-			server.addAdapter("test", {} as any)
-
-			// act
-			server.addMiddleware("test", "test", new Middleware())
-
-			// assert
-			assert(server.getAdapter("test")?.middlewares.test).toBeDefined()
-		})
-
-		// -------------------------------------------------
-		// Test 13
-		// -------------------------------------------------
-
 		test("Add middleware as object", (assert) => {
 			// arrange
 			const server = new Server()
@@ -260,7 +243,7 @@ test.group("Server tests", () => {
 		})
 
 		// -------------------------------------------------
-		// Test 14
+		// Test 13
 		// -------------------------------------------------
 
 		test("Add middleware as callback", (assert) => {
@@ -276,7 +259,7 @@ test.group("Server tests", () => {
 		})
 
 		// -------------------------------------------------
-		// Test 15
+		// Test 14
 		// -------------------------------------------------
 
 		test("Middlewares run in the correct order", async (assert) => {
@@ -285,8 +268,8 @@ test.group("Server tests", () => {
 			const data = { m1: null, m2: null }
 			const server = new Server()
 			server.addAdapter("test", adapter)
-			server.addMiddleware("test1", (r, n) => {data.m1 = r.n; r.n++; return n(r)})
-			server.addMiddleware("test2", (r, n) => {data.m2 = r.n; r.n++; return n(r)})
+			server.addMiddleware("test1", (r: any, n) => {data.m1 = r.n; r.n++; return n(r)})
+			server.addMiddleware("test2", (r: any, n) => {data.m2 = r.n; r.n++; return n(r)})
 			await server.run("test")
 
 			// act
@@ -298,7 +281,7 @@ test.group("Server tests", () => {
 		})
 
 		// -------------------------------------------------
-		// Test 16
+		// Test 15
 		// -------------------------------------------------
 
 		test("Check forwarded request data injection through middlewares", async (assert) => {
@@ -306,7 +289,7 @@ test.group("Server tests", () => {
 			const adapter = new MockAdapter()
 			const server = new Server()
 			server.addAdapter("test", adapter)
-			server.addMiddleware("test1", (r, n) => {r.n++; return n(r)})
+			server.addMiddleware("test1", (r: any, n) => {r.n++; return n(r)})
 			await server.run("test")
 
 			// act
@@ -317,7 +300,7 @@ test.group("Server tests", () => {
 		})
 
 		// -------------------------------------------------
-		// Test 17
+		// Test 16
 		// -------------------------------------------------
 
 		test("Use args in middleware", async (assert) => {

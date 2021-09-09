@@ -267,26 +267,6 @@ test.group("Server tests", () => {
 		// Test 14
 		// -------------------------------------------------
 
-		test("Add global as instance", (assert) => {
-			// arrange
-			class Middleware {
-				public async onApply (r, n) { return n(r) }
-			}
-			const global = new Middleware()
-			const server = new Server()
-			server.addAdapter("test", {} as any)
-
-			// act
-			server.addGlobal(global)
-
-			// assert
-			assert(server.getAdapter("test")?.globals).toBeDefined().toBe([global])
-		})
-
-		// -------------------------------------------------
-		// Test 15
-		// -------------------------------------------------
-
 		test("Add global as callback", (assert) => {
 			// arrange
 			const global = (r, n) => n(r)
