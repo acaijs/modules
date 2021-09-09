@@ -7,7 +7,7 @@ export default interface ServerRequest<RawRequest = any> {
 	/**
 	 * Resource coming from client
 	 */
-	body: Record<string, string> | string;
+	body: any;
 
 	/**
 	 * Query is a immutable side effect that serves organization. Such as pagination, perpage, filters, etc
