@@ -1,50 +1,50 @@
 {
-	"name": "@acai/router",
-	"version": "2.2.0-beta.0",
-	"description": "An agnostic router that is part of the Açaí Framework ecosytem that can be easily extended to be used both on the backend and frontend.",
-	"repository": "https://gitlab.com/acaijs/router.git",
-	"author": "Rafael <rafael.chaves98@hotmail.com>",
-	"keywords": [
-		"router",
-		"acaijs",
-		"module",
-		"typescript",
-		"route"
-	],
-	"license": "BSD-3-Clause",
-	"private": false,
-	"module": "dist/index.es.js",
-	"main": "dist/index.js",
-	"typings": "dist",
-	"files": [
-		"dist"
-	],
-	"exports": {
-		".": {
-			"import": "./dist/index.es.js",
-			"require": "./dist/index.js"
-		}
-	},
-	"scripts": {
-		"build": "rollup -c",
-		"test": "ts-node ./test.ts --path \"./src/**/*.{test,tests}.{js,ts}\"",
-		"lint": "eslint --quiet **/*",
-		"lint:fix": "eslint --quiet **/* --fix",
-		"prepublishOnly": "yarn build"
-	},
-	"engines": {
-		"node": ">=12.0.0"
-	},
-	"devDependencies": {
-		"@types/node": "^14.14.28",
-		"eslint": "^7.31.0",
-		"ts-node-dev": "^1.1.8",
-		"typescript": "^4.1.5"
-	},
-	"peerDependencies": {
-		"ts-node-dev": "^1.1.8"
-	},
-	"dependencies": {
-		"@acai/testing": "^3.0.0-beta.0"
-	}
+  "name": "@acai/router",
+  "version": "2.2.0-beta.0",
+  "description": "An agnostic router that is part of the Açaí Framework ecosytem that can be easily extended to be used both on the backend and frontend.",
+  "repository": "https://gitlab.com/acaijs/router.git",
+  "author": "Rafael <rafael.chaves98@hotmail.com>",
+  "keywords": [
+    "router",
+    "acaijs",
+    "module",
+    "typescript",
+    "route"
+  ],
+  "license": "BSD-3-Clause",
+  "private": false,
+  "module": "dist/index.es.js",
+  "main": "dist/index.js",
+  "typings": "dist",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "test": "ts-node ./test.ts --path \"./src/**/*.{test,tests}.{js,ts}\"",
+    "lint": "eslint --quiet **/*",
+    "lint:fix": "eslint --quiet **/* --fix",
+    "prepublishOnly": "yarn build"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.28",
+    "eslint": "^7.31.0",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.1.5"
+  },
+  "peerDependencies": {
+    "ts-node-dev": "^1.1.8"
+  },
+  "dependencies": {
+    "@acai/testing": "3.0.0-beta.0"
+  }
 }
