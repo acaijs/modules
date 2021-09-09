@@ -19,7 +19,7 @@
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"target": "esnext",
-		"module": "esnext",
+		"module": "commonjs",
 		"noImplicitReturns": true,
 		"outDir": "dist"
 	},
