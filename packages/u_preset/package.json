@@ -5,7 +5,8 @@
 	"homepage": "https://gitlab.com/acaijs/preset#readme",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/AcaiJS/modules.git"
+		"url": "git+https://github.com/AcaiJS/modules.git",
+		"directory": "packages/m_preset"
 	},
 	"files": [
 		".eslintrc.js",

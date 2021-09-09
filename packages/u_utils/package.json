@@ -2,7 +2,11 @@
 	"name": "@acai/utils",
 	"version": "0.7.0-beta.1",
 	"description": "A set of tools used by the Açaí Framework to enhance and ease your development experience.",
-	"repository": "https://github.com/AcaiJS/modules.git",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/AcaiJS/modules.git",
+		"directory": "packages/m_utils"
+	},
 	"author": "Rafael <rafael.chaves98@hotmail.com>",
 	"license": "BSD-3-Clause",
 	"private": false,

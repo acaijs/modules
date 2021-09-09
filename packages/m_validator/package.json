@@ -2,7 +2,11 @@
 	"name": "@acai/validator",
 	"version": "0.3.2-beta.0",
 	"description": "A customizable validator for the Açaí framework. You can easily add your own rules and extend the capabilities of our validator.",
-	"repository": "https://github.com/AcaiJS/modules.git",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/AcaiJS/modules.git",
+		"directory": "packages/m_validator"
+	},
 	"author": "Rafael <rafael.chaves98@hotmail.com>",
 	"license": "BSD-3-Clause",
 	"private": false,
