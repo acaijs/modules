@@ -2,7 +2,7 @@
 	"name": "@acai/config",
 	"version": "1.1.0-beta.0",
 	"description": "Config is a base module that helps you organize data through your application",
-	"repository": "https://github.com/AcaiFramework/config.git",
+	"repository": "https://github.com/AcaiJS/modules.git",
 	"author": "Rafael <rafael.chaves98@hotmail.com>",
 	"license": "BSD-3-Clause",
 	"private": false,
@@ -16,7 +16,7 @@
 		"node": ">=12.0.0"
 	},
 	"devDependencies": {
-		"@acai/testing": "3.0.0-beta.0",
+		"@acai/testing": "^3.0.0-beta.0",
 		"@types/node": "^14.14.28",
 		"ts-node-dev": "^1.1.8",
 		"typescript": "^4.1.5"
