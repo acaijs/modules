@@ -44,5 +44,8 @@
 		"m:runtime": "yarn workspace runtime",
 		"m:preset": "yarn workspace @acai/preset",
 		"m:utils": "yarn workspace @acai/utils"
+	},
+	"dependencies": {
+		"rollup-plugin-ts": "^1.4.1"
 	}
 }

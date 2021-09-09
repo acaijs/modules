@@ -1,6 +1,6 @@
 {
 	"name": "@acai/interfaces",
-	"version": "0.2.0-alpha4",
+	"version": "0.2.0-beta.0",
 	"description": "General use typescript interfaces for use across all the Açaí modules.",
 	"repository": "https://gitlab.com/acaijs/modules/interfaces.git",
 	"author": "Rafael <rafael.correa@aposoftworks.com>",

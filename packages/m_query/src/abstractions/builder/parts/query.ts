@@ -129,7 +129,7 @@ export default abstract class QueryClass<T = Record<string, ModelContent>> exten
 		return result
 	}
 
-	public last = async <ModelConfig = T>(fields: (keyof ModelConfig | "*")[] = ["*"]) : Promise<ModelConfig | undefined> => {
+	public last = async <ModelConfig = T>(fields: (keyof ModelConfig)[] | "*" | keyof ModelConfig = "*") : Promise<ModelConfig | undefined> => {
 		const result = await this.getAdapter().querySelect<ModelConfig>(
 			this.tableName,
 			fields,
@@ -146,10 +146,10 @@ export default abstract class QueryClass<T = Record<string, ModelContent>> exten
 		return this.parseResultCache ? this.parseResultCache(result):result
 	}
 
-	public get = async <ModelConfig = T>(fields?: (keyof ModelConfig | "*")[]) : Promise<ModelConfig[]> => {
+	public get = async <ModelConfig = T>(fields?: (keyof ModelConfig)[] | "*" | keyof ModelConfig) : Promise<ModelConfig[]> => {
 		const result = await this.getAdapter().querySelect<ModelConfig>(
 			this.tableName,
-			fields || this.fieldsList as (keyof ModelConfig | "*")[],
+			fields || this.fieldsList as (keyof ModelConfig)[] | "*",
 			this.queryBuild.logic.length > 0 ? this.queryBuild:undefined,
 			this.limitQuantity,
 			this.offsetQuantity,
@@ -167,7 +167,7 @@ export default abstract class QueryClass<T = Record<string, ModelContent>> exten
 
 		const entries = await this.getAdapter().querySelect<ModelConfig>(
 			this.tableName,
-			this.fieldsList as (keyof ModelConfig | "*")[],
+			this.fieldsList as (keyof ModelConfig)[] | "*",
 			this.queryBuild.logic.length > 0 ? this.queryBuild:undefined,
 			npp,
 			((np || 1) - 1) * npp,

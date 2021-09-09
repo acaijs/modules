@@ -1,5 +1,5 @@
 // Interfaces
-import queryInterface 		from "../interface"
+import AbstractQuery 		from "../interface"
 import QueryStrategy 		from "../../../interfaces/queryStrategy"
 import { ModelContent } 	from "../../../interfaces/ModelContent"
 
@@ -41,6 +41,6 @@ export default abstract class StaticClass<T = Record<string, ModelContent>> exte
 
 		query.table(table)
 
-		return query as queryInterface<model>
+		return query as AbstractQuery<model>
 	}
 }

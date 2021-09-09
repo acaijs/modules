@@ -171,7 +171,7 @@ export default class Model {
 			}
 		})
 
-		query().table(this.$table).addMigration(this.$table, fields)
+		query().addMigration(this.$table, fields)
 	}
 
 	// -------------------------------------------------
@@ -213,7 +213,7 @@ export default class Model {
 		}
 
 		// update fields
-		const updatedFields = await query().table($table).where($primary, id).first() as Model
+		const updatedFields = await query().table($table).where($primary, id).first() as any
 		if (updatedFields) this.fill(updatedFields.toObject())
 	}
 
