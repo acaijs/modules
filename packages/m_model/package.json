@@ -25,7 +25,7 @@
     "prepublishOnly": "yarn build"
   },
   "dependencies": {
-    "@acai/config": "1.1.0-alpha3",
+    "@acai/config": "1.1.0-beta.0",
     "@acai/query": "0.7.0-alpha2",
     "@acai/utils": "0.7.0-alpha3",
     "bcrypt": "^5.0.0",
@@ -37,7 +37,7 @@
     "ts-node-dev": "^1.1.8"
   },
   "devDependencies": {
-    "@acai/testing": "3.0.0-alpha5",
+    "@acai/testing": "3.0.0-beta.0",
     "@types/bcrypt": "^3.0.0",
     "@types/luxon": "^1.26.5",
     "@types/node": "^14.14.28",

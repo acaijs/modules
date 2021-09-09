@@ -50,11 +50,12 @@ export default class ErrorProvider {
 		return response()
 			.headers({ "Content-Type": "text/html" })
 			.status(error.status || 500)
-			.data(`
-			<h1>Error thrown: ${data.message || "An error has occured"}</h1>
-			<h2>Trace</h2>
-			<ul>${data.trace.map(i => `<li>${i}</li>`).join("")}</ul>
-			${data.data ? `<h2>Data</h2>${JSON.stringify(data.data, null, 4)}`:""}`)
+			.body(`
+				<h1>Error thrown: ${data.message || "An error has occured"}</h1>
+				<h2>Trace</h2>
+				<ul>${data.trace.map(i => `<li>${i}</li>`).join("")}</ul>
+				${data.data ? `<h2>Data</h2>${JSON.stringify(data.data, null, 4)}`:""}
+			`)
 	}
 
 	// -------------------------------------------------

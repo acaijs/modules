@@ -35,8 +35,10 @@ export default function buildBodyParserMiddleware (config?: Partial<BodyParseCon
 
 					resolve({
 						...request,
-						fields,
-						files,
+						body: {
+							...fields as any,
+							...files,
+						},
 					})
 				})
 		}))
