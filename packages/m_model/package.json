@@ -1,6 +1,6 @@
 {
 	"name": "@acai/model",
-	"version": "0.8.0-alpha3",
+	"version": "0.8.0-beta.0",
 	"description": "Models are a easy way to group your data with methods to format it, save and other crud operations.",
 	"repository": "https://github.com/AcaiFramework/config.git",
 	"author": "Rafael <rafael.chaves98@hotmail.com>",
@@ -25,9 +25,9 @@
 		"prepublishOnly": "yarn build"
 	},
 	"dependencies": {
-		"@acai/config": "1.1.0-beta.0",
-		"@acai/query": "0.7.0-alpha2",
-		"@acai/utils": "0.7.0-beta.0",
+		"@acai/config": "^1.1.0-beta.0",
+		"@acai/query": "^0.7.0-beta.0",
+		"@acai/utils": "^0.7.0-beta.0",
 		"bcrypt": "^5.0.0",
 		"luxon": "^1.26.0",
 		"uuid": "^8.3.2"
@@ -37,7 +37,7 @@
 		"ts-node-dev": "^1.1.8"
 	},
 	"devDependencies": {
-		"@acai/testing": "3.0.0-beta.0",
+		"@acai/testing": "^3.0.0-beta.0",
 		"@types/bcrypt": "^3.0.0",
 		"@types/luxon": "^1.26.5",
 		"@types/node": "^14.14.28",

@@ -2,37 +2,6 @@
 # yarn lockfile v1
 
 
-"@acai/config@1.1.0-alpha3":
-  version "1.1.0-alpha3"
-  resolved "https://registry.yarnpkg.com/@acai/config/-/config-1.1.0-alpha3.tgz#e32cb46a2a40b10c229c4a64ba98a873872a317d"
-  integrity sha512-O7uRWikrG3TFld7kIyA1OkpVNU0QETY3/gAVva67jFCead66/KJFt0RmvvAj3uiXf4DonEb+6/cVrDFo6dNC1w==
-
-"@acai/interfaces@0.2.0-alpha4":
-  version "0.2.0-alpha4"
-  resolved "https://registry.yarnpkg.com/@acai/interfaces/-/interfaces-0.2.0-alpha4.tgz#7a3d80ef49d30177f3cf14a51c6c7765a8aa0f7a"
-  integrity sha512-EiF3W9DqsB8Ssly5JFiZSK14vrDEm8wUoUsxXXjZS6vixisph6NT/jrJVETpuyTICyYaC3H8DQADQMJ/iywjDA==
-
-"@acai/server@3.0.0-alpha8":
-  version "3.0.0-alpha8"
-  resolved "https://registry.yarnpkg.com/@acai/server/-/server-3.0.0-alpha8.tgz#65edbd632d44899ce094bc35282769861684bb86"
-  integrity sha512-Rb3+SeOMBBZ2FtTNYBM58MgGp6IfVwSsZKyL531Uh8/rZ2ICndzmhcKi+YvuZxdmckP7dEk83ZiT21SQrA4MCA==
-  dependencies:
-    "@acai/utils" "0.7.0-alpha3"
-    body-parser "^1.19.0"
-    cookies "^0.8.0"
-  optionalDependencies:
-    "@acai/router" "^2.2.0-alpha4"
-
-"@acai/utils@0.7.0-alpha3":
-  version "0.7.0-alpha3"
-  resolved "https://registry.yarnpkg.com/@acai/utils/-/utils-0.7.0-alpha3.tgz#d004ef626a89eaec47ccd7bbaf14b8b7ec1150cd"
-  integrity sha512-Ep3TIkccGF+kp9OF18uguNh+Af51vdKCyXVxW5SDIYHsLMuXhXGiEsDCiYEBZjENh5GH+lEsHI6Cb/Fz9hH8DQ==
-  dependencies:
-    "@acai/config" "1.1.0-alpha3"
-    "@acai/interfaces" "0.2.0-alpha4"
-    formidable "^1.2.2"
-    ts-node "*"
-
 "@babel/code-frame@7.12.11":
   version "7.12.11"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.12.11.tgz#f4ad435aa263db935b8f10f2c552d23fb716a63f"
