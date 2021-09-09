@@ -1,6 +1,6 @@
 {
 	"name": "@acai/stubber",
-	"version": "0.1.0-alpha",
+	"version": "0.1.0-beta.0",
 	"description": "Stubber is a simple and configurable template engine, helping you create repeated files so you don't have to.",
 	"repository": "https://github.com/AcaiJS/modules.git",
 	"author": "Rafael <rafael.chaves98@hotmail.com>",
