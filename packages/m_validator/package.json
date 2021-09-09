@@ -27,7 +27,6 @@
     "node": ">=12.0.0"
   },
   "devDependencies": {
-    "@acai/preset": "0.2.0-alpha",
     "@acai/testing": "3.0.0-beta.0",
     "@types/glob": "^7.1.3",
     "@types/luxon": "^1.26.5",
@@ -36,7 +35,7 @@
     "typescript": "^4.1.5"
   },
   "dependencies": {
-    "@acai/utils": "0.7.0-alpha3",
+    "@acai/utils": "0.7.0-beta.0",
     "@acai/server": "3.0.0-alpha8",
     "glob": "^7.1.6",
     "luxon": "^1.26.0"

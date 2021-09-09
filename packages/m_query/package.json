@@ -28,7 +28,6 @@
   },
   "devDependencies": {
     "@acai/interfaces": "0.2.0-beta.0",
-    "@acai/preset": "0.2.0-alpha",
     "@acai/testing": "3.0.0-beta.0",
     "@types/node": "^14.14.28",
     "@types/pg": "^7.14.9",
@@ -41,7 +40,7 @@
     "pg": "^8.5.1"
   },
   "dependencies": {
-    "@acai/utils": "0.7.0-alpha3"
+    "@acai/utils": "0.7.0-beta.0"
   },
   "peerDependencies": {
     "mysql2": "^2.2.5",

@@ -35,7 +35,6 @@
 		"node": ">=12.0.0"
 	},
 	"devDependencies": {
-		"@acai/preset": "0.2.0-alpha",
 		"@types/cookies": "^0.7.6",
 		"@types/node": "^14.14.28",
 		"eslint": "^7.31.0",
