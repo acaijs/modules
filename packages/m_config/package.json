@@ -1,6 +1,6 @@
 {
 	"name": "@acai/config",
-	"version": "1.1.0-beta.0",
+	"version": "1.1.0-beta.1",
 	"description": "Config is a base module that helps you organize data through your application",
 	"repository": "https://github.com/AcaiJS/modules.git",
 	"author": "Rafael <rafael.chaves98@hotmail.com>",
