@@ -1,6 +1,6 @@
 {
 	"name": "@acai/validator",
-	"version": "0.3.2-alpha2",
+	"version": "0.3.2-beta.0",
 	"description": "A customizable validator for the Açaí framework. You can easily add your own rules and extend the capabilities of our validator.",
 	"repository": "https://github.com/AcaiJS/modules.git",
 	"author": "Rafael <rafael.chaves98@hotmail.com>",
@@ -35,8 +35,8 @@
 		"typescript": "^4.1.5"
 	},
 	"dependencies": {
-		"@acai/utils": "^0.7.0-beta.0",
 		"@acai/server": "^3.0.0-beta.0",
+		"@acai/utils": "^0.7.0-beta.0",
 		"glob": "^7.1.6",
 		"luxon": "^1.26.0"
 	},
