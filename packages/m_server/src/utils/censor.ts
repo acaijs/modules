@@ -8,6 +8,9 @@ export default function simpleStringify (object) {
 		const cleanObject = {}
 		Object.keys(object).forEach(function(key) {
 			const value = object[key]
+			if (value && Array.isArray(value)) {
+				cleanObject[key] = value.map(i => copyWithoutCircularReferences(references, i))
+			}
 			if (value && typeof value === "object") {
 				if (references.indexOf(value) < 0) {
 					references.push(value)
