@@ -76,10 +76,7 @@ export default class HttpAdapter implements AdapterInterface {
 		const headers = Object.keys(req.headers).reduce((prev, curr) => ({...prev, [curr.toLowerCase()]: req.headers[curr]}), {})
 
 		// gather all data
-		const request = {raw: req, headers, method: req.method, status: req.statusCode, url: path, body: {}}
-
-		// prevent raw request to show in any serialization
-		Object.defineProperty(request, "raw", { enumerable: false })
+		const request = {raw: () => req, headers, method: req.method, status: req.statusCode, url: path, body: {}}
 
 		return request
 	}

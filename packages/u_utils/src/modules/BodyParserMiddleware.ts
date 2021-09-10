@@ -25,7 +25,7 @@ export default function buildBodyParserMiddleware (config?: Partial<BodyParseCon
 				keepExtensions: true,
 				multiples: true,
 			})
-				.parse(request.raw, (_, fields, prefiles) => {
+				.parse(request.raw && request.raw(), (_, fields, prefiles) => {
 				// wrap files in helper class
 					const files = {}
 

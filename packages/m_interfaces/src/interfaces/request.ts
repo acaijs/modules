@@ -22,7 +22,7 @@ export default interface ServerRequest<RawRequest = any> {
 	/**
 	 * Raw request data sent by the adapter
 	 */
-	raw: RawRequest;
+	raw: () => RawRequest;
 
 	/**
 	 * Status number that can be correlated to a manual assertion on the adapter
