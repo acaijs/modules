@@ -61,7 +61,8 @@ export default async function findController(controllerPath: string | ((req: any
 	}
 	// check if controller is a valid class
 	else if (typeof file === "function" && Object.getOwnPropertyNames(file.prototype).length > 1 && method && !file.prototype[method]) {
-		throw new CustomException("controller", `Controller (${controller}) did not provide a property for the method ${method}`)
+		console.log(Object.getOwnPropertyNames(file.prototype), file)
+		throw new CustomException("controller", `Controller (${controller}) did not provide a property for the method ${method} or it was an arrow function (sadly we do not support them)`)
 	}
 	// check if controller is a valid callback
 	else if (typeof file === "function" && method && Object.getOwnPropertyNames(file.prototype).length === 1) {
@@ -73,7 +74,7 @@ export default async function findController(controllerPath: string | ((req: any
 		if (file.prototype?.constructor && typeof file.prototype?.constructor === "function") {
 			if (Object.getOwnPropertyNames(file.prototype).length > 1) {
 				const instance = new file(request)
-				return instance[method].bind()(request)
+				return instance[method].bind(instance)(request)
 			}
 
 			return file(request)

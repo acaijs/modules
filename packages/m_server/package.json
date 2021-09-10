@@ -1,6 +1,6 @@
 {
 	"name": "@acai/server",
-	"version": "3.0.0-beta.8",
+	"version": "3.0.0-beta.9",
 	"description": "The base server for the açai framework",
 	"repository": {
 		"type": "git",
