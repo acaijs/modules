@@ -11,7 +11,7 @@ export default function simpleStringify (object) {
 			if (value && Array.isArray(value)) {
 				cleanObject[key] = value.map(i => copyWithoutCircularReferences(references, i))
 			}
-			if (value && typeof value === "object") {
+			else if (value && typeof value === "object") {
 				if (references.indexOf(value) < 0) {
 					references.push(value)
 					cleanObject[key] = copyWithoutCircularReferences(references, value)
