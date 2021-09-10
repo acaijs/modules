@@ -1,5 +1,5 @@
 // Packages
-import { route } from "@acai/router/dist"
+import { route } from "@acai/router"
 import test from "@acai/testing"
 
 // Adapters
@@ -204,7 +204,6 @@ test.group("Adapter tests", () => {
 			await server.stop()
 
 			// assert
-			assert(data.request.file).toBeDefined()
 			assert(data.request.query).toBe({})
 			assert(data.request.middlewares).toBe([])
 			assert(data.request.params).toBe({})

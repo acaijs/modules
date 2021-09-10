@@ -1,4 +1,5 @@
 // Packages
+import { CustomException } from "@acai/utils"
 import * as fs from "fs"
 import * as path from "path"
 
@@ -29,7 +30,7 @@ function findFile (filepath: string): string | undefined {
 // Main method
 // -------------------------------------------------
 
-export default async function findController(controllerPath: string | ((req: any) => any), request: any) {
+export default async function findController(controllerPath: string | ((req: any) => any), route: string) {
 	// controller itself is the callback
 	if (typeof controllerPath !== "string") {
 		return controllerPath
@@ -41,34 +42,46 @@ export default async function findController(controllerPath: string | ((req: any
 
 	// controller requested doesn't exist
 	if (!pathString || !fs.existsSync(pathString)) {
-		throw new ControllerNotFoundException(sanitizedControllerPath, request.route)
+		throw new ControllerNotFoundException(sanitizedControllerPath, route)
 	}
 
 	const file = (await import(pathString)).default
 
-	// controller is a class or a function
-	if (file.prototype?.constructor && typeof file.prototype?.constructor === "function") {
-		const instance = new file(request)
+	// check if controller is a valid object
+	if (typeof file === "object" && !method) {
+		throw new CustomException("controller", `Controller (${controller}) is a object but a method was not passed`)
+	}
+	// check if controller is a valid object
+	if (typeof file === "object" && method && !file[method]) {
+		throw new CustomException("controller", `Controller (${controller}) did not provide a property for the method ${method}`)
+	}
+	// check if controller is a valid class
+	else if (typeof file === "function" && Object.getOwnPropertyNames(file.prototype).length > 1 && !method) {
+		throw new CustomException("controller", `Controller (${controller}) is a class but you are trying to access it as a function`)
+	}
+	// check if controller is a valid class
+	else if (typeof file === "function" && Object.getOwnPropertyNames(file.prototype).length > 1 && method && !file.prototype[method]) {
+		throw new CustomException("controller", `Controller (${controller}) did not provide a property for the method ${method}`)
+	}
+	// check if controller is a valid callback
+	else if (typeof file === "function" && method && Object.getOwnPropertyNames(file.prototype).length === 1) {
+		throw new CustomException("controller", `Controller (${controller}) is a callback but you are trying to access it as a class`)
+	}
 
-		// access property in context
-		if (method) {
-			if (instance[method])
-				return instance[method].bind(instance)
-			else {
-				throw new ControllerNotFoundException(sanitizedControllerPath, request.route, method)
+	return async (request) => {
+		// controller is a class or a function
+		if (file.prototype?.constructor && typeof file.prototype?.constructor === "function") {
+			if (Object.getOwnPropertyNames(file.prototype).length > 1) {
+				const instance = new file(request)
+				return instance[method].bind()(request)
 			}
+
+			return file(request)
 		}
 
-		return instance
+		// controller should be an object
+		if (method) return file[method].bind(file)(request)
+
+		return file
 	}
-
-	// controller should be an object
-	if (method) {
-		if (file[method])
-			return file[method]
-
-		throw new ControllerNotFoundException(sanitizedControllerPath, request.route, method)
-	}
-
-	return file
 }

@@ -32,6 +32,6 @@ export default class ControllerNotFoundException extends CustomException {
 	}
 
 	public render () {
-		this.message
+		return this.message
 	}
 }
