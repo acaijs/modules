@@ -9,6 +9,9 @@ import RelationDataInterface 	from "../interfaces/relationData"
 // Types
 import * as dynamicTypes from "../types/index"
 
+// Utils
+import foreignHandler from "../utils/foreignHandler"
+
 export default class Model {
 	// -------------------------------------------------
 	// Properties
@@ -27,6 +30,47 @@ export default class Model {
 	// -------------------------------------------------
 	// Main Methods
 	// -------------------------------------------------
+
+	public constructor (fields = {}, databaseSaved = false) {
+		const modelClass			= this.constructor.prototype as {$fields: FieldInfoInterface[]; $relations: RelationDataInterface[]}
+		const $allFields 			= modelClass.$fields
+		this.$databaseInitialized 	= databaseSaved
+
+		// set fields
+		for (let i = 0; i < $allFields.length; i++) {
+			const field 	= $allFields[i]
+			const foreign	= (modelClass.$relations || []).find((i) => i.name === field.name)
+			const handler 	= foreign ? foreignHandler.bind(this)(foreign) : undefined
+
+			// define custom getter
+			Object.defineProperty(this, field.name, {
+				set: (value) => {
+					// not a foreign
+					if (!foreign) {
+						const dynamictype 			= dynamicTypes.get(field.type)
+						const callback 				= databaseSaved ? dynamictype.onRetrieve : dynamictype.onCreate
+						this.$values[field.name] 	= callback ? callback({key: field.name, value, row: this.$values as any, args: field.args, model: this.constructor as any}) : value
+					}
+					else if (foreign.type === "belongsTo") {
+						this.$values[foreign.foreignKey] = value
+					}
+				},
+				get: () => {
+					// custom getter
+					if (handler) {
+						return handler
+					}
+					// not a foreign
+					else {
+						return this.$values[field.name]
+					}
+				},
+			})
+		}
+
+		this.fill(fields)
+	}
+
 
 	public toObject <T extends typeof Model, I = InstanceType<T>> () : I {
 		const serializedValues = {} as I
