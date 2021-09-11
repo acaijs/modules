@@ -16,9 +16,9 @@
 		"resolveJsonModule": true,
 		"esModuleInterop": true,
 		"noEmit": false,
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
-		"target": "esnext",
+		"noUnusedLocals": false,
+		"noUnusedParameters": false,
+		"target": "ES2015",
 		"module": "commonjs",
 		"noImplicitReturns": true,
 		"outDir": "dist"

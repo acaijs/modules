@@ -32,7 +32,7 @@ const hashType = {
 		return new Hasher(value as string)
 	},
 	onSerialize	: ({value}) => {
-		if ((value as Hasher).toString)
+		if (value && (value as Hasher).toString)
 			return (value as Hasher).toString()
 
 		return `${value}`
