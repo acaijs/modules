@@ -15,7 +15,7 @@ export default class Hasher {
 
 	constructor (value?: string, saltOrRounds?: string) {
 		if (value) this.value 	= value
-		this.saltOrRounds 		= saltOrRounds && bcrypt.genSaltSync(this.hashCode(`${saltOrRounds}`))
+		this.saltOrRounds 		= `$2b$10$${saltOrRounds}`
 	}
 
 	// -------------------------------------------------
