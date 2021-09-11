@@ -1,6 +1,6 @@
 {
 	"name": "@acai/server",
-	"version": "3.0.0-beta.10",
+	"version": "3.0.0-beta.11",
 	"description": "The base server for the açai framework",
 	"repository": {
 		"type": "git",
@@ -56,7 +56,7 @@
 		"cookies": "^0.8.0"
 	},
 	"peerDependencies": {
-		"@acai/utils": "^0.7.0-beta.0",
-		"@acai/router": "^2.2.0-beta.0"
+		"@acai/router": "^2.2.0-beta.0",
+		"@acai/utils": "^0.7.0-beta.0"
 	}
 }
