@@ -261,8 +261,8 @@ export default class Model {
 		}
 
 		// update fields
-		const updatedFields = await query().table($table).where($primary, id).first() as any
-		if (updatedFields) this.fill(updatedFields.toObject())
+		const updatedFields = await this.query().table($table).where($primary, id).first() as any
+		if (updatedFields) this.fill(updatedFields)
 	}
 
 	public async delete () {
