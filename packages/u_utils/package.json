@@ -1,6 +1,6 @@
 {
 	"name": "@acai/utils",
-	"version": "0.7.0-beta.3",
+	"version": "0.7.0-beta.4",
 	"description": "A set of tools used by the Açaí Framework to enhance and ease your development experience.",
 	"repository": {
 		"type": "git",
@@ -43,7 +43,7 @@
 		"formidable": "^1.2.2"
 	},
 	"peerDependencies": {
-		"@acai/interfaces": "^0.2.0-beta.0",
-		"@acai/config": "^1.1.0-beta.0"
+		"@acai/config": "^1.1.0-beta.0",
+		"@acai/interfaces": "^0.2.0-beta.0"
 	}
 }
