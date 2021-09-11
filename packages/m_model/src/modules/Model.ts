@@ -48,7 +48,6 @@ export default class Model {
 					enumerable: true,
 					configurable: true,
 					set: (value) => {
-						console.log("test", value)
 						// not a foreign
 						if (!foreign) {
 							const dynamictype 			= dynamicTypes.get(field.type)
