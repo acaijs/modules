@@ -1,6 +1,6 @@
 {
 	"name": "@acai/validator",
-	"version": "0.3.2-beta.0",
+	"version": "0.3.2-beta.1",
 	"description": "A customizable validator for the Açaí framework. You can easily add your own rules and extend the capabilities of our validator.",
 	"repository": {
 		"type": "git",
