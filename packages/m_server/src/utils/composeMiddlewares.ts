@@ -16,7 +16,6 @@ const composeMiddlewares = (middlewares: [MiddlewareInterface, string[] | undefi
 			}
 			catch(e) {
 				(e as any).request = v
-				console.log(e)
 				throw e
 			}
 		})
