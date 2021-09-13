@@ -7,8 +7,9 @@ const Composable = (arr) => ({
 
 		return Composable(arr.map(cbOrAr))
 	},
+	reverse: () => Composable(arr.reverse()),
 	fold: () => arr,
-	compose: (reducer) => (value: any) => arr.reduce(reducer, value),
+	compose: (reducer) => (value?: any) => arr.reduce(reducer, value),
 	toString: `Composable([${arr.map(arr => typeof arr).join(", ")}])`,
 })
 

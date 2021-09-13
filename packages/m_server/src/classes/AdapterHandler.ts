@@ -86,7 +86,7 @@ export default class AdapterHandler {
 
 			// Pass through middlewares
 			const composition = composeMiddlewares([...globals, ...middlewares] as ([MiddlewareInterface, string[] | undefined])[], controller)
-			const response = composition(request)
+			const response = composition()(request)
 
 			return response
 		}, this)
