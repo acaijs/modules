@@ -7,9 +7,9 @@ import Composable from "./composable"
 const composeMiddlewares = (middlewares: [MiddlewareInterface, string[] | undefined][], controller: any) =>
 	Composable(middlewares)
 		// build arguments
-		.map(item => (request, next) => item[0](request, next, item[1]))
+		.map(item => async (request, next) => await item[0](request, next, item[1]))
 		// turn it binary
-		.map(item => (value:any, next: any) => item(value, next || controller))
+		.map(item => async (value:any, next: any) => await item(value, next || controller))
 		// safe thread it
 		.map(item => (v: any, n: any) => {
 			try {
@@ -21,6 +21,6 @@ const composeMiddlewares = (middlewares: [MiddlewareInterface, string[] | undefi
 			}
 		})
 		// compose it into unary
-		.compose((prev, curr) => curr(prev))
+		.compose(async (prev, curr) => curr(await prev))
 
 export default composeMiddlewares
