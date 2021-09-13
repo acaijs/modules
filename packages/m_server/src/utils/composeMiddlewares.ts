@@ -11,10 +11,12 @@ const composeMiddlewares = (middlewares: [MiddlewareInterface, string[] | undefi
 		// safe thread it
 		.map(item => async (v: any, n: any) => {
 			try {
-				return await item(v, n)
+				const response = await item(v, n)
+				if (response) return response
 			}
 			catch(e) {
 				(e as any).request = v
+				console.log(e)
 				throw e
 			}
 		})
