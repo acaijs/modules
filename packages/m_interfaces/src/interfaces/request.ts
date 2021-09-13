@@ -20,6 +20,11 @@ export default interface ServerRequest<RawRequest = any> {
 	params: Record<string, string>;
 
 	/**
+	 * The path used to identify which controller to be used
+	 */
+	url: string;
+
+	/**
 	 * Raw request data sent by the adapter
 	 */
 	raw: () => RawRequest;

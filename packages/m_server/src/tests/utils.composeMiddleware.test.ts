@@ -13,7 +13,7 @@ test.group("Utils", () => {
 		test("Run successfully through compose", (assert) => {
 			// arrange
 			const middleware = (r, n) => n(r)
-			const composed = composeMiddlewares([[middleware, undefined], [middleware, undefined]])(t => t)
+			const composed = composeMiddlewares([[middleware, undefined], [middleware, undefined]], t => t)
 
 			// act
 			const response = composed(1)
@@ -30,7 +30,7 @@ test.group("Utils", () => {
 			// arrange
 			const data = {args: null}
 			const middleware = (r, n, a) => {data.args = a; return n(r)}
-			const composed = composeMiddlewares([[middleware, ["2", "3"]]])(t => t)
+			const composed = composeMiddlewares([[middleware, ["2", "3"]]], t => t)
 
 			// act
 			composed(1)

@@ -8,6 +8,7 @@ import safeHandle from "../utils/safeHandle"
 
 // Exceptions
 import MiddlewareNotFound from "../exceptions/middlewareNotFound"
+import Composable from "../utils/composable"
 
 
 export default class AdapterHandler {
@@ -71,7 +72,7 @@ export default class AdapterHandler {
 		}
 	}
 
-	public async onRequest (data: any, precontroller: string | ((...args: any[]) => any), middlewareNames: string[] = []) {
+	public async onRequest (request: any, precontroller: string | ((...args: any[]) => any), middlewareNames: string[] = []) {
 		return await safeHandle(async () => {
 			// check if all middlewares are available
 			middlewareNames.map(name => name.split(":")[0]).forEach(name => { if (!this.adapter.middlewares[name]) throw new MiddlewareNotFound(name, `${precontroller}`) })
@@ -81,11 +82,11 @@ export default class AdapterHandler {
 			const middlewares = middlewareNames.map(name => name.split(":")).map(([name, ...data]) => [this.adapter.middlewares[name], (data || "").join(":").split(",")])
 
 			// Get controller method
-			const controller = typeof precontroller === "string" ? await findController( `${this.adapter.config.filePrefix || ""}/${precontroller}`, data.route) : precontroller
+			const controller = typeof precontroller === "string" ? await findController( `${this.adapter.config.filePrefix || ""}/${precontroller}`, request.route) : precontroller
 
 			// Pass through middlewares
-			const composition = composeMiddlewares([...globals, ...middlewares] as ([MiddlewareInterface, string[] | undefined])[])(controller)
-			const response = await safeHandle(() => composition(data), this)
+			const composition = composeMiddlewares([...globals, ...middlewares] as ([MiddlewareInterface, string[] | undefined])[], controller)
+			const response = composition(request)
 
 			return response
 		}, this)
