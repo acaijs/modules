@@ -9,9 +9,9 @@ const composeMiddlewares = (middlewares: [MiddlewareInterface, string[] | undefi
 		// build arguments
 		.map(item => async (request, next) => item[0](await request, await next, item[1]))
 		// safe thread it
-		.map(item => (v: any, n: any) => {
+		.map(item => async (v: any, n: any) => {
 			try {
-				return item(v, n)
+				return await item(v, n)
 			}
 			catch(e) {
 				(e as any).request = v
