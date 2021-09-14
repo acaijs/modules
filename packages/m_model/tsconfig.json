@@ -4,7 +4,7 @@
 	},
 	"extends": "../u_preset/tsconfig.json",
 	"include": [
-		"src/**/*"
+		"src/**/*",
 	],
 	"exclude": [
 		"dist/*",

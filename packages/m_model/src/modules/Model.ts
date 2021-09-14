@@ -109,15 +109,11 @@ export default class Model {
 		return query().table(this.$table).parseResult((result: unknown) => {
 			if (Array.isArray(result)) {
 				return result.map(r => {
-					const m = new this()
-					m.fill({...r})
-					m
+					return new this({...r}, true)
 				})
 			}
 
-			const m = new this()
-			m.fill({...result as Record<string, unknown>})
-			return m
+			return new this({...result as Record<string, unknown>}, true)
 		}) as unknown as AbstractQuery<I>
 	}
 
