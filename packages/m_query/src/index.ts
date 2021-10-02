@@ -3,10 +3,13 @@
 // -------------------------------------------------
 
 // Base abstract query
-export {default as AbstractQuery} 	from "./abstractions/builder"
+export {default as AbstractQuery} from "./abstractions/builder"
 
 // Implementations
-export {default as SqlQuery} 		from "./classes/queryStrategies/sql"
+export {default as SqlQuery} from "./classes/queryStrategies/sql"
+
+// Interfaces
+export type { default as Pagination } from "./interfaces/PaginatedResponse"
 
 // -------------------------------------------------
 // Connection handling
