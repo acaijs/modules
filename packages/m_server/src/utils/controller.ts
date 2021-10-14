@@ -11,7 +11,17 @@ export default async function findController(controller: string | ((req: Request
 	if (typeof controller !== "string") {
 		return controller;
 	}
-
+	/**
+	 * This here is a performance concern
+	 * This should all be loaded when the server is initialized
+	 * i/o reads/writes are very expensive and will definitely have significant latency
+	 * Especially since this is being called on every single request.
+	 * 
+	 * In addition, all file operations are synchronous
+	 * 	- If two requests come in at the same time, then the i/o read operations will block the entire
+	 * thread (since Node is single-threaded).
+	 * 	- In production, the routing itself will be a big bottleneck in speed which should never be the case 
+	 */
 	const pathString = findFile(controller) || controller;
 
 	if (!fs.existsSync(pathString)) {
