@@ -62,6 +62,11 @@ const routeOptions = (options: RouteOptionsInterface["options"], callback: () =>
 	});
 }
 
+/**
+ * Just a nitpick here - this is a pretty brittle & inefficient implementation
+ * You're unnecessarily looping through the method array way too many times.
+ * It also doesn't support a lot of HTTP types (although those are very uncommon)
+ */
 const routeMany = (method: methodTypes[], path: string, filePath: string, options: Partial<RouteOptionsInterface> = {}) => {
 	if (method.includes("GET"))
 		routeGetMethod(path, filePath, options);
@@ -122,6 +127,14 @@ const clearMethod = () => {
 // -------------------------------------------------
 // Add default macro
 // -------------------------------------------------
+
+/**
+ * Correct me if I'm wrong here, but it's a bit disadvantageous to rely on a global context here:
+ * 	- you can't do something like `const usersGroup = routeGroup(/users);` in file1 and import that into the main file
+ * 	- it seems like you're reliant on all routes to be defined in one main file sequentially without imports
+ * 	- (it's kind of like you're forced to write raw javascript code that has to be executed sequentially since the AST relies
+ * 		on some type of context to keep track of where you are)
+ */
 
 routeMacro("resource", (name: string, file: string) => {
 	routeGetMethod(`${name}`, 	`${file}@index`);

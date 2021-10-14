@@ -19,6 +19,14 @@ import maxRule			from "./validations/max";
 import regexRule		from "./validations/regex";
 import dateRule			from "./validations/date";
 
+/**
+ * I would look into the OpenAPI spec and what kind of schemas you can generate with those - it's pretty
+ * industry standard and would be very useful here
+ * 
+ * Note about Date: it's very hard to validate - do you validate ISO-8601? does any positive number pass (time since Epoch)? Maybe you want
+ * to only validate dates that match a specific type of format - the user actually has no idea what dates potentially matches
+ */
+
 // list
 let ruleList: Record<string, RuleInterface> = {
 	// general

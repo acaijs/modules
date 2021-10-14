@@ -8,6 +8,10 @@ import RouteOptionsInterface	from "../interfaces/routeOptions";
 // Properties
 // -------------------------------------------------
 
+/**
+ * These "global" variables make it impossible to modularize your server since the entire server 
+ * is reliant on these global variables versus being able to make multiple isolated instances
+ */
 let context		: Options 									= {options:{}};
 let routes		: Route[] 									= [];
 let cbs			: (() => void)[] 							= [];
