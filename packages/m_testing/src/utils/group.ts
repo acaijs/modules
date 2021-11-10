@@ -1,15 +1,15 @@
 // Interface
-import ContextInterface 		from "../interfaces/context";
-import GroupAuxiliaryInterface 	from "../interfaces/groupAuxiliary";
+import ContextInterface 		from "../interfaces/context"
+import GroupAuxiliaryInterface 	from "../interfaces/groupAuxiliary"
 
-type GroupsInterface = {ctx: ContextInterface, cb: (aux: GroupAuxiliaryInterface) => void};
+type GroupsInterface = {ctx: ContextInterface; cb: (aux: GroupAuxiliaryInterface) => void};
 
-let groups: GroupsInterface[] = [];
+let groups: GroupsInterface[] = []
 
-export const get = () => groups;
+export const get = () => groups
 
 export const append = (ctx: Partial<ContextInterface>) => {
-	const lastctx = groups[groups.length - 1].ctx;
+	const lastctx = groups[groups.length - 1].ctx
 
 	groups[groups.length - 1].ctx = {
 		...groups[groups.length - 1].ctx,
@@ -23,11 +23,11 @@ export const append = (ctx: Partial<ContextInterface>) => {
 		beforeEach	: [...lastctx.beforeEach, ...(ctx.beforeEach || [])],
 		afterAll	: [...lastctx.afterAll	, ...(ctx.afterAll || [])],
 		afterEach	: [...lastctx.afterEach	, ...(ctx.afterEach || [])],
-	};
+	}
 }
 export const add = (test: GroupsInterface) => {
-	groups.push(test);
+	groups.push(test)
 }
 export const clear = () => {
-	groups = [];
+	groups = []
 }

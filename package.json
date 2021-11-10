@@ -8,17 +8,20 @@
 		"url": "https://github.com/AcaiJS/modules"
 	},
 	"private": true,
-	"workspaces": [
-		"packages/*"
-	],
+	"workspaces": {
+		"packages": [
+			"packages/*"
+		]
+	},
 	"devDependencies": {
 		"eslint": "^7.31.0",
+		"husky": "^7.0.0",
 		"lerna": "^4.0.0",
 		"lint-staged": "^11.0.1",
-		"syncpack": "^5.7.11",
-		"husky": "^7.0.0"
+		"syncpack": "^5.7.11"
 	},
 	"scripts": {
+		"sync": "yarn run syncpack fix-mismatches",
 		"all:publish": "yarn lerna publish from-git --yes",
 		"all:test": "yarn lerna run test --stream",
 		"all:version": "yarn lerna version",
@@ -26,17 +29,23 @@
 		"delete:node_modules": "find . -name \"node_modules\" -exec rm -rf '{}' +",
 		"format": "eslint --fix --ext .js,jsx,.ts,.tsx .",
 		"lerna": "./node_modules/.bin/lerna",
-		"lint": "yarn eslint -c ./packages/preset/.eslintrc.js",
+		"lint": "yarn eslint -c ./packages/u_preset/.eslintrc.js",
 		"pre-commit": "lint-staged",
 		"prepare": "husky install",
-		"config": "yarn workspace @acai/config",
-		"interfaces": "yarn workspace @acai/interfaces",
-		"model": "yarn workspace @acai/model",
-		"query": "yarn workspace @acai/query",
-		"router": "yarn workspace @acai/router",
-		"server": "yarn workspace @acai/server",
-		"stubber": "yarn workspace @acai/stubber",
-		"testing": "yarn workspace @acai/testing",
-		"validator": "yarn workspace @acai/validator"
+		"m:config": "yarn workspace @acai/config",
+		"m:interfaces": "yarn workspace @acai/interfaces",
+		"m:model": "yarn workspace @acai/model",
+		"m:query": "yarn workspace @acai/query",
+		"m:router": "yarn workspace @acai/router",
+		"m:server": "yarn workspace @acai/server",
+		"m:stubber": "yarn workspace @acai/stubber",
+		"m:testing": "yarn workspace @acai/testing",
+		"m:validator": "yarn workspace @acai/validator",
+		"m:runtime": "yarn workspace runtime",
+		"m:preset": "yarn workspace @acai/preset",
+		"m:utils": "yarn workspace @acai/utils"
+	},
+	"dependencies": {
+		"rollup-plugin-ts": "^1.4.1"
 	}
 }

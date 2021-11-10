@@ -1,7 +1,10 @@
 // Interfaces
-import RouteInterface 			from "../interfaces/route";
-import MethodTypes	 			from "../interfaces/method";
-import RouterConfigInterface 	from "../interfaces/routerConfig";
+import RouteInterface from "../interfaces/route"
+import MethodTypes from "../interfaces/method"
+import RouterConfigInterface from "../interfaces/routerConfig"
+
+// Utils
+import buildQueryParams from "../utils/buildQueryParams"
 
 /**
  * # Router
@@ -13,60 +16,63 @@ import RouterConfigInterface 	from "../interfaces/routerConfig";
  * @param {RouteInterface[]} routes list of available routes that can be matched
  * @param {RouterConfigInterface?} config extra config options to customize the router behaviour
  */
-const routerModule = <Options = Record<string, string>> (path: string, method: MethodTypes, routes: RouteInterface[], config?: RouterConfigInterface) => {
+const routerModule = <Options = Record<string, string>> (path: string, method: MethodTypes, routes: RouteInterface[], config: RouterConfigInterface = {}) => {
 	// prepare data
-	const sanitizedpath 		= path.replace(/(\\|\/)^/, "");
-	const variablematch 		= new RegExp(`${config?.variableEnclose || "{"}\\s*\\S+\\??\\s*${config?.variableEnclose || "}"}`);
-	const optionalVariableMatch = new RegExp(`\\?{1}\\s*${config?.variableEnclose || "}"}`);
-	let variables	 			= {} as Record<string, string | string[]>;
+	const sanitizedpath = path.replace(/(\\|\/)^/, "")
+	const [clearpath, queryParams] = buildQueryParams(sanitizedpath)
+	const variablematch = new RegExp(`${config.variableEnclose || "{"}\\s*\\S+\\??\\s*${config.variableEnclose || "}"}`)
+	const optionalVariableMatch = new RegExp(`\\?{1}\\s*${config.variableEnclose || "}"}`)
+	let variables = {} as Record<string, string | string[]>
 
 	// Match routes
 	const route = routes.find((route) => {
-		variables = {};
-		const splitpath = route.path.split("/").filter(i => i !== "");
-		const possibleMatch = sanitizedpath.split("/").filter(i => i !== "");
+		variables = {}
+		const splitpath = route.path.split("/").filter(i => i !== "")
+		const possibleMatch = clearpath.split("/").filter(i => i !== "")
 
 		// check route http method
-		if (method !== route.method && !(method === "OPTIONS") && route.method !== "ANY") return false;
+		if (method !== route.method && !(method === "OPTIONS" && config.allowOptionsMatch !== false) && route.method !== "ANY") return false
 
 		// check by length
 		if (possibleMatch.length > splitpath.length && splitpath[splitpath.length - 1] !== "*") {
-			return false;
+			return false
 		}
 
 		// filter by the actual route
 		const matches = splitpath.filter((part, index) => {
-			const isVar 		= variablematch.test(part);
-			const isOptionalVar = optionalVariableMatch.test(part);
-			const varName 		= part.replace(new RegExp(`${config?.variableEnclose || "{"}\\s*`), "").replace(new RegExp(`\\??\\s*${config?.variableEnclose || "}"}`), "");
+			const isVar 		= variablematch.test(part)
+			const isOptionalVar = optionalVariableMatch.test(part)
+			const varName 		= part.replace(new RegExp(`${config.variableEnclose || "{"}\\s*`), "").replace(new RegExp(`\\??\\s*${config.variableEnclose || "}"}`), "")
 
 			if (isVar) {
 				if (possibleMatch[index]) {
-					variables[varName] = possibleMatch[index];
+					variables[varName] = possibleMatch[index]
 				}
 
 				if (isOptionalVar) {
-					return false;
+					return false
 				}
 				else {
-					return !possibleMatch[index];
+					return !possibleMatch[index]
 				}
 			}
 			else {
-				return part !== possibleMatch[index];
+				return part !== possibleMatch[index]
 			}
-		}).length;
+		}).length
 
 		// add extra if necessary
 		if (!matches && splitpath[splitpath.length - 1] === "*" && possibleMatch.length > splitpath.length) {
-			variables["*"] = possibleMatch.splice(0, splitpath.length);
+			variables["*"] = possibleMatch.splice(0, splitpath.length)
 		}
 
-		return !matches;
-	});
+		return !matches
+	})
 
 	if (route)
-		return {...route, options: route.options as Options, variables};
+		return {...route, options: route.options as Options, variables, query: queryParams}
+
+	return undefined
 }
 
-export default routerModule;
+export default routerModule

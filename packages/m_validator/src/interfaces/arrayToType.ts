@@ -1,5 +1,5 @@
 // Interfaces
-import StringToType from "./stringToType";
+import StringToType from "./stringToType"
 
 type ArrayToType<t extends readonly string[], s extends number[] = []> =
 	// check if we looped entire array
@@ -16,4 +16,4 @@ type ArrayToType<t extends readonly string[], s extends number[] = []> =
 			// current index returned a valid type
 			StringToType<t[s[0]]>;
 
-export default ArrayToType;
+export default ArrayToType

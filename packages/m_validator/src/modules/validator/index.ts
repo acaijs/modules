@@ -1,13 +1,13 @@
 // Interfaces
-import RuleInterface 		from "../../interfaces/rule";
-import Writable				from "../../interfaces/writable";
-import SchemaToTypedSchema 	from "../../interfaces/schemaToTypedSchema";
+import RuleInterface 		from "../../interfaces/rule"
+import Writable				from "../../interfaces/writable"
+import SchemaToTypedSchema 	from "../../interfaces/schemaToTypedSchema"
 
 // Exceptions
-import InvalidRuleException from "../../classes/InvalidRuleException";
+import InvalidRuleException from "../../classes/InvalidRuleException"
 
 // Rules
-import ruleList from "../../rules/index";
+import ruleList from "../../rules/index"
 
 export default class Validator<
 	Fields extends Record<string, unknown> | undefined = undefined,
@@ -32,72 +32,72 @@ export default class Validator<
 	// -------------------------------------------------
 
 	constructor (fields: Record<string, any> = {}) {
-		this._fields = fields as any;
+		this._fields = fields as any
 	}
 
 	public static validate<T extends new (...args: any) => any, I = InstanceType<T>>(this: T, fields?: Partial<ConstructorParameters<T>[0]>, overwriteSchemaOrThrow?: Record<string, string[]> | boolean): I {
-		const validator =  new this(fields);
-		validator.validate(overwriteSchemaOrThrow);
-		return validator as unknown as I;
+		const validator =  new this(fields)
+		validator.validate(overwriteSchemaOrThrow)
+		return validator as unknown as I
 	}
 
 	public validate(overwriteSchemaOrThrow: Record<string, string[]> | boolean | undefined = undefined) {
-		const schema = typeof overwriteSchemaOrThrow === "object" ? overwriteSchemaOrThrow : this.getSchema();
+		const schema = typeof overwriteSchemaOrThrow === "object" ? overwriteSchemaOrThrow : this.getSchema()
 
 		Object.keys(schema).forEach(fieldName => {
-			let passes			= true;
-			let fieldValue 		= this._fields[fieldName];
-			const rulesApplied 	= Array.isArray(schema[fieldName]) ? (schema[fieldName] as string[]):(schema[fieldName] as string).split(";");
-			const isRequired	= rulesApplied.find(i => i.split(":")[0] === "required");
-			const rulesNames	= rulesApplied.map(i => i.split(":")[0]);
+			let passes			= true
+			let fieldValue 		= this._fields[fieldName]
+			const rulesApplied 	= Array.isArray(schema[fieldName]) ? (schema[fieldName] as string[]):(schema[fieldName] as string).split(";")
+			const isRequired	= rulesApplied.find(i => i.split(":")[0] === "required")
+			const rulesNames	= rulesApplied.map(i => i.split(":")[0])
 
 			if (!(fieldValue === undefined && !isRequired)) {
 				for (let i = 0; i < rulesApplied.length; i++) {
-					const [name, ...preargs] 	= rulesApplied[i].split(":");
-					const args					= (preargs.join(":") || "").split(",");
-					const rule 					= this.rules[name];
+					const [name, ...preargs] 	= rulesApplied[i].split(":")
+					const args					= (preargs.join(":") || "").split(",")
+					const rule 					= this.rules[name]
 
 					if (!rule) {
-						throw new InvalidRuleException(`Rule ${name} on validator ${this.constructor.name} doesn't exist`);
+						throw new InvalidRuleException(`Rule ${name} on validator ${this.constructor.name} doesn't exist`)
 					}
 
 					// validation failed
 					if (rule.onValidate && !rule.onValidate({value: fieldValue, key: fieldName, fields: this._fields, args, rules: rulesNames})) {
-						passes = false;
-						const error = rule.onError && rule.onError({value: fieldValue, key: fieldName, fields: this._fields, args, rules: rulesNames}) || `${name} failed validation`;
+						passes = false
+						const error = rule.onError && rule.onError({value: fieldValue, key: fieldName, fields: this._fields, args, rules: rulesNames}) || `${name} failed validation`
 
 						// instance it
-						if (!this._errors[fieldName]) this._errors[fieldName] = [];
+						if (!this._errors[fieldName]) this._errors[fieldName] = []
 
 						// push
 						if (Array.isArray(error))
-							error.forEach(i => this._errors[fieldName].push(i));
+							error.forEach(i => this._errors[fieldName].push(i))
 						else
-							this._errors[fieldName].push(error);
+							this._errors[fieldName].push(error)
 					}
 					// validation successful
 					else {
-						fieldValue = rule.onMask ? rule.onMask({value: fieldValue, key: fieldName, fields: this._fields, args, rules: rulesNames}):fieldValue;
+						fieldValue = rule.onMask ? rule.onMask({value: fieldValue, key: fieldName, fields: this._fields, args, rules: rulesNames}):fieldValue
 					}
 				}
 
 				// validation successful
 				if (!this._errors[fieldName]) {
-					this._validated[fieldName] = fieldValue;
+					this._validated[fieldName] = fieldValue
 				}
 			}
 
-			if (passes && !this._validated[fieldName]) this._validated[fieldName] = fieldValue;
-		});
+			if (passes && !this._validated[fieldName]) this._validated[fieldName] = fieldValue
+		})
 
 		// check if should throw
 		if (overwriteSchemaOrThrow !== false && this.throwable && Object.keys(this._errors).length > 0) {
-			const error 		= new Error("Validation error") as Error & {type: string, data?: Record<string, unknown>, shouldReport?: boolean};
-			error.type 			= "validation";
-			error.data			= this.printErrors();
-			error.shouldReport 	= false;
+			const error 		= new Error("Validation error") as Error & {type: string; data?: Record<string, unknown>; shouldReport?: boolean}
+			error.type 			= "validation"
+			error.data			= this.printErrors()
+			error.shouldReport 	= false
 
-			throw error;
+			throw error
 		}
 	}
 
@@ -106,11 +106,11 @@ export default class Validator<
 	// -------------------------------------------------
 
 	public getSchema(): Readonly<Record<Keys, readonly string[]>> {
-		throw new Error("Schema not implemented");
+		throw new Error("Schema not implemented")
 	}
 
 	public printErrors () {
-		if (Object.keys(this._errors).length === 0) return undefined;
+		if (Object.keys(this._errors).length === 0) return undefined
 
 		return {
 			errors: this._errors,
@@ -122,18 +122,18 @@ export default class Validator<
 	// -------------------------------------------------
 
 	public get rules (): Record<string, RuleInterface> {
-		return ruleList();
+		return ruleList()
 	}
 
 	public get validated (): Writable<Fields extends undefined ? SchemaToTypedSchema<ReturnType<this["getSchema"]>>:Fields> {
-		return this._validated as any;
+		return this._validated as any
 	}
 
 	public get errors () {
-		return this.printErrors() as any as {errors: Record<keyof UsageFields, string[]>} | undefined;
+		return this.printErrors() as any as {errors: Record<keyof UsageFields, string[]>} | undefined
 	}
 
 	public get fields () {
-		return this._fields as Fields extends undefined ? Record<(keyof ReturnType<this["getSchema"]>) & string, any>:Fields;
+		return this._fields as Fields extends undefined ? Record<(keyof ReturnType<this["getSchema"]>) & string, any>:Fields
 	}
 }

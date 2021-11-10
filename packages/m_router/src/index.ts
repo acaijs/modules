@@ -5,8 +5,8 @@
 */
 
 // Modules
-export { default as route } 	from "./modules/route";
-export { default as router } 	from "./modules/router";
+export { default as route } 	from "./modules/route"
+export { default as router } 	from "./modules/router"
 
 // Interfaces
-export { default as RouteInterface } from "./interfaces/route";
+export { default as RouteInterface } from "./interfaces/route"

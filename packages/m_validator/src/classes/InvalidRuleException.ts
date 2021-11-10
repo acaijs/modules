@@ -1,14 +1,14 @@
 // Packages
-import { CustomException } from "@acai/server";
+import { CustomException } from "@acai/utils"
 
 export default class InvalidRuleException extends CustomException {
 	shouldReport = true;
 
 	public constructor (message: string, data?: any) {
-		super("invalidValidationRule", message, data);
+		super("invalidValidationRule", message, data)
 	}
 
 	public report () {
-		console.log(this.message);
+		console.log(this.message)
 	}
 }

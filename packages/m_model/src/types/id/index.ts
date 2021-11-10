@@ -1,11 +1,11 @@
 // Interfaces
-import ModelTypeInterface from "../../interfaces/modelType";
+import ModelTypeInterface from "../../interfaces/modelType"
 
 const toInt = ({value}) => {
-	const format = parseInt(value);
+	const format = parseInt(value)
 
-	return format;
-};
+	return format
+}
 
 const idType = {
 	type: {
@@ -17,6 +17,6 @@ const idType = {
 	onUpdate	: toInt,
 	onSave		: toInt,
 	onRetrieve	: toInt,
-} as ModelTypeInterface;
+} as ModelTypeInterface
 
-export default idType;
+export default idType

@@ -1,9 +1,9 @@
 // Interfaces
-import * as ContextQueue 	from "../utils/context";
-import * as GroupQueue 		from "../utils/group";
+import * as ContextQueue 	from "../utils/context"
+import * as GroupQueue 		from "../utils/group"
 
 export default function tag (tag: string | string[], callback: () => void) {
-	const context = ContextQueue.get();
+	const context = ContextQueue.get()
 
 	GroupQueue.add({
 		ctx: {
@@ -11,7 +11,7 @@ export default function tag (tag: string | string[], callback: () => void) {
 			tags: Array.isArray(tag) ? tag : [tag],
 		},
 		cb: callback,
-	});
+	})
 
-	callback();
+	callback()
 }

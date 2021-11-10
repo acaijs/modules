@@ -1,3 +1,3 @@
 export type QueryComparison = "=" | "!=" | "<" | "<=" | ">" | ">=" | "LIKE" | "like";
 
-export default QueryComparison;
+export default QueryComparison

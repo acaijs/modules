@@ -1,5 +1,5 @@
 // Interfaces
-import ModelContent from "./ModelContent";
+import ModelContent from "./ModelContent"
 
 export default interface PaginatedResponse<ModelConfig = Record<string, ModelContent>> {
 	data: ModelConfig[];

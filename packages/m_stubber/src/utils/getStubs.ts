@@ -1,41 +1,41 @@
 // Packages
-import * as fs 		from "fs";
-import * as path 	from "path";
+import * as fs 		from "fs"
+import * as path 	from "path"
 
 export default function getStubs(stubFilesPath: string) {
-	const stubpath = path.join(process.cwd(), stubFilesPath);
+	const stubpath = path.join(process.cwd(), stubFilesPath)
 
 	// find stubs directory
 	if (!fs.existsSync(stubpath)) {
-		throw new Error("Stubs directory does not exist");
+		throw new Error("Stubs directory does not exist")
 	}
 
 	// check if is an actual directory
 	if (!fs.lstatSync(stubpath).isDirectory()) {
-		throw new Error("Stubs directory is not a directory");
+		throw new Error("Stubs directory is not a directory")
 	}
 
 	// read its content
-	const stubsAvailable = fs.readdirSync(stubpath, {withFileTypes: true}).filter( i => i.isDirectory());
+	const stubsAvailable = fs.readdirSync(stubpath, {withFileTypes: true}).filter( i => i.isDirectory())
 
 
 	for (let i = 0; i < stubsAvailable.length; i++) {
-		const item 				= stubsAvailable[i];
-		const configFilePath 	= path.join(stubpath, item.name, "stub.config.json");
+		const item 				= stubsAvailable[i]
+		const configFilePath 	= path.join(stubpath, item.name, "stub.config.json")
 
 		// check config file
 		if (!fs.existsSync(configFilePath)) {
-			throw new Error(`Stub ${item.name} does not have a config file`);
+			throw new Error(`Stub ${item.name} does not have a config file`)
 		}
 
 		// load config file
 		try {
-			JSON.parse(fs.readFileSync(configFilePath, {encoding: "utf-8"}));
+			JSON.parse(fs.readFileSync(configFilePath, {encoding: "utf-8"}))
 		}
 		catch (e) {
-			throw new Error(`Stub ${item.name} config is not a valid JSON`);
+			throw new Error(`Stub ${item.name} config is not a valid JSON`)
 		}
 	}
 
-	return stubsAvailable;
+	return stubsAvailable
 }

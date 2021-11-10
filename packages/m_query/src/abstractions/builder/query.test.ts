@@ -1,11 +1,11 @@
 // Packages
-import test from "@acai/testing";
+import test from "@acai/testing"
 
 // Abstractions
-import AbstractQuery from "./index";
+import AbstractQuery from "./index"
 
 // Strategies
-import sql from "../../classes/queryStrategies/sql/strategy";
+import sql from "../../classes/queryStrategies/sql/strategy"
 
 // Create concrete class based on sql
 class Query extends AbstractQuery {
@@ -20,10 +20,10 @@ test.group("Test abstract query methods", () => {
 
 	test("Test test's not undefined", (expect) => {
 		// Instance test
-		const query = new Query();
+		const query = new Query()
 
-		expect(query).toBeDefined();
-	});
+		expect(query).toBeDefined()
+	})
 
 	// -------------------------------------------------
 	// test and queries
@@ -31,29 +31,29 @@ test.group("Test abstract query methods", () => {
 
 	test("Test composition of a simple and query", (expect) => {
 		// Instance test
-		const query = new Query;
+		const query = new Query
 
 		// build test
-		query.where("id", 2);
-		const raw = query.rawQueryObject();
+		query.where("id", 2)
+		const raw = query.rawQueryObject()
 
-		expect(raw).toBeDefined();
+		expect(raw).toBeDefined()
 		expect(query.rawQueryObject()).toBe({
 			type: "or",
 			logic: [
 				{
 					type: "and",
 					logic: [
-						["id", "=", 2]
-					]
-				}
-			]
-		});
-	});
+						["id", "=", 2],
+					],
+				},
+			],
+		})
+	})
 
 	test("Test composition of a simple and query", (expect) => {
-		const query = new Query;
-		query.where("id", 2).where("name", "John");
+		const query = new Query
+		query.where("id", 2).where("name", "John")
 
 		expect(query.rawQueryObject()).toBe({
 			type: "or",
@@ -62,16 +62,16 @@ test.group("Test abstract query methods", () => {
 					type: "and",
 					logic: [
 						["id", "=", 2],
-						["name", "=", "John"]
-					]
-				}
-			]
-		});
-	});
+						["name", "=", "John"],
+					],
+				},
+			],
+		})
+	})
 
 	test("Test composition of a array and query", (expect) => {
-		const query = new Query;
-		query.where([["id", "=", 2], ["name", "=", "John"]]);
+		const query = new Query
+		query.where([["id", "=", 2], ["name", "=", "John"]])
 
 		expect(query.rawQueryObject()).toBe({
 			type: "or",
@@ -80,12 +80,12 @@ test.group("Test abstract query methods", () => {
 					type: "and",
 					logic: [
 						["id", "=", 2],
-						["name", "=", "John"]
-					]
-				}
-			]
-		});
-	});
+						["name", "=", "John"],
+					],
+				},
+			],
+		})
+	})
 
 	// -------------------------------------------------
 	// test and different queries
@@ -93,27 +93,27 @@ test.group("Test abstract query methods", () => {
 
 	test("Test composition of a simple and query", (expect) => {
 		// Instance test
-		const query = new Query;
+		const query = new Query
 
-		query.where("id", "!=", 2);
+		query.where("id", "!=", 2)
 
-		expect(query.rawQueryObject()).toBeDefined();
+		expect(query.rawQueryObject()).toBeDefined()
 		expect(query.rawQueryObject()).toBe({
 			type: "or",
 			logic: [
 				{
 					type: "and",
 					logic: [
-						["id", "!=", 2]
-					]
-				}
-			]
-		});
-	});
+						["id", "!=", 2],
+					],
+				},
+			],
+		})
+	})
 
 	test("Test composition of a simple and query", (expect) => {
-		const query = new Query;
-		query.where("id", "!=", 2).where("name", "!=", "John");
+		const query = new Query
+		query.where("id", "!=", 2).where("name", "!=", "John")
 
 		expect(query.rawQueryObject()).toBe({
 			type: "or",
@@ -122,16 +122,16 @@ test.group("Test abstract query methods", () => {
 					type: "and",
 					logic: [
 						["id", "!=", 2],
-						["name", "!=", "John"]
-					]
-				}
-			]
-		});
-	});
+						["name", "!=", "John"],
+					],
+				},
+			],
+		})
+	})
 
 	test("Test composition of a array and query", (expect) => {
-		const query = new Query;
-		query.where([["id", "!=", 2], ["name", "!=", "John"]]);
+		const query = new Query
+		query.where([["id", "!=", 2], ["name", "!=", "John"]])
 
 		expect(query.rawQueryObject()).toBe({
 			type: "or",
@@ -140,20 +140,20 @@ test.group("Test abstract query methods", () => {
 					type: "and",
 					logic: [
 						["id", "!=", 2],
-						["name", "!=", "John"]
-					]
-				}
-			]
-		});
-	});
+						["name", "!=", "John"],
+					],
+				},
+			],
+		})
+	})
 
 	// -------------------------------------------------
 	// test or queries
 	// -------------------------------------------------
 
 	test("Test composition of a simple or different query", (expect) => {
-		const query = new Query;
-		query.where("id", 2).orWhere("name", "John");
+		const query = new Query
+		query.where("id", 2).orWhere("name", "John")
 
 		expect(query.rawQueryObject()).toBe({
 			type: "or",
@@ -162,25 +162,25 @@ test.group("Test abstract query methods", () => {
 					type: "and",
 					logic: [
 						["id", "=", 2],
-					]
+					],
 				},
 				{
 					type: "and",
 					logic: [
 						["name", "=", "John"],
-					]
+					],
 				},
-			]
-		});
-	});
+			],
+		})
+	})
 
 	// -------------------------------------------------
 	// test composite queries
 	// -------------------------------------------------
 
 	test("Test composition of a simple and / or / and", (expect) => {
-		const query = new Query;
-		query.where("id", 2).orWhere("name", "John").where("age", 20);
+		const query = new Query
+		query.where("id", 2).orWhere("name", "John").where("age", 20)
 
 		expect(query.rawQueryObject()).toBe({
 			type: "or",
@@ -189,26 +189,26 @@ test.group("Test abstract query methods", () => {
 					type: "and",
 					logic: [
 						["id", "=", 2],
-					]
+					],
 				},
 				{
 					type: "and",
 					logic: [
 						["name", "=", "John"],
 						["age", "=", 20],
-					]
+					],
 				},
-			]
-		});
-	});
+			],
+		})
+	})
 
 	// -------------------------------------------------
 	// test and different queries
 	// -------------------------------------------------
 
 	test("Test composition of a simple or different query", (expect) => {
-		const query = new Query;
-		query.where("id", "!=", 2).orWhere("name", "!=", "John");
+		const query = new Query
+		query.where("id", "!=", 2).orWhere("name", "!=", "John")
 
 		expect(query.rawQueryObject()).toBe({
 			type: "or",
@@ -217,15 +217,15 @@ test.group("Test abstract query methods", () => {
 					type: "and",
 					logic: [
 						["id", "!=", 2],
-					]
+					],
 				},
 				{
 					type: "and",
 					logic: [
-						["name", "!=", "John"]
-					]
-				}
-			]
-		});
-	});
-}).tag(["query", "abstract"]);
+						["name", "!=", "John"],
+					],
+				},
+			],
+		})
+	})
+}).tag(["query", "abstract"])

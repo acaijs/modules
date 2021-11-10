@@ -1,10 +1,10 @@
 // Interfaces
-import RuleInterface from "../../../interfaces/rule";
+import RuleInterface from "../../../interfaces/rule"
 
 const rule = {
 	// callbacks
 	onValidate	: ({value}) => !!value,
 	onError		: ({key}) 	=> `${key} is required`,
-} as RuleInterface;
+} as RuleInterface
 
-export default rule;
+export default rule

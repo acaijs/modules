@@ -1,5 +1,5 @@
 // Interfaces
-import ContextInterface from "../interfaces/context";
+import ContextInterface from "../interfaces/context"
 
 let context: ContextInterface = {
 	group		: [],
@@ -10,10 +10,10 @@ let context: ContextInterface = {
 	beforeEach	:[],
 	afterAll	:[],
 	afterEach	:[],
-};
+}
 
-export const get = () => context;
-export const set = (ctx: ContextInterface) => { context = ctx; }
+export const get = () => context
+export const set = (ctx: ContextInterface) => { context = ctx }
 export const add = (ctx: Partial<ContextInterface>) => {
 	context = {
 		group		: [...context.group			, ...(ctx.group || [])],
@@ -24,5 +24,5 @@ export const add = (ctx: Partial<ContextInterface>) => {
 		beforeEach	: [...context.beforeEach	, ...(ctx.beforeEach 	|| [])],
 		afterAll	: [...context.afterAll		, ...(ctx.afterAll 		|| [])],
 		afterEach	: [...context.afterEach		, ...(ctx.afterEach 	|| [])],
-	};
+	}
 }

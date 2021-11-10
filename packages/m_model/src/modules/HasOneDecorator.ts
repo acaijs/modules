@@ -1,19 +1,19 @@
 // Interfaces
-import FieldInfoInterface 	from "../interfaces/fieldInfo";
-import RelationDataInterface 	from "../interfaces/relationData";
+import FieldInfoInterface 	from "../interfaces/fieldInfo"
+import RelationDataInterface 	from "../interfaces/relationData"
 
 // Parts
-import Model from "./Model";
+import Model from "./Model"
 
 const HasOne = (modelcb:() => typeof Model, foreignKey: string, primaryKey?: string): PropertyDecorator => {
 	return (target, key) => {
-		const thismodel 	= target.constructor.prototype as { $fields?: FieldInfoInterface[], $relations?: RelationDataInterface[] };
+		const thismodel 	= target.constructor.prototype as { $fields?: FieldInfoInterface[]; $relations?: RelationDataInterface[] }
 
-		if (!thismodel.$fields) 	thismodel.$fields 		= [];
-		if (!thismodel.$relations)	thismodel.$relations 	= [];
+		if (!thismodel.$fields) 	thismodel.$fields 		= []
+		if (!thismodel.$relations)	thismodel.$relations 	= []
 
 		// field that links the two models is in another model, so we don't need to instance it
-		thismodel.$fields.push({name: key as string, type: "string", args:{}});
+		thismodel.$fields.push({name: key as string, type: "string", args:{}})
 
 		// add relation
 		thismodel.$relations.push({
@@ -22,8 +22,8 @@ const HasOne = (modelcb:() => typeof Model, foreignKey: string, primaryKey?: str
 			name		: key as string,
 			primaryKey	: primaryKey || "id",
 			foreignKey,
-		});
+		})
 	}
 }
 
-export default HasOne;
+export default HasOne

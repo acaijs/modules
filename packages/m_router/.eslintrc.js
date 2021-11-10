@@ -7,6 +7,6 @@ module.exports = {
 		 * code the way they please. Letting they overwrite this behaviour
 		 * in their application.
 		 */
-		"@typescript-eslint/no-explicit-any": 0
-	}
+		"@typescript-eslint/no-explicit-any": 0,
+	},
 }

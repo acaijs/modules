@@ -1,8 +1,8 @@
 // Packages
-import test from "@acai/testing";
+import test from "@acai/testing"
 
 // Strategies
-import smartUpdate from "../../helpers/smartUpdate";
+import smartUpdate from "../../helpers/smartUpdate"
 
 test.group("sql tests", () => {
 	test.group("helper tests", () => {
@@ -16,57 +16,57 @@ test.group("sql tests", () => {
 					"table",
 					{
 						id: {
-							type: "string"
-						}
+							type: "string",
+						},
 					},
 					{
 						id: {
-							type: "string"
-						}
-					}
-				);
+							type: "string",
+						},
+					},
+				)
 
-				assert(result[0]).toBe("");
-			});
+				assert(result[0]).toBe("")
+			})
 
 			test("Test field type change", async (assert) => {
 				const result = smartUpdate(
 					"table",
 					{
 						id: {
-							type: "string"
-						}
+							type: "string",
+						},
 					},
 					{
 						id: {
-							type: "int"
-						}
-					}
-				);
+							type: "int",
+						},
+					},
+				)
 
-				assert(result[0]).toBe("ALTER TABLE table MODIFY COLUMN id int(255) NOT NULL");
-				assert(result[1]).toBe("");
-			});
+				assert(result[0]).toBe("ALTER TABLE table MODIFY COLUMN id int(255) NOT NULL")
+				assert(result[1]).toBe("")
+			})
 
 			test("Test field length change", async (assert) => {
 				const result = smartUpdate(
 					"table",
 					{
 						id: {
-							type: "string"
-						}
+							type: "string",
+						},
 					},
 					{
 						id: {
 							type: "string",
 							length: 25,
-						}
-					}
-				);
+						},
+					},
+				)
 
-				assert(result[0]).toBe("ALTER TABLE table MODIFY COLUMN id varchar(25) NOT NULL");
-				assert(result[1]).toBe("");
-			});
+				assert(result[0]).toBe("ALTER TABLE table MODIFY COLUMN id varchar(25) NOT NULL")
+				assert(result[1]).toBe("")
+			})
 
 			// -------------------------------------------------
 			// nullable
@@ -77,20 +77,20 @@ test.group("sql tests", () => {
 					"table",
 					{
 						id: {
-							type: "string"
-						}
+							type: "string",
+						},
 					},
 					{
 						id: {
 							type: "string",
 							nullable: true,
-						}
-					}
-				);
+						},
+					},
+				)
 
-				assert(result[0]).toBe("ALTER TABLE table MODIFY COLUMN id varchar(255) NULL");
-				assert(result[1]).toBe("");
-			}).tag("nullable");
+				assert(result[0]).toBe("ALTER TABLE table MODIFY COLUMN id varchar(255) NULL")
+				assert(result[1]).toBe("")
+			}).tag("nullable")
 
 			test("Test field nullable remove", async (assert) => {
 				const result = smartUpdate(
@@ -99,18 +99,18 @@ test.group("sql tests", () => {
 						id: {
 							type: "string",
 							nullable: true,
-						}
+						},
 					},
 					{
 						id: {
 							type: "string",
-						}
-					}
-				);
+						},
+					},
+				)
 
-				assert(result[0]).toBe("ALTER TABLE table MODIFY COLUMN id varchar(255) NOT NULL");
-				assert(result[1]).toBe("");
-			}).tag("nullable");
+				assert(result[0]).toBe("ALTER TABLE table MODIFY COLUMN id varchar(255) NOT NULL")
+				assert(result[1]).toBe("")
+			}).tag("nullable")
 
 			// -------------------------------------------------
 			// unique
@@ -121,20 +121,20 @@ test.group("sql tests", () => {
 					"table",
 					{
 						id: {
-							type: "string"
-						}
+							type: "string",
+						},
 					},
 					{
 						id: {
 							type: "string",
 							unique: true,
-						}
-					}
-				);
+						},
+					},
+				)
 
-				assert(result[0]).toBe("ALTER TABLE table MODIFY COLUMN id varchar(255) NOT NULL UNIQUE");
-				assert(result[1]).toBe("");
-			}).tag("unique");
+				assert(result[0]).toBe("ALTER TABLE table MODIFY COLUMN id varchar(255) NOT NULL UNIQUE")
+				assert(result[1]).toBe("")
+			}).tag("unique")
 
 			test("Test field unique remove", async (assert) => {
 				const result = smartUpdate(
@@ -143,18 +143,18 @@ test.group("sql tests", () => {
 						id: {
 							type: "string",
 							unique: true,
-						}
+						},
 					},
 					{
 						id: {
 							type: "string",
-						}
-					}
-				);
+						},
+					},
+				)
 
-				assert(result[0]).toBe("ALTER TABLE table DROP INDEX id, MODIFY COLUMN id varchar(255) NOT NULL");
-				assert(result[1]).toBe("");
-			}).tag("unique");
+				assert(result[0]).toBe("ALTER TABLE table DROP INDEX id, MODIFY COLUMN id varchar(255) NOT NULL")
+				assert(result[1]).toBe("")
+			}).tag("unique")
 
 			// -------------------------------------------------
 			// autoincrement
@@ -167,20 +167,20 @@ test.group("sql tests", () => {
 						id: {
 							type: "string",
 							primary: true,
-						}
+						},
 					},
 					{
 						id: {
 							type: "string",
 							primary: true,
 							autoIncrement: true,
-						}
-					}
-				);
+						},
+					},
+				)
 
-				assert(result[0]).toBe("ALTER TABLE table MODIFY COLUMN id varchar(255) NOT NULL AUTO_INCREMENT");
-				assert(result[1]).toBe("");
-			}).tag("autoincrement");
+				assert(result[0]).toBe("ALTER TABLE table MODIFY COLUMN id varchar(255) NOT NULL AUTO_INCREMENT")
+				assert(result[1]).toBe("")
+			}).tag("autoincrement")
 
 			test("Test field autoincrement remove", async (assert) => {
 				const result = smartUpdate(
@@ -190,19 +190,19 @@ test.group("sql tests", () => {
 							type: "string",
 							primary: true,
 							autoIncrement: true,
-						}
+						},
 					},
 					{
 						id: {
 							type: "string",
 							primary: true,
-						}
-					}
-				);
+						},
+					},
+				)
 
-				assert(result[0]).toBe("ALTER TABLE table MODIFY COLUMN id varchar(255) NOT NULL");
-				assert(result[1]).toBe("");
-			}).tag("autoincrement");
+				assert(result[0]).toBe("ALTER TABLE table MODIFY COLUMN id varchar(255) NOT NULL")
+				assert(result[1]).toBe("")
+			}).tag("autoincrement")
 
 			// -------------------------------------------------
 			// default
@@ -214,19 +214,19 @@ test.group("sql tests", () => {
 					{
 						id: {
 							type: "string",
-						}
+						},
 					},
 					{
 						id: {
 							type: "string",
 							default: "test",
-						}
-					}
-				);
+						},
+					},
+				)
 
-				assert(result[0]).toBe("ALTER TABLE table MODIFY COLUMN id varchar(255) NOT NULL DEFAULT 'test'");
-				assert(result[1]).toBe("");
-			}).tag("default");
+				assert(result[0]).toBe("ALTER TABLE table MODIFY COLUMN id varchar(255) NOT NULL DEFAULT 'test'")
+				assert(result[1]).toBe("")
+			}).tag("default")
 
 			test("Test field default remove", async (assert) => {
 				const result = smartUpdate(
@@ -235,18 +235,18 @@ test.group("sql tests", () => {
 						id: {
 							type: "string",
 							default: "test",
-						}
+						},
 					},
 					{
 						id: {
 							type: "string",
-						}
-					}
-				);
+						},
+					},
+				)
 
-				assert(result[0]).toBe("ALTER TABLE table MODIFY COLUMN id varchar(255) NOT NULL");
-				assert(result[1]).toBe("");
-			}).tag("default");
+				assert(result[0]).toBe("ALTER TABLE table MODIFY COLUMN id varchar(255) NOT NULL")
+				assert(result[1]).toBe("")
+			}).tag("default")
 
 			test("Test field default change", async (assert) => {
 				const result = smartUpdate(
@@ -255,19 +255,19 @@ test.group("sql tests", () => {
 						id: {
 							type: "string",
 							default: "test",
-						}
+						},
 					},
 					{
 						id: {
 							type: "string",
 							default: "test2",
-						}
-					}
-				);
+						},
+					},
+				)
 
-				assert(result[0]).toBe("ALTER TABLE table MODIFY COLUMN id varchar(255) NOT NULL DEFAULT 'test2'");
-				assert(result[1]).toBe("");
-			}).tag("default");
+				assert(result[0]).toBe("ALTER TABLE table MODIFY COLUMN id varchar(255) NOT NULL DEFAULT 'test2'")
+				assert(result[1]).toBe("")
+			}).tag("default")
 
 			// -------------------------------------------------
 			// primary
@@ -279,19 +279,19 @@ test.group("sql tests", () => {
 					{
 						id: {
 							type: "string",
-						}
+						},
 					},
 					{
 						id: {
 							type: "string",
 							primary: true,
-						}
-					}
-				);
+						},
+					},
+				)
 
-				assert(result[0]).toBe("ALTER TABLE table ADD PRIMARY KEY (id)");
-				assert(result[1]).toBe("");
-			}).tag("primary");
+				assert(result[0]).toBe("ALTER TABLE table ADD PRIMARY KEY (id)")
+				assert(result[1]).toBe("")
+			}).tag("primary")
 
 			test("Test field primary remove", async (assert) => {
 				const result = smartUpdate(
@@ -300,18 +300,18 @@ test.group("sql tests", () => {
 						id: {
 							type: "string",
 							primary: true,
-						}
+						},
 					},
 					{
 						id: {
 							type: "string",
-						}
-					}
-				);
+						},
+					},
+				)
 
-				assert(result[0]).toBe("ALTER TABLE table DROP PRIMARY KEY");
-				assert(result[1]).toBe("");
-			}).tag("primary");
+				assert(result[0]).toBe("ALTER TABLE table DROP PRIMARY KEY")
+				assert(result[1]).toBe("")
+			}).tag("primary")
 
 			test("Test field primary change", async (assert) => {
 				const result = smartUpdate(
@@ -323,7 +323,7 @@ test.group("sql tests", () => {
 						},
 						otherid: {
 							type: "string",
-						}
+						},
 					},
 					{
 						id: {
@@ -332,13 +332,13 @@ test.group("sql tests", () => {
 						otherid: {
 							type: "string",
 							primary: true,
-						}
-					}
-				);
+						},
+					},
+				)
 
-				assert(result[0]).toBe("ALTER TABLE table DROP PRIMARY KEY, ADD PRIMARY KEY (otherid)");
-				assert(result[1]).toBe("");
-			}).tag("primary");
-		}).tag(["column", "update"]);
-	}).tag(["sql", "helper"]);
-});
+				assert(result[0]).toBe("ALTER TABLE table DROP PRIMARY KEY, ADD PRIMARY KEY (otherid)")
+				assert(result[1]).toBe("")
+			}).tag("primary")
+		}).tag(["column", "update"])
+	}).tag(["sql", "helper"])
+})

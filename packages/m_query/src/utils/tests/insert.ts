@@ -1,8 +1,8 @@
 // Packages
-import test from "@acai/testing";
+import test from "@acai/testing"
 
 // Abstractions
-import QueryAbstract from "../../abstractions/builder";
+import QueryAbstract from "../../abstractions/builder"
 
 export default function adapterInsertTests (name: string, adapter: typeof QueryAbstract, settings: any) {
 	test.group(`Test ${name} insert query methods`, (context) => {
@@ -11,8 +11,8 @@ export default function adapterInsertTests (name: string, adapter: typeof QueryA
 		// -------------------------------------------------
 
 		context.beforeAll(async () => {
-			await adapter.toggleSettings(settings);
-		});
+			await adapter.toggleSettings(settings)
+		})
 
 		context.beforeEach(async () => {
 			await adapter.table("test").createTable({
@@ -34,16 +34,16 @@ export default function adapterInsertTests (name: string, adapter: typeof QueryA
 					type	: "string",
 					nullable: true,
 				},
-			});
+			})
 
-			await adapter.table("test").insert({email: "john.doe@email.com", 	label: "John Doe"});
-			await adapter.table("test").insert({email: "mary.doe@email.com", 	label: "Mary Doe"});
-			await adapter.table("test").insert({email: "junior.doe@email.com", 	label: "Junior Doe", description: "Son of John and Mary Doe"});
-		});
+			await adapter.table("test").insert({email: "john.doe@email.com", 	label: "John Doe"})
+			await adapter.table("test").insert({email: "mary.doe@email.com", 	label: "Mary Doe"})
+			await adapter.table("test").insert({email: "junior.doe@email.com", 	label: "Junior Doe", description: "Son of John and Mary Doe"})
+		})
 
 		context.afterEach(async () => {
-			await adapter.table("test").dropTable();
-		});
+			await adapter.table("test").dropTable()
+		})
 
 		// -------------------------------------------------
 		// tests
@@ -54,9 +54,9 @@ export default function adapterInsertTests (name: string, adapter: typeof QueryA
 				email		: "joe.doe@email.com",
 				label		: "Joe Doe",
 				description	: "Father of John Doe",
-			});
+			})
 
-			assert(fields).toBeDefined();
-		});
-	}).tag(["insert"]);
+			assert(fields).toBeDefined()
+		})
+	}).tag(["insert"])
 }

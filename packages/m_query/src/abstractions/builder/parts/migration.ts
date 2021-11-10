@@ -1,9 +1,9 @@
 // Interfaces
-import ColumnOptions 	from "../../../interfaces/ColumnOptions";
-import { ModelContent } from "../../../interfaces/ModelContent";
+import ColumnOptions 	from "../../../interfaces/ColumnOptions"
+import { ModelContent } from "../../../interfaces/ModelContent"
 
 // Parts
-import TransactionClass from "./transaction";
+import TransactionClass from "./transaction"
 
 export default abstract class MigrationClass<T = Record<string, ModelContent>> extends TransactionClass<T> {
 	// -------------------------------------------------
@@ -11,10 +11,10 @@ export default abstract class MigrationClass<T = Record<string, ModelContent>> e
 	// -------------------------------------------------
 
 	public static addMigration (table: string, columns: Record<string, ColumnOptions>) {
-		this.adapter.addMigration(table, columns);
+		this.adapter.addMigration(table, columns)
 	}
 
 	public static async runMigrations () {
-		await this.adapter.runMigrations();
+		await this.adapter.runMigrations()
 	}
 }

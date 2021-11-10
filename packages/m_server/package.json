@@ -1,8 +1,12 @@
 {
 	"name": "@acai/server",
-	"version": "2.0.6",
+	"version": "3.0.0-beta.17",
 	"description": "The base server for the açai framework",
-	"repository": "https://gitlab.com/acaijs/modules/server.git",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/AcaiJS/modules.git",
+		"directory": "packages/m_server"
+	},
 	"keywords": [
 		"server",
 		"http",
@@ -14,38 +18,45 @@
 	],
 	"author": "Rafael <rafael.chaves98@hotmail.com>",
 	"license": "BSD-3-Clause",
-	"main": "dist",
-	"types": "dist",
+	"module": "dist/index.es.js",
+	"main": "dist/index.js",
+	"typings": "dist/index.d.ts",
+	"files": [
+		"dist"
+	],
+	"exports": {
+		".": {
+			"import": "./dist/index.es.js",
+			"require": "./dist/index.js"
+		}
+	},
 	"private": false,
 	"scripts": {
-		"build": "tsc",
+		"build": "rollup -c",
 		"start": "ts-node ./index.ts",
 		"test": "ts-node ./test.ts",
 		"lint": "eslint --quiet **/*",
 		"lint:fix": "eslint --quiet **/* --fix",
 		"prepublishOnly": "yarn build"
 	},
-	"optionalDependencies": {
-		"@acai/router": ">= 2"
-	},
 	"devDependencies": {
-		"@acai/preset": "^0.1.14",
-		"@acai/testing": "2.4.1",
+		"@acai/interfaces": "^0.2.0-beta.0",
+		"@acai/testing": "^3.0.0-beta.0",
 		"@types/cookies": "^0.7.6",
 		"@types/node": "^14.14.28",
 		"@types/supertest": "^2.0.11",
 		"eslint": "^7.31.0",
 		"form-data": "^4.0.0",
 		"supertest": "^6.1.3",
-		"ts-node-dev": "^1.1.8",
 		"typescript": "^4.1.5"
 	},
 	"dependencies": {
-		"@acai/interfaces": "^0.1.2",
+		"@acai/utils": "^0.7.0-beta.0",
 		"body-parser": "^1.19.0",
 		"cookies": "^0.8.0"
 	},
 	"peerDependencies": {
-		"ts-node-dev": "^1.1.8"
+		"@acai/router": "^2.2.0-beta.0",
+		"@acai/utils": "^0.7.0-beta.0"
 	}
 }

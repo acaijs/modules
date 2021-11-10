@@ -1,8 +1,8 @@
 // Packages
-import { AbstractQuery } 	from "@acai/query";
+import { AbstractQuery } 	from "@acai/query"
 
 // Modules
-import Model 				from "../modules/Model";
+import Model 				from "../modules/Model"
 
 export interface HasManyInterface<model extends Model, cleanModel = Omit<model, keyof Model>> {
 	create	(fields?: Partial<cleanModel>)	: Promise		<model>;
@@ -30,4 +30,4 @@ type Relation <modelType extends Model, relationtype extends "belongsTo" | "hasO
 	relationtype extends "hasMany" 		? HasManyInterface	<modelType> :
 		never>;
 
-export default Relation;
+export default Relation

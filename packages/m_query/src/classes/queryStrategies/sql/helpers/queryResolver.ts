@@ -1,25 +1,25 @@
 // Packages
-import * as Client from "mysql2";
-import QueryException from "../../../../exceptions/query";
+import * as Client from "mysql2"
+import QueryException from "../../../../exceptions/query"
 
 export default async function queryResolver (client: Client.Connection, queryString: string, params: unknown[] = []): Promise<any> {
-	let result;
+	let result
 
 	try {
 		result = await new Promise((resolve, reject) => {
 			client.query(queryString, params,
 				(error, results) => {
-					if (error) reject(error);
+					if (error) reject(error)
 
-					resolve(results);
-				});
-		});
+					resolve(results)
+				})
+		})
 	}
 	catch (e) {
-		if (e.sqlMessage || e.sqlState) {
-			throw new QueryException(e.sqlMessage, e.sqlState, queryString);
+		if ((e as any).sqlMessage || (e as any).sqlState) {
+			throw new QueryException((e as any).sqlMessage, (e as any).sqlState, queryString)
 		}
 	}
 
-	return result;
+	return result
 }

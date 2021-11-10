@@ -1,8 +1,8 @@
 // Packages
-import test from "@acai/testing";
+import test from "@acai/testing"
 
 // Abstractions
-import QueryAbstract from "../../abstractions/builder";
+import QueryAbstract from "../../abstractions/builder"
 
 export default function adapterColumnTests (name: string, adapter: typeof QueryAbstract, settings: any) {
 	test.group(`Test ${name} column methods`, (context) => {
@@ -11,12 +11,12 @@ export default function adapterColumnTests (name: string, adapter: typeof QueryA
 		// -------------------------------------------------
 
 		context.beforeAll(async () => {
-			await adapter.toggleSettings(settings);
-		});
+			await adapter.toggleSettings(settings)
+		})
 
 		context.afterEach(async () => {
-			await adapter.table("test").dropTable();
-		});
+			await adapter.table("test").dropTable()
+		})
 
 		// -------------------------------------------------
 		// tests
@@ -42,16 +42,16 @@ export default function adapterColumnTests (name: string, adapter: typeof QueryA
 					type	: "string",
 					nullable: true,
 				},
-			});
+			})
 
-			const table = await adapter.table("test").getColumns();
+			const table = await adapter.table("test").getColumns()
 
-			assert(table).toBeDefined();
-			assert(table.id).toBeDefined();
-			assert(table.email).toBeDefined();
-			assert(table.label).toBeDefined();
-			assert(table.description).toBeDefined();
-		});
+			assert(table).toBeDefined()
+			assert(table.id).toBeDefined()
+			assert(table.email).toBeDefined()
+			assert(table.label).toBeDefined()
+			assert(table.description).toBeDefined()
+		})
 
 		test("Test field length", async (assert) => {
 			await adapter.table("test").createTable({
@@ -63,12 +63,12 @@ export default function adapterColumnTests (name: string, adapter: typeof QueryA
 					type	: "string",
 					length	: 36,
 				},
-			});
+			})
 
-			const table = await adapter.table("test").getColumns();
+			const table = await adapter.table("test").getColumns()
 
-			assert(table.field.length).toBe(36);
-		});
+			assert(table.field.length).toBe(36)
+		})
 
 		test("Test field auto increment", async (assert) => {
 			await adapter.table("test").createTable({
@@ -77,12 +77,12 @@ export default function adapterColumnTests (name: string, adapter: typeof QueryA
 					autoIncrement	: true,
 					primary			: true,
 				},
-			});
+			})
 
-			const table = await adapter.table("test").getColumns();
+			const table = await adapter.table("test").getColumns()
 
-			assert(table.field.autoIncrement).toBe(true);
-		});
+			assert(table.field.autoIncrement).toBe(true)
+		})
 
 		test("Test field primary", async (assert) => {
 			await adapter.table("test").createTable({
@@ -90,12 +90,12 @@ export default function adapterColumnTests (name: string, adapter: typeof QueryA
 					type	: "int",
 					primary	: true,
 				},
-			});
+			})
 
-			const table = await adapter.table("test").getColumns();
+			const table = await adapter.table("test").getColumns()
 
-			assert(table.field.primary).toBe(true);
-		});
+			assert(table.field.primary).toBe(true)
+		})
 
 		test("Test field unique", async (assert) => {
 			await adapter.table("test").createTable({
@@ -107,12 +107,12 @@ export default function adapterColumnTests (name: string, adapter: typeof QueryA
 					type	: "int",
 					unique	: true,
 				},
-			});
+			})
 
-			const table = await adapter.table("test").getColumns();
+			const table = await adapter.table("test").getColumns()
 
-			assert(table.field.unique).toBe(true);
-		});
+			assert(table.field.unique).toBe(true)
+		})
 
 		test("Test field nullable", async (assert) => {
 			await adapter.table("test").createTable({
@@ -124,12 +124,12 @@ export default function adapterColumnTests (name: string, adapter: typeof QueryA
 					type		: "int",
 					nullable	: true,
 				},
-			});
+			})
 
-			const table = await adapter.table("test").getColumns();
+			const table = await adapter.table("test").getColumns()
 
-			assert(table.field.nullable).toBe(true);
-		});
+			assert(table.field.nullable).toBe(true)
+		})
 
 		test("Test field default value", async (assert) => {
 			await adapter.table("test").createTable({
@@ -141,11 +141,11 @@ export default function adapterColumnTests (name: string, adapter: typeof QueryA
 					type	: "int",
 					default	: 10,
 				},
-			});
+			})
 
-			const table = await adapter.table("test").getColumns();
+			const table = await adapter.table("test").getColumns()
 
-			assert(table.field.default).toBe(10);
-		});
-	}).tag(["column"]);
+			assert(table.field.default).toBe(10)
+		})
+	}).tag(["column"])
 }

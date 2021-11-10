@@ -1,10 +1,10 @@
 // Interfaces
-import ContextErrorInterface 		from "./contextError";
-import { ExpectAssertionInterface } from "./expect";
-import ExtraOptionsInterface 		from "./extraOptions";
-import GroupAuxiliaryInterface 		from "./groupAuxiliary";
-import RunSettings 					from "./runSettings";
-import TestInterface 				from "./testQueue";
+import ContextErrorInterface 		from "./contextError"
+import { ExpectAssertionInterface } from "./expect"
+import ExtraOptionsInterface 		from "./extraOptions"
+import GroupAuxiliaryInterface 		from "./groupAuxiliary"
+import RunSettings 					from "./runSettings"
+import TestInterface 				from "./testQueue"
 
 export default interface TestModuleInterface {
 	/**

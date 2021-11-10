@@ -6,4 +6,4 @@ type modelActions = (
 	"onSerialize"
 );
 
-export default modelActions;
+export default modelActions

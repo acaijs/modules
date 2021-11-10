@@ -1,6 +1,6 @@
 // Packages
-import * as supertest from "supertest";
+import * as supertest from "supertest"
 
-const instance = supertest("http://0.0.0.0:8000");
+const request = supertest.agent("http://localhost:3000")
 
-export default instance;
+export default request

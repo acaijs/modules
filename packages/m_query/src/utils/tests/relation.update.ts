@@ -1,8 +1,8 @@
 // Packages
-import test from "@acai/testing";
+import test from "@acai/testing"
 
 // Abstractions
-import QueryAbstract from "../../abstractions/builder";
+import QueryAbstract from "../../abstractions/builder"
 
 export default function adapterRelationUpdateTests (name: string, adapter: typeof QueryAbstract, settings: any) {
 	test.group(`Test ${name} column relation update methods`, (context) => {
@@ -11,14 +11,14 @@ export default function adapterRelationUpdateTests (name: string, adapter: typeo
 		// -------------------------------------------------
 
 		context.beforeEach(async () => {
-			await adapter.toggleSettings(settings);
+			await adapter.toggleSettings(settings)
 
 			await adapter.table("base").createTable({
 				id: {
 					type: "int",
 					primary: true,
 				},
-			});
+			})
 
 			await adapter.table("base2").createTable({
 				id: {
@@ -29,7 +29,7 @@ export default function adapterRelationUpdateTests (name: string, adapter: typeo
 					type: "int",
 					unique: true,
 				},
-			});
+			})
 
 			await adapter.table("test").createTable({
 				id: {
@@ -40,16 +40,16 @@ export default function adapterRelationUpdateTests (name: string, adapter: typeo
 					type: "int",
 					foreign: {
 						table: "base",
-					}
-				}
-			});
-		});
+					},
+				},
+			})
+		})
 
 		context.afterEach(async () => {
-			await adapter.table("test").dropTable();
-			await adapter.table("base").dropTable();
-			await adapter.table("base2").dropTable();
-		});
+			await adapter.table("test").dropTable()
+			await adapter.table("base").dropTable()
+			await adapter.table("base2").dropTable()
+		})
 
 		// -------------------------------------------------
 		// tests
@@ -65,20 +65,20 @@ export default function adapterRelationUpdateTests (name: string, adapter: typeo
 					type: "int",
 					foreign: {
 						table: "base",
-						name: "customname"
-					}
-				}
-			});
+						name: "customname",
+					},
+				},
+			})
 
-			await adapter.runMigrations();
+			await adapter.runMigrations()
 
-			const table = await adapter.table("test").getColumns();
+			const table = await adapter.table("test").getColumns()
 
-			assert(table.id_base.foreign).toBeDefined();
-			assert(table.id_base.foreign?.name).toBe("customname");
-			assert(table.id_base.foreign?.table).toBe("base");
-			assert(table.id_base.foreign?.column).toBe("id");
-		});
+			assert(table.id_base.foreign).toBeDefined()
+			assert(table.id_base.foreign?.name).toBe("customname")
+			assert(table.id_base.foreign?.table).toBe("base")
+			assert(table.id_base.foreign?.column).toBe("id")
+		})
 
 		test("Test field basic constraint table change", async (assert) => {
 			adapter.addMigration("test", {
@@ -89,19 +89,19 @@ export default function adapterRelationUpdateTests (name: string, adapter: typeo
 				id_base: {
 					type: "int",
 					foreign: {
-						table: "base2"
-					}
-				}
-			});
+						table: "base2",
+					},
+				},
+			})
 
-			await adapter.runMigrations();
+			await adapter.runMigrations()
 
-			const table = await adapter.table("test").getColumns();
+			const table = await adapter.table("test").getColumns()
 
-			assert(table.id_base.foreign).toBeDefined();
-			assert(table.id_base.foreign?.table).toBe("base2");
-			assert(table.id_base.foreign?.column).toBe("id");
-		});
+			assert(table.id_base.foreign).toBeDefined()
+			assert(table.id_base.foreign?.table).toBe("base2")
+			assert(table.id_base.foreign?.column).toBe("id")
+		})
 
 		test("Test field basic constraint column change", async (assert) => {
 			adapter.addMigration("test", {
@@ -113,18 +113,18 @@ export default function adapterRelationUpdateTests (name: string, adapter: typeo
 					type: "int",
 					foreign: {
 						table: "base2",
-						column: "code"
-					}
-				}
-			});
+						column: "code",
+					},
+				},
+			})
 
-			await adapter.runMigrations();
+			await adapter.runMigrations()
 
-			const table = await adapter.table("test").getColumns();
+			const table = await adapter.table("test").getColumns()
 
-			assert(table.id_base.foreign).toBeDefined();
-			assert(table.id_base.foreign?.table).toBe("base2");
-			assert(table.id_base.foreign?.column).toBe("code");
-		});
-	}).tag(["column", "relation", "update"]);
+			assert(table.id_base.foreign).toBeDefined()
+			assert(table.id_base.foreign?.table).toBe("base2")
+			assert(table.id_base.foreign?.column).toBe("code")
+		})
+	}).tag(["column", "relation", "update"])
 }

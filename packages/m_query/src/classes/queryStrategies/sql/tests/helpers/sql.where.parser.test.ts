@@ -1,8 +1,8 @@
 // Packages
-import test from "@acai/testing";
+import test from "@acai/testing"
 
 // Helpers
-import { resolveQueryPart } from "../../helpers";
+import { resolveQueryPart } from "../../helpers"
 
 test.group("sql tests", () => {
 	test.group("helper tests", () => {
@@ -15,22 +15,22 @@ test.group("sql tests", () => {
 						type: "and",
 						logic: [
 							["id", "=", 2],
-						]
+						],
 					},
 					{
 						type: "and",
 						logic: [
 							["name", "=", "John"],
 							["age", "=", 20],
-						]
+						],
 					},
-				]
-			});
+				],
+			})
 
 			//assert
-			expect(data[0]).toBe("id = ? OR name = ? AND age = ?");
-			expect(data[1]).toBe([2, "John", 20]);
-		});
+			expect(data[0]).toBe("id = ? OR name = ? AND age = ?")
+			expect(data[1]).toBe([2, "John", 20])
+		})
 
-	}).tag(["sql", "helper", "parser"]);
-});
+	}).tag(["sql", "helper", "parser"])
+})

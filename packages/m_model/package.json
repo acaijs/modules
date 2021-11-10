@@ -1,39 +1,52 @@
 {
 	"name": "@acai/model",
-	"version": "0.7.11",
+	"version": "0.8.0-beta.9",
 	"description": "Models are a easy way to group your data with methods to format it, save and other crud operations.",
-	"repository": "https://github.com/AcaiFramework/config.git",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/AcaiJS/modules.git",
+		"directory": "packages/m_model"
+	},
 	"author": "Rafael <rafael.chaves98@hotmail.com>",
 	"license": "BSD-3-Clause",
 	"private": false,
+	"module": "dist/index.es.js",
 	"main": "dist/index.js",
+	"typings": "dist/index.d.ts",
+	"files": [
+		"dist"
+	],
+	"exports": {
+		".": {
+			"import": "./dist/index.es.js",
+			"require": "./dist/index.js"
+		}
+	},
 	"scripts": {
-		"build": "tsc --project ./tsconfig.json",
+		"build": "rollup -c",
 		"start": "ts-node ./yay.ts",
 		"test": "ts-node ./test.ts",
 		"prepublishOnly": "yarn build"
 	},
 	"dependencies": {
-		"@acai/query": "^0.5.13",
-		"@acai/utils": "^0.1.1",
+		"@acai/config": "^1.1.0-beta.0",
+		"@acai/query": "^0.7.0-beta.0",
+		"@acai/utils": "^0.7.0-beta.0",
 		"bcrypt": "^5.0.0",
 		"luxon": "^1.26.0",
 		"uuid": "^8.3.2"
 	},
 	"peerDependencies": {
-		"@acai/query": "^0.5.13",
-		"ts-node-dev": "^1.1.8",
+		"@acai/config": "^1.1.0-beta.0",
+		"@acai/query": "^0.7.0-beta.0",
+		"@acai/utils": "^0.7.0-beta.0",
 		"luxon": "^1.26.0"
 	},
 	"devDependencies": {
-		"@acai/testing": "2.4.1",
+		"@acai/testing": "^3.0.0-beta.0",
 		"@types/bcrypt": "^3.0.0",
 		"@types/luxon": "^1.26.5",
 		"@types/node": "^14.14.28",
-		"ts-node-dev": "^1.1.8",
 		"typescript": "^4.1.5"
-	},
-	"optionalDependencies": {
-		"@acai/config": "^0.1.2"
 	}
 }

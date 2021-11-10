@@ -1,5 +1,5 @@
 // Interfaces
-import methodTypes from "./method";
+import methodTypes from "./method"
 
 export default interface RouteInterface<T = Record<string, unknown>> {
 	/**

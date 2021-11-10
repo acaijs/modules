@@ -5,5 +5,6 @@ export default interface ContextErrorInterface {
 		title: string;
 		message: string;
 		type: string;
-	}[]
+		data: any[];
+	}[];
 }

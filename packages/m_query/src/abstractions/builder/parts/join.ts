@@ -1,9 +1,8 @@
 // Interfaces
-import { ModelContent } 	from "../../../interfaces/ModelContent";
-import QueryInterface		from "../interface";
+import { ModelContent } 	from "../../../interfaces/ModelContent"
 
 // Parts
-import DataClass from "./data";
+import DataClass from "./data"
 
 export default abstract class JoinClass<T = Record<string, ModelContent>> extends DataClass<T> {
 	// -------------------------------------------------
@@ -17,32 +16,32 @@ export default abstract class JoinClass<T = Record<string, ModelContent>> extend
 			firstColumn,
 			secondColumn: secondColumn || secondColumnOrOperator,
 			operator: secondColumn ? secondColumnOrOperator : "=",
-		};
+		}
 
-		return this;
+		return this
 	}
 
 	public join (table: string, firstColumn: string, secondColumnOrOperator: string | "=" | "!=" | ">" | "<", secondColumn?: string) {
-		this.joinType("outer", table, firstColumn, secondColumnOrOperator, secondColumn);
+		this.joinType("outer", table, firstColumn, secondColumnOrOperator, secondColumn)
 
-		return this;
+		return this
 	}
 
 	public leftJoin (table: string, firstColumn: string, secondColumnOrOperator: string | "=" | "!=" | ">" | "<", secondColumn?: string) {
-		this.joinType("left", table, firstColumn, secondColumnOrOperator, secondColumn);
+		this.joinType("left", table, firstColumn, secondColumnOrOperator, secondColumn)
 
-		return this;
+		return this
 	}
 
 	public rightJoin (table: string, firstColumn: string, secondColumnOrOperator: string | "=" | "!=" | ">" | "<", secondColumn?: string) {
-		this.joinType("right", table, firstColumn, secondColumnOrOperator, secondColumn);
+		this.joinType("right", table, firstColumn, secondColumnOrOperator, secondColumn)
 
-		return this;
+		return this
 	}
 
 	public innerJoin (table: string, firstColumn: string, secondColumnOrOperator: string | "=" | "!=" | ">" | "<", secondColumn?: string) {
-		this.joinType("inner", table, firstColumn, secondColumnOrOperator, secondColumn);
+		this.joinType("inner", table, firstColumn, secondColumnOrOperator, secondColumn)
 
-		return this;
+		return this
 	}
 }

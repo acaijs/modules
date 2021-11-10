@@ -1,7 +1,7 @@
 // Interfaces
-import methodTypes 				from "./method";
-import BuiltRoute				from "./route";
-import RouteOptionsInterface 	from "./routeOptions";
+import methodTypes 				from "./method"
+import BuiltRoute				from "./route"
+import RouteOptionsInterface 	from "./routeOptions"
 type targetMatch = string | ((...args: any[]) => any);
 
 type concactRoute = {options: (options: RouteOptionsInterface["options"]) => void};

@@ -1,11 +1,11 @@
 // Interfaces
-import GenericModelContent, { ModelContent } 	from "../../interfaces/ModelContent";
-import QueryPart 								from "../../interfaces/QueryPart";
-import QueryComparison 							from "../../interfaces/QueryComparison";
-import PaginatedResponse 						from "../../interfaces/PaginatedResponse";
-import ColumnOptions from "../../interfaces/ColumnOptions";
+import GenericModelContent, { ModelContent } 	from "../../interfaces/ModelContent"
+import QueryPart 								from "../../interfaces/QueryPart"
+import QueryComparison 							from "../../interfaces/QueryComparison"
+import PaginatedResponse 						from "../../interfaces/PaginatedResponse"
+import ColumnOptions from "../../interfaces/ColumnOptions"
 
-export default interface AbstractQuery<ModelGeneralOverwrite = Record<string, ModelContent>> {
+export default interface AbstractQuery<ModelGeneralOverwrite = Record<string, ModelContent>, FieldArg = (keyof ModelGeneralOverwrite)[] | "*" | keyof ModelGeneralOverwrite> {
 	// -------------------------------------------------
 	// query methods
 	// -------------------------------------------------
@@ -15,7 +15,7 @@ export default interface AbstractQuery<ModelGeneralOverwrite = Record<string, Mo
 	limit (value: number, offset?: number): AbstractQuery;
 	orderBy (by: string, order?: "ASC" | "DESC"): AbstractQuery;
 	groupBy (column: string): AbstractQuery;
-	fields <ModelConfig = ModelGeneralOverwrite>(fields: (keyof ModelConfig | "*")[]): AbstractQuery;
+	fields (fields: FieldArg): AbstractQuery;
 
 	// -------------------------------------------------
 	// debug methods
@@ -28,45 +28,45 @@ export default interface AbstractQuery<ModelGeneralOverwrite = Record<string, Mo
 	// table methods
 	// -------------------------------------------------
 
-	getColumns <ModelConfig = ModelGeneralOverwrite> 		(fields?: (keyof ModelConfig | "*")[]) 	: Promise<Record<string, ColumnOptions>>;
-	createTable 	(columns: Record<string, ColumnOptions>)										: Promise<void>;
-	alterTable 		(columns: Record<string, ColumnOptions>)										: Promise<void>;
-	dropTable 		()																				: Promise<void>;
-	existsTable 	()																				: Promise<boolean>;
+	getColumns (fields?: FieldArg): Promise<Record<string, ColumnOptions>>;
+	createTable (columns: Record<string, ColumnOptions>): Promise<void>;
+	alterTable (columns: Record<string, ColumnOptions>): Promise<void>;
+	dropTable (): Promise<void>;
+	existsTable (): Promise<boolean>;
 
 	// -------------------------------------------------
 	// join methods
 	// -------------------------------------------------
 
-	join 		(table: string, firstColumn: string, secondColumnOrOperator: string | "=" | "!=" | ">" | "<", secondColumn?: string): AbstractQuery;
-	leftJoin 	(table: string, firstColumn: string, secondColumnOrOperator: string | "=" | "!=" | ">" | "<", secondColumn?: string): AbstractQuery;
-	rightJoin 	(table: string, firstColumn: string, secondColumnOrOperator: string | "=" | "!=" | ">" | "<", secondColumn?: string): AbstractQuery;
-	innerJoin 	(table: string, firstColumn: string, secondColumnOrOperator: string | "=" | "!=" | ">" | "<", secondColumn?: string): AbstractQuery;
-	joinType 	(type: "inner" | "left" | "right" | "outer", table: string, firstColumn: string, secondColumnOrOperator: string | "=" | "!=" | ">" | "<", secondColumn?: string): AbstractQuery;
+	join (table: string, firstColumn: string, secondColumnOrOperator: string | "=" | "!=" | ">" | "<", secondColumn?: string): AbstractQuery<ModelGeneralOverwrite>;
+	leftJoin (table: string, firstColumn: string, secondColumnOrOperator: string | "=" | "!=" | ">" | "<", secondColumn?: string): AbstractQuery<ModelGeneralOverwrite>;
+	rightJoin (table: string, firstColumn: string, secondColumnOrOperator: string | "=" | "!=" | ">" | "<", secondColumn?: string): AbstractQuery<ModelGeneralOverwrite>;
+	innerJoin (table: string, firstColumn: string, secondColumnOrOperator: string | "=" | "!=" | ">" | "<", secondColumn?: string): AbstractQuery<ModelGeneralOverwrite>;
+	joinType (type: "inner" | "left" | "right" | "outer", table: string, firstColumn: string, secondColumnOrOperator: string | "=" | "!=" | ">" | "<", secondColumn?: string): AbstractQuery<ModelGeneralOverwrite>;
 
 	// -------------------------------------------------
 	// data methods
 	// -------------------------------------------------
 
-	raw 	(query: string)			: any;
-	avg 	(columnName: string)	: Promise<number>;
-	sum 	(columnName: string)	: Promise<number>;
-	count 	(columnName?: string)	: Promise<number>;
+	raw (query: string): any;
+	avg (columnName: string): Promise<number>;
+	sum (columnName: string): Promise<number>;
+	count (columnName?: string): Promise<number>;
 	parseResult <ModelConfig = ModelGeneralOverwrite> (cb: (result: ModelConfig | ModelConfig[]) => unknown): AbstractQuery;
 
 	// -------------------------------------------------
 	// retrieve methods
 	// -------------------------------------------------
 
-	get 		<ModelConfig = ModelGeneralOverwrite> (fields?: (keyof ModelConfig | "*")[]) 	: Promise<ModelConfig[]>;
-	first 		<ModelConfig = ModelGeneralOverwrite> (fields?: (keyof ModelConfig | "*")[]) 	: Promise<ModelConfig | undefined>;
-	last 		<ModelConfig = ModelGeneralOverwrite> (fields?: (keyof ModelConfig | "*")[]) 	: Promise<ModelConfig | undefined>;
-	paginate 	<ModelConfig = ModelGeneralOverwrite> (page?: number, perPage?: number) 		: Promise<PaginatedResponse<ModelConfig>>;
+	get (fields?: FieldArg): Promise<ModelGeneralOverwrite[]>;
+	first (fields?: FieldArg): Promise<ModelGeneralOverwrite | undefined>;
+	last (fields?: FieldArg): Promise<ModelGeneralOverwrite | undefined>;
+	paginate (page?: number, perPage?: number): Promise<PaginatedResponse<ModelGeneralOverwrite>>;
 
 	// -------------------------------------------------
 	// crud methods
 	// -------------------------------------------------
-	insert <T = ModelGeneralOverwrite>	(fields: T) 			: Promise<number | string>;
-	update <T = ModelGeneralOverwrite>	(fields: Partial<T>) 	: Promise<number | string>;
-	delete 								() 						: Promise<number>;
+	insert (fields: ModelGeneralOverwrite): Promise<number | string>;
+	update (fields: Partial<ModelGeneralOverwrite>): Promise<number | string>;
+	delete (): Promise<number>;
 }

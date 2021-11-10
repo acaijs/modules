@@ -1,11 +1,10 @@
 // Interfaces
-import queryInterface 		from "../interface";
-import QueryStrategy 		from "../../../interfaces/queryStrategy";
-import { ModelContent } 	from "../../../interfaces/ModelContent";
-import ColumnOptions 		from "../../../interfaces/ColumnOptions";
+import AbstractQuery 		from "../interface"
+import QueryStrategy 		from "../../../interfaces/queryStrategy"
+import { ModelContent } 	from "../../../interfaces/ModelContent"
 
 // Parts
-import Properties from "./properties";
+import Properties from "./properties"
 
 export default abstract class StaticClass<T = Record<string, ModelContent>> extends Properties<T> {
 	// -------------------------------------------------
@@ -13,35 +12,35 @@ export default abstract class StaticClass<T = Record<string, ModelContent>> exte
 	// -------------------------------------------------
 
 	public static async toggleAdapter (adapter: QueryStrategy, settings?: Record<string, ModelContent>) {
-		this.adapter = new (adapter as any)();
-		if (settings) this.settings = settings;
+		this.adapter = new (adapter as any)()
+		if (settings) this.settings = settings
 
-		return await this.adapter.build(this.settings);
+		return await this.adapter.build(this.settings)
 	}
 
 	public static async toggleSettings (settings: Record<string, ModelContent>) {
-		this.settings = settings;
+		this.settings = settings
 
-		return await this.adapter.build(this.settings);
+		return await this.adapter.build(this.settings)
 	}
 
 	public static async isConnected () {
-		return await this.adapter.isConnected();
+		return await this.adapter.isConnected()
 	}
 
 	public static async hasErrors () {
-		return await this.adapter.hasErrors();
+		return await this.adapter.hasErrors()
 	}
 
 	public static async close () {
-		await this.adapter.close();
+		await this.adapter.close()
 	}
 
 	public static table<model = Record<string, ModelContent>> (table: string) {
-		const query = new (this as any)();
+		const query = new (this as any)()
 
-		query.table(table);
+		query.table(table)
 
-		return query as queryInterface<model>;
+		return query as AbstractQuery<model>
 	}
 }

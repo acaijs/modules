@@ -1,18 +1,29 @@
 {
 	"name": "@acai/validator",
-	"version": "0.3.2",
+	"version": "0.3.3-beta.2",
 	"description": "A customizable validator for the Açaí framework. You can easily add your own rules and extend the capabilities of our validator.",
-	"repository": "https://github.com/AcaiFramework/validator.git",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/AcaiJS/modules.git",
+		"directory": "packages/m_validator"
+	},
 	"author": "Rafael <rafael.chaves98@hotmail.com>",
 	"license": "BSD-3-Clause",
 	"private": false,
-	"files": [
-		"dist/**"
-	],
+	"module": "dist/index.es.js",
 	"main": "dist/index.js",
-	"types": "dist/types",
+	"typings": "dist/index.d.ts",
+	"files": [
+		"dist"
+	],
+	"exports": {
+		".": {
+			"import": "./dist/index.es.js",
+			"require": "./dist/index.js"
+		}
+	},
 	"scripts": {
-		"build": "tsc",
+		"build": "rollup -c",
 		"test": "ts-node ./test.ts",
 		"prepublishOnly": "yarn build"
 	},
@@ -20,20 +31,20 @@
 		"node": ">=12.0.0"
 	},
 	"devDependencies": {
-		"@acai/preset": "^0.1.14",
-		"@acai/testing": "2.4.1",
+		"@acai/testing": "^3.0.0-beta.0",
 		"@types/glob": "^7.1.3",
 		"@types/luxon": "^1.26.5",
 		"@types/node": "^14.14.28",
-		"ts-node-dev": "^1.1.8",
 		"typescript": "^4.1.5"
 	},
 	"dependencies": {
-		"@acai/server": "*",
+		"@acai/server": "^3.0.0-beta.0",
+		"@acai/utils": "^0.7.0-beta.0",
 		"glob": "^7.1.6",
 		"luxon": "^1.26.0"
 	},
 	"peerDependencies": {
-		"ts-node-dev": "^1.1.8"
+		"@acai/server": "^3.0.0-beta.0",
+		"@acai/utils": "^0.7.0-beta.0"
 	}
 }

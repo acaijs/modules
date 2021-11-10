@@ -3,5 +3,5 @@ export default interface BodyParseConfig {
 
 	file: {
 
-	}
+	};
 }

@@ -1,7 +1,7 @@
 // Interfaces
-import CustomExceptionInterface from "../interfaces/CustomException";
+import { CustomExceptionInterface } from "@acai/interfaces"
 
-export default abstract class Exception extends Error implements CustomExceptionInterface {
+export default class Exception extends Error implements CustomExceptionInterface {
 	// -------------------------------------------------
 	// Properties
 	// -------------------------------------------------
@@ -21,15 +21,11 @@ export default abstract class Exception extends Error implements CustomException
 	// -------------------------------------------------
 
 	public constructor (type: string, message: string, data?: unknown) {
-		super (message);
+		super (message)
 
-		this._type		= type;
-		this._data 		= data;
-		this._message 	= message;
-	}
-
-	public report () {
-		return this.message;
+		this._type		= type
+		this._data 		= data
+		this._message 	= message
 	}
 
 	// -------------------------------------------------
@@ -37,14 +33,14 @@ export default abstract class Exception extends Error implements CustomException
 	// -------------------------------------------------
 
 	public get message () {
-		return this._message;
+		return this._message
 	}
 
 	public get data () {
-		return this._data;
+		return this._data
 	}
 
 	public get type () {
-		return this._type;
+		return this._type
 	}
 }

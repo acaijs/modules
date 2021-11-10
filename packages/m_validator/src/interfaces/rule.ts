@@ -1,9 +1,9 @@
 type signature<response> = (data: {
-	value: unknown,
-	key: string,
-	fields: Record<string, unknown>,
-	args?: string[],
-	rules: string[],
+	value: unknown;
+	key: string;
+	fields: Record<string, unknown>;
+	args?: string[];
+	rules: string[];
 }) => response;
 
 export default interface RuleInterface {

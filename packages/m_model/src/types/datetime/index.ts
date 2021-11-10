@@ -1,33 +1,33 @@
 // Packages
-import { DateTime } from "luxon";
+import { DateTime } from "luxon"
 
 // Interfaces
-import ModelTypeInterface from "../../interfaces/modelType";
+import ModelTypeInterface from "../../interfaces/modelType"
 
 const toDate = ({value}) => {
 	if (DateTime.isDateTime(value))
-		return value;
+		return value
 	if (typeof value === "string")
-		return DateTime.fromISO(value);
+		return DateTime.fromISO(value)
 	if (typeof value === "number")
-		return DateTime.fromMillis(value);
+		return DateTime.fromMillis(value)
 	if (value instanceof Date)
-		return DateTime.fromJSDate(value);
+		return DateTime.fromJSDate(value)
 
-	return value;
-};
+	return value
+}
 
 const toSerializeDate = ({value, args}) => {
-	const _value = DateTime.isDateTime(value) ? value : DateTime.fromJSDate(value);
+	const _value = DateTime.isDateTime(value) ? value : DateTime.fromJSDate(value)
 
 	if (args) {
 		if (args.format) {
-			return _value.toFormat(args.format);
+			return _value.toFormat(args.format)
 		}
 	}
 
-	return _value.toSQL();
-};
+	return _value.toSQL()
+}
 
 const datetimeType = {
 	type: {
@@ -37,6 +37,6 @@ const datetimeType = {
 	onRetrieve	: toDate,
 	onSave		: toSerializeDate,
 	onSerialize	: toSerializeDate,
-} as ModelTypeInterface;
+} as ModelTypeInterface
 
-export default datetimeType;
+export default datetimeType

@@ -1,8 +1,12 @@
 {
 	"name": "@acai/interfaces",
-	"version": "0.1.2",
+	"version": "0.2.0-beta.5",
 	"description": "General use typescript interfaces for use across all the Açaí modules.",
-	"repository": "https://gitlab.com/acaijs/modules/interfaces.git",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/AcaiJS/modules.git",
+		"directory": "packages/m_interfaces"
+	},
 	"author": "Rafael <rafael.correa@aposoftworks.com>",
 	"license": "BSD-3-Clause",
 	"keywords": [
@@ -13,12 +17,20 @@
 		"modules"
 	],
 	"private": false,
+	"module": "dist/index.es.js",
+	"main": "dist/index.js",
+	"typings": "dist/index.d.ts",
 	"files": [
-		"dist/**"
+		"dist"
 	],
-	"types": "dist",
+	"exports": {
+		".": {
+			"import": "./dist/index.es.js",
+			"require": "./dist/index.js"
+		}
+	},
 	"scripts": {
-		"build": "tsc --project ./tsconfig.json",
+		"build": "rollup -c",
 		"lint": "eslint --quiet **/*",
 		"lint:fix": "eslint --quiet **/* --fix",
 		"prepublishOnly": "yarn build"
@@ -27,7 +39,6 @@
 		"node": ">=12.0.0"
 	},
 	"devDependencies": {
-		"@acai/preset": "^0.1.14",
 		"@types/cookies": "^0.7.6",
 		"@types/node": "^14.14.28",
 		"eslint": "^7.31.0",

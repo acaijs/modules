@@ -1,24 +1,24 @@
 // Interfaces
-import FieldInfoInterface from "../interfaces/fieldInfo";
+import FieldInfoInterface from "../interfaces/fieldInfo"
 
-const Field = (type = "string", args?: Record<string, string | number | boolean | string[]>): PropertyDecorator => {
+const Field = (type = "string", args?: Record<string, string | number | boolean | string[]> | string[]): PropertyDecorator => {
 	return (target, key) => {
-		const model = target.constructor.prototype as { $fields?: FieldInfoInterface[] };
+		const model = target.constructor.prototype as { $fields?: FieldInfoInterface[] }
 
-		if (!model.$fields) model.$fields = [];
+		if (!model.$fields) model.$fields = []
 
-		const extraargs = {} as Record<string, string | boolean>;
-		if (type.match(/^\w+\?/))	extraargs.nullable 	= true;
-		if (type.match(/^\w+\*/))	extraargs.primary 	= true;
-		if (type.match(/^\w+!/))	extraargs.unique 	= true;
-		if (type.match(/^\w+=/))	extraargs.default 	= type.split("=")[1];
+		const extraargs = {} as Record<string, string | boolean>
+		if (type.match(/^\w+\?/))	extraargs.nullable 	= true
+		if (type.match(/^\w+\*/))	extraargs.primary 	= true
+		if (type.match(/^\w+!/))	extraargs.unique 	= true
+		if (type.match(/^\w+=/))	extraargs.default 	= type.split("=")[1]
 
 		model.$fields.push({
 			name: key as string,
 			type: (type.match(/^\w+/) as string[])[0],
-			args: {...args, ...extraargs},
-		});
+			args: {...(Array.isArray(args) ? {length:args}: args), ...extraargs},
+		})
 	}
 }
 
-export default Field;
+export default Field
