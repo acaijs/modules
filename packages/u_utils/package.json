@@ -1,6 +1,6 @@
 {
 	"name": "@acai/utils",
-	"version": "0.7.0-beta.9",
+	"version": "0.7.0-beta.10",
 	"description": "A set of tools used by the Açaí Framework to enhance and ease your development experience.",
 	"repository": {
 		"type": "git",
