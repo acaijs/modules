@@ -195,9 +195,6 @@ class SqlStrategy implements queryStrategy {
 		const columns 		= [] as string[]
 		const constraints 	= [] as string[]
 
-		// disable foreign key constraint
-		await queryResolver(this.client, "SET FOREIGN_KEY_CHECKS=0;")
-
 		// gather all migrations
 		await Promise.all(Object.keys(this.migrations).map(tableName => {
 			const c = async () => {
@@ -208,8 +205,8 @@ class SqlStrategy implements queryStrategy {
 					const oldtable 					= await this.getColumns(tableName)
 					const [_columns, _constraints] 	= smartUpdate(tableName, oldtable, updatedtable)
 
-					columns.push(_columns)
-					constraints.push(_constraints)
+					if (_columns) columns.push(_columns)
+					if (_constraints) constraints.push(_constraints)
 				}
 				// create table
 				else {
@@ -242,15 +239,12 @@ class SqlStrategy implements queryStrategy {
 			return c()
 		}))
 
+		// disable foreign key constraint
+		await queryResolver(this.client, "SET FOREIGN_KEY_CHECKS=0;")
+
 		// run migrations
-		for (let i = 0; i < columns.length; i++) {
-			if (columns[i])
-				await queryResolver(this.client, columns[i])
-		}
-		for (let i = 0; i < constraints.length; i++) {
-			if (constraints[i])
-				await queryResolver(this.client, constraints[i])
-		}
+		await Promise.all(columns.map(i => queryResolver(this.client, i)))
+		await Promise.all(constraints.map(c => queryResolver(this.client, c)))
 
 		// reenable foreign key constraint
 		await queryResolver(this.client, "SET FOREIGN_KEY_CHECKS=1;")

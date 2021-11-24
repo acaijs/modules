@@ -25,7 +25,7 @@ const buildProduction = (bundles = [], buildDefault = true) => {
 						experimentalBundling: true,
 					}),
 					globals(),
-					uglify(),
+					// uglify(),
 					banner(() => bannerText, { sourcemap: true }),
 				],
 				output: [

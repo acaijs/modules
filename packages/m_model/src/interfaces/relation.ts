@@ -18,16 +18,21 @@ export interface HasOneInterface<model extends Model, cleanModel = Omit<model, k
 	query			()								: AbstractQuery	<model>;
 }
 
-export interface BelongsToInterface<model extends Model> {
+export interface BelongsToInterface<model extends Model, primaryKey extends keyof model> {
 	get () 								: Promise<model | undefined>;
 	set (value: string | number | model): void;
-	value	()							: string | number | undefined;
+	value	()							: model[primaryKey];
 }
 
-type Relation <modelType extends Model, relationtype extends "belongsTo" | "hasOne" | "hasMany"> = Readonly<
-	relationtype extends "belongsTo" 	? BelongsToInterface<modelType> :
+/**
+ * A utility function to allow you to get any relation type through a generic
+ *
+ * primaryKey refers to the related model's primary key, not this model's one
+ */
+type Relation <modelType extends Model, relationtype extends "belongsTo" | "hasOne" | "hasMany", primaryKey extends keyof modelType> = Readonly<
+relationtype extends "belongsTo" 	? BelongsToInterface<modelType, primaryKey> :
 	relationtype extends "hasOne" 		? HasOneInterface	<modelType> :
-	relationtype extends "hasMany" 		? HasManyInterface	<modelType> :
-		never>;
+		relationtype extends "hasMany" 		? HasManyInterface	<modelType> :
+			never>;
 
 export default Relation

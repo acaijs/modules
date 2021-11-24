@@ -10,13 +10,15 @@ import ControllerNotFoundException from "../exceptions/controllerNotFound"
 // Helper methods
 // -------------------------------------------------
 
-function findFile (filepath: string): string | undefined {
+const exists = (path: string) => fs.promises.access(path).then(() => true).catch(() => false)
+
+async function findFile (filepath: string): Promise<string | undefined> {
 	const [ name, ...dirpath ] = filepath.split(/(\/|\\)/).reverse()
 	const dir = path.join(...dirpath.reverse())
 
-	if (!fs.existsSync(dir)) return
+	if (!(await exists(dir))) return
 
-	const files = fs.readdirSync(dir, { withFileTypes: true })
+	const files = await fs.promises.readdir(dir, { withFileTypes: true })
 
 	for (let i = 0; i < files.length; i++) {
 		if (files[i].isFile() && files[i].name.match(new RegExp(`^${name}`)))
@@ -37,11 +39,11 @@ export default async function findController(controllerPath: string | ((req: any
 	}
 
 	const [controller, method] = controllerPath.split("@")
-	const pathString = findFile(path.join(process.cwd(), controller)) || controller
+	const pathString = await findFile(path.join(process.cwd(), controller)) || controller
 	const sanitizedControllerPath = pathString.split(/(\\|\/)/).reverse()[0].split("@")[0]
 
 	// controller requested doesn't exist
-	if (!pathString || !fs.existsSync(pathString)) {
+	if (!pathString || !exists(pathString)) {
 		throw new ControllerNotFoundException(sanitizedControllerPath, route)
 	}
 

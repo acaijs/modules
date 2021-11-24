@@ -9,7 +9,7 @@ export {default as AbstractQuery} from "./abstractions/builder"
 export {default as SqlQuery} from "./classes/queryStrategies/sql"
 
 // Interfaces
-export type { default as Pagination } from "./interfaces/PaginatedResponse"
+export type { default as PaginatedResponse } from "./interfaces/PaginatedResponse"
 
 // -------------------------------------------------
 // Connection handling

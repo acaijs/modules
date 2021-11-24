@@ -9,7 +9,7 @@ import RequestInterface, { ICustomIncomingMessage } from "../../../interfaces/ht
 // Utils
 import censor from "../../../utils/censor"
 
-export default async function smartResponse (payload: string | RequestInterface | ResponseInterface | Record<string, unknown> | (() => any), request: ICustomIncomingMessage, viewPrefix?: string) {
+export default async function smartResponse (payload: [string | RequestInterface | ResponseInterface | Record<string, unknown> | (() => any), any], request: ICustomIncomingMessage, viewPrefix?: string) {
 	const headers = {} as Record<string, any>
 	let body 	= "" as string | Record<string, unknown>
 	let status 	= 200
@@ -19,9 +19,14 @@ export default async function smartResponse (payload: string | RequestInterface 
 		if (k !== "content-length") headers[k] = request.headers[k]
 	})
 
+	// merge later headers
+	Object.keys(payload[1].headers).forEach((k) => {
+		if (k !== "content-length") headers[k] = payload[1].headers[k]
+	})
+
 	// prepare content
-	if (typeof payload === "function" && (payload as unknown as {utility: string}).utility === "response") {
-		const data 	= payload()
+	if (typeof payload[0] === "function" && (payload[0] as unknown as {utility: string}).utility === "response") {
+		const data 	= payload[0]()
 		status 		= data.status || 200
 		body		= (data.body as string) || ""
 
@@ -40,7 +45,7 @@ export default async function smartResponse (payload: string | RequestInterface 
 		}
 	}
 	else {
-		body = payload as string | Record<string, unknown>
+		body = payload[0] as string | Record<string, unknown>
 	}
 
 	if (typeof body === "object") {

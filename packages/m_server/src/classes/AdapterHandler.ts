@@ -85,10 +85,10 @@ export default class AdapterHandler {
 			const controller = typeof precontroller === "string" ? await findController( `${this.adapter.config.filePrefix || ""}/${precontroller}`, request.route) : precontroller
 
 			// Pass through middlewares
-			const composition = composeMiddlewares([...globals, ...middlewares] as ([MiddlewareInterface, string[] | undefined])[], controller)
-			const response = composition()(request)
+			const composition = composeMiddlewares([...globals, ...middlewares] as ([MiddlewareInterface, string[] | undefined])[])
+			const middlewarerequest = await composition(request)
 
-			return response
+			return [await controller(middlewarerequest), middlewarerequest]
 		}, this)
 	}
 }

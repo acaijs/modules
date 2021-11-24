@@ -16,6 +16,8 @@ export default function foreignHandler(this: Model, foreign: RelationDataInterfa
 				if (key) {
 					return foreign.model().find(key as string)
 				}
+
+				return undefined
 			},
 			set: (value: string | number | Model) => {
 				if (value && (value as Model).$values)
@@ -24,7 +26,7 @@ export default function foreignHandler(this: Model, foreign: RelationDataInterfa
 					this.$values[foreign.foreignKey] = value
 			},
 			value: () => {
-				this.$values[foreign.foreignKey]
+				return this.$values[foreign.foreignKey]
 			},
 		}
 	}

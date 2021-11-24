@@ -41,7 +41,7 @@ export default class Model {
 			for (let i = 0; i < $allFields.length; i++) {
 				const field 	= $allFields[i]
 				const foreign	= (modelClass.$relations || []).find((i) => i.name === field.name)
-				const handler 	= foreign ? foreignHandler.bind(this)(foreign) : undefined
+				const handler 	= foreign ? foreignHandler : undefined
 
 				// define custom getter
 				Object.defineProperty(this, field.name, {
@@ -61,7 +61,7 @@ export default class Model {
 					get: () => {
 						// custom getter
 						if (handler) {
-							return handler
+							return handler.bind(this)(foreign!)
 						}
 						// not a foreign
 						else {
@@ -133,8 +133,8 @@ export default class Model {
 		return this.query().paginate<I>(page, perPage)
 	}
 
-	public static async find <T extends typeof Model, I = InstanceType<T>> (this: T, id: string | number): Promise<I | void> {
-		return (await this.query().orderBy(this.$primary).where(this.$primary, id).limit(1).get())[0] as unknown as I | void
+	public static async find <T extends typeof Model, I = InstanceType<T>> (this: T, id: string | number): Promise<I | undefined> {
+		return (await this.query().orderBy(this.$primary).where(this.$primary, id).limit(1).get())[0] as unknown as I | undefined
 	}
 
 	public static async findOrFail <T extends typeof Model, I = InstanceType<T>> (this: T, id: string | number): Promise<I> {
@@ -151,23 +151,23 @@ export default class Model {
 		return response as I
 	}
 
-	public static async first <T extends typeof Model> (this: T): Promise<InstanceType<T> | void> {
+	public static async first <T extends typeof Model> (this: T): Promise<InstanceType<T> | undefined> {
 		return this.query().first()
 	}
 
-	public static async last <T extends typeof Model, I = InstanceType<T>> (this: T): Promise<I | void> {
+	public static async last <T extends typeof Model, I = InstanceType<T>> (this: T): Promise<I | undefined> {
 		return this.query().last<I>()
 	}
 
-	public static async insert <T extends typeof Model, I = InstanceType<T>> (this: T, fields: Partial<InstanceType<T>>): Promise<I> {
+	public static async insert <T extends typeof Model, I extends InstanceType<T> = InstanceType<T>> (this: T, fields: Partial<InstanceType<T>>): Promise<I> {
 		const instance = new this()
 		instance.fill(fields)
 		await instance.save()
-		return instance as any as I
+		return instance as I
 	}
 
 	public static async insertMany <T extends typeof Model, I = InstanceType<T>> (this: T, rows: Partial<InstanceType<T>>[]): Promise<I[]> {
-		return Promise.all(rows.map(row => this.insert(row))) as any as Promise<I[]>
+		return Promise.all(rows.map(i => this.insert(i))) as Promise<I[]>
 	}
 
 	// -------------------------------------------------
