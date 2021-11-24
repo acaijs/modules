@@ -5,11 +5,11 @@
 */
 
 // Modules
-export { default as Presenter } from "./modules/Presenter"
-export { default as CustomException } from "./modules/CustomException"
-export { default as ErrorProvider } from "./modules/ErrorProvider"
-export { default as buildBodyParserMiddleware } from "./modules/BodyParserMiddleware"
-export { default as response } from "./modules/response"
+export { default as response } from "./modules/general/response"
+export { default as Presenter } from "./modules/general/Presenter"
+export { default as ErrorProvider } from "./modules/providers/ErrorProvider"
+export { default as CustomException } from "./modules/exceptions/CustomException"
+export { default as buildBodyParserMiddleware } from "./modules/middlewares/bodyparser"
 
 // Utils
 export { default as FileHandler } from "./utils/FileHandler"

@@ -1,5 +1,5 @@
 // Interfaces
-import ResponseUtilityOptions from "../interfaces/responseUtility"
+import ResponseUtilityOptions from "../../interfaces/responseUtility"
 
 /**
  * ### Response utility
@@ -22,6 +22,8 @@ function response (options?: Partial<ResponseUtilityOptions>) {
 	responseUtility.view 	= (name: string) 					=> {preparedoptions.view 	= name; 	return responseUtility}
 	responseUtility.status 	= (status: number) 					=> {preparedoptions.status 	= status; 	return responseUtility}
 	responseUtility.body 	= (body: unknown) 					=> {preparedoptions.body 	= body; 	return responseUtility}
+	responseUtility.json 	= (body: unknown) 					=> {preparedoptions.body 	= body; 	return responseUtility}
+	responseUtility.data 	= (body: unknown) 					=> {preparedoptions.body 	= body; 	return responseUtility}
 
 	return responseUtility
 }

@@ -5,10 +5,10 @@ import * as fs from "fs"
 import { MiddlewareInterface } from "@acai/interfaces"
 
 // Interfaces
-import BodyParseConfig from "../interfaces/bodyParserConfig"
+import BodyParseConfig from "../../interfaces/bodyParserConfig"
 
 // Utils
-import FileHandler from "../utils/FileHandler"
+import FileHandler from "../../utils/FileHandler"
 
 
 export default function buildBodyParserMiddleware (config?: Partial<BodyParseConfig>) {

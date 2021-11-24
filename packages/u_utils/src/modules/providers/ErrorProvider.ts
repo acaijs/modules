@@ -2,13 +2,13 @@
 import { ProviderInterface, CustomExceptionInterface, SerializedAdapterInterface } from "@acai/interfaces"
 
 // Modules
-import response from "../modules/response"
+import response from "../general/response"
 
 // Utils
-import isApi			from "../utils/isApi"
-import isDevelopment	from "../utils/isDevelopment"
-import logError			from "../utils/logError"
-import storeLog 		from "../utils/storeLog"
+import isApi			from "../../utils/isApi"
+import isDevelopment	from "../../utils/isDevelopment"
+import logError			from "../../utils/logError"
+import storeLog 		from "../../utils/storeLog"
 
 export default class ErrorProvider {
 	// -------------------------------------------------

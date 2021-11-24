@@ -1,5 +1,5 @@
 // Interfaces
-import GenericObject from "../interfaces/generic"
+import GenericObject from "../../interfaces/generic"
 
 export default abstract class BasePresenter {
 	// -------------------------------------------------
@@ -42,8 +42,36 @@ export default abstract class BasePresenter {
 	}
 
 	// -------------------------------------------------
+	// Utilitary methods
+	// -------------------------------------------------
+
+	public async serialize (obj: GenericObject, fields?: string[]) {
+		const reduce = (fields?: string[]) =>
+			(obj: GenericObject) =>
+				(fields || Object.keys(obj))
+					.reduce((prev, curr) =>
+						({...prev, [curr]: (obj[curr]?.toObject ? obj[curr]?.toObject() : obj[curr]?.toString()) })
+					, {})
+
+		if (obj.toObject) {
+			const serialized = obj.toObject()
+
+			return reduce(fields)(serialized)
+		}
+
+		return reduce(fields)(obj)
+	}
+
+	// -------------------------------------------------
 	// Helper methods
 	// -------------------------------------------------
+
+	protected async checkMethod (type: string) {
+		if ((this as any)[`${type}List`]) return `${type}List`
+		if ((this as any)[type]) return type
+
+		return undefined
+	}
 
 	protected async prepareFormatList (data: GenericObject, type: string) {
 		return Promise.all(data.map(async item => {
@@ -70,12 +98,11 @@ export default abstract class BasePresenter {
 			let data
 
 			// Use custom formatter
-			if (formatType) {
-				data = await this.prepareFormatList(list, formatType)
-			}
-
+			if (formatType)
+				data = await this.prepareFormatList(list, [formatType, "format"].find(this.checkMethod.bind(this))!)
 			// Use default list format if found or just format
-			data = await this.prepareFormatList(list, (this as any).formatList? "formatList" : "format")
+			else
+				data = await this.prepareFormatList(list, ["format"].find(this.checkMethod.bind(this))!)
 
 			// Insert the rest of the pagination data
 			const insert = {...(extraData || {}),...(await this.formatPagination({...model,data}))}
