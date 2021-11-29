@@ -170,6 +170,12 @@ export default class Model {
 		return Promise.all(rows.map(i => this.insert(i))) as Promise<I[]>
 	}
 
+	public static async updateMany <T extends typeof Model, I = InstanceType<T>> (this: T, models: Record<string, InstanceType<T>> | [string, InstanceType<T>]) {
+		const normalized = Array.isArray(models) ? models : Object.entries(models)
+
+		Promise.all(normalized.map(entry => void this.query().where(this.$primary, entry[0]).update(entry[1])))
+	}
+
 	// -------------------------------------------------
 	// Migration methods
 	// -------------------------------------------------
