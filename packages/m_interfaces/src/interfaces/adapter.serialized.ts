@@ -1,5 +1,5 @@
 // Interfaces
-import MiddlewareInterface from "./middleware"
+import MiddlewareInterface from "../types/middleware"
 import ProviderInterface from "./provider"
 import AdapterInterface from "./adapter"
 import ServerConfigInterface from "./server.config"

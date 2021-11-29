@@ -1,6 +1,6 @@
 // Interfaces
 import ServerConfigInterface from "./server.config"
-import MiddlewareType from "./middleware"
+import MiddlewareType from "../types/middleware"
 import ProviderInterface from "./provider"
 import AdapterInterface from "./adapter"
 import SerializedAdapterInterface from "./adapter.serialized"

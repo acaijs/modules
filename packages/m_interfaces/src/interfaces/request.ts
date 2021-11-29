@@ -10,6 +10,11 @@ export default interface ServerRequest<RawRequest = any> {
 	body: any;
 
 	/**
+	 * Method is the connection method made to the request (may not be applied to all server adapters)
+	 */
+	method: string;
+
+	/**
 	 * Query is a immutable side effect that serves organization. Such as pagination, perpage, filters, etc
 	 */
 	query: Record<string, string | boolean | number>;
