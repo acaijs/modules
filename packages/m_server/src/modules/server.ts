@@ -1,6 +1,6 @@
 // Interfaces
 import { AdapterInterface, ClassType, SerializedAdapterInterface } from "@acai/interfaces"
-import { ProviderInterface, MiddlewareInterface } from "@acai/interfaces"
+import { ProviderInterface, MiddlewareType } from "@acai/interfaces"
 import { ServerConfigInterface, ServerInterface } from "@acai/interfaces"
 
 // Utils
@@ -150,14 +150,14 @@ export default class Server implements ServerInterface {
 	// Middleware methods
 	// -------------------------------------------------
 
-	public addMiddleware (id: string, middleware: MiddlewareInterface) : void;
-	public addMiddleware (adapter: string | string[], id: string, middleware: MiddlewareInterface) : void;
+	public addMiddleware (id: string, middleware: MiddlewareType) : void;
+	public addMiddleware (adapter: string | string[], id: string, middleware: MiddlewareType) : void;
 
-	public addMiddleware(idOrAdapter: string | string[], middlewareOrId: string | MiddlewareInterface, cb?: MiddlewareInterface): void {
+	public addMiddleware(idOrAdapter: string | string[], middlewareOrId: string | MiddlewareType, cb?: MiddlewareType): void {
 		// normalize instances
 		const adapters = cb && (typeof idOrAdapter === "string" ? [idOrAdapter] : idOrAdapter)
 		const id = (cb ? middlewareOrId : idOrAdapter) as string
-		const middleware = cb ? cb : middlewareOrId as MiddlewareInterface
+		const middleware = cb ? cb : middlewareOrId as MiddlewareType
 
 		if (adapters) {
 			// make sure all adapters referenced exist
@@ -172,10 +172,10 @@ export default class Server implements ServerInterface {
 		Object.values(this.adapters).forEach(adapter => adapter.middlewares[id] = middleware)
 	}
 
-	public addMiddlewares (middlewares: Record<string, MiddlewareInterface>) : void;
-	public addMiddlewares (adapter: string | string[], middlewares: Record<string, MiddlewareInterface>) : void;
+	public addMiddlewares (middlewares: Record<string, MiddlewareType>) : void;
+	public addMiddlewares (adapter: string | string[], middlewares: Record<string, MiddlewareType>) : void;
 
-	public addMiddlewares(middlewaresOrAdapter: Record<string, MiddlewareInterface> | string | string[], middlewares?: Record<string, MiddlewareInterface>): void {
+	public addMiddlewares(middlewaresOrAdapter: Record<string, MiddlewareType> | string | string[], middlewares?: Record<string, MiddlewareType>): void {
 		// normalize instances
 		const adapters = middlewares ? (typeof middlewaresOrAdapter === "string" ? [middlewaresOrAdapter] : middlewaresOrAdapter as string[]) : undefined
 		const middlewareGroup = middlewares ? middlewares : middlewaresOrAdapter
@@ -222,13 +222,13 @@ export default class Server implements ServerInterface {
 	// Global middleware methods
 	// -------------------------------------------------
 
-	public addGlobal (cb: MiddlewareInterface) : void;
-	public addGlobal (adapter: string | string[], cb: MiddlewareInterface) : void;
+	public addGlobal (cb: MiddlewareType) : void;
+	public addGlobal (adapter: string | string[], cb: MiddlewareType) : void;
 
-	public addGlobal(adapterOrCallback: MiddlewareInterface | string | string[], cb?: MiddlewareInterface): void {
+	public addGlobal(adapterOrCallback: MiddlewareType | string | string[], cb?: MiddlewareType): void {
 		// normalize instances
 		const adapters = cb && (typeof adapterOrCallback === "string" ? [adapterOrCallback]:adapterOrCallback as string[])
-		const callback = cb || adapterOrCallback as MiddlewareInterface
+		const callback = cb || adapterOrCallback as MiddlewareType
 
 		if (adapters) {
 			// make sure all adapters referenced exist
@@ -242,13 +242,13 @@ export default class Server implements ServerInterface {
 		Object.values(this.adapters).forEach(adapter => adapter.globals.push(callback))
 	}
 
-	public addGlobals (middlewares: MiddlewareInterface[]) : void;
-	public addGlobals (adapter: string | string[], middlewares: MiddlewareInterface[]) : void;
+	public addGlobals (middlewares: MiddlewareType[]) : void;
+	public addGlobals (adapter: string | string[], middlewares: MiddlewareType[]) : void;
 
-	public addGlobals(adapterOrGlobals: string | string[] | MiddlewareInterface[], globalsOrNone?: MiddlewareInterface[]): void {
+	public addGlobals(adapterOrGlobals: string | string[] | MiddlewareType[], globalsOrNone?: MiddlewareType[]): void {
 		// normalize instances
 		const adapters = globalsOrNone && (typeof adapterOrGlobals === "string" ? [adapterOrGlobals] : adapterOrGlobals as string[])
-		const globals = globalsOrNone || adapterOrGlobals as MiddlewareInterface[]
+		const globals = globalsOrNone || adapterOrGlobals as MiddlewareType[]
 
 		if (adapters) {
 			// make sure all adapters referenced exist
@@ -259,7 +259,7 @@ export default class Server implements ServerInterface {
 		}
 
 		// push to all adapters
-		(adapterOrGlobals as MiddlewareInterface[]).forEach(global => this.addGlobal(global))
+		(adapterOrGlobals as MiddlewareType[]).forEach(global => this.addGlobal(global))
 	}
 
 	public clearGlobals () : void;

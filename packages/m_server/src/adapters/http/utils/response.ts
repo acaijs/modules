@@ -20,7 +20,7 @@ export default async function smartResponse (payload: [string | RequestInterface
 	})
 
 	// merge later headers
-	Object.keys(payload[1].headers).forEach((k) => {
+	Object.keys(payload[1]?.headers || {}).forEach((k) => {
 		if (k !== "content-length") headers[k] = payload[1].headers[k]
 	})
 

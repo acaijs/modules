@@ -1,14 +1,15 @@
 // Interfaces
-import { CustomExceptionInterface, MiddlewareInterface, SerializedAdapterInterface } from "@acai/interfaces"
+import { CustomExceptionInterface, SerializedAdapterInterface } from "@acai/interfaces"
 
 // Utils
 import findController from "../utils/findController"
-import composeMiddlewares from "../utils/composeMiddlewares"
 import safeHandle from "../utils/safeHandle"
 
 // Exceptions
 import MiddlewareNotFound from "../exceptions/middlewareNotFound"
-import Composable from "../utils/composable"
+
+// Classes
+import MiddlewareHandler from "./MiddlewareHandler"
 
 
 export default class AdapterHandler {
@@ -68,27 +69,43 @@ export default class AdapterHandler {
 			const provider = this.adapter.providers[i]
 			const response = provider.onError && await provider.onError({error, server: this.adapter, request})
 
-			if (response) return response
+			if (response) return [response, request]
 		}
+
+		return undefined
 	}
 
 	public async onRequest (request: any, precontroller: string | ((...args: any[]) => any), middlewareNames: string[] = []) {
-		return await safeHandle(async () => {
+		const controller = await safeHandle(async () => {
+			// Get controller method
+			return typeof precontroller === "string" ? await findController( `${this.adapter.config.filePrefix || ""}/${precontroller}`, request.route) : precontroller
+		}, this, request)
+
+		const globalsresponse = await safeHandle(async () => {
+			// gather compose middlewares
+			const globals = this.adapter.globals.map(item => [item, undefined])
+
+			// Pass through middlewares
+			const composition = new MiddlewareHandler(globals as any)
+			return composition.pipe(request)
+		}, this, request, request)
+
+		if (globalsresponse.length === 3 || !Array.isArray(globalsresponse)) return [globalsresponse]
+
+		const middlewaresresponse = await safeHandle(async () => {
 			// check if all middlewares are available
 			middlewareNames.map(name => name.split(":")[0]).forEach(name => { if (!this.adapter.middlewares[name]) throw new MiddlewareNotFound(name, `${precontroller}`) })
 
 			// gather compose middlewares
-			const globals = this.adapter.globals.map(item => [item, undefined])
 			const middlewares = middlewareNames.map(name => name.split(":")).map(([name, ...data]) => [this.adapter.middlewares[name], (data || "").join(":").split(",")])
 
-			// Get controller method
-			const controller = typeof precontroller === "string" ? await findController( `${this.adapter.config.filePrefix || ""}/${precontroller}`, request.route) : precontroller
-
 			// Pass through middlewares
-			const composition = composeMiddlewares([...globals, ...middlewares] as ([MiddlewareInterface, string[] | undefined])[])
-			const middlewarerequest = await composition(request)
+			const composition = new MiddlewareHandler(middlewares as any)
+			return composition.pipe(globalsresponse[0])
+		}, this, request, globalsresponse)
 
-			return [await controller(middlewarerequest), middlewarerequest]
-		}, this)
+		if (middlewaresresponse.length === 3 || !Array.isArray(middlewaresresponse)) return [middlewaresresponse]
+
+		return [await controller(middlewaresresponse[0]), middlewaresresponse[0]]
 	}
 }
