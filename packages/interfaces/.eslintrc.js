@@ -1,5 +1,5 @@
 module.exports = {
-	extends: "../u_preset/.eslintrc.js",
+	extends: "../preset/.eslintrc.js",
 	rules: {
 		/**
 		 * We specifically disable any checks here because we really know
