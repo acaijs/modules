@@ -12,6 +12,9 @@
 		".eslintrc.js",
 		"tsconfig.json"
 	],
+	"scripts": {
+		"build": ""
+	},
 	"author": "Nuinalp and APO Softworks Authors",
 	"license": "BSD-3-Clause",
 	"devDependencies": {

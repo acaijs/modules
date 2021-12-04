@@ -29,8 +29,8 @@
 
   "projects": [
     {
-      "packageName": "@acai/testing",
-      "projectFolder": "packages/testing",
+      "packageName": "@acai/config",
+      "projectFolder": "packages/config",
       "shouldPublish": true
     },
     {
@@ -39,8 +39,53 @@
       "shouldPublish": true
     },
     {
+      "packageName": "@acai/model",
+      "projectFolder": "packages/model",
+      "shouldPublish": true
+    },
+    {
       "packageName": "@acai/preset",
       "projectFolder": "packages/preset",
+      "shouldPublish": true
+    },
+    {
+      "packageName": "@acai/query",
+      "projectFolder": "packages/query",
+      "shouldPublish": true
+    },
+    {
+      "packageName": "@acai/router",
+      "projectFolder": "packages/router",
+      "shouldPublish": true
+    },
+    {
+      "packageName": "@acai/runtime",
+      "projectFolder": "packages/runtime",
+      "shouldPublish": true
+    },
+    {
+      "packageName": "@acai/server",
+      "projectFolder": "packages/server",
+      "shouldPublish": true
+    },
+    {
+      "packageName": "@acai/stubber",
+      "projectFolder": "packages/stubber",
+      "shouldPublish": true
+    },
+    {
+      "packageName": "@acai/testing",
+      "projectFolder": "packages/testing",
+      "shouldPublish": true
+    },
+    {
+      "packageName": "@acai/utils",
+      "projectFolder": "packages/utils",
+      "shouldPublish": true
+    },
+    {
+      "packageName": "@acai/validator",
+      "projectFolder": "packages/validator",
       "shouldPublish": true
     }
   ]

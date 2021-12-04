@@ -1,0 +1,7 @@
+{
+	"name": "controller",
+	"targetPath": "test/controllers",
+	"renameToNameFiles": [
+		"index.ts"
+	]
+}

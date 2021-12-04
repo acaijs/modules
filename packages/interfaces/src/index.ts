@@ -7,7 +7,6 @@
 // Interfaces
 export type { default as ServerRequest } from "./interfaces/request"
 export type { default as CustomExceptionInterface } from "./interfaces/exception"
-export type { default as MiddlewareInterface } from "./interfaces/middleware"
 export type { default as ProviderInterface } from "./interfaces/provider"
 export type { default as ResponseInterface } from "./interfaces/response"
 export type { default as ServerConfigInterface } from "./interfaces/server.config"
@@ -17,3 +16,6 @@ export type { default as SerializedAdapterInterface } from "./interfaces/adapter
 
 // Types
 export type { default as ClassType } from "./types/ClassType"
+export type { MiddlewareClassType } from "./types/middleware"
+export type { MiddlewareCbType } from "./types/middleware"
+export type { default as MiddlewareType } from "./types/middleware"

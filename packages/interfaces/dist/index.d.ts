@@ -8,6 +8,10 @@ interface ServerRequest<RawRequest = any> {
      */
     body: any;
     /**
+     * Method is the connection method made to the request (may not be applied to all server adapters)
+     */
+    method: string;
+    /**
      * Query is a immutable side effect that serves organization. Such as pagination, perpage, filters, etc
      */
     query: Record<string, string | boolean | number>;
@@ -40,10 +44,12 @@ interface ResponseInterface {
 }
 type MiddlewareResponse = any | ResponseInterface | string | Record<string, unknown>;
 type nextWrap = (request: ServerRequest) => MiddlewareResponse | Promise<MiddlewareResponse>;
-type MiddlewareType = (request: ServerRequest, next: nextWrap, params?: string[]) => MiddlewareResponse | Promise<MiddlewareResponse>;
-type MiddlewareInterface = {
-    onApply: MiddlewareType;
-} | MiddlewareType;
+type MiddlewareCbType = (request: ServerRequest, next: nextWrap, params: string[]) => MiddlewareResponse | Promise<MiddlewareResponse>;
+type MiddlewareClassType = {
+    onApply: MiddlewareCbType;
+};
+type MiddlewareType = MiddlewareCbType | MiddlewareClassType;
+type MiddlewareInterface = MiddlewareType;
 interface ProviderInterface {
     /**
      * Allows you to boot services (database, mailing, etc) before the server actually starts.
@@ -153,6 +159,13 @@ interface CustomExceptionInterface<Request = ServerRequest> extends Error {
      */
     critical?: boolean;
     /**
+     * Preserve any changes made to the request. If an error has occured during a middleware, it may not have the full flow you may expect
+     * - global: only global middlewares
+     * - all: globals and local middlewares
+     * - none: don't preserve
+     */
+    preserve?: "global" | "all" | "none";
+    /**
      * A way to categorize your errors so you can group them into subsets that can easily be handled together. Such as: route, validation, database, etc.
      */
     type?: string;
@@ -173,7 +186,6 @@ interface CustomExceptionInterface<Request = ServerRequest> extends Error {
         request: Request;
     }): unknown;
 }
-type MiddlewareType$0 = MiddlewareInterface;
 interface ServerInterface {
     // -------------------------------------------------
     // Config methods
@@ -267,8 +279,8 @@ interface ServerInterface {
      * @param {string} id
      * @param {MiddlewareType} middleware
      */
-    addMiddleware(id: string, middleware: MiddlewareType$0): void;
-    addMiddleware(adapter: string | string[], id: string, middleware: MiddlewareType$0): void;
+    addMiddleware(id: string, middleware: MiddlewareType): void;
+    addMiddleware(adapter: string | string[], id: string, middleware: MiddlewareType): void;
     /**
      * ### Add multiple middlewares
      *
@@ -276,8 +288,8 @@ interface ServerInterface {
      *
      * @param {Record<string, MiddlewareType>} middlewares
      */
-    addMiddlewares(middlewares: Record<string, MiddlewareType$0>): void;
-    addMiddlewares(adapter: string | string[], middlewares: Record<string, MiddlewareType$0>): void;
+    addMiddlewares(middlewares: Record<string, MiddlewareType>): void;
+    addMiddlewares(adapter: string | string[], middlewares: Record<string, MiddlewareType>): void;
     /**
      * ### Clear middlewares
      *
@@ -296,8 +308,8 @@ interface ServerInterface {
      * @param {string} id
      * @param {MiddlewareType} middleware
      */
-    addGlobal(cb: MiddlewareType$0): void;
-    addGlobal(adapter: string | string[], cb: MiddlewareType$0): void;
+    addGlobal(cb: MiddlewareType): void;
+    addGlobal(adapter: string | string[], cb: MiddlewareType): void;
     /**
      * ### Add globals
      *
@@ -306,8 +318,8 @@ interface ServerInterface {
      * @param {string} id
      * @param {MiddlewareType} middleware
      */
-    addGlobals(middlewares: MiddlewareType$0[]): void;
-    addGlobals(adapter: string | string[], middlewares: MiddlewareType$0[]): void;
+    addGlobals(middlewares: MiddlewareType[]): void;
+    addGlobals(adapter: string | string[], middlewares: MiddlewareType[]): void;
     /**
      * ### Clear globals
      *
@@ -378,4 +390,4 @@ type ClassType<Instance extends Record<string, any>> = {
 * Use of this source code is governed by a BSD-style license that can be
 * found in the LICENSE file.
 */
-export type { ServerRequest, CustomExceptionInterface, MiddlewareInterface, ProviderInterface, ResponseInterface, ServerConfigInterface, ServerInterface, AdapterInterface, SerializedAdapterInterface, ClassType };
+export type { ServerRequest, CustomExceptionInterface, ProviderInterface, ResponseInterface, ServerConfigInterface, ServerInterface, AdapterInterface, SerializedAdapterInterface, ClassType, MiddlewareClassType, MiddlewareCbType, MiddlewareType };
