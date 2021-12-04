@@ -34,9 +34,9 @@ specifiers:
   formidable: ^2.0.1
   glob: ^7.1.6
   luxon: ^1.26.0
-  mysql2: ^2.2.5
-  pg: ^8.5.1
-  rollup: ^2.56.3
+  mysql2: ~2.3.3
+  pg: ~8.7.1
+  rollup: ~2.60.2
   rollup-plugin-banner2: ^1.2.2
   rollup-plugin-esbuild: ^4.5.0
   rollup-plugin-node-builtins: ^2.1.2
@@ -46,6 +46,7 @@ specifiers:
   rollup-plugin-uglify: ^6.0.4
   supertest: ^6.1.3
   ts-node: ^10.2.1
+  tslib: ~2.3.1
   typescript: ^4.1.5
   uuid: ^8.3.2
 
@@ -95,6 +96,7 @@ dependencies:
   rollup-plugin-uglify: 6.0.4_rollup@2.60.2
   supertest: 6.1.6
   ts-node: 10.4.0_93e46f6a697db70638e1c817267526bc
+  tslib: 2.3.1
   typescript: 4.5.2
   uuid: 8.3.2
 
@@ -1883,6 +1885,10 @@ packages:
       - supports-color
     dev: false
 
+  /bignumber.js/9.0.0:
+    resolution: {integrity: sha512-t/OYhhJ2SD+YGBQcjY8GzzDHEk9f3nerxjtfa6tlMXfe7frs/WozhvCNoGvpM0P3bNf3Gq5ZRMlGr5f3r4/N8A==}
+    dev: false
+
   /bl/0.8.2:
     resolution: {integrity: sha1-yba8oI0bwuoA/Ir7Txpf0eHGbk4=}
     dependencies:
@@ -3330,6 +3336,16 @@ packages:
     resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
     dev: false
 
+  /mysql/2.18.1:
+    resolution: {integrity: sha512-Bca+gk2YWmqp2Uf6k5NFEurwY/0td0cpebAucFpY/3jhrwrVGuxU2uQFCHjU19SJfje0yQvi+rVWdq78hR5lig==}
+    engines: {node: '>= 0.6'}
+    dependencies:
+      bignumber.js: 9.0.0
+      readable-stream: 2.3.7
+      safe-buffer: 5.1.2
+      sqlstring: 2.3.1
+    dev: false
+
   /mysql2/2.3.3:
     resolution: {integrity: sha512-wxJUev6LgMSgACDkb/InIFxDprRa6T95+VEoR+xPvtngtccNH2dGjEB/fVZ8yg1gWv1510c9CvXuJHi5zUm0ZA==}
     engines: {node: '>= 8.0'}
@@ -4043,6 +4059,11 @@ packages:
     resolution: {integrity: sha1-BOaSb2YolTVPPdAVIDYzuFcpfiw=}
     dev: false
 
+  /sqlstring/2.3.1:
+    resolution: {integrity: sha1-R1OT/56RR5rqYtyvDKPRSYOn+0A=}
+    engines: {node: '>= 0.6'}
+    dev: false
+
   /sqlstring/2.3.2:
     resolution: {integrity: sha512-vF4ZbYdKS8OnoJAWBmMxCQDkiEBkGQYU7UZPtL8flbDRSNkhaXvRJ279ZtI6M+zDaQovVU4tuRgzK5fVhvFAhg==}
     engines: {node: '>= 0.6'}
@@ -4428,29 +4449,33 @@ packages:
     dev: false
 
   file:projects/config.tgz:
-    resolution: {integrity: sha512-HKyeWg8Qx0DpmaJqWEInMYDyRmmr48Ix6w9QCiXdJk4SxguGi9NDPhB4bLvgO1SVOw4gTn5fLZ7zpTRX4Aye+g==, tarball: file:projects/config.tgz}
+    resolution: {integrity: sha512-nqPkuDRM06MAQwKBhHF9yL3aHVY0DqCfQ7Bsh0Y8AkkKm8xaxJQVQ3N92NGuJUui7G1uzBQbtFIwpffjzP2VDw==, tarball: file:projects/config.tgz}
     name: '@rush-temp/config'
     version: 0.0.0
     dependencies:
       '@types/node': 14.17.34
+      rollup: 2.60.2
+      tslib: 2.3.1
       typescript: 4.5.2
     dev: false
 
   file:projects/interfaces.tgz:
-    resolution: {integrity: sha512-xX9x719LVDshYr7T6BC1ZuWTE2jiezWkbABxx/SQrf1eekByx2g7UDJY7RreADESKNLDIMFpqEmcyfSNiefNgw==, tarball: file:projects/interfaces.tgz}
+    resolution: {integrity: sha512-/ZNVaQ4ciThhzy3mkRub9p7Vw8m00R7gLNo54qbA6tyhOhCwKWZcR+LRP7WzAsMj8PLxk+Cy3Ll4Tm6O9gQzpg==, tarball: file:projects/interfaces.tgz}
     name: '@rush-temp/interfaces'
     version: 0.0.0
     dependencies:
       '@types/cookies': 0.7.7
       '@types/node': 14.17.34
       eslint: 7.32.0
+      rollup: 2.60.2
+      tslib: 2.3.1
       typescript: 4.5.2
     transitivePeerDependencies:
       - supports-color
     dev: false
 
   file:projects/model.tgz:
-    resolution: {integrity: sha512-JJhyVgR9dIjXFNw/1YRevdJr4h13ARW7CGq4+wObDp5oFbobBvLW/lpFwtVFCs+FeKw5UGwHXz+ivHSoif5tdA==, tarball: file:projects/model.tgz}
+    resolution: {integrity: sha512-P14yaWSRQuuqYFSKfxT2UfMX4vqMrwbNx6yaJUrEgXuAQ+JWfn68rvUVPjUli32DtJAnfLrxUjgBW8nYbwYw5w==, tarball: file:projects/model.tgz}
     name: '@rush-temp/model'
     version: 0.0.0
     dependencies:
@@ -4459,6 +4484,8 @@ packages:
       '@types/node': 14.17.34
       bcrypt: 5.0.1
       luxon: 1.28.0
+      rollup: 2.60.2
+      tslib: 2.3.1
       typescript: 4.5.2
       uuid: 8.3.2
     transitivePeerDependencies:
@@ -4466,7 +4493,7 @@ packages:
     dev: false
 
   file:projects/preset.tgz_typescript@4.5.2:
-    resolution: {integrity: sha512-Flg8Mt7KPRV7odHdGRotLaxSiiRjRIHjW/92Z3leTRRYlgHyhTLhzvnrtqjxXY2+8IwdwXrwsUOgX1q5GQWpKQ==, tarball: file:projects/preset.tgz}
+    resolution: {integrity: sha512-+OY41H5t7duY4xNMKbM58HehGWhMhNIuiQ56Pes6P80aUZyGDOfRR0acEXB8c9B3imd4lJozueI0JYX8MlJxUQ==, tarball: file:projects/preset.tgz}
     id: file:projects/preset.tgz
     name: '@rush-temp/preset'
     version: 0.0.0
@@ -4474,19 +4501,24 @@ packages:
       '@typescript-eslint/eslint-plugin': 4.33.0_d00b196ac5df1286ea7e45797bebddbc
       '@typescript-eslint/parser': 4.33.0_eslint@7.32.0+typescript@4.5.2
       eslint: 7.32.0
+      rollup: 2.60.2
+      tslib: 2.3.1
     transitivePeerDependencies:
       - supports-color
       - typescript
     dev: false
 
   file:projects/query.tgz:
-    resolution: {integrity: sha512-1i+VJaHenDBKFaSwR1ZnnOPJiREmB2nFSp65dLce3HG3hgd+RL1GidUbL4x4phUbVPeUyyXKYQvM/5v38cYCjw==, tarball: file:projects/query.tgz}
+    resolution: {integrity: sha512-3orUx3H81WhdANIZHgFHFFTKl2r8VPs4cJMOJwOmC/g9LLJUFtT88DHgZkSv5cJMwS4DzOyNOhCVV/qdwP0qXg==, tarball: file:projects/query.tgz}
     name: '@rush-temp/query'
     version: 0.0.0
     dependencies:
       '@types/node': 14.17.34
       '@types/pg': 7.14.11
       eslint: 7.32.0
+      mysql: 2.18.1
+      rollup: 2.60.2
+      tslib: 2.3.1
       typescript: 4.5.2
     optionalDependencies:
       mysql2: 2.3.3
@@ -4497,19 +4529,21 @@ packages:
     dev: false
 
   file:projects/router.tgz:
-    resolution: {integrity: sha512-6DElM7GOdaj5eHbW5nKDq+cpbIJaUtgkO4B8Xp92aTbvcjtvCUsjMJJ0CUVDAXZ5Llxjxz2RoJB/m2SA2oMCDA==, tarball: file:projects/router.tgz}
+    resolution: {integrity: sha512-hS3vhWiYhK3Xz1xl6k5noRyrYbVVaL00byqFJsg2+IhkO4CLUEuERFOqoEf3t7W/ngklwEQn+pZHywuM1bC3vQ==, tarball: file:projects/router.tgz}
     name: '@rush-temp/router'
     version: 0.0.0
     dependencies:
       '@types/node': 14.17.34
       eslint: 7.32.0
+      rollup: 2.60.2
+      tslib: 2.3.1
       typescript: 4.5.2
     transitivePeerDependencies:
       - supports-color
     dev: false
 
   file:projects/runtime.tgz:
-    resolution: {integrity: sha512-7DiiRhGZHRIGU7OLq/f34m/ihMeJ3VbhRxzJOqjzmvU5v/dGDu3LDW21EvZxqjs7H0G8UaF7YBKVLFzYEaK08A==, tarball: file:projects/runtime.tgz}
+    resolution: {integrity: sha512-KxOp3jgH7YL2wjPj9rJ5jGF5lKJovJEe5ciknAzAkoFVyqmr67qCb8bFfzZ6u5U5S9MAK4GZH/LtMy0tkFhhsQ==, tarball: file:projects/runtime.tgz}
     name: '@rush-temp/runtime'
     version: 0.0.0
     dependencies:
@@ -4525,13 +4559,14 @@ packages:
       rollup-plugin-node-resolve: 5.2.0_rollup@2.60.2
       rollup-plugin-ts: 1.4.7_rollup@2.60.2+typescript@4.5.2
       rollup-plugin-uglify: 6.0.4_rollup@2.60.2
+      tslib: 2.3.1
       typescript: 4.5.2
     transitivePeerDependencies:
       - supports-color
     dev: false
 
   file:projects/server.tgz:
-    resolution: {integrity: sha512-oR1cde9sJgNaBSQw2bCgay5+vyCso4KFojUaLENHYj4K/8topnQL1O+iX506kVwYKH8Mn6DZ2zuxbr7liRRjwQ==, tarball: file:projects/server.tgz}
+    resolution: {integrity: sha512-OFic3HbB+qAnOIJgZaJOueoZGSutoSwcVSlMWeTLunR9nYdWWXKq5fopexZG4NiMkpozT63XTOGKRwghnkpNIQ==, tarball: file:projects/server.tgz}
     name: '@rush-temp/server'
     version: 0.0.0
     dependencies:
@@ -4542,25 +4577,29 @@ packages:
       cookies: 0.8.0
       eslint: 7.32.0
       form-data: 4.0.0
+      rollup: 2.60.2
       supertest: 6.1.6
+      tslib: 2.3.1
       typescript: 4.5.2
     transitivePeerDependencies:
       - supports-color
     dev: false
 
   file:projects/stubber.tgz:
-    resolution: {integrity: sha512-bz6Lv6xTDS5Iu/HDrspT0WDDVQYsjYOUCfG36PQkEZmjHONvbqO/LH2w4GzEkWzTv1fZ52gruTe/1G6NL/VFhg==, tarball: file:projects/stubber.tgz}
+    resolution: {integrity: sha512-A3kVIh1ShaJCPmZzzBQQGCGgejDe+SP7P5x3RdZSnSJCygSQkcE0bKSxGe7F41WuaR1YMd8oSpauq6rid5WM0A==, tarball: file:projects/stubber.tgz}
     name: '@rush-temp/stubber'
     version: 0.0.0
     dependencies:
       '@types/glob': 7.2.0
       '@types/node': 14.17.34
       glob: 7.2.0
+      rollup: 2.60.2
+      tslib: 2.3.1
       typescript: 4.5.2
     dev: false
 
   file:projects/testing.tgz:
-    resolution: {integrity: sha512-aEa72gyOYa7TRySsBsDanrKij2RBjosT0o2ZnJBb1v1fAuxW0o+5XRC+zf7B4ruojzOmPokSjoPtpaO0PxIeVA==, tarball: file:projects/testing.tgz}
+    resolution: {integrity: sha512-FqPUOh5sAFkOBbVhBSmxP4Hnj6Ts3BnVGlJxSrsQ1+OICNxIATiaHlFkyHF76zFP1611aoUcu1gj/1sSTNTBug==, tarball: file:projects/testing.tgz}
     name: '@rush-temp/testing'
     version: 0.0.0
     dependencies:
@@ -4570,7 +4609,9 @@ packages:
       '@typescript-eslint/parser': 4.33.0_eslint@7.32.0+typescript@4.5.2
       eslint: 7.32.0
       glob: 7.2.0
+      rollup: 2.60.2
       ts-node: 10.4.0_93e46f6a697db70638e1c817267526bc
+      tslib: 2.3.1
       typescript: 4.5.2
     transitivePeerDependencies:
       - '@swc/core'
@@ -4578,7 +4619,7 @@ packages:
     dev: false
 
   file:projects/utils.tgz:
-    resolution: {integrity: sha512-MeDlNevoN/D6lDbKBxBFOUCbXC7joPpa4DzEfijAtvPWmmTsxS15nrZgKi3EpA9NS28/BNtMqLAHEXUlQCaeFg==, tarball: file:projects/utils.tgz}
+    resolution: {integrity: sha512-fc2DY07q3sHsc4pJlyJ66bvNuXDhmsHvo6l2uaLE9U+h3QgNmrSG9vktL6cTWfH5YqO3bnhl5lESGTRCA+y2sg==, tarball: file:projects/utils.tgz}
     name: '@rush-temp/utils'
     version: 0.0.0
     dependencies:
@@ -4586,11 +4627,13 @@ packages:
       '@types/glob': 7.2.0
       '@types/node': 14.17.34
       formidable: 2.0.1
+      rollup: 2.60.2
+      tslib: 2.3.1
       typescript: 4.5.2
     dev: false
 
   file:projects/validator.tgz:
-    resolution: {integrity: sha512-/w8YIWrRzlBT5FlIe0NqLzcrYazX7DcIPF/aQJWOtkpXJ+phx2tCotYWHDB8+KyOMOZuLgFmyDQdHLB5o5xa1g==, tarball: file:projects/validator.tgz}
+    resolution: {integrity: sha512-JN5v7YIhYiKu3CeuwxJoObPmHRFRhQ+WHYMy9O36qTpgVw0N4yz0SHZ88ir8AL3PR9yRD9lBmzbWX7IiHVmyow==, tarball: file:projects/validator.tgz}
     name: '@rush-temp/validator'
     version: 0.0.0
     dependencies:
@@ -4599,5 +4642,7 @@ packages:
       '@types/node': 14.17.34
       glob: 7.2.0
       luxon: 1.28.0
+      rollup: 2.60.2
+      tslib: 2.3.1
       typescript: 4.5.2
     dev: false

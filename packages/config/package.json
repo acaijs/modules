@@ -34,5 +34,9 @@
 			"import": "./dist/index.es.js",
 			"require": "./dist/index.js"
 		}
+	},
+	"dependencies": {
+	  "rollup": "~2.60.2",
+	  "tslib": "~2.3.1"
 	}
 }

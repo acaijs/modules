@@ -21,14 +21,12 @@ function _interopNamespace(e) {
         var d = Object.getOwnPropertyDescriptor(e, k);
         Object.defineProperty(n, k, d.get ? d : {
           enumerable: true,
-          get: function () {
-            return e[k];
-          }
+          get: function () { return e[k]; }
         });
       }
     });
   }
-  n['default'] = e;
+  n["default"] = e;
   return Object.freeze(n);
 }
 
@@ -274,7 +272,7 @@ async function findController(controllerPath, route2) {
   if (!pathString || !exists(pathString)) {
     throw new ControllerNotFoundException(sanitizedControllerPath, route2);
   }
-  const file = (await Promise.resolve().then(function () { return /*#__PURE__*/_interopNamespace(require(pathString)); })).default;
+  const file = (await (function (t) { return Promise.resolve().then(function () { return /*#__PURE__*/_interopNamespace(require(t)); }); })(pathString)).default;
   if (typeof file === "object" && !method) {
     throw new utils.CustomException("controller", `Controller (${controller}) is a object but a method was not passed`);
   }
@@ -676,10 +674,8 @@ var src_default = Server;
 
 Object.defineProperty(exports, 'response', {
   enumerable: true,
-  get: function () {
-    return utils.response;
-  }
+  get: function () { return utils.response; }
 });
 exports.HttpAdapter = HttpAdapter;
-exports['default'] = src_default;
+exports["default"] = src_default;
 //# sourceMappingURL=index.js.map

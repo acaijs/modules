@@ -21,5 +21,9 @@
 		"@typescript-eslint/eslint-plugin": "^4.27.0",
 		"@typescript-eslint/parser": "^4.27.0",
 		"eslint": "^7.31.0"
+	},
+	"dependencies": {
+	  "rollup": "~2.60.2",
+	  "tslib": "~2.3.1"
 	}
 }

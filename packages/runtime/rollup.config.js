@@ -2,7 +2,6 @@ import dts from "rollup-plugin-ts"
 import esbuild from "rollup-plugin-esbuild"
 import nodeResolve from "@rollup/plugin-node-resolve"
 import globals from "rollup-plugin-node-globals"
-import {uglify} from "rollup-plugin-uglify"
 import banner from "rollup-plugin-banner2"
 
 const bannerText = "/**\n * Copyright (c) 2020 The Nuinalp and APO Softworks Authors. All rights reserved.\n * Use of this source code is governed by a BSD-style license that can be\n * found in the LICENSE file.\n **/"
@@ -26,7 +25,7 @@ const buildProduction = (bundles = [], buildDefault = true) => {
 					}),
 					globals(),
 					// uglify(),
-					banner(() => bannerText, { sourcemap: true }),
+					banner(() => bannerText),
 				],
 				output: [
 					{
