@@ -2,5 +2,248 @@
  * Copyright (c) 2020 The Nuinalp and APO Softworks Authors. All rights reserved.
  * Use of this source code is governed by a BSD-style license that can be
  * found in the LICENSE file.
- **/"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var context={options:{}},routes=[],cbs=[],macros={},getContext=()=>context,setContext=({options:t,...e},r)=>{const u={...r};t&&Object.keys(t).forEach(e=>{if(e.match(/^!/))u[e.replace(/^!/,"")]=t[e];else if(Array.isArray(t[e])&&Array.isArray(r[e])){const o=t[e];u[e]=[...r[e].filter(t=>!o.find(e=>e===t)),...o]}else"object"==typeof t[e]&&"object"==typeof r[e]?u[e]={...r[e],...t[e]}:u[e]=t[e]}),context={...e,options:{...u}}},clearContext=()=>{context={options:{}}},getRoutes=()=>routes,addRoute=(e,t,o,r)=>{const{prefix:u,...a}=getContext();t=`/${(void 0===u?"/":u)+t}`.replace(/\/$/,"").replace(/^(\\+|\/+)/gm,"/"),e="string"==typeof e?e.replace(/(\\+|\/+)/gm,"/").replace(/(\\|\/)$/gm,"").replace(/^(\\|\/)/gm,""):e;routes.push({file:e,path:t,method:o,options:{...a.options,...r}});const s=routes.length-1;return{options:e=>{routes[s].options={...routes[s].options,...e}}}},clearRoutes=()=>{routes=[]},getCallbacks=()=>cbs,addCallback=e=>{cbs.push(e)},clearCallbacks=()=>{cbs=[]},getMacro=e=>{if(!macros[e])throw new Error(`Macro '${e}' not found`);return macros[e]},setMacro=(e,t)=>{macros[e]=t},routeAnyMethod=(e,t,o={})=>addRoute(t,e,"ANY",o),routeGetMethod=(e,t,o={})=>addRoute(t,e,"GET",o),routePostMethod=(e,t,o={})=>addRoute(t,e,"POST",o),routePatchMethod=(e,t,o={})=>addRoute(t,e,"PATCH",o),routePutMethod=(e,t,o={})=>addRoute(t,e,"PUT",o),routeDeleteMethod=(e,t,o={})=>addRoute(t,e,"DELETE",o),routeMacro=(e,t)=>{setMacro(e,t)},routeUseMacro=async(e,...t)=>{const o=getMacro(e);await o(...t)},routeOptions=(e,t)=>{const o={...getContext(),options:{...e}},r={...getContext().options};addCallback(()=>{setContext(o,r),t()})},routeMany=(e,t,o,r={})=>{e.includes("GET")&&routeGetMethod(t,o,r),e.includes("PUT")&&routePutMethod(t,o,r),e.includes("POST")&&routePostMethod(t,o,r),e.includes("PATCH")&&routePatchMethod(t,o,r),e.includes("DELETE")&&routeDeleteMethod(t,o,r)},routeGroup=(e,t,o)=>{e=(void 0===getContext().prefix?"":getContext().prefix)+(e||"");const r={...getContext(),...o,prefix:e},u={...getContext().options};addCallback(()=>{setContext(r,u),t()})},routeBuild=(e=!0)=>{let t=getCallbacks();for(;0<t.length;){clearCallbacks();for(let e=0;e<t.length;e+=1)t[e]();t=getCallbacks()}const o=getRoutes();e&&clearRoutes();const r=[];return o.reverse().forEach(t=>{r.find(e=>e.path===t.path&&e.method===t.method)||r.push(t)}),r.reverse()},clearMethod=()=>{clearRoutes(),clearContext()};routeMacro("resource",(e,t)=>{routeGetMethod(`${e}`,`${t}@index`),routePostMethod(`${e}`,`${t}@store`),routeGroup("/{id}",()=>{routeGetMethod("/",`${t}@show`),routePatchMethod("/",`${t}@update`),routePutMethod("/",`${t}@update`),routeDeleteMethod("/",`${t}@destroy`)})});var route=routeAnyMethod;route.any=routeAnyMethod,route.get=routeGetMethod,route.post=routePostMethod,route.put=routePutMethod,route.patch=routePatchMethod,route.delete=routeDeleteMethod,route.options=routeOptions,route.group=routeGroup,route.many=routeMany,route.build=routeBuild,route.clear=clearMethod,route.macro=routeMacro,route.use=routeUseMacro;var route_default=route;function stringToType(e){return"true"===e||"false"!==e&&(`${parseFloat(e)}`===e?parseFloat(e):e)}function buildQueryParams(e=""){const[t,...o]=e.split("?"),r={};return new URLSearchParams(o.join("?")).forEach((e,t)=>r[t]=stringToType(e)||!0),[t,r]}var routerModule=(e,o,t,s={})=>{const[r,u]=buildQueryParams(e.replace(/(\\|\/)^/,"")),n=new RegExp(`${s.variableEnclose||"{"}\\s*\\S+\\??\\s*${s.variableEnclose||"}"}`),l=new RegExp(`\\?{1}\\s*${s.variableEnclose||"}"}`);let c={};t=t.find(e=>{c={};const t=e.path.split("/").filter(e=>""!==e),a=r.split("/").filter(e=>""!==e);if(o!==e.method&&("OPTIONS"!==o||!1===s.allowOptionsMatch)&&"ANY"!==e.method)return!1;if(a.length>t.length&&"*"!==t[t.length-1])return!1;e=t.filter((e,t)=>{var o=n.test(e),r=l.test(e),u=e.replace(new RegExp(`${s.variableEnclose||"{"}\\s*`),"").replace(new RegExp(`\\??\\s*${s.variableEnclose||"}"}`),"");return o?(a[t]&&(c[u]=a[t]),!r&&!a[t]):e!==a[t]}).length;return!e&&"*"===t[t.length-1]&&a.length>t.length&&(c["*"]=a.splice(0,t.length)),!e});if(t)return{...t,options:t.options,variables:c,query:u}},router_default=routerModule;exports.route=route_default,exports.router=router_default;
+ **/'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+// src/utils/context.ts
+var context = { options: {} };
+var routes = [];
+var cbs = [];
+var macros = {};
+var getContext = () => context;
+var setContext = ({ options, ...newContext }, lastoptions) => {
+  const newoptions = { ...lastoptions };
+  if (options) {
+    Object.keys(options).forEach((key) => {
+      if (!key.match(/^!/)) {
+        if (Array.isArray(options[key]) && Array.isArray(lastoptions[key])) {
+          const arr = options[key];
+          newoptions[key] = [...lastoptions[key].filter((i) => !arr.find((x) => x === i)), ...arr];
+        } else if (typeof options[key] === "object" && typeof lastoptions[key] === "object") {
+          newoptions[key] = { ...lastoptions[key], ...options[key] };
+        } else {
+          newoptions[key] = options[key];
+        }
+      } else {
+        newoptions[key.replace(/^!/, "")] = options[key];
+      }
+    });
+  }
+  context = { ...newContext, options: { ...newoptions } };
+};
+var clearContext = () => {
+  context = { options: {} };
+};
+var getRoutes = () => routes;
+var addRoute = (view, path, method, options) => {
+  const { prefix, ..._context } = getContext();
+  const completepath = `/${(prefix === void 0 ? "/" : prefix) + path}`.replace(/\/$/, "").replace(/^(\\+|\/+)/gm, "/");
+  const clearview = typeof view === "string" ? view.replace(/(\\+|\/+)/gm, "/").replace(/(\\|\/)$/gm, "").replace(/^(\\|\/)/gm, "") : view;
+  routes.push({
+    file: clearview,
+    path: completepath,
+    method,
+    options: {
+      ..._context.options,
+      ...options
+    }
+  });
+  const index = routes.length - 1;
+  return {
+    options: (newoptions) => {
+      routes[index].options = {
+        ...routes[index].options,
+        ...newoptions
+      };
+    }
+  };
+};
+var clearRoutes = () => {
+  routes = [];
+};
+var getCallbacks = () => cbs;
+var addCallback = (newCallback) => {
+  cbs.push(newCallback);
+};
+var clearCallbacks = () => {
+  cbs = [];
+};
+var getMacro = (name) => {
+  if (!macros[name]) {
+    throw new Error(`Macro '${name}' not found`);
+  }
+  return macros[name];
+};
+var setMacro = (name, callback) => {
+  macros[name] = callback;
+};
+
+// src/modules/route.ts
+var routeAnyMethod = (path, filePath, options = {}) => {
+  return addRoute(filePath, path, "ANY", options);
+};
+var routeGetMethod = (path, filePath, options = {}) => {
+  return addRoute(filePath, path, "GET", options);
+};
+var routePostMethod = (path, filePath, options = {}) => {
+  return addRoute(filePath, path, "POST", options);
+};
+var routePatchMethod = (path, filePath, options = {}) => {
+  return addRoute(filePath, path, "PATCH", options);
+};
+var routePutMethod = (path, filePath, options = {}) => {
+  return addRoute(filePath, path, "PUT", options);
+};
+var routeDeleteMethod = (path, filePath, options = {}) => {
+  return addRoute(filePath, path, "DELETE", options);
+};
+var routeMacro = (name, callback) => {
+  setMacro(name, callback);
+};
+var routeUseMacro = async (name, ...args) => {
+  const callback = getMacro(name);
+  await callback(...args);
+};
+var routeOptions = (options, callback) => {
+  const c = { ...getContext(), options: { ...options } };
+  const lastoptions = { ...getContext().options };
+  addCallback(() => {
+    setContext(c, lastoptions);
+    callback();
+  });
+};
+var routeMany = (method, path, filePath, options = {}) => {
+  if (method.includes("GET"))
+    routeGetMethod(path, filePath, options);
+  if (method.includes("PUT"))
+    routePutMethod(path, filePath, options);
+  if (method.includes("POST"))
+    routePostMethod(path, filePath, options);
+  if (method.includes("PATCH"))
+    routePatchMethod(path, filePath, options);
+  if (method.includes("DELETE"))
+    routeDeleteMethod(path, filePath, options);
+};
+var routeGroup = (prefix, callback, options) => {
+  const cprefix = (getContext().prefix === void 0 ? "" : getContext().prefix) + (prefix || "");
+  const c = { ...getContext(), ...options, prefix: cprefix };
+  const lastoptions = { ...getContext().options };
+  addCallback(() => {
+    setContext(c, lastoptions);
+    callback();
+  });
+};
+var routeBuild = (clearCache = true) => {
+  let cbs2 = getCallbacks();
+  while (cbs2.length > 0) {
+    clearCallbacks();
+    for (let i = 0; i < cbs2.length; i += 1) {
+      cbs2[i]();
+    }
+    cbs2 = getCallbacks();
+  }
+  const routes2 = getRoutes();
+  if (clearCache)
+    clearRoutes();
+  const filteredroutes = [];
+  routes2.reverse().forEach((i) => {
+    if (!filteredroutes.find((x) => x.path === i.path && x.method === i.method))
+      filteredroutes.push(i);
+  });
+  return filteredroutes.reverse();
+};
+var clearMethod = () => {
+  clearRoutes();
+  clearContext();
+};
+routeMacro("resource", (name, file) => {
+  routeGetMethod(`${name}`, `${file}@index`);
+  routePostMethod(`${name}`, `${file}@store`);
+  routeGroup("/{id}", () => {
+    routeGetMethod("/", `${file}@show`);
+    routePatchMethod("/", `${file}@update`);
+    routePutMethod("/", `${file}@update`);
+    routeDeleteMethod("/", `${file}@destroy`);
+  });
+});
+var route = routeAnyMethod;
+route.any = routeAnyMethod;
+route.get = routeGetMethod;
+route.post = routePostMethod;
+route.put = routePutMethod;
+route.patch = routePatchMethod;
+route.delete = routeDeleteMethod;
+route.options = routeOptions;
+route.group = routeGroup;
+route.many = routeMany;
+route.build = routeBuild;
+route.clear = clearMethod;
+route.macro = routeMacro;
+route.use = routeUseMacro;
+var route_default = route;
+
+// src/utils/buildQueryParams.ts
+function stringToType(str) {
+  if (str === "true")
+    return true;
+  if (str === "false")
+    return false;
+  if (`${parseFloat(str)}` === str)
+    return parseFloat(str);
+  return str;
+}
+function buildQueryParams(prepath = "") {
+  const [path, ...preargs] = prepath.split("?");
+  const args = {};
+  new URLSearchParams(preargs.join("?")).forEach((val, key) => args[key] = stringToType(val) || true);
+  return [path, args];
+}
+
+// src/modules/router.ts
+var routerModule = (path, method, routes2, config = {}) => {
+  const sanitizedpath = path.replace(/(\\|\/)^/, "");
+  const [clearpath, queryParams] = buildQueryParams(sanitizedpath);
+  const variablematch = new RegExp(`${config.variableEnclose || "{"}\\s*\\S+\\??\\s*${config.variableEnclose || "}"}`);
+  const optionalVariableMatch = new RegExp(`\\?{1}\\s*${config.variableEnclose || "}"}`);
+  let variables = {};
+  const route2 = routes2.find((route3) => {
+    variables = {};
+    const splitpath = route3.path.split("/").filter((i) => i !== "");
+    const possibleMatch = clearpath.split("/").filter((i) => i !== "");
+    if (method !== route3.method && !(method === "OPTIONS" && config.allowOptionsMatch !== false) && route3.method !== "ANY")
+      return false;
+    if (possibleMatch.length > splitpath.length && splitpath[splitpath.length - 1] !== "*") {
+      return false;
+    }
+    const matches = splitpath.filter((part, index) => {
+      const isVar = variablematch.test(part);
+      const isOptionalVar = optionalVariableMatch.test(part);
+      const varName = part.replace(new RegExp(`${config.variableEnclose || "{"}\\s*`), "").replace(new RegExp(`\\??\\s*${config.variableEnclose || "}"}`), "");
+      if (isVar) {
+        if (possibleMatch[index]) {
+          variables[varName] = possibleMatch[index];
+        }
+        if (isOptionalVar) {
+          return false;
+        } else {
+          return !possibleMatch[index];
+        }
+      } else {
+        return part !== possibleMatch[index];
+      }
+    }).length;
+    if (!matches && splitpath[splitpath.length - 1] === "*" && possibleMatch.length > splitpath.length) {
+      variables["*"] = possibleMatch.splice(0, splitpath.length);
+    }
+    return !matches;
+  });
+  if (route2)
+    return { ...route2, options: route2.options, variables, query: queryParams };
+  return void 0;
+};
+var router_default = routerModule;
+
+exports.route = route_default;
+exports.router = router_default;
 //# sourceMappingURL=index.js.map

@@ -2,5 +2,61 @@
  * Copyright (c) 2020 The Nuinalp and APO Softworks Authors. All rights reserved.
  * Use of this source code is governed by a BSD-style license that can be
  * found in the LICENSE file.
- **/import{existsSync,readFileSync}from"fs";import{join}from"path";var ConfigClass=class{constructor(){this.data={},this._env={}}get config(){return this.data}getConfig(n,t){return this.data[n]||t}setConfig(n,t){this.data[n]=t}get env(){return this._env}getEnv(n,t){return this._env[n]||t}async fetchEnv(n=void 0,t=!1,e=!1){let s=join(process.cwd(),`.env${n?`.${n}`:""}`);if(this._env=process.env,n&&(await existsSync(s)||(e||console.log(`.env${n?`.${n}`:""} not found, falling back into .env`),s=join(process.cwd(),".env"))),await existsSync(s)){const i=await readFileSync(s,"utf-8");i.split("\n").forEach(n=>{var[t,n]=n.split("=");this._env[t]=n}),t&&Object.keys(this._env).forEach(n=>{this.config[n]=this._env[n]})}else e||console.warn("ENV file not found")}},createConfig=()=>new ConfigClass,instance=new ConfigClass,src_default=instance;export{createConfig,src_default as default};
+ **/import { existsSync, readFileSync } from 'fs';
+import { join } from 'path';
+
+// src/modules/config.ts
+var ConfigClass = class {
+  constructor() {
+    this.data = {};
+    this._env = {};
+  }
+  get config() {
+    return this.data;
+  }
+  getConfig(key, defaultValue) {
+    return this.data[key] || defaultValue;
+  }
+  setConfig(key, value) {
+    this.data[key] = value;
+  }
+  get env() {
+    return this._env;
+  }
+  getEnv(key, defaultValue) {
+    return this._env[key] || defaultValue;
+  }
+  async fetchEnv(preference = void 0, injectIntoConfig = false, suppresLog = false) {
+    let file = join(process.cwd(), `.env${preference ? `.${preference}` : ""}`);
+    this._env = process.env;
+    if (preference) {
+      if (!await existsSync(file)) {
+        if (!suppresLog)
+          console.log(`.env${preference ? `.${preference}` : ""} not found, falling back into .env`);
+        file = join(process.cwd(), ".env");
+      }
+    }
+    if (await existsSync(file)) {
+      const text = await readFileSync(file, "utf-8");
+      text.split("\n").forEach((i) => {
+        const [key, value] = i.split("=");
+        this._env[key] = value;
+      });
+      if (injectIntoConfig) {
+        Object.keys(this._env).forEach((key) => {
+          this.config[key] = this._env[key];
+        });
+      }
+    } else if (!suppresLog) {
+      console.warn("ENV file not found");
+    }
+  }
+};
+
+// src/index.ts
+var createConfig = () => new ConfigClass();
+var instance = new ConfigClass();
+var src_default = instance;
+
+export { createConfig, src_default as default };
 //# sourceMappingURL=index.es.js.map

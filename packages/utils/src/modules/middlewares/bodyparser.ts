@@ -2,7 +2,7 @@
 import formidable from "formidable"
 import * as path from "path"
 import * as fs from "fs"
-import { MiddlewareInterface } from "@acai/interfaces"
+import { MiddlewareType } from "@acai/interfaces"
 
 // Interfaces
 import BodyParseConfig from "../../interfaces/bodyParserConfig"
@@ -12,7 +12,7 @@ import FileHandler from "../../utils/FileHandler"
 
 
 export default function buildBodyParserMiddleware (config?: Partial<BodyParseConfig>) {
-	const BodyParserMiddleware: MiddlewareInterface = async (request, n) => {
+	const BodyParserMiddleware: MiddlewareType = async (request, n) => {
 		return n(await new Promise(resolve => {
 			const uploadpath = path.join(process.cwd(), config?.uploadDir || "storage/tmp")
 

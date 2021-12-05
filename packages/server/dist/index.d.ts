@@ -1,4 +1,3 @@
-/// <reference types="body-parser" />
 // Interfaces
 import { AdapterInterface, ClassType, SerializedAdapterInterface, ProviderInterface, MiddlewareType, ServerConfigInterface, ServerInterface, CustomExceptionInterface } from "@acai/interfaces";
 // Packages

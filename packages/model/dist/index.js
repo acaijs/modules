@@ -163,7 +163,7 @@ var Hasher = class {
 var hashType = {
   onCreate: ({ value }) => {
     if (typeof value === "string") {
-      const salt = config__default['default'] ? config__default['default'].getConfig("APP_KEY", void 0) : void 0;
+      const salt = config__default["default"] ? config__default["default"].getConfig("APP_KEY", void 0) : void 0;
       const hash = new Hasher(void 0, salt || "10");
       hash.hash(value);
       return hash;
@@ -574,7 +574,7 @@ var Model = class {
     return JSON.stringify(this.toObject());
   }
   static query() {
-    return query__default['default']().table(this.$table).parseResult((result) => {
+    return query__default["default"]().table(this.$table).parseResult((result) => {
       if (Array.isArray(result)) {
         return result.map((r) => {
           return new this({ ...r }, true);
@@ -584,7 +584,7 @@ var Model = class {
     });
   }
   query() {
-    return query__default['default']().table(this.constructor.$table).parseResult((result) => {
+    return query__default["default"]().table(this.constructor.$table).parseResult((result) => {
       if (Array.isArray(result)) {
         return result.map((r) => {
           return new this.prototype.constructor({ ...r }, true);
@@ -659,7 +659,7 @@ var Model = class {
         });
       }
     });
-    query__default['default']().addMigration(this.$table, fields);
+    query__default["default"]().addMigration(this.$table, fields);
   }
   async save() {
     const { $table, $primary } = this.constructor;
@@ -680,20 +680,20 @@ var Model = class {
     }
     let id;
     if (this.$databaseInitialized) {
-      await query__default['default']().table($table).where($primary, fields[$primary]).update(fields);
+      await query__default["default"]().table($table).where($primary, fields[$primary]).update(fields);
       id = fields[$primary];
     } else {
-      id = await query__default['default']().table($table).insert(fields) || fields[$primary];
+      id = await query__default["default"]().table($table).insert(fields) || fields[$primary];
       this.$databaseInitialized = true;
     }
-    const updatedFields = await query__default['default']().table($table).where($primary, id).first();
+    const updatedFields = await query__default["default"]().table($table).where($primary, id).first();
     if (updatedFields)
       this.fill(updatedFields);
   }
   async delete() {
     const { $table, $primary } = this.constructor;
     if (this.$databaseInitialized) {
-      await query__default['default']().table($table).where($primary, this.$values[$primary]).delete();
+      await query__default["default"]().table($table).where($primary, this.$values[$primary]).delete();
     }
     this.$databaseInitialized = false;
   }

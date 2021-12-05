@@ -47,7 +47,7 @@ declare class Model {
     static last<T extends typeof Model, I = InstanceType<T>>(this: T): Promise<I | undefined>;
     static insert<T extends typeof Model, I extends InstanceType<T> = InstanceType<T>>(this: T, fields: Partial<InstanceType<T>>): Promise<I>;
     static insertMany<T extends typeof Model, I = InstanceType<T>>(this: T, rows: Partial<InstanceType<T>>[]): Promise<I[]>;
-    static updateMany<T extends typeof Model, I = InstanceType<T>>(this: T, models: Record<string, InstanceType<T>> | [
+    static updateMany<T extends typeof Model>(this: T, models: Record<string, InstanceType<T>> | [
         string,
         InstanceType<T>
     ]): Promise<void>;

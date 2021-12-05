@@ -156,10 +156,12 @@ interface TestInterface {
     timeout?: number;
     // result
     fail: boolean;
-    messages: [any, string?][];
+    messages: [
+        any,
+        string?
+    ][];
     assertions: {
-        type: (keyof ExpectInterface) | print"         | mport runAnd | intMethod 	fr | "./modules | unAndPrint"         | aces
-        ;
+        type: (keyof ExpectInterface) | "test" | "beforeAll" | "beforeEach" | "afterAll" | "afterEach" | "timeout";
         message?: string;
         fail: boolean;
         stack?: string;
