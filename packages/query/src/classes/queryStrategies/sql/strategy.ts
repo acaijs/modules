@@ -14,10 +14,10 @@ class SqlStrategy implements queryStrategy {
 	// Properties
 	// -------------------------------------------------
 
-	protected migrations: Record<string, Record<string, ColumnOptions>> = {};
-	protected client 	= {} as any;
-	protected connected = false;
-	protected errors: any;
+	protected migrations: Record<string, Record<string, ColumnOptions>> = {}
+	protected client 	= {} as any
+	protected connected = false
+	protected errors: any
 
 	// -------------------------------------------------
 	// Client methods

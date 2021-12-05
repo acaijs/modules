@@ -12,7 +12,7 @@ type ArrayToType<t extends readonly string[], s extends number[] = []> =
 			s[0] extends 20 ?
 				StringToType<t[s[0]]>:
 			// current index didn't return a valid type
-			ArrayToType<t, [s["length"], ...s]> :
+				ArrayToType<t, [s["length"], ...s]> :
 			// current index returned a valid type
 			StringToType<t[s[0]]>;
 

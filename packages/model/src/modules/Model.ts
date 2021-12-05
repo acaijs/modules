@@ -18,14 +18,14 @@ export default class Model {
 	// -------------------------------------------------
 
 	// static
-	public static $table		: string;
-	public static $primary		 = "id";
-	public static $fields		: FieldInfoInterface[] = [];
-	public static $relations	: RelationDataInterface[] = [];
+	public static $table		: string
+	public static $primary		 = "id"
+	public static $fields		: FieldInfoInterface[] = []
+	public static $relations	: RelationDataInterface[] = []
 
 	// instance
-	public $values: Record<string, unknown> = {};
-	public $databaseInitialized = false;
+	public $values: Record<string, unknown> = {}
+	public $databaseInitialized = false
 
 	// -------------------------------------------------
 	// Main Methods

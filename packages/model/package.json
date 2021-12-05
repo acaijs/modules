@@ -26,14 +26,18 @@
 		"build": "rollup -c",
 		"start": "ts-node ./yay.ts",
 		"test": "ts-node ./test.ts",
-		"prepublishOnly": "yarn build"
+		"prepublishOnly": "yarn build",
+		"lint": "eslint ."
 	},
 	"dependencies": {
 		"bcrypt": "^5.0.0",
 		"uuid": "^8.3.2",
 		"rollup": "~2.60.2",
 		"tslib": "~2.3.1",
-		"rollup-plugin-ts": "~2.0.4"
+		"rollup-plugin-ts": "~2.0.4",
+		"@typescript-eslint/eslint-plugin": "~5.5.0",
+		"eslint": "~8.4.0",
+		"@typescript-eslint/parser": "~5.5.0"
 	},
 	"peerDependencies": {
 		"@acai/config": "^1.1.0-beta.0",

@@ -15,10 +15,10 @@ export default class Stubber {
 	// Properties
 	// -------------------------------------------------
 
-	protected callArgs			: ReturnType<typeof parseArgs>;
-	protected stubConfig		: StubConfigInterface;
-	protected stubFileContent	: string[];
-	protected stubOriginPath	: string;
+	protected callArgs			: ReturnType<typeof parseArgs>
+	protected stubConfig		: StubConfigInterface
+	protected stubFileContent	: string[]
+	protected stubOriginPath	: string
 
 	// -------------------------------------------------
 	// Constructor

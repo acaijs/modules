@@ -7,14 +7,14 @@ export default class RouteNotFound extends CustomException {
 	// -------------------------------------------------
 
 	// Custom settings
-	public route: string;
-	public method: string;
+	public route: string
+	public method: string
 
 	// Base class override
-	public status = 403;
-	public critical = false;
-	public shouldReport = false;
-	public shouldSerialize = false;
+	public status = 403
+	public critical = false
+	public shouldReport = false
+	public shouldSerialize = false
 
 	// -------------------------------------------------
 	// Main methods

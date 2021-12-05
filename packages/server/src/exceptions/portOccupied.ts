@@ -7,12 +7,12 @@ export default class PortOccupied extends CustomException {
 	// -------------------------------------------------
 
 	// Custom settings
-	public port: number;
+	public port: number
 
 	// Base class override
-	public critical = true;
-	public shouldReport = true;
-	public shouldSerialize = true;
+	public critical = true
+	public shouldReport = true
+	public shouldSerialize = true
 
 	// -------------------------------------------------
 	// Main methods

@@ -9,7 +9,7 @@ import sql from "../../classes/queryStrategies/sql/strategy"
 
 // Create concrete class based on sql
 class Query extends AbstractQuery {
-	protected queryType = sql;
+	protected queryType = sql
 }
 
 test.group("Test abstract query methods", () => {

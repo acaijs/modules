@@ -10,10 +10,10 @@ export default class FileHandler {
 	// Helper methods
 	// -------------------------------------------------
 
-	private config?		: Partial<BodyParseConfig>;
-	private data		: any;
-	private filepath	: string;
-	private isTmp		= true;
+	private config?		: Partial<BodyParseConfig>
+	private data		: any
+	private filepath	: string
+	private isTmp		= true
 
 	// -------------------------------------------------
 	// Main methods

@@ -3,7 +3,7 @@ import { MiddlewareCbType, MiddlewareClassType, MiddlewareType, ServerRequest } 
 type ConstructableMiddleware = [MiddlewareType, string[] | undefined]
 
 export default class MiddlewareHandler {
-	private middlewares: ConstructableMiddleware[] = [];
+	private middlewares: ConstructableMiddleware[] = []
 
 	public constructor(md?: ConstructableMiddleware | ConstructableMiddleware[]) {
 		if (md) this.add(md)

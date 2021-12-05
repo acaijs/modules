@@ -20,12 +20,12 @@ export default class Validator<
 	// -------------------------------------------------
 
 	// overwritable
-	public throwable = true;
+	public throwable = true
 
 	// internal
-	protected _fields	: any;
-	protected _validated: Record<string, unknown> 	= {};
-	protected _errors	: Record<string, string[]> 	= {};
+	protected _fields	: any
+	protected _validated: Record<string, unknown> 	= {}
+	protected _errors	: Record<string, string[]> 	= {}
 
 	// -------------------------------------------------
 	// Main methods

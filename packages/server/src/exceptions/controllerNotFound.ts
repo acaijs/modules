@@ -7,14 +7,14 @@ export default class ControllerNotFoundException extends CustomException {
 	// -------------------------------------------------
 
 	// Custom settings
-	public controller: string;
-	public route: string;
-	public method?: string;
+	public controller: string
+	public route: string
+	public method?: string
 
 	// Base class override
-	public critical = false;
-	public shouldReport = true;
-	public shouldSerialize = false;
+	public critical = false
+	public shouldReport = true
+	public shouldSerialize = false
 
 	// -------------------------------------------------
 	// Main methods

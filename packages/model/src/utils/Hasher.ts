@@ -6,8 +6,8 @@ export default class Hasher {
 	// Properties
 	// -------------------------------------------------
 
-	protected value				: string;
-	protected saltOrRounds		: string | number | undefined;
+	protected value				: string
+	protected saltOrRounds		: string | number | undefined
 
 	// -------------------------------------------------
 	// Main methods

@@ -7,12 +7,12 @@ export default class AdapterNotFound extends CustomException {
 	// -------------------------------------------------
 
 	// Custom settings
-	public adapter: string;
+	public adapter: string
 
 	// Base class override
-	public critical = true;
-	public shouldReport = true;
-	public shouldSerialize = true;
+	public critical = true
+	public shouldReport = true
+	public shouldSerialize = true
 
 	// -------------------------------------------------
 	// Main methods

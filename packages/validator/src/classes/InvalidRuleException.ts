@@ -2,7 +2,7 @@
 import { CustomException } from "@acai/utils"
 
 export default class InvalidRuleException extends CustomException {
-	shouldReport = true;
+	shouldReport = true
 
 	public constructor (message: string, data?: any) {
 		super("invalidValidationRule", message, data)

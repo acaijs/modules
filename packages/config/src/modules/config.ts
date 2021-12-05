@@ -10,8 +10,8 @@ export default class ConfigClass {
 	// Properties
 	// -------------------------------------------------
 
-	protected data	: Record<string, any> = {};
-	protected _env	: Record<string, string | undefined> = {};
+	protected data	: Record<string, any> = {}
+	protected _env	: Record<string, string | undefined> = {}
 
 	// -------------------------------------------------
 	// Config methods

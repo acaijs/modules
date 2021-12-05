@@ -6,7 +6,7 @@ import Validator from "../../../modules/validator"
 
 // concrete validator class
 class TestValidator extends Validator {
-	public throwable = false;
+	public throwable = false
 
 	public getSchema() {
 		return {

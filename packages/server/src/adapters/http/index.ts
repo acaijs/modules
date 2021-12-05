@@ -18,7 +18,7 @@ export default class HttpAdapter implements AdapterInterface {
 	// Properties
 	// -------------------------------------------------
 
-	protected conn: http.Server;
+	protected conn: http.Server
 
 	// -------------------------------------------------
 	// Main methods

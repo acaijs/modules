@@ -6,7 +6,7 @@ export default abstract class BasePresenter {
 	// Properties
 	// -------------------------------------------------
 
-	protected static data: GenericObject | GenericObject[];
+	protected static data: GenericObject | GenericObject[]
 
 	// -------------------------------------------------
 	// Main methods

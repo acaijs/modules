@@ -8,6 +8,6 @@ import SettingsConfigInterface 	from "./types"
 import strategy from "./strategy"
 
 export default class SqlQuery extends QueryAbstract {
-	protected static adapter = new strategy();
-	protected static settings: SettingsConfigInterface;
+	protected static adapter = new strategy()
+	protected static settings: SettingsConfigInterface
 }

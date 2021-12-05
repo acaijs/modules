@@ -21,8 +21,8 @@ export default class Server implements ServerInterface {
 	// Properties
 	// -------------------------------------------------
 
-	protected _config: Partial<ServerConfigInterface>;
-	protected adapters: Record<string, SerializedAdapterInterface & {handler?: AdapterHandler}> = {};
+	protected _config: Partial<ServerConfigInterface>
+	protected adapters: Record<string, SerializedAdapterInterface & {handler?: AdapterHandler}> = {}
 
 	// -------------------------------------------------
 	// Boot methods

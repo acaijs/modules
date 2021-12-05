@@ -15,7 +15,7 @@ export default class ErrorProvider {
 	// Main properties
 	// -------------------------------------------------
 
-	public logStorage?: string | undefined;
+	public logStorage?: string | undefined
 
 	// -------------------------------------------------
 	// Main methods

@@ -13,14 +13,15 @@
 		"tsconfig.json"
 	],
 	"scripts": {
-		"build": ""
+		"build": "",
+		"lint": "eslint ."
 	},
 	"author": "Nuinalp and APO Softworks Authors",
 	"license": "BSD-3-Clause",
 	"devDependencies": {
-		"@typescript-eslint/eslint-plugin": "^4.27.0",
-		"@typescript-eslint/parser": "^4.27.0",
-		"eslint": "^7.31.0"
+		"@typescript-eslint/eslint-plugin": "~5.5.0",
+		"@typescript-eslint/parser": "~5.5.0",
+		"eslint": "~8.4.0"
 	},
 	"dependencies": {
 	  "rollup": "~2.60.2",

@@ -7,14 +7,14 @@ export default class Exception extends Error implements CustomExceptionInterface
 	// -------------------------------------------------
 
 	// internal cached data
-	_message: string;
-	_data?: unknown;
-	_type: string;
+	_message: string
+	_data?: unknown
+	_type: string
 
 	// public config
-	public shouldReport		 = true;
-	public shouldSerialize	 = false;
-	public critical			 = false;
+	public shouldReport		 = true
+	public shouldSerialize	 = false
+	public critical			 = false
 
 	// -------------------------------------------------
 	// Main methods

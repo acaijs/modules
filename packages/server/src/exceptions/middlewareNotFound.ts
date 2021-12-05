@@ -7,13 +7,13 @@ export default class MiddlewareNotFound extends CustomException {
 	// -------------------------------------------------
 
 	// Custom settings
-	public middleware: string;
-	public route: string;
+	public middleware: string
+	public route: string
 
 	// Base class override
-	public critical = false;
-	public shouldReport = true;
-	public shouldSerialize = false;
+	public critical = false
+	public shouldReport = true
+	public shouldSerialize = false
 
 	// -------------------------------------------------
 	// Main methods

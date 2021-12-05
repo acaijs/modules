@@ -11,18 +11,18 @@ export default abstract class Properties<T = Record<string, ModelContent>> {
 	// properties
 	// -------------------------------------------------
 
-	protected tableName		= "";
-	protected queryBuild	 	 : QueryPart = {type:"or", logic:[]};
-	protected orderByQuery  	?: {order?: "ASC" | "DESC"; by: string};
-	protected offsetQuantity	?: number;
-	protected limitQuantity 	?: number;
-	protected fieldsList		?: string[] = [];
-	protected joinList			?: JoinClauseInterface;
-	protected groupByColumn 	?: string;
-	protected parseResultCache	?: (result: any | any[]) => unknown;
+	protected tableName		= ""
+	protected queryBuild	 	 : QueryPart = {type:"or", logic:[]}
+	protected orderByQuery  	?: {order?: "ASC" | "DESC"; by: string}
+	protected offsetQuantity	?: number
+	protected limitQuantity 	?: number
+	protected fieldsList		?: string[] = []
+	protected joinList			?: JoinClauseInterface
+	protected groupByColumn 	?: string
+	protected parseResultCache	?: (result: any | any[]) => unknown
 
-	protected static adapter: QueryStrategy;
-	protected static settings: Record<string, ModelContent>;
+	protected static adapter: QueryStrategy
+	protected static settings: Record<string, ModelContent>
 
 	// -------------------------------------------------
 	// debug methods
