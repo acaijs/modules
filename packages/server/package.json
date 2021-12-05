@@ -1,10 +1,6 @@
 {
 	"name": "@acai/server",
-<<<<<<< HEAD:packages/server/package.json
 	"version": "3.0.0-beta.41",
-=======
-	"version": "3.0.0-beta.39",
->>>>>>> origin/development:packages/m_server/package.json
 	"description": "The base server for the açai framework",
 	"repository": {
 		"type": "git",

@@ -3,7 +3,7 @@ import { MiddlewareCbType, MiddlewareClassType, MiddlewareType, ServerRequest } 
 type ConstructableMiddleware = [MiddlewareType, string[] | undefined]
 
 export default class MiddlewareHandler {
-	private middlewares: ConstructableMiddleware[] = [];
+	private middlewares: ConstructableMiddleware[] = []
 
 	public constructor(md?: ConstructableMiddleware | ConstructableMiddleware[]) {
 		if (md) this.add(md)
@@ -34,21 +34,21 @@ export default class MiddlewareHandler {
 			stack.push(async (r: ServerRequest) => {
 				try {
 					const response = await this.buildCallback(curr[0])(
-						await r,
-						async (r) => [await (stack[i + 1] || ((r: ServerRequest) => r))(await r), await r],
+						(await r)[0],
+						async (r) => await (stack[i + 1] || ((r: ServerRequest) => r))([await r]),
 						curr[1] || [],
 					)
 
-					return response[0]
+					return response
 				}
 				catch (e) {
-					(e as any).request = r
+					(e as any).request = r[0]
 					throw e
 				}
 			})
 		}
 
-		if (stack.length) return stack[0](lastrequest)
+		if (stack.length) return stack[0]([lastrequest])
 		return lastrequest
 	}
 

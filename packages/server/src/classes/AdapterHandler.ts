@@ -90,12 +90,8 @@ export default class AdapterHandler {
 			return composition.pipe(request)
 		}, this, request, request)
 
-<<<<<<< HEAD:packages/server/src/classes/AdapterHandler.ts
 		if (!Array.isArray(globalsresponse)) return [globalsresponse]
 		if (globalsresponse.length === 3) return globalsresponse
-=======
-		if (globalsresponse.length === 3 || !Array.isArray(globalsresponse)) return [globalsresponse]
->>>>>>> origin/development:packages/m_server/src/classes/AdapterHandler.ts
 
 		const middlewaresresponse = await safeHandle(async () => {
 			// check if all middlewares are available
@@ -109,12 +105,8 @@ export default class AdapterHandler {
 			return composition.pipe(globalsresponse[0])
 		}, this, request, globalsresponse)
 
-<<<<<<< HEAD:packages/server/src/classes/AdapterHandler.ts
 		if (!Array.isArray(middlewaresresponse)) return [middlewaresresponse]
 		if (middlewaresresponse.length === 3) return middlewaresresponse
-=======
-		if (middlewaresresponse.length === 3 || !Array.isArray(middlewaresresponse)) return [middlewaresresponse]
->>>>>>> origin/development:packages/m_server/src/classes/AdapterHandler.ts
 
 		return [await controller(middlewaresresponse[0]), middlewaresresponse[0]]
 	}

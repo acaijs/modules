@@ -170,11 +170,7 @@ export default class Model {
 		return Promise.all(rows.map(i => this.insert(i))) as Promise<I[]>
 	}
 
-<<<<<<< HEAD:packages/model/src/modules/Model.ts
 	public static async updateMany <T extends typeof Model> (this: T, models: Record<string, InstanceType<T>> | [string, InstanceType<T>]) {
-=======
-	public static async updateMany <T extends typeof Model, I = InstanceType<T>> (this: T, models: Record<string, InstanceType<T>> | [string, InstanceType<T>]) {
->>>>>>> origin/development:packages/m_model/src/modules/Model.ts
 		const normalized = Array.isArray(models) ? models : Object.entries(models)
 
 		Promise.all(normalized.map(entry => void this.query().where(this.$primary, entry[0]).update(entry[1])))
