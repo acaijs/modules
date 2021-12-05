@@ -2,8 +2,15 @@
  * Copyright (c) 2020 The Nuinalp and APO Softworks Authors. All rights reserved.
  * Use of this source code is governed by a BSD-style license that can be
  * found in the LICENSE file.
- **/import { createConnection } from 'mysql2';
-import { CustomException } from '@acai/utils';
+ **/import { CustomException } from '@acai/utils';
+
+var __require = /* @__PURE__ */ ((x) => typeof require !== "undefined" ? require : typeof Proxy !== "undefined" ? new Proxy(x, {
+  get: (a, b) => (typeof require !== "undefined" ? require : a)[b]
+}) : x)(function(x) {
+  if (typeof require !== "undefined")
+    return require.apply(this, arguments);
+  throw new Error('Dynamic require of "' + x + '" is not supported');
+});
 
 // src/abstractions/builder/parts/properties.ts
 var Properties = class {
@@ -609,13 +616,19 @@ function smartUpdate(tableName, oldColumns, updatedColumns) {
   const constraintQuery = constraints.length === 0 ? "" : `ALTER TABLE ${tableName} ${constraints.join(", ")}`;
   return [columnQuery.trim().replace(/ +(?= )/g, ""), constraintQuery.trim().replace(/ +(?= )/g, "")];
 }
-
-// src/classes/queryStrategies/sql/strategy.ts
 var SqlStrategy = class {
   constructor() {
     this.migrations = {};
     this.client = {};
     this.connected = false;
+  }
+  get createConn() {
+    try {
+      const { createConnection } = __require("mysql2");
+      return createConnection;
+    } catch (e) {
+      throw new CustomException("database", "The package mysql2 is required to use the mariadb/mysql connectors");
+    }
   }
   async close() {
     if (this.client && this.client.end)
@@ -623,7 +636,7 @@ var SqlStrategy = class {
   }
   async build(settings) {
     await this.close();
-    this.client = await createConnection(settings);
+    this.client = await this.createConn(settings);
     return new Promise((r) => {
       this.client.connect((err) => {
         this.errors = err;

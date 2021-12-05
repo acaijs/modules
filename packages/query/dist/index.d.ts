@@ -1,5 +1,3 @@
-// Packages
-import * as Client from "mysql2";
 // -------------------------------------------------
 // Serialize column data
 // -------------------------------------------------
@@ -50,8 +48,16 @@ interface AbstractQuery<ModelGeneralOverwrite = Record<string, ModelContent>, Fi
     // -------------------------------------------------
     // query methods
     // -------------------------------------------------
-    where(arg1: string | [string, QueryComparison, GenericModelContent$0?][], arg2?: QueryComparison | GenericModelContent$0, arg3?: GenericModelContent$0): AbstractQuery;
-    orWhere(arg1: string | [string, QueryComparison, GenericModelContent$0?][], arg2?: QueryComparison | GenericModelContent$0, arg3?: GenericModelContent$0): AbstractQuery;
+    where(arg1: string | [
+        string,
+        QueryComparison,
+        GenericModelContent$0?
+    ][], arg2?: QueryComparison | GenericModelContent$0, arg3?: GenericModelContent$0): AbstractQuery;
+    orWhere(arg1: string | [
+        string,
+        QueryComparison,
+        GenericModelContent$0?
+    ][], arg2?: QueryComparison | GenericModelContent$0, arg3?: GenericModelContent$0): AbstractQuery;
     limit(value: number, offset?: number): AbstractQuery;
     orderBy(by: string, order?: "ASC" | "DESC"): AbstractQuery;
     groupBy(column: string): AbstractQuery;
@@ -170,7 +176,15 @@ declare abstract class Properties<T = Record<string, ModelContent>> {
     // -------------------------------------------------
     protected getAdapter(): QueryStrategy;
     protected push(type: "and" | "or", subqueries: unknown[]): void;
-    protected buildQueryPart: <ModelConfig = T>(arg1: keyof ModelConfig | [keyof ModelConfig, string | number | boolean | undefined, GenericModelContent$1?][], arg2?: QueryComparison | GenericModelContent$1, arg3?: GenericModelContent$1) => [string, string, ModelContent][];
+    protected buildQueryPart: <ModelConfig = T>(arg1: keyof ModelConfig | [
+        keyof ModelConfig,
+        string | number | boolean | undefined,
+        GenericModelContent$1?
+    ][], arg2?: QueryComparison | GenericModelContent$1, arg3?: GenericModelContent$1) => [
+        string,
+        string,
+        ModelContent
+    ][];
 }
 declare abstract class StaticClass<T = Record<string, ModelContent>> extends Properties<T> {
     // -------------------------------------------------
@@ -207,8 +221,16 @@ declare abstract class QueryClass<T = Record<string, ModelContent>> extends Join
     // query methods
     // -------------------------------------------------
     table: (table: string) => this;
-    where: (arg1: string | [string, QueryComparison, GenericModelContent$1?][], arg2?: QueryComparison | GenericModelContent$1, arg3?: GenericModelContent$1) => this;
-    orWhere: (arg1: string | [string, QueryComparison, GenericModelContent$1?][], arg2?: QueryComparison | GenericModelContent$1, arg3?: GenericModelContent$1) => this;
+    where: (arg1: string | [
+        string,
+        QueryComparison,
+        GenericModelContent$1?
+    ][], arg2?: QueryComparison | GenericModelContent$1, arg3?: GenericModelContent$1) => this;
+    orWhere: (arg1: string | [
+        string,
+        QueryComparison,
+        GenericModelContent$1?
+    ][], arg2?: QueryComparison | GenericModelContent$1, arg3?: GenericModelContent$1) => this;
     whereNull: (field: string) => this;
     whereNotNull: (field: string) => this;
     orWhereNull: (field: string) => this;
@@ -295,12 +317,13 @@ declare class SqlStrategy implements queryStrategy {
     // Properties
     // -------------------------------------------------
     protected migrations: Record<string, Record<string, ColumnOptions>>;
-    protected client: Client.Connection;
+    protected client: any;
     protected connected: boolean;
     protected errors: any;
     // -------------------------------------------------
     // Client methods
     // -------------------------------------------------
+    protected get createConn(): any;
     close(): Promise<void>;
     build(settings: Record<string, unknown>): Promise<unknown>;
     isConnected(): boolean;
@@ -360,4 +383,5 @@ declare function addQuery(name: string, type: string, config?: Record<string, Mo
 declare function setDefault(name: string, config?: Record<string, ModelContent>): Promise<typeof MigrationClass>;
 declare const _default: (key?: string | undefined) => typeof MigrationClass;
 declare const dictionary: typeof _default;
-export { dictionary as default, MigrationClass as AbstractQuery, SqlQuery, PaginatedResponse, addQuery, setDefault, _default };
+export { dictionary as default, MigrationClass as AbstractQuery, SqlQuery, addQuery, setDefault, _default };
+export type { PaginatedResponse };

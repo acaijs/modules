@@ -1,6 +1,3 @@
-// Packages
-import * as Client from "mysql2"
-
 // Interfaces
 import ModelContent 		from "../../../interfaces/ModelContent"
 import QueryPart 			from "../../../interfaces/QueryPart"
@@ -10,6 +7,7 @@ import JoinClauseInterface 	from "../../../interfaces/JoinClause"
 
 // Helpers
 import { tableDeserialize, columnSerialize, joinClauseBuilder, queryResolver, resolveQueryPart, smartUpdate } from "./helpers"
+import { CustomException } from "@acai/utils"
 
 class SqlStrategy implements queryStrategy {
 	// -------------------------------------------------
@@ -17,7 +15,7 @@ class SqlStrategy implements queryStrategy {
 	// -------------------------------------------------
 
 	protected migrations: Record<string, Record<string, ColumnOptions>> = {};
-	protected client 	= {} as Client.Connection;
+	protected client 	= {} as any;
 	protected connected = false;
 	protected errors: any;
 
@@ -25,13 +23,23 @@ class SqlStrategy implements queryStrategy {
 	// Client methods
 	// -------------------------------------------------
 
+	protected get createConn () {
+		try {
+			const { createConnection } = require("mysql2")
+			return createConnection
+		}
+		catch (e) {
+			throw new CustomException("database", "The package mysql2 is required to use the mariadb/mysql connectors")
+		}
+	}
+
 	public async close () {
 		if (this.client && this.client.end) await this.client.end()
 	}
 
 	public async build (settings: Record<string, unknown>) {
 		await this.close()
-		this.client = await Client.createConnection(settings)
+		this.client = await this.createConn(settings)
 		return new Promise(r => {
 			this.client.connect((err) => {
 				this.errors 	= err

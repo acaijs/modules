@@ -1,8 +1,7 @@
 // Packages
-import * as Client from "mysql2"
 import QueryException from "../../../../exceptions/query"
 
-export default async function queryResolver (client: Client.Connection, queryString: string, params: unknown[] = []): Promise<any> {
+export default async function queryResolver (client: any, queryString: string, params: unknown[] = []): Promise<any> {
 	let result
 
 	try {

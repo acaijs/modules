@@ -6,8 +6,15 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var mysql2 = require('mysql2');
 var utils = require('@acai/utils');
+
+var __require = /* @__PURE__ */ ((x) => typeof require !== "undefined" ? require : typeof Proxy !== "undefined" ? new Proxy(x, {
+  get: (a, b) => (typeof require !== "undefined" ? require : a)[b]
+}) : x)(function(x) {
+  if (typeof require !== "undefined")
+    return require.apply(this, arguments);
+  throw new Error('Dynamic require of "' + x + '" is not supported');
+});
 
 // src/abstractions/builder/parts/properties.ts
 var Properties = class {
@@ -613,13 +620,19 @@ function smartUpdate(tableName, oldColumns, updatedColumns) {
   const constraintQuery = constraints.length === 0 ? "" : `ALTER TABLE ${tableName} ${constraints.join(", ")}`;
   return [columnQuery.trim().replace(/ +(?= )/g, ""), constraintQuery.trim().replace(/ +(?= )/g, "")];
 }
-
-// src/classes/queryStrategies/sql/strategy.ts
 var SqlStrategy = class {
   constructor() {
     this.migrations = {};
     this.client = {};
     this.connected = false;
+  }
+  get createConn() {
+    try {
+      const { createConnection } = __require("mysql2");
+      return createConnection;
+    } catch (e) {
+      throw new utils.CustomException("database", "The package mysql2 is required to use the mariadb/mysql connectors");
+    }
   }
   async close() {
     if (this.client && this.client.end)
@@ -627,7 +640,7 @@ var SqlStrategy = class {
   }
   async build(settings) {
     await this.close();
-    this.client = await mysql2.createConnection(settings);
+    this.client = await this.createConn(settings);
     return new Promise((r) => {
       this.client.connect((err) => {
         this.errors = err;
@@ -807,6 +820,6 @@ var src_default = dictionary_default;
 exports.AbstractQuery = builder_default;
 exports.SqlQuery = SqlQuery;
 exports.addQuery = addQuery;
-exports['default'] = src_default;
+exports["default"] = src_default;
 exports.setDefault = setDefault;
 //# sourceMappingURL=index.js.map
