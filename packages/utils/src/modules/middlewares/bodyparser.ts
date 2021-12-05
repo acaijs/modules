@@ -20,7 +20,7 @@ export default function buildBodyParserMiddleware (config?: Partial<BodyParseCon
 			fs.mkdirSync(uploadpath, { recursive: true })
 
 			formidable({
-				...(config?.file || {}),
+				...(config || {}),
 				uploadDir: uploadpath,
 				keepExtensions: true,
 				multiples: true,
