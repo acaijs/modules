@@ -4,7 +4,7 @@ import nodeResolve from "@rollup/plugin-node-resolve"
 import globals from "rollup-plugin-node-globals"
 import banner from "rollup-plugin-banner2"
 
-const bannerText = "/**\n * Copyright (c) 2020 The Nuinalp and APO Softworks Authors. All rights reserved.\n * Use of this source code is governed by a BSD-style license that can be\n * found in the LICENSE file.\n **/"
+const bannerText = "/**\n * Copyright (c) 2020 The Nuinalp and APO Softworks Authors. All rights reserved.\n * Use of this source code is governed by a BSD-style license that can be\n * found in the LICENSE file.\n **/\n\n"
 
 const buildProduction = (bundles = [], buildDefault = true) => {
 	const standard = buildDefault && buildProduction([{entry: "index.ts"}], false)
