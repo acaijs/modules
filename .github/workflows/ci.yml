@@ -22,9 +22,9 @@ jobs:
         run: npm install -g @microsoft/rush
 
       - name: Rush Install
-        uses: advancedcsg-open/actions-rush@v1.0.1
+        uses: advancedcsg-open/actions-rush
 
-      - name: Rush Build
+      - name: Rush Lint
         run: rush lint
 
       - name: Rush Build
