@@ -24,7 +24,14 @@
       "summary": "Run a lint check to all projects",
       "description": "Will check the linting for every file on each project",
       "enableParallelism": false
-    }
+    },
+	{
+		"commandKind": "global",
+		"name": "clear:dist",
+		"summary": "Clear all production folders in the projects",
+		"description": "Will go  through every project added to rush.json and remove their dist folder if they have any",
+		"shellCommand": "node common/scripts/clear-dist.js"
+	}
     // {
     //   /**
     //    * (Required) Determines the type of custom command.
