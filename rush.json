@@ -13,7 +13,7 @@
     
   },
 
-  "nodeSupportedVersionRange": ">=16.0.0",
+  "nodeSupportedVersionRange": ">=12.0.0",
 
   "suppressNodeLtsWarning": true,
 

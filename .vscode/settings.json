@@ -1,0 +1,23 @@
+{
+	"editor.tabSize": 4,
+	"editor.insertSpaces": false,
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": true
+	},
+	"eslint.validate": [
+		"javascript"
+	],
+	"[javascript]": {
+		"editor.formatOnSave": false,
+		"editor.codeActionsOnSave": {
+			"source.organizeImports": false,
+		},
+	},
+	"editor.formatOnSave": true,
+	"[typescript]": {
+		"editor.formatOnSave": false,
+		"editor.codeActionsOnSave": {
+			"source.organizeImports": false,
+		},
+	}
+}
