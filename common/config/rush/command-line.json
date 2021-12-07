@@ -1,0 +1,55 @@
+/**
+ * This configuration file defines custom commands for the "rush" command-line.
+ * More documentation is available on the Rush website: https://rushjs.io
+ */
+{
+	"$schema": "https://developer.microsoft.com/json-schemas/rush/v5/command-line.schema.json",
+	"commands": [
+		{
+			"commandKind": "bulk",
+			"name": "test",
+			"summary": "Test all repositories",
+			"description": "Run the test suite for every repository",
+			"enableParallelism": false
+		},
+		{
+			"commandKind": "bulk",
+			"name": "lint",
+			"summary": "Run a lint check to all projects",
+			"description": "Will check the linting for every file on each project",
+			"enableParallelism": false
+		},
+		{
+			"commandKind": "global",
+			"name": "clear:dist",
+			"summary": "Clear all production folders in the projects",
+			"description": "Will go  through every project added to rush.json and remove their dist folder if they have any",
+			"shellCommand": "node common/scripts/clear-dist.js"
+		},
+		{
+			"commandKind": "bulk",
+			"name": "build",
+			"summary": "Build all projects that haven't been built, or have changed since they were last built",
+			"description": "This command is similar to \"rush rebuild\", except that \"rush build\" performs...",
+			"safeForSimultaneousRushProcesses": false,
+			"enableParallelism": true,
+			"ignoreDependencyOrder": false,
+			"ignoreMissingScript": false,
+			"allowWarningsInSuccessfulBuild": true
+		},
+	],
+	/**
+   * Custom "parameters" introduce new parameters for specified Rush command-line commands.
+   * For example, you might define a "--production" parameter for the "rush build" command.
+   */
+	"parameters": [
+		{
+			"parameterKind": "flag",
+			"longName": "--fix",
+			"description": "Will actually automatically fix every linting error it encounters",
+			"associatedCommands": [
+				"lint"
+			]
+		}
+	]
+}
