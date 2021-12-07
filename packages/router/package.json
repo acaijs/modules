@@ -31,7 +31,7 @@
 	},
 	"scripts": {
 		"build": "rollup -c",
-		"test": "ts-node ./test.ts --path \"./src/**/*.{test,tests}.{js,ts}\"",
+		"test": "ts-node-dev ./test.ts --path \"./src/**/*.{test,tests}.{js,ts}\"",
 		"lint": "eslint .",
 		"lint:fix": "eslint --quiet **/* --fix",
 		"prepublishOnly": "yarn build"

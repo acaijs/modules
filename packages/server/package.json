@@ -33,7 +33,7 @@
 	"private": false,
 	"scripts": {
 		"build": "rollup -c",
-		"start": "ts-node ./index.ts",
+		"start": "ts-node-dev ./index.ts",
 		"test": "ts-node-dev ./test.ts",
 		"lint": "eslint .",
 		"prepublishOnly": "yarn build"

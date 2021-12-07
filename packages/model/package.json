@@ -24,8 +24,8 @@
 	},
 	"scripts": {
 		"build": "rollup -c",
-		"start": "ts-node ./yay.ts",
-		"test": "ts-node ./test.ts",
+		"start": "ts-node-dev ./yay.ts",
+		"test": "",
 		"prepublishOnly": "yarn build",
 		"lint": "eslint ."
 	},
