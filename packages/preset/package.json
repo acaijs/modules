@@ -12,11 +12,25 @@
 		".eslintrc.js",
 		"tsconfig.json"
 	],
+	"scripts": {
+		"build": "",
+		"lint": "eslint .",
+		"test": ""
+	},
 	"author": "Nuinalp and APO Softworks Authors",
 	"license": "BSD-3-Clause",
 	"devDependencies": {
+<<<<<<< HEAD:packages/preset/package.json
 		"@typescript-eslint/eslint-plugin": "^4.27.0",
 		"@typescript-eslint/parser": "^4.27.0",
 		"eslint": "^7.31.0"
+=======
+		"@typescript-eslint/eslint-plugin": "~5.5.0",
+		"@typescript-eslint/parser": "~5.5.0",
+		"eslint": "~8.4.0",
+		"rollup": "~2.60.2",
+		"tslib": "~2.3.1",
+		"rollup-plugin-ts": "~2.0.4"
+>>>>>>> origin/development:packages/u_preset/package.json
 	}
 }

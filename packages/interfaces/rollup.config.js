@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import buildProduction from "../m_runtime/rollup.config"
+=======
+import buildProduction from "../runtime/rollup.config"
+>>>>>>> origin/development
 import pckg from "./package.json"
 
 const deps = Object.keys({...pckg.dependencies, ...pckg.peerDependencies, ...pckg.devDependencies})

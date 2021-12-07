@@ -1,6 +1,6 @@
 {
 	"name": "@acai/interfaces",
-	"version": "0.2.0-beta.5",
+	"version": "0.2.0-beta.10",
 	"description": "General use typescript interfaces for use across all the Açaí modules.",
 	"repository": {
 		"type": "git",
@@ -31,8 +31,15 @@
 	},
 	"scripts": {
 		"build": "rollup -c",
+<<<<<<< HEAD:packages/interfaces/package.json
 		"lint": "eslint --quiet",
 		"prepublishOnly": "yarn build"
+=======
+		"lint": "eslint .",
+		"lint:fix": "eslint --quiet **/* --fix",
+		"prepublishOnly": "yarn build",
+		"test": ""
+>>>>>>> origin/development:packages/m_interfaces/package.json
 	},
 	"engines": {
 		"node": ">=12.0.0"
@@ -40,6 +47,16 @@
 	"devDependencies": {
 		"@types/cookies": "^0.7.6",
 		"@types/node": "^14.14.28",
+<<<<<<< HEAD:packages/interfaces/package.json
 		"typescript": "^4.1.5"
+=======
+		"eslint": "~8.4.0",
+		"typescript": "^4.1.5",
+		"rollup": "~2.60.2",
+		"tslib": "~2.3.1",
+		"rollup-plugin-ts": "~2.0.4",
+		"@typescript-eslint/eslint-plugin": "~5.5.0",
+		"@typescript-eslint/parser": "~5.5.0"
+>>>>>>> origin/development:packages/m_interfaces/package.json
 	}
 }

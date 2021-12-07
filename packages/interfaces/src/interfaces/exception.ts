@@ -35,6 +35,14 @@ export default interface CustomExceptionInterface<Request = ServerRequest> exten
 	critical?: boolean;
 
 	/**
+	 * Preserve any changes made to the request. If an error has occured during a middleware, it may not have the full flow you may expect
+	 * - global: only global middlewares
+	 * - all: globals and local middlewares
+	 * - none: don't preserve
+	 */
+	preserve?: "global" | "all" | "none";
+
+	/**
 	 * A way to categorize your errors so you can group them into subsets that can easily be handled together. Such as: route, validation, database, etc.
 	 */
 	type?: string;

@@ -2,7 +2,7 @@
 	"compilerOptions": {
 		"outDir": "dist"
 	},
-	"extends": "../u_preset/tsconfig.json",
+	"extends": "../preset/tsconfig.json",
 	"include": [
 		"src/**/*",
 		"src/index.ts"
