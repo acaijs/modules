@@ -6,7 +6,7 @@ on:
     branches: [ production, development ]
 
 jobs:
-  build:
+  integration:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -20,6 +20,9 @@ jobs:
 
       - name: Rush CLI
         run: npm install -g @microsoft/rush
+
+      - name: Global ts-node-dev
+        run: npm install -g ts-node-dev
 
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
