@@ -31,9 +31,7 @@
 	},
 	"dependencies": {
 		"bcrypt": "^5.0.0",
-		"uuid": "^8.3.2"
-	},
-	"peerDependencies": {
+		"uuid": "^8.3.2",
 		"@acai/config": "^1.1.0-beta.0",
 		"@acai/query": "^0.7.0-beta.0",
 		"@acai/utils": "^0.7.0-beta.0",

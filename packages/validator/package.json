@@ -46,9 +46,7 @@
 	},
 	"dependencies": {
 		"glob": "^7.1.6",
-		"luxon": "^1.26.0"
-	},
-	"peerDependencies": {
+		"luxon": "^1.26.0",
 		"@acai/server": "^3.0.0-beta.0",
 		"@acai/utils": "^0.7.0-beta.0"
 	}

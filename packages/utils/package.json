@@ -45,9 +45,7 @@
 		"@typescript-eslint/parser": "~5.5.0"
 	},
 	"dependencies": {
-		"formidable": "^2.0.1"
-	},
-	"peerDependencies": {
+		"formidable": "^2.0.1",
 		"@acai/config": "^1.1.0-beta.0",
 		"@acai/interfaces": "^0.2.0-beta.0"
 	}

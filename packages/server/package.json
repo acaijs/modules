@@ -53,9 +53,7 @@
 	},
 	"dependencies": {
 		"body-parser": "^1.19.0",
-		"cookies": "^0.8.0"
-	},
-	"peerDependencies": {
+		"cookies": "^0.8.0",
 		"@acai/router": "^2.2.0-beta.0",
 		"@acai/utils": "^0.7.0-beta.0"
 	}
