@@ -31,7 +31,7 @@
 	},
 	"scripts": {
 		"build": "rollup -c",
-		"test": "ts-node-dev . --run",
+		"test": "",
 		"lint": "eslint ."
 	},
 	"engines": {
