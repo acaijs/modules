@@ -1,0 +1,15 @@
+{
+	"compilerOptions": {
+		"outDir": "dist"
+	},
+	"extends": "../preset/tsconfig.json",
+	"include": [
+		"src/*",
+		"src/**/*"
+	],
+	"exclude": [
+		"dist/**/*",
+		"node_modules",
+		"**/*.test.*"
+	]
+}
