@@ -10,8 +10,8 @@ import PortOccupied from "../../exceptions/portOccupied"
 import RouteNotFound from "../../exceptions/routeNotFound"
 
 // Utils
-import respond from "./utils/respond"
-import smartResponse from "./utils/response"
+import respond from "../../utils/respond"
+import smartResponse from "../../utils/response"
 
 export default class HttpAdapter implements AdapterInterface {
 	// -------------------------------------------------

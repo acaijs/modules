@@ -2,7 +2,7 @@ export default function simpleStringify (object) {
 	if (object && typeof object === "object") {
 		object = copyWithoutCircularReferences([object], object)
 	}
-	return JSON.stringify(object)
+	return object
 
 	function copyWithoutCircularReferences(references, object) {
 		const cleanObject = {}

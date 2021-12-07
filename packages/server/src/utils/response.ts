@@ -4,10 +4,10 @@ import * as fs 					from "fs"
 
 // Interfaces
 import { ResponseInterface } from "@acai/interfaces"
-import RequestInterface, { ICustomIncomingMessage } from "../../../interfaces/httpServerRequest"
+import RequestInterface, { ICustomIncomingMessage } from "../interfaces/httpServerRequest"
 
 // Utils
-import censor from "../../../utils/censor"
+import censor from "./censor"
 
 export default async function smartResponse (payload: [string | RequestInterface | ResponseInterface | Record<string, unknown> | (() => any), any], request: ICustomIncomingMessage, viewPrefix?: string) {
 	const headers = {} as Record<string, any>

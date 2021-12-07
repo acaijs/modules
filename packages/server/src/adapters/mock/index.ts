@@ -1,6 +1,9 @@
 // Interfaces
 import { AdapterInterface } from "@acai/interfaces"
 
+// Utils
+import smartResponse from "../../utils/response"
+
 export default class MockAdapter implements AdapterInterface {
 	private onRequestData = () => {}
 
@@ -11,11 +14,14 @@ export default class MockAdapter implements AdapterInterface {
 
 	public shutdown () {}
 
-	public onRequest (onRequestStart) {
-		this.onRequestData = onRequestStart
+	public onRequest (onRequestStart, safeHandle) {
+		this.onRequestData = (...args) => safeHandle(() => onRequestStart(...args))
 	}
 
-	public makeRequest (this: any, arg1: any, arg2: string | ((...args: any[]) => any), arg3?: string[]) {
-		return this.onRequestData(arg1, arg2, arg3)
+	public async makeRequest (this: any, arg1: any, arg2: string | ((...args: any[]) => any), arg3?: string[]) {
+		const response = await this.onRequestData(arg1, arg2, arg3)
+		const { body } = await smartResponse(response, { headers: {} } as any)
+
+		return body as any
 	}
 }

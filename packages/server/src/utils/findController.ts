@@ -45,7 +45,7 @@ export default async function findController(controllerPath: string | ((req: any
 	const sanitizedControllerPath = pathString.split(/(\\|\/)/).reverse()[0].split("@")[0]
 
 	// controller requested doesn't exist
-	if (!pathString || !exists(pathString)) {
+	if (!pathString || !(await exists(pathString))) {
 		throw new ControllerNotFoundException(sanitizedControllerPath, route)
 	}
 
@@ -65,7 +65,6 @@ export default async function findController(controllerPath: string | ((req: any
 	}
 	// check if controller is a valid class
 	else if (typeof file === "function" && Object.getOwnPropertyNames(file.prototype).length > 1 && method && !file.prototype[method]) {
-		console.log(Object.getOwnPropertyNames(file.prototype), file)
 		throw new CustomException("controller", `Controller (${controller}) did not provide a property for the method ${method} or it was an arrow function (sadly we do not support them)`)
 	}
 	// check if controller is a valid callback

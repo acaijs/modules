@@ -91,7 +91,7 @@ test.group("Request tests", () => {
 			const response = await mock.makeRequest({data: "hi"}, "src/tests/utils/response.class@method")
 
 			// assert
-			assert(response).toBe("Controller (/src/tests/utils/response.class) did not provide a property for the method method")
+			assert(response).toBe("Controller (/src/tests/utils/response.class) did not provide a property for the method method or it was an arrow function (sadly we do not support them)")
 		})
 
 		// -------------------------------------------------

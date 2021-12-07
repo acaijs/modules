@@ -81,6 +81,8 @@ export default class AdapterHandler {
 			return typeof precontroller === "string" ? await findController( `${this.adapter.config.filePrefix || ""}/${precontroller}`, request.route) : precontroller
 		}, this, request)
 
+		if (Array.isArray(controller)) return controller
+
 		const globalsresponse = await safeHandle(async () => {
 			// gather compose middlewares
 			const globals = this.adapter.globals.map(item => [item, undefined])

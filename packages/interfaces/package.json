@@ -33,7 +33,8 @@
 		"build": "rollup -c",
 		"lint": "eslint .",
 		"lint:fix": "eslint --quiet **/* --fix",
-		"prepublishOnly": "yarn build"
+		"prepublishOnly": "yarn build",
+		"test": ""
 	},
 	"engines": {
 		"node": ">=12.0.0"

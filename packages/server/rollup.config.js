@@ -1,4 +1,4 @@
-import buildProduction from "../runtime/rollup.config"
+import buildProduction from "@acai/runtime"
 import pckg from "./package.json"
 
 const deps = [...Object.keys({...pckg.dependencies, ...pckg.peerDependencies, ...pckg.devDependencies}), "http"]
