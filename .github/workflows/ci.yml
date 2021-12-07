@@ -30,8 +30,8 @@ jobs:
       - name: Lint
         run: rush lint
 
-      - name: Test
-        run: rush test
-
       - name: Build
         run: rush build
+
+      - name: Test
+        run: rush test
