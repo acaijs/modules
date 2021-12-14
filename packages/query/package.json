@@ -5,12 +5,12 @@
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/AcaiJS/modules.git",
-		"directory": "packages/m_query"
+		"directory": "packages/query"
 	},
 	"author": "Rafael <rafael.chaves98@hotmail.com>",
 	"license": "BSD-3-Clause",
 	"private": false,
-	"module": "dist/index.es.js",
+	"module": "dist/index.mjs",
 	"main": "dist/index.js",
 	"typings": "dist/index.d.ts",
 	"files": [
@@ -18,14 +18,13 @@
 	],
 	"exports": {
 		".": {
-			"import": "./dist/index.es.js",
+			"import": "./dist/index.mjs",
 			"require": "./dist/index.js"
 		}
 	},
 	"scripts": {
-		"build": "rollup -c",
+		"build": "tsup",
 		"test": "",
-		"start": "ts-node-dev ./localtest.ts",
 		"lint": "eslint .",
 		"prepublishOnly": "yarn build"
 	},
@@ -36,11 +35,9 @@
 		"@types/pg": "^7.14.9",
 		"eslint": "~8.4.0",
 		"typescript": "^4.1.5",
-		"rollup": "~2.60.2",
-		"tslib": "~2.3.1",
-		"rollup-plugin-ts": "~2.0.4",
 		"@typescript-eslint/eslint-plugin": "~5.5.0",
-		"@typescript-eslint/parser": "~5.5.0"
+		"@typescript-eslint/parser": "~5.5.0",
+		"tsup": "~5.11.4"
 	},
 	"optionalDependencies": {
 		"mysql2": "~2.3.3",
