@@ -23,6 +23,13 @@
 	"files": [
 		"dist"
 	],
+	"typesVersions": {
+		"*": {
+			"*": [
+				"./dist/*"
+			]
+		}
+	},
 	"exports": {
 		".": {
 			"import": "./dist/index.mjs",

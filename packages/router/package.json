@@ -29,6 +29,13 @@
 			"require": "./dist/index.js"
 		}
 	},
+	"typesVersions": {
+		"*": {
+			"*": [
+				"./dist/*"
+			]
+		}
+	},
 	"scripts": {
 		"build": "tsup",
 		"test": "",

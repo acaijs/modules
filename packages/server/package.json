@@ -18,9 +18,6 @@
 	],
 	"author": "Rafael <rafael.chaves98@hotmail.com>",
 	"license": "BSD-3-Clause",
-	"module": "dist/index.mjs",
-	"main": "dist/index.js",
-	"typings": "dist/index.d.ts",
 	"files": [
 		"dist"
 	],
@@ -28,6 +25,10 @@
 		".": {
 			"import": "./dist/index.mjs",
 			"require": "./dist/index.js"
+		},
+		"./http": {
+			"import": "./dist/http.mjs",
+			"require": "./dist/http.js"
 		}
 	},
 	"private": false,
