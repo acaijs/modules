@@ -1,6 +1,6 @@
 {
 	"name": "@acai/config",
-	"version": "1.1.0-beta.3",
+	"version": "1.1.0-beta.4",
 	"description": "Config is a base module that helps you organize data through your application",
 	"repository": {
 		"type": "git",
@@ -30,14 +30,12 @@
 	"devDependencies": {
 		"@acai/testing": "^3.0.0-beta.0",
 		"@types/node": "^14.14.28",
-		"typescript": "^4.1.5",
 		"@typescript-eslint/eslint-plugin": "~5.5.0",
-		"eslint": "~8.4.0",
 		"@typescript-eslint/parser": "~5.5.0",
-		"tsup": "~5.11.4"
+		"eslint": "~8.4.0",
+		"tsup": "~5.11.4",
+		"typescript": "^4.1.5"
 	},
-	"module": "dist/index.mjs",
-	"main": "dist/index.js",
 	"files": [
 		"dist"
 	],
