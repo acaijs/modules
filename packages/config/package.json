@@ -13,7 +13,7 @@
 	"types": "dist",
 	"scripts": {
 		"build": "tsup",
-		"test": "tsup --onSuccess ./dist/test.js",
+		"test": "ts-node-dev ./test.ts",
 		"prepublishOnly": "yarn build",
 		"lint": "eslint ."
 	},
