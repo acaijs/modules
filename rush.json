@@ -3,90 +3,72 @@
  * For full documentation, please see https://rushjs.io
  */
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/rush.schema.json",
-  
-  "rushVersion": "5.55.1",
-  
-  "pnpmVersion": "6.7.1",
-  
-  "pnpmOptions": {
-    
-  },
-
-  "nodeSupportedVersionRange": ">=12.0.0",
-
-  "suppressNodeLtsWarning": true,
-
-  "gitPolicy": {
-    
-  },
-
-  "repository": {
-    "url": "https://github.com/AcaiJS/modules",
-
-    "defaultBranch": "production"
-  },
-
-  "projects": [
-    {
-      "packageName": "@acai/config",
-      "projectFolder": "packages/config",
-      "shouldPublish": true
-    },
-    {
-      "packageName": "@acai/interfaces",
-      "projectFolder": "packages/interfaces",
-      "shouldPublish": true
-    },
-    {
-      "packageName": "@acai/model",
-      "projectFolder": "packages/model",
-      "shouldPublish": true
-    },
-    {
-      "packageName": "@acai/preset",
-      "projectFolder": "packages/preset",
-      "shouldPublish": true
-    },
-    {
-      "packageName": "@acai/query",
-      "projectFolder": "packages/query",
-      "shouldPublish": true
-    },
-    {
-      "packageName": "@acai/router",
-      "projectFolder": "packages/router",
-      "shouldPublish": true
-    },
-    {
-      "packageName": "@acai/runtime",
-      "projectFolder": "packages/runtime",
-      "shouldPublish": true
-    },
-    {
-      "packageName": "@acai/server",
-      "projectFolder": "packages/server",
-      "shouldPublish": true
-    },
-    {
-      "packageName": "@acai/stubber",
-      "projectFolder": "packages/stubber",
-      "shouldPublish": true
-    },
-    {
-      "packageName": "@acai/testing",
-      "projectFolder": "packages/testing",
-      "shouldPublish": true
-    },
-    {
-      "packageName": "@acai/utils",
-      "projectFolder": "packages/utils",
-      "shouldPublish": true
-    },
-    {
-      "packageName": "@acai/validator",
-      "projectFolder": "packages/validator",
-      "shouldPublish": true
-    }
-  ]
+	"$schema": "https://developer.microsoft.com/json-schemas/rush/v5/rush.schema.json",
+	"rushVersion": "5.55.1",
+	"pnpmVersion": "6.7.1",
+	"pnpmOptions": {},
+	"nodeSupportedVersionRange": ">=12.0.0",
+	"suppressNodeLtsWarning": true,
+	"gitPolicy": {},
+	"repository": {
+		"url": "https://github.com/AcaiJS/modules",
+		"defaultBranch": "production"
+	},
+	"projects": [
+		{
+			"packageName": "@acai/config",
+			"projectFolder": "packages/config",
+			"shouldPublish": true
+		},
+		{
+			"packageName": "@acai/interfaces",
+			"projectFolder": "packages/interfaces",
+			"shouldPublish": true
+		},
+		{
+			"packageName": "@acai/model",
+			"projectFolder": "packages/model",
+			"shouldPublish": true
+		},
+		{
+			"packageName": "@acai/preset",
+			"projectFolder": "packages/preset",
+			"shouldPublish": true
+		},
+		{
+			"packageName": "@acai/query",
+			"projectFolder": "packages/query",
+			"shouldPublish": true
+		},
+		{
+			"packageName": "@acai/router",
+			"projectFolder": "packages/router",
+			"shouldPublish": true
+		},
+		{
+			"packageName": "@acai/server",
+			"projectFolder": "packages/server",
+			"shouldPublish": true
+		},
+		{
+			"packageName": "@acai/stubber",
+			"projectFolder": "packages/stubber",
+			"shouldPublish": true
+		},
+		{
+			"packageName": "@acai/testing",
+			"projectFolder": "packages/testing",
+			"shouldPublish": true
+		},
+		{
+			"packageName": "@acai/utils",
+			"projectFolder": "packages/utils",
+			"shouldPublish": true
+		},
+		{
+			"packageName": "@acai/validator",
+			"projectFolder": "packages/validator",
+			"shouldPublish": true
+		}
+	]
 }

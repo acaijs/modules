@@ -1,53 +1,54 @@
 {
 	"name": "@acai/model",
-	"version": "0.8.0-beta.16",
+	"version": "0.8.0-beta.17",
 	"description": "Models are a easy way to group your data with methods to format it, save and other crud operations.",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/AcaiJS/modules.git",
-		"directory": "packages/m_model"
+		"directory": "packages/model"
 	},
 	"author": "Rafael <rafael.chaves98@hotmail.com>",
 	"license": "BSD-3-Clause",
 	"private": false,
-	"module": "dist/index.es.js",
-	"main": "dist/index.js",
-	"typings": "dist/index.d.ts",
 	"files": [
 		"dist"
 	],
+	"typesVersions": {
+		"*": {
+			"*": [
+				"./dist/*"
+			]
+		}
+	},
 	"exports": {
 		".": {
-			"import": "./dist/index.es.js",
+			"import": "./dist/index.mjs",
 			"require": "./dist/index.js"
 		}
 	},
 	"scripts": {
-		"build": "rollup -c",
-		"start": "ts-node-dev ./yay.ts",
+		"build": "tsup",
 		"test": "",
 		"prepublishOnly": "yarn build",
 		"lint": "eslint ."
 	},
 	"dependencies": {
-		"bcrypt": "^5.0.0",
-		"uuid": "^8.3.2",
 		"@acai/config": "^1.1.0-beta.0",
 		"@acai/query": "^0.7.0-beta.0",
 		"@acai/utils": "^0.7.0-beta.0",
-		"luxon": "^1.26.0"
+		"bcrypt": "^5.0.0",
+		"luxon": "^1.26.0",
+		"uuid": "^8.3.2"
 	},
 	"devDependencies": {
 		"@acai/testing": "^3.0.0-beta.0",
 		"@types/bcrypt": "^3.0.0",
 		"@types/luxon": "^1.26.5",
 		"@types/node": "^14.14.28",
-		"typescript": "^4.1.5",
-		"rollup": "~2.60.2",
-		"tslib": "~2.3.1",
-		"rollup-plugin-ts": "~2.0.4",
 		"@typescript-eslint/eslint-plugin": "~5.5.0",
+		"@typescript-eslint/parser": "~5.5.0",
 		"eslint": "~8.4.0",
-		"@typescript-eslint/parser": "~5.5.0"
+		"tsup": "~5.11.4",
+		"typescript": "^4.1.5"
 	}
 }

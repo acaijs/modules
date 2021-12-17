@@ -1,31 +1,34 @@
 {
 	"name": "@acai/stubber",
-	"version": "0.1.0-beta.2",
+	"version": "0.1.0-beta.3",
 	"description": "Stubber is a simple and configurable template engine, helping you create repeated files so you don't have to.",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/AcaiJS/modules.git",
-		"directory": "packages/m_stubber"
+		"directory": "packages/stubber"
 	},
 	"author": "Rafael <rafael.chaves98@hotmail.com>",
 	"license": "BSD-3-Clause",
 	"private": false,
-	"module": "dist/index.es.js",
-	"main": "dist/index.js",
-	"typings": "dist/index.d.ts",
 	"files": [
 		"dist"
 	],
 	"exports": {
 		".": {
-			"import": "./dist/index.es.js",
+			"import": "./dist/index.mjs",
 			"require": "./dist/index.js"
 		}
 	},
+	"typesVersions": {
+		"*": {
+			"*": [
+				"./dist/*"
+			]
+		}
+	},
 	"scripts": {
-		"build": "rollup -c",
+		"build": "tsup",
 		"test": "ts-node-dev ./test.ts",
-		"start": "ts-node-dev ./index.ts",
 		"prepublishOnly": "yarn build",
 		"lint": "eslint ."
 	},
@@ -36,13 +39,11 @@
 		"@acai/testing": "^3.0.0-beta.0",
 		"@types/glob": "^7.1.3",
 		"@types/node": "^14.14.28",
-		"typescript": "^4.1.5",
-		"rollup": "~2.60.2",
-		"tslib": "~2.3.1",
-		"rollup-plugin-ts": "~2.0.4",
 		"@typescript-eslint/eslint-plugin": "~5.5.0",
+		"@typescript-eslint/parser": "~5.5.0",
 		"eslint": "~8.4.0",
-		"@typescript-eslint/parser": "~5.5.0"
+		"tsup": "~5.11.4",
+		"typescript": "^4.1.5"
 	},
 	"dependencies": {
 		"glob": "^7.1.6"

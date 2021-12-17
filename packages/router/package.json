@@ -1,11 +1,11 @@
 {
 	"name": "@acai/router",
-	"version": "2.2.0-beta.3",
+	"version": "2.2.0-beta.4",
 	"description": "An agnostic router that is part of the Açaí Framework ecosytem that can be easily extended to be used both on the backend and frontend.",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/AcaiJS/modules.git",
-		"directory": "packages/m_router"
+		"directory": "packages/router"
 	},
 	"author": "Rafael <rafael.chaves98@hotmail.com>",
 	"keywords": [
@@ -17,21 +17,25 @@
 	],
 	"license": "BSD-3-Clause",
 	"private": false,
-	"module": "dist/index.es.js",
-	"main": "dist/index.js",
-	"typings": "dist/index.d.ts",
 	"files": [
 		"dist"
 	],
 	"exports": {
 		".": {
-			"import": "./dist/index.es.js",
+			"import": "./dist/index.mjs",
 			"require": "./dist/index.js"
 		}
 	},
+	"typesVersions": {
+		"*": {
+			"*": [
+				"./dist/*"
+			]
+		}
+	},
 	"scripts": {
-		"build": "rollup -c",
-		"test": "ts-node-dev ./test.ts --path \"./src/**/*.{test,tests}.{js,ts}\"",
+		"build": "tsup",
+		"test": "",
 		"lint": "eslint .",
 		"lint:fix": "eslint --quiet **/* --fix",
 		"prepublishOnly": "yarn build"
@@ -42,12 +46,10 @@
 	"devDependencies": {
 		"@acai/testing": "^3.0.0-beta.0",
 		"@types/node": "^14.14.28",
-		"eslint": "~8.4.0",
-		"typescript": "^4.1.5",
-		"rollup": "~2.60.2",
-		"tslib": "~2.3.1",
-		"rollup-plugin-ts": "~2.0.4",
 		"@typescript-eslint/eslint-plugin": "~5.5.0",
-		"@typescript-eslint/parser": "~5.5.0"
+		"@typescript-eslint/parser": "~5.5.0",
+		"eslint": "~8.4.0",
+		"tsup": "~5.11.4",
+		"typescript": "^4.1.5"
 	}
 }

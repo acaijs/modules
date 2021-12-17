@@ -1,29 +1,33 @@
 {
 	"name": "@acai/utils",
-	"version": "0.7.0-beta.18",
+	"version": "0.7.0-beta.19",
 	"description": "A set of tools used by the Açaí Framework to enhance and ease your development experience.",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/AcaiJS/modules.git",
-		"directory": "packages/m_utils"
+		"directory": "packages/utils"
 	},
 	"author": "Rafael <rafael.chaves98@hotmail.com>",
 	"license": "BSD-3-Clause",
 	"private": false,
-	"module": "dist/index.es.js",
-	"main": "dist/index.js",
-	"typings": "dist/index.d.ts",
 	"files": [
 		"dist"
 	],
+	"typesVersions": {
+		"*": {
+			"*": [
+				"./dist/*"
+			]
+		}
+	},
 	"exports": {
 		".": {
-			"import": "./dist/index.es.js",
+			"import": "./dist/index.mjs",
 			"require": "./dist/index.js"
 		}
 	},
 	"scripts": {
-		"build": "rollup -c",
+		"build": "tsup",
 		"test": "ts-node-dev ./test.ts",
 		"prepublishOnly": "yarn build",
 		"lint": "eslint ."
@@ -36,17 +40,15 @@
 		"@types/formidable": "^2.0.0",
 		"@types/glob": "^7.1.3",
 		"@types/node": "^14.14.28",
-		"typescript": "^4.1.5",
-		"rollup": "~2.60.2",
-		"tslib": "~2.3.1",
-		"rollup-plugin-ts": "~2.0.4",
 		"@typescript-eslint/eslint-plugin": "~5.5.0",
+		"@typescript-eslint/parser": "~5.5.0",
 		"eslint": "~8.4.0",
-		"@typescript-eslint/parser": "~5.5.0"
+		"tsup": "~5.11.4",
+		"typescript": "^4.1.5"
 	},
 	"dependencies": {
-		"formidable": "^2.0.1",
 		"@acai/config": "^1.1.0-beta.0",
-		"@acai/interfaces": "^0.2.0-beta.0"
+		"@acai/interfaces": "^0.2.0-beta.0",
+		"formidable": "^2.0.1"
 	}
 }
