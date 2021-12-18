@@ -1,0 +1,6 @@
+.github/CODEOWNERS @darklight9811
+
+packages/**/* @darklight9811
+README.md @darklight9811
+
+common/scripts/clear-dist.js @darklight9811
