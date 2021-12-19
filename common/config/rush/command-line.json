@@ -42,7 +42,8 @@
 			"name": "audit",
 			"summary": "Make sure every dependency used does not contain a security issue",
 			"description": "Make sure every dependency used does not contain a security issue",
-			"enableParallelism": true
+			"enableParallelism": true,
+			"allowWarningsInSuccessfulBuild": true
 		}
 	],
 	/**
