@@ -37,6 +37,13 @@
 			"ignoreMissingScript": false,
 			"allowWarningsInSuccessfulBuild": true
 		},
+		{
+			"commandKind": "bulk",
+			"name": "audit",
+			"summary": "Make sure every dependency used does not contain a security issue",
+			"description": "Make sure every dependency used does not contain a security issue",
+			"enableParallelism": true
+		}
 	],
 	/**
    * Custom "parameters" introduce new parameters for specified Rush command-line commands.

@@ -28,6 +28,9 @@ jobs:
         uses: advancedcsg-open/actions-rush@v1.4.5
 
       - name: Lint
+        run: rush audit
+
+      - name: Lint
         run: rush lint
 
       - name: Build
