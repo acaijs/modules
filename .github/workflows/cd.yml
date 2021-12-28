@@ -1,20 +1,30 @@
-name: Publish Package to npmjs
+name: '@acai publish'
+
 on:
   release:
-    types: [created]
+    types: [published]
+
 jobs:
-  build:
+  integration:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      # Setup .npmrc file to publish to npm
-      - uses: actions/setup-node@v2
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v2
         with:
           node-version: '16.x'
-          registry-url: 'https://registry.npmjs.org'
-          # Defaults to the user or organization that owns the workflow file
-          scope: '@acai'
-      - run: yarn
-      - run: yarn publish
+          registry-url: https://registry.npmjs.org/
+
+      - name: Rush CLI
+        run: npm install -g @microsoft/rush
+
+      - name: Rush Install
+        uses: advancedcsg-open/actions-rush@v1.4.5
+
+      - name: Publish packages
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          RELEASE: ${{ github.event.release.body }}
+        run: rush bump "$RELEASE"

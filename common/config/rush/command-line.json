@@ -44,6 +44,13 @@
 			"description": "Make sure every dependency used does not contain a security issue",
 			"enableParallelism": true,
 			"allowWarningsInSuccessfulBuild": true
+		},
+		{
+			"commandKind": "global",
+			"name": "bump",
+			"summary": "Make sure every dependency used does not contain a security issue",
+			"description": "Make sure every dependency used does not contain a security issue",
+			"shellCommand": "node common/scripts/bump.js"
 		}
 	],
 	/**
