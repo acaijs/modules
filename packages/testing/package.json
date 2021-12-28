@@ -37,6 +37,7 @@
 		"build": "tsup",
 		"test": "",
 		"lint": "eslint .",
+		"prepublishOnly": "yarn build",
 		"audit": "yarn audit"
 	},
 	"engines": {
