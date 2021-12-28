@@ -2,6 +2,7 @@ lockfileVersion: 5.3
 
 specifiers:
   '@acai/testing': ^3.0.0-beta.0
+  '@rush-temp/commands': file:./projects/commands.tgz
   '@rush-temp/config': file:./projects/config.tgz
   '@rush-temp/interfaces': file:./projects/interfaces.tgz
   '@rush-temp/model': file:./projects/model.tgz
@@ -40,6 +41,7 @@ specifiers:
 
 dependencies:
   '@acai/testing': 3.0.0-beta.4
+  '@rush-temp/commands': file:projects/commands.tgz
   '@rush-temp/config': file:projects/config.tgz
   '@rush-temp/interfaces': file:projects/interfaces.tgz
   '@rush-temp/model': file:projects/model.tgz
@@ -2541,6 +2543,23 @@ packages:
   /yn/3.1.1:
     resolution: {integrity: sha512-Ux4ygGWsu2c7isFWe8Yu1YluJmqVhxqK2cLXNQA5AcC3QfbGNpM7fu0Y8b/z16pXLnFxZYvWhd3fhBY9DLmC6Q==}
     engines: {node: '>=6'}
+    dev: false
+
+  file:projects/commands.tgz:
+    resolution: {integrity: sha512-0F5+DW10ROeOxbpN4eb1N3DJeOQbjjiJJSeUIlNw+QIzWC1j9zUFKYdXjY9bgdOqexnK9kRlGzXLJyX4T/13Xg==, tarball: file:projects/commands.tgz}
+    name: '@rush-temp/commands'
+    version: 0.0.0
+    dependencies:
+      '@acai/testing': 3.0.0-beta.4
+      '@types/node': 14.18.0
+      '@typescript-eslint/eslint-plugin': 5.5.0_b885794d89d00e0b80d68a1b7275fb2c
+      '@typescript-eslint/parser': 5.5.0_eslint@8.4.0+typescript@4.5.2
+      eslint: 8.4.0
+      tsup: 5.11.4_typescript@4.5.2
+      typescript: 4.5.2
+    transitivePeerDependencies:
+      - supports-color
+      - ts-node
     dev: false
 
   file:projects/config.tgz:
