@@ -1,8 +1,14 @@
 name: '@acai publish'
 
 on:
-  release:
-    types: [published]
+  workflow_call:
+    inputs:
+      body:
+        required: true
+        type: string
+    secrets:
+      token:
+        required: true
 
 jobs:
   publish:
@@ -25,6 +31,6 @@ jobs:
 
       - name: Publish packages
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          RELEASE: ${{ github.event.release.body }}
+          NODE_AUTH_TOKEN: ${{ secrets.token }}
+          RELEASE: ${{ inputs.username }}
         run: rush bump

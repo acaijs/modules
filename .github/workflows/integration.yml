@@ -4,6 +4,8 @@ on:
   pull_request:
   push:
     branches: [ production, development ]
+  release:
+    types: [created, edited, prereleased, published]
 
 jobs:
   integration:
@@ -38,3 +40,11 @@ jobs:
 
       - name: Test packages
         run: rush test
+      
+      - name: Publish packages
+        uses: ./.github/workflows/delivery@v1
+        if: ${{ github.event.release.body!= "" && success() }}
+        with:
+          - body: ${{ github.event.release.body }}
+        secrets:
+          token: ${{ secrets.NPM_TOKEN }}
