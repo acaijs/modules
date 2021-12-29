@@ -31,6 +31,6 @@ jobs:
 
       - name: Publish packages
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.token }}
+          NODE_AUTH_TOKEN: ${{ inputs.token }}
           RELEASE: ${{ inputs.username }}
         run: rush bump

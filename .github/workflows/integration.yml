@@ -46,5 +46,4 @@ jobs:
         uses: ./.github/workflows/delivery@v1
         with:
           body: ${{ github.event.release.body }}
-        secrets:
           token: ${{ secrets.NPM_TOKEN }}
