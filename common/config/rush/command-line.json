@@ -37,11 +37,26 @@
 			"ignoreMissingScript": false,
 			"allowWarningsInSuccessfulBuild": true
 		},
+		{
+			"commandKind": "bulk",
+			"name": "audit",
+			"summary": "Make sure every dependency used does not contain a security issue",
+			"description": "Make sure every dependency used does not contain a security issue",
+			"enableParallelism": true,
+			"allowWarningsInSuccessfulBuild": true
+		},
+		{
+			"commandKind": "global",
+			"name": "bump",
+			"summary": "Publish packages described in the markdown env config",
+			"description": "Publish packages described in the markdown env config.\nMake sure rush builds the project before calling this command.",
+			"shellCommand": "cd commands && yarn run command:bump"
+		}
 	],
 	/**
-   * Custom "parameters" introduce new parameters for specified Rush command-line commands.
-   * For example, you might define a "--production" parameter for the "rush build" command.
-   */
+   	 * Custom "parameters" introduce new parameters for specified Rush command-line commands.
+   	 * For example, you might define a "--production" parameter for the "rush build" command.
+   	 */
 	"parameters": [
 		{
 			"parameterKind": "flag",

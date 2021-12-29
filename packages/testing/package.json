@@ -1,6 +1,6 @@
 {
 	"name": "@acai/testing",
-	"version": "3.0.0-beta.4",
+	"version": "4.0.0-beta.5",
 	"description": "A complete solution toolkit for your test suite.",
 	"repository": {
 		"type": "git",
@@ -36,7 +36,9 @@
 	"scripts": {
 		"build": "tsup",
 		"test": "",
-		"lint": "eslint ."
+		"lint": "eslint .",
+		"prepublishOnly": "yarn build",
+		"audit": "yarn audit"
 	},
 	"engines": {
 		"node": ">=12.0.0"

@@ -4,6 +4,8 @@ on:
   pull_request:
   push:
     branches: [ production, development ]
+  release:
+    types: [created, edited, prereleased, published]
 
 jobs:
   integration:
@@ -27,11 +29,21 @@ jobs:
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
 
-      - name: Lint
+      - name: Audit dependencies
+        run: rush audit
+
+      - name: Lint codebase
         run: rush lint
 
-      - name: Build
+      - name: Build packages
         run: rush build
 
-      - name: Test
+      - name: Test packages
         run: rush test
+      
+      - name: Publish packages
+        if: ${{ github.event.release.body != '' && success() }}
+        uses: ./.github/workflows/delivery@v1
+        with:
+          body: ${{ github.event.release.body }}
+          token: ${{ secrets.NPM_TOKEN }}

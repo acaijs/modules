@@ -38,7 +38,8 @@
 		"lint": "eslint .",
 		"lint:fix": "eslint --quiet **/* --fix",
 		"prepublishOnly": "yarn build",
-		"test": ""
+		"test": "",
+		"audit": "yarn audit"
 	},
 	"engines": {
 		"node": ">=12.0.0"

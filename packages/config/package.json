@@ -15,7 +15,8 @@
 		"build": "tsup",
 		"test": "ts-node-dev ./test.ts",
 		"prepublishOnly": "yarn build",
-		"lint": "eslint ."
+		"lint": "eslint .",
+		"audit": "yarn audit"
 	},
 	"engines": {
 		"node": ">=12.0.0"

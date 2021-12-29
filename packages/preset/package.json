@@ -14,7 +14,8 @@
 	"scripts": {
 		"build": "",
 		"lint": "eslint .",
-		"test": ""
+		"test": "",
+		"audit": "yarn audit"
 	},
 	"author": "Nuinalp and APO Softworks Authors",
 	"license": "BSD-3-Clause",

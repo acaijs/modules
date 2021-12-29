@@ -1,0 +1,23 @@
+{
+	"name": "commands",
+	"version": "1.0.0",
+	"description": "An internal package to handle rush commands through typescript",
+	"license": "BSD-3-Clause",
+	"private": true,
+	"scripts": {
+		"build": "tsup",
+		"test": "ts-node-dev ./test.ts",
+		"lint": "eslint .",
+		"audit": "yarn audit",
+		"command:bump": "node dist/bump"
+	},
+	"devDependencies": {
+		"@acai/testing": "^3.0.0-beta.0",
+		"@types/node": "^14.14.28",
+		"@typescript-eslint/eslint-plugin": "~5.5.0",
+		"@typescript-eslint/parser": "~5.5.0",
+		"eslint": "~8.4.0",
+		"tsup": "~5.11.4",
+		"typescript": "^4.1.5"
+	}
+}

@@ -69,6 +69,14 @@
 			"packageName": "@acai/validator",
 			"projectFolder": "packages/validator",
 			"shouldPublish": true
+		},
+		/**
+		 * Utility packages that serve as commands
+		 */
+		{
+			"packageName": "commands",
+			"projectFolder": "commands",
+			"shouldPublish": false
 		}
 	]
 }

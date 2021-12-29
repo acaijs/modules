@@ -1,6 +1,8 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@acai/testing': ^3.0.0-beta.0
+  '@rush-temp/commands': file:./projects/commands.tgz
   '@rush-temp/config': file:./projects/config.tgz
   '@rush-temp/interfaces': file:./projects/interfaces.tgz
   '@rush-temp/model': file:./projects/model.tgz
@@ -32,12 +34,14 @@ specifiers:
   luxon: ^1.26.0
   mysql2: ~2.3.3
   pg: ~8.7.1
-  supertest: ^6.1.3
+  supertest: ^6.1.6
   tsup: ~5.11.4
   typescript: ^4.1.5
   uuid: ^8.3.2
 
 dependencies:
+  '@acai/testing': 3.0.0-beta.4
+  '@rush-temp/commands': file:projects/commands.tgz
   '@rush-temp/config': file:projects/config.tgz
   '@rush-temp/interfaces': file:projects/interfaces.tgz
   '@rush-temp/model': file:projects/model.tgz
@@ -75,6 +79,13 @@ dependencies:
   uuid: 8.3.2
 
 packages:
+
+  /@acai/testing/3.0.0-beta.4:
+    resolution: {integrity: sha512-LLxkQ+F9hiSebQxzriZaXyhswpBRbmREnP7CJ0y5D9AsaD4eZgAztkM/7dHHbj4su+LydnZNilWDd1dgmuka3g==}
+    engines: {node: '>=12.0.0'}
+    dependencies:
+      glob: 7.2.0
+    dev: false
 
   /@cspotcode/source-map-consumer/0.8.0:
     resolution: {integrity: sha512-41qniHzTU8yAGbCp04ohlmSrZf8bkf/iJsl3V0dRGsQN/5GFfx+LbCSsCpp2gqrqjTVg/K6O8ycoV35JIwAzAg==}
@@ -2534,11 +2545,29 @@ packages:
     engines: {node: '>=6'}
     dev: false
 
+  file:projects/commands.tgz:
+    resolution: {integrity: sha512-0F5+DW10ROeOxbpN4eb1N3DJeOQbjjiJJSeUIlNw+QIzWC1j9zUFKYdXjY9bgdOqexnK9kRlGzXLJyX4T/13Xg==, tarball: file:projects/commands.tgz}
+    name: '@rush-temp/commands'
+    version: 0.0.0
+    dependencies:
+      '@acai/testing': 3.0.0-beta.4
+      '@types/node': 14.18.0
+      '@typescript-eslint/eslint-plugin': 5.5.0_b885794d89d00e0b80d68a1b7275fb2c
+      '@typescript-eslint/parser': 5.5.0_eslint@8.4.0+typescript@4.5.2
+      eslint: 8.4.0
+      tsup: 5.11.4_typescript@4.5.2
+      typescript: 4.5.2
+    transitivePeerDependencies:
+      - supports-color
+      - ts-node
+    dev: false
+
   file:projects/config.tgz:
-    resolution: {integrity: sha512-ChPmSDMJzTKicrgJrSeGUQxL5WP669ixAQGWW7LP0vQrf8H6Ln1GPmpwXMpYPkOUJIRin6ZqH5vAzi7yAG6hag==, tarball: file:projects/config.tgz}
+    resolution: {integrity: sha512-HFpJCIwvf6p7X4viFmQXzz78BPFOEW8eEXx6lTdBkfXuIwzh8LVIDnTVgRV87tYcqZszB2M9cop+sKUOFIPTrA==, tarball: file:projects/config.tgz}
     name: '@rush-temp/config'
     version: 0.0.0
     dependencies:
+      '@acai/testing': 3.0.0-beta.4
       '@types/node': 14.18.0
       '@typescript-eslint/eslint-plugin': 5.5.0_b885794d89d00e0b80d68a1b7275fb2c
       '@typescript-eslint/parser': 5.5.0_eslint@8.4.0+typescript@4.5.2
@@ -2574,10 +2603,11 @@ packages:
     dev: false
 
   file:projects/model.tgz:
-    resolution: {integrity: sha512-QYDLGQs6xPtd2Cg1+VhLRi3CQNIu9wAB68ehNOqFXjzC6hD1ac+Kqsar7+K4Fa/6s7gtihRDpKhe6PKHDqGuew==, tarball: file:projects/model.tgz}
+    resolution: {integrity: sha512-ihAzl9zXoWwxEfuO1UtWKF9v87P6AaBd+aK3RnfaxmBv+8IIBHULldu1KK8VNQ7IxF1T2PzfRczuaBrSfLvJTA==, tarball: file:projects/model.tgz}
     name: '@rush-temp/model'
     version: 0.0.0
     dependencies:
+      '@acai/testing': 3.0.0-beta.4
       '@types/bcrypt': 3.0.1
       '@types/luxon': 1.27.1
       '@types/node': 14.18.0
@@ -2598,7 +2628,7 @@ packages:
     dev: false
 
   file:projects/preset.tgz_typescript@4.5.2:
-    resolution: {integrity: sha512-6KghSm+ViDLLkuXaU6eyMZv4EDGNWHF785MO5TUPORMyObx1fuKQyVQp4RefkTN7PyAqW4UB7AEDFUSbJ8OSxA==, tarball: file:projects/preset.tgz}
+    resolution: {integrity: sha512-4rVfi9v0hDw4ca+2anlna46MYNJRXHBsb6XqBzv6PQrerKe+pk0SxFNrjx6ehp26c+7KuMkpZE9GcgP8t1IX2g==, tarball: file:projects/preset.tgz}
     id: file:projects/preset.tgz
     name: '@rush-temp/preset'
     version: 0.0.0
@@ -2612,15 +2642,15 @@ packages:
       tsup: 5.11.4_typescript@4.5.2
     transitivePeerDependencies:
       - supports-color
-      - ts-node
       - typescript
     dev: false
 
   file:projects/query.tgz:
-    resolution: {integrity: sha512-UFfbxzuTPhaHSVhd6jnS36Rd3W/gfFBcLMFSazFAdmXYvwx8BtpHfsMLPfunYOyFzyHJLV8e7Dzf2XDnnEkd8Q==, tarball: file:projects/query.tgz}
+    resolution: {integrity: sha512-PPVAHmY2knHFUWXU+rbP/HvlZLf3FE7hAKVBELmrK3m6Bw6+0SevCNJrR0+JRQU9d4XUQ4N8ByNKy5G7ZBh/Tg==, tarball: file:projects/query.tgz}
     name: '@rush-temp/query'
     version: 0.0.0
     dependencies:
+      '@acai/testing': 3.0.0-beta.4
       '@types/node': 14.18.0
       '@types/pg': 7.14.11
       '@typescript-eslint/eslint-plugin': 5.5.0_b885794d89d00e0b80d68a1b7275fb2c
@@ -2641,10 +2671,11 @@ packages:
     dev: false
 
   file:projects/router.tgz:
-    resolution: {integrity: sha512-4GmMaj+Mcxis6iGCR7bJBex4ZbV5mKDxUXTte9W5+S+SfgxEMetfHlK3jaCFdHjMScTNDY8Nx56PrEwszPHRcA==, tarball: file:projects/router.tgz}
+    resolution: {integrity: sha512-pVOaJnI4og9YVUPIKBMD3KjL21ZlqOiA+9oVUuvbwZjjqnYsjenPTqbI58AP6YM7nv3f25AOe6Qrz5/IkN2Vtg==, tarball: file:projects/router.tgz}
     name: '@rush-temp/router'
     version: 0.0.0
     dependencies:
+      '@acai/testing': 3.0.0-beta.4
       '@types/node': 14.18.0
       '@typescript-eslint/eslint-plugin': 5.5.0_b885794d89d00e0b80d68a1b7275fb2c
       '@typescript-eslint/parser': 5.5.0_eslint@8.4.0+typescript@4.5.2
@@ -2660,10 +2691,11 @@ packages:
     dev: false
 
   file:projects/server.tgz:
-    resolution: {integrity: sha512-hTd5XM0b/+OlG2qot8O1GdxR6nP+2Gw5g3b1m3Z11cpfhwonBkrdo0lFg5T8zNMXfmQLG+xHs74Dpo7f3FzTpg==, tarball: file:projects/server.tgz}
+    resolution: {integrity: sha512-eYEds8GqVQBVGkNy0SofN3B4XqfxI3+8SmuB0JKXDKaRgvOSjZahyN/bFdmPpjkUn4QT4c1UydpgSqbzscUV1w==, tarball: file:projects/server.tgz}
     name: '@rush-temp/server'
     version: 0.0.0
     dependencies:
+      '@acai/testing': 3.0.0-beta.4
       '@types/cookies': 0.7.7
       '@types/node': 14.18.0
       '@types/supertest': 2.0.11
@@ -2685,10 +2717,11 @@ packages:
     dev: false
 
   file:projects/stubber.tgz:
-    resolution: {integrity: sha512-51Ha/NNUNQZZxC+M1/eVZ/pmqgtrC6IFL31O/DwC2/vr69h27/tGPSnkCvnvru+zf/9aQKOXoXolhEzNSBzTkw==, tarball: file:projects/stubber.tgz}
+    resolution: {integrity: sha512-O3QnQwjO8MaPf1LJEll9omrghSeUnJ0guLWNcTrcBeR+1Nue6ANgNeglMZajZlz/4CkF+S0XAE06XZND7xvbOA==, tarball: file:projects/stubber.tgz}
     name: '@rush-temp/stubber'
     version: 0.0.0
     dependencies:
+      '@acai/testing': 3.0.0-beta.4
       '@types/glob': 7.2.0
       '@types/node': 14.18.0
       '@typescript-eslint/eslint-plugin': 5.5.0_b885794d89d00e0b80d68a1b7275fb2c
@@ -2728,10 +2761,11 @@ packages:
     dev: false
 
   file:projects/utils.tgz:
-    resolution: {integrity: sha512-ZhSKT1259cNs3509I9P7xVA2dcKy8Lyt+tJg3t6MHn36vWqiQjzCJboBdndYMMeOVIuDyTWWIz2Zd/VwCwq4Dg==, tarball: file:projects/utils.tgz}
+    resolution: {integrity: sha512-fU9/ps7x1R4/j66LiM4STnSD/HtSDzdpv6piKzeoPcVgNFUjZE11rhEHUeFegRncE3BXTQ3FynM5kvuyxIAUSw==, tarball: file:projects/utils.tgz}
     name: '@rush-temp/utils'
     version: 0.0.0
     dependencies:
+      '@acai/testing': 3.0.0-beta.4
       '@types/formidable': 2.0.0
       '@types/glob': 7.2.0
       '@types/node': 14.18.0
@@ -2750,10 +2784,11 @@ packages:
     dev: false
 
   file:projects/validator.tgz:
-    resolution: {integrity: sha512-mU9Hm5kHXz32Eqvao0rewuqKS3GxVF9Fh4X7owTyKThtif3QfIwYxX594d6AUn6CVkVItdW2NQYO1CJQh3yufg==, tarball: file:projects/validator.tgz}
+    resolution: {integrity: sha512-H9XtFb3FE/ea6BcitV4C2FzbLhAHwkgx80hCUttuu7kdYkFpj5BRgYPYB/UCUbsc6TqOQVxBaIngxAM2az/kzQ==, tarball: file:projects/validator.tgz}
     name: '@rush-temp/validator'
     version: 0.0.0
     dependencies:
+      '@acai/testing': 3.0.0-beta.4
       '@types/glob': 7.2.0
       '@types/luxon': 1.27.1
       '@types/node': 14.18.0
