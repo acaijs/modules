@@ -42,9 +42,9 @@ jobs:
         run: rush test
       
       - name: Publish packages
-        uses: ./.github/workflows/delivery@v1
         if: ${{ github.event.release.body != '' && success() }}
+        uses: ./.github/workflows/delivery@v1
         with:
-          - body: ${{ github.event.release.body }}
+          body: ${{ github.event.release.body }}
         secrets:
-          - token: ${{ secrets.NPM_TOKEN }}
+          token: ${{ secrets.NPM_TOKEN }}
