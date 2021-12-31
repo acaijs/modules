@@ -9,6 +9,7 @@ on:
 
 jobs:
   setup:
+    name: Setup node and environment
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -58,38 +59,42 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
 
   audit:
+    name: Audit for vulnerabilities
     needs: setup
     runs-on: ubuntu-latest
     steps:
       - run: rush audit
 
   lint:
+    name: Lint code for standarlization
     needs: setup
     runs-on: ubuntu-latest
     steps:
       - run: rush lint
 
   build:
+    name: Build all packages
     needs: [lint, audit]
     runs-on: ubuntu-latest
     steps:
       - run: rush build
 
   test_1:
-    name: test general packages
+    name: Test general packages
     needs: build
     runs-on: ubuntu-latest
     steps:
       - run: rush test
 
   test_2:
-    name: test database packages
+    name: Test database packages
     needs: build
     runs-on: ubuntu-latest
     steps:
       - run: echo 'implement database tests'
       
   publish:
+    name: Publish packages
     needs: [build, test_1, test_2]
     runs-on: ubuntu-latest
     if: ${{ github.event.release.body != '' && success() }}
