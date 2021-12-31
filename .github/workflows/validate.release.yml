@@ -1,0 +1,30 @@
+name: '@acai validate release'
+
+on:
+  release:
+    types: [created, edited, prereleased]
+
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+          registry-url: https://registry.npmjs.org/
+
+      - name: Rush CLI
+        run: npm install -g @microsoft/rush
+
+      - name: Rush Install
+        uses: advancedcsg-open/actions-rush@v1.4.5
+
+      - name: Publish packages
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          RELEASE: ${{ github.event.release.body }}
+        run: rush bump "$RELEASE"

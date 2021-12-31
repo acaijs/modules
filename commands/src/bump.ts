@@ -9,7 +9,7 @@ import { colored, exception, cli } from "./utils/terminal"
 
 async function main() {
 	const body = process.env.RELEASE!
-
+        
 	if (!body) {
 		exception("Release body was not given")
 	}
