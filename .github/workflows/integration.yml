@@ -8,7 +8,7 @@ on:
     types: [ published ]
 
 jobs:
-  integration:
+  setup:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -28,31 +28,55 @@ jobs:
 
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
+
+      - name: Upload enviromnent
+        uses: actions/upload-artifact@v2
+        with:
+          name: env
+
   audit:
     needs: integration
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: env
       - run: rush audit
+
   lint:
     needs: integration
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: env
       - run: rush lint
+
   build:
     needs: [lint, audit]
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: env
       - run: rush build
+
   test:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: env
       - run: rush test
       
   publish:
     needs: test
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: env
       - name: Publish packages
         if: ${{ github.event.release.body != '' && success() }}
         uses: ./.github/workflows/delivery@master
