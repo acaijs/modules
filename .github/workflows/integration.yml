@@ -12,6 +12,7 @@ jobs:
     name: Setup node and environment
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - uses: ./.github/workflows/setup@master
 
   audit:
@@ -19,6 +20,7 @@ jobs:
     needs: setup
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - uses: ./.github/workflows/setup@master
       - run: rush audit
 
@@ -27,6 +29,7 @@ jobs:
     needs: setup
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - uses: ./.github/workflows/setup@master
       - run: rush lint
 
@@ -35,6 +38,7 @@ jobs:
     needs: [lint, audit]
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - uses: ./.github/workflows/setup@master
       - run: rush build
 
@@ -43,6 +47,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - uses: ./.github/workflows/setup@master
       - run: rush test
 
@@ -51,6 +56,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - uses: ./.github/workflows/setup@master
       - run: echo 'implement database tests'
       
@@ -60,6 +66,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.release.body != '' && success() }}
     steps:
+      - uses: actions/checkout@v2
       - uses: ./.github/workflows/setup@master
       - name: Publish packages
         env:
