@@ -75,11 +75,19 @@ jobs:
     steps:
       - run: rush build
 
-  test:
+  test_1:
+    name: test general packages
     needs: build
     runs-on: ubuntu-latest
     steps:
       - run: rush test
+
+  test_2:
+    name: test database packages
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'implement database tests'
       
   publish:
     needs: [build, test]
