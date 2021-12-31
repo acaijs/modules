@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: ./.github/workflows/setup@v1
+      - uses: ./.github/workflows/setup.yml@master
 
   audit:
     name: Audit for vulnerabilities
@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: ./.github/workflows/setup@master
+      - uses: ./.github/workflows/setup.yml@master
       - run: rush audit
 
   lint:
@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: ./.github/workflows/setup@master
+      - uses: ./.github/workflows/setup.yml@master
       - run: rush lint
 
   build:
@@ -39,7 +39,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: ./.github/workflows/setup@master
+      - uses: ./.github/workflows/setup.yml@master
       - run: rush build
 
   test_1:
@@ -48,7 +48,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: ./.github/workflows/setup@master
+      - uses: ./.github/workflows/setup.yml@master
       - run: rush test
 
   test_2:
@@ -57,7 +57,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: ./.github/workflows/setup@master
+      - uses: ./.github/workflows/setup.yml@master
       - run: echo 'implement database tests'
       
   publish:
@@ -67,7 +67,7 @@ jobs:
     if: ${{ github.event.release.body != '' && success() }}
     steps:
       - uses: actions/checkout@v2
-      - uses: ./.github/workflows/setup@master
+      - uses: ./.github/workflows/setup.yml@master
       - name: Publish packages
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
