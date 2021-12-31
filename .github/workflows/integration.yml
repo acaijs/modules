@@ -29,6 +29,7 @@ jobs:
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
   verify:
+    needs: integration
     runs-on: ubuntu-latest
     steps:
       - name: Audit dependencies
@@ -44,6 +45,7 @@ jobs:
         run: rush test
       
   publish:
+    needs: verify
     runs-on: ubuntu-latest
     steps:
       - name: Publish packages
