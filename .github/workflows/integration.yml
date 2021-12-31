@@ -30,6 +30,7 @@ jobs:
         uses: advancedcsg-open/actions-rush@v1.4.5
   verify:
     runs-on: ubuntu-latest
+    steps:
       - name: Audit dependencies
         run: rush audit
 
@@ -44,6 +45,7 @@ jobs:
       
   publish:
     runs-on: ubuntu-latest
+    steps:
       - name: Publish packages
         if: ${{ github.event.release.body != '' && success() }}
         uses: ./.github/workflows/delivery@master
