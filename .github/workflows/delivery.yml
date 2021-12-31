@@ -6,9 +6,9 @@ on:
       body:
         required: true
         type: string
-    secrets:
       token:
         required: true
+        type: string
 
 jobs:
   publish:

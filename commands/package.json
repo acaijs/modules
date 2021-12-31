@@ -9,7 +9,7 @@
 		"test": "ts-node-dev ./test.ts",
 		"lint": "eslint .",
 		"audit": "yarn audit",
-		"command:bump": "node dist/bump"
+		"command:bump": "yarn build && node dist/bump"
 	},
 	"devDependencies": {
 		"@acai/testing": "^3.0.0-beta.0",
