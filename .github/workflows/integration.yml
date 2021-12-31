@@ -28,24 +28,29 @@ jobs:
 
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
-  verify:
+  audit:
     needs: integration
     runs-on: ubuntu-latest
     steps:
-      - name: Audit dependencies
-        run: rush audit
-
-      - name: Lint codebase
-        run: rush lint
-
-      - name: Build packages
-        run: rush build
-
-      - name: Test packages
-        run: rush test
+      - run: rush audit
+  lint:
+    needs: integration
+    runs-on: ubuntu-latest
+    steps:
+      - run: rush lint
+  build:
+    needs: [lint, audit]
+    runs-on: ubuntu-latest
+    steps:
+      - run: rush build
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - run: rush test
       
   publish:
-    needs: verify
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Publish packages
