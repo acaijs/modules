@@ -20,15 +20,6 @@ jobs:
           node-version: '16.x'
           registry-url: https://registry.npmjs.org/
 
-      - name: Rush CLI
-        run: npm install -g @microsoft/rush
-
-      - name: Global ts-node-dev
-        run: npm install -g ts-node-dev
-
-      - name: Rush Install
-        uses: advancedcsg-open/actions-rush@v1.4.5
-      
       - name: Cache Rush
         uses: actions/cache@v2
         with:
@@ -44,13 +35,19 @@ jobs:
             ~/.cache/Cypress
           key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
 
+      - name: Rush CLI
+        run: npm install -g @microsoft/rush
+
+      - name: Global ts-node-dev
+        run: npm install -g ts-node-dev
+
+      - name: Rush Install
+        uses: advancedcsg-open/actions-rush@v1.4.5
+
   audit:
     needs: setup
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@v2
-        with:
-          name: env
       - run: rush audit
 
   lint:
