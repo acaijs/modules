@@ -28,11 +28,21 @@ jobs:
 
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
-
-      - name: Upload enviromnent
-        uses: actions/upload-artifact@v2
+      
+      - name: Cache Rush
+        uses: actions/cache@v2
         with:
-          name: env
+          path: |
+            common/temp/install-run
+            ~/.rush
+          key: ${{ runner.os }}-${{ hashFiles('rush.json') }}
+      - name: Cache pnpm
+        uses: actions/cache@v2
+        with:
+          path: |
+            common/temp/pnpm-store
+            ~/.cache/Cypress
+          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
 
   audit:
     needs: setup
@@ -47,36 +57,24 @@ jobs:
     needs: setup
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@v2
-        with:
-          name: env
       - run: rush lint
 
   build:
     needs: [lint, audit]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@v2
-        with:
-          name: env
       - run: rush build
 
   test:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@v2
-        with:
-          name: env
       - run: rush test
       
   publish:
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@v2
-        with:
-          name: env
       - name: Publish packages
         if: ${{ github.event.release.body != '' && success() }}
         uses: ./.github/workflows/delivery@master
