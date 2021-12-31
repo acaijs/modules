@@ -43,7 +43,7 @@ jobs:
       
       - name: Publish packages
         if: ${{ github.event.release.body != '' && success() }}
-        uses: ./.github/workflows/delivery@v1
+        uses: ./.github/workflows/delivery@master
         with:
           body: "${{ github.event.release.body }}"
           token: "${{ secrets.NPM_TOKEN }}"
