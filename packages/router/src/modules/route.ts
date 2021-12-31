@@ -110,7 +110,7 @@ const routeBuild = <T = Record<string, unknown>>(clearCache = true) => {
 
 	// filter repeated routes
 	const filteredroutes = [] as typeof routes
-	routes.reverse().forEach(i => {if (!filteredroutes.find(x => x.path === i.path && x.method === i.method)) filteredroutes.push(i) })
+	routes.slice().reverse().forEach(i => {if (!filteredroutes.find(x => x.path === i.path && x.method === i.method)) filteredroutes.push(i) })
 	return filteredroutes.reverse() as RouteInterface<T>[]
 }
 
