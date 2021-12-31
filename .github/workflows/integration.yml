@@ -67,6 +67,8 @@ jobs:
       - name: Rush CLI
         run: npm install -g @microsoft/rush
 
+      - run: rush update
+
       - name: Global ts-node-dev
         run: npm install -g ts-node-dev
       - run: rush audit
