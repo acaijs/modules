@@ -12,67 +12,14 @@ jobs:
     name: Setup node and environment
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Setup Node
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16.x'
-          registry-url: https://registry.npmjs.org/
-
-      - name: Rush CLI
-        run: npm install -g @microsoft/rush
-
-      - name: Global ts-node-dev
-        run: npm install -g ts-node-dev
-
-      - name: Rush Install
-        uses: advancedcsg-open/actions-rush@v1.4.5
-
-      - name: Cache node modules
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-
-      - name: Cache Rush
-        uses: actions/cache@v2
-        with:
-          path: |
-            common/temp/install-run
-            ~/.rush
-          key: ${{ runner.os }}-${{ hashFiles('rush.json') }}
-
-      - name: Cache pnpm
-        uses: actions/cache@v2
-        with:
-          path: |
-            common/temp/pnpm-store
-            ~/.cache/Cypress
-          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+      - uses: ./.github/workflows/setup@master
 
   audit:
     name: Audit for vulnerabilities
     needs: setup
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Rush CLI
-        run: npm install -g @microsoft/rush
-
-      - run: rush update
-
-      - name: Global ts-node-dev
-        run: npm install -g ts-node-dev
+      - uses: ./.github/workflows/setup@master
       - run: rush audit
 
   lint:
@@ -80,6 +27,7 @@ jobs:
     needs: setup
     runs-on: ubuntu-latest
     steps:
+      - uses: ./.github/workflows/setup@master
       - run: rush lint
 
   build:
@@ -87,6 +35,7 @@ jobs:
     needs: [lint, audit]
     runs-on: ubuntu-latest
     steps:
+      - uses: ./.github/workflows/setup@master
       - run: rush build
 
   test_1:
@@ -94,6 +43,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - uses: ./.github/workflows/setup@master
       - run: rush test
 
   test_2:
@@ -101,6 +51,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - uses: ./.github/workflows/setup@master
       - run: echo 'implement database tests'
       
   publish:
@@ -109,6 +60,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.release.body != '' && success() }}
     steps:
+      - uses: ./.github/workflows/setup@master
       - name: Publish packages
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
