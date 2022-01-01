@@ -10,7 +10,7 @@ on:
 jobs:
   setup:
     name: Setup node and environment
-    uses: ./.github/workflows/setup-env@development
+    uses: ./.github/workflows/setup-env.yml@development
 
   audit:
     name: Audit for vulnerabilities
