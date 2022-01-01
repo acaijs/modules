@@ -12,7 +12,7 @@ jobs:
     name: Setup node and environment
     runs-on: ubuntu-latest
     steps:
-      - uses: .github/workflows/setup@development
+      - uses: ./.github/workflows/setup-env@development
 
   audit:
     name: Audit for vulnerabilities
