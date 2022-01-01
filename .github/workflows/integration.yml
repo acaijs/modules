@@ -10,7 +10,9 @@ on:
 jobs:
   setup:
     name: Setup node and environment
-    uses: ./.github/workflows/setup-env.yml@development
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/workflows/setup-env.yml@development
 
   audit:
     name: Audit for vulnerabilities
