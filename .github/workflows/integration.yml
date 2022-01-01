@@ -211,6 +211,9 @@ jobs:
 
       - name: Rush CLI
         run: npm install -g @microsoft/rush
+
+      - name: Global ts-node-dev
+        run: npm install -g ts-node-dev
           
       - name: Publish packages
         env:
