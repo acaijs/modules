@@ -16,49 +16,49 @@ jobs:
     name: Audit for vulnerabilities
     needs: setup
     runs-on: ubuntu-latest
-    uses: darklight9811/modules/.github/workflows/setup-env.yml@development
     steps:
+      - uses: ./.github/workflows/setup.yml@development
       - run: rush audit
 
   lint:
     name: Lint code for standarlization
     needs: setup
     runs-on: ubuntu-latest
-    uses: darklight9811/modules/.github/workflows/setup-env.yml@development
     steps:
+      - uses: ./.github/workflows/setup.yml@master
       - run: rush lint
 
   build:
     name: Build all packages
     needs: [lint, audit]
     runs-on: ubuntu-latest
-    uses: darklight9811/modules/.github/workflows/setup-env.yml@development
     steps:
+      - uses: ./.github/workflows/setup.yml@master
       - run: rush build
 
   test_1:
     name: Test general packages
     needs: build
     runs-on: ubuntu-latest
-    uses: darklight9811/modules/.github/workflows/setup-env.yml@development
     steps:
+      - uses: ./.github/workflows/setup.yml@master
       - run: rush test
 
   test_2:
     name: Test database packages
     needs: build
     runs-on: ubuntu-latest
-    uses: darklight9811/modules/.github/workflows/setup-env.yml@development
     steps:
+      - uses: ./.github/workflows/setup.yml@master
       - run: echo 'implement database tests'
       
   publish:
     name: Publish packages
     needs: [build, test_1, test_2]
     runs-on: ubuntu-latest
-    uses: darklight9811/modules/.github/workflows/setup-env.yml@development
     if: ${{ github.event.release.body != '' && success() }}
     steps:
+      - uses: ./.github/workflows/setup.yml@master
       - name: Publish packages
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
