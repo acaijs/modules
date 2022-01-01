@@ -4,7 +4,7 @@ import Server from "./modules/server"
 export default Server
 
 // Interfaces
-export type { ServerRequest } from "@acai/interfaces"
+export type { default as  ServerRequest } from "./interfaces/requests/request"
 
 // Utilities
 export { response } from "@acai/utils"
