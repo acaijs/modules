@@ -12,7 +12,7 @@ jobs:
     name: Setup node and environment
     runs-on: ubuntu-latest
     steps:
-      - uses: darklight9811/modules/.github/workflows/setup.yml@master
+      - uses: ./.github/workflows/setup@development
 
   audit:
     name: Audit for vulnerabilities
