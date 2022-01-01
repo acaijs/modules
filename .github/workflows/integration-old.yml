@@ -1,0 +1,112 @@
+name: '@acai build'
+
+on:
+  pull_request:
+  push:
+    branches: [ production, development ]
+  release:
+    types: [ published ]
+
+jobs:
+  setup:
+    name: Setup node and environment
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+          registry-url: https://registry.npmjs.org/
+
+      - name: Rush CLI
+        run: npm install -g @microsoft/rush
+
+      - name: Global ts-node-dev
+        run: npm install -g ts-node-dev
+
+      - name: Rush Install
+        uses: advancedcsg-open/actions-rush@v1.4.5
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: Cache Rush
+        uses: actions/cache@v2
+        with:
+          path: |
+            common/temp/install-run
+            ~/.rush
+          key: ${{ runner.os }}-${{ hashFiles('rush.json') }}
+
+      - name: Cache pnpm
+        uses: actions/cache@v2
+        with:
+          path: |
+            common/temp/pnpm-store
+            ~/.cache/Cypress
+          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+
+  audit:
+    name: Audit for vulnerabilities
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/workflows/setup.yml@development
+      - run: rush audit
+
+  lint:
+    name: Lint code for standarlization
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/workflows/setup.yml@master
+      - run: rush lint
+
+  build:
+    name: Build all packages
+    needs: [lint, audit]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/workflows/setup.yml@master
+      - run: rush build
+
+  test_1:
+    name: Test general packages
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/workflows/setup.yml@master
+      - run: rush test
+
+  test_2:
+    name: Test database packages
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/workflows/setup.yml@master
+      - run: echo 'implement database tests'
+      
+  publish:
+    name: Publish packages
+    needs: [build, test_1, test_2]
+    runs-on: ubuntu-latest
+    if: ${{ github.event.release.body != '' && success() }}
+    steps:
+      - uses: ./.github/workflows/setup.yml@master
+      - name: Publish packages
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          RELEASE: ${{ github.event.release.body }}
+        run: rush bump
