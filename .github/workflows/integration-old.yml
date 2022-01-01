@@ -1,9 +1,6 @@
 name: '@acai build'
 
 on:
-  pull_request:
-  push:
-    branches: [ production, development ]
   release:
     types: [ published ]
 
