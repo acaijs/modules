@@ -57,7 +57,6 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Cache node modules
-        id: cacheNode
         uses: actions/cache@v2
         env:
           cache-name: cache-node-modules
@@ -71,5 +70,8 @@ jobs:
 
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
+
+      - name: Rush CLI
+        run: npm install -g @microsoft/rush
           
       - run: rush audit
