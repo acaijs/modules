@@ -151,6 +151,8 @@ jobs:
 
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
+        with:
+          build: true
 
       - name: Rush CLI
         run: npm install -g @microsoft/rush
@@ -182,6 +184,8 @@ jobs:
 
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
+        with:
+          build: true
 
       - name: Rush CLI
         run: npm install -g @microsoft/rush
