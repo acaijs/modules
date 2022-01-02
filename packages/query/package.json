@@ -28,7 +28,7 @@
 	},
 	"scripts": {
 		"build": "tsup",
-		"test": "",
+		"test": "echo \"to be implemented\"",
 		"lint": "eslint .",
 		"prepublishOnly": "yarn build",
 		"audit": "yarn audit"
@@ -36,7 +36,7 @@
 	"devDependencies": {
 		"@acai/interfaces": "^0.2.0-beta.0",
 		"@acai/testing": "^3.0.0-beta.0",
-		"@types/node": "^14.14.28",
+		"@types/node": "~17.0.6",
 		"@types/pg": "^7.14.9",
 		"@typescript-eslint/eslint-plugin": "~5.5.0",
 		"@typescript-eslint/parser": "~5.5.0",

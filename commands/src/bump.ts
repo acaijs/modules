@@ -9,7 +9,7 @@ import { colored, exception, cli } from "./utils/terminal"
 
 async function main() {
 	const body = process.env.RELEASE!
-        
+
 	if (!body) {
 		exception("Release body was not given")
 	}
@@ -76,7 +76,7 @@ async function main() {
 	await Promise.all(
 		Object.entries(versionList).map(async (pckg) => {
 			await cli(
-				`yarn publish ${process.cwd()}/../packages/${pckg[0]} --new-version ${pckg[1].next
+				`yarn publish ../../packages/${pckg[0]} --new-version ${pckg[1].next
 				}`,
 			)
 				.then(() =>
