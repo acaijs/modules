@@ -102,7 +102,7 @@ jobs:
       - name: Rush CLI
         run: npm install -g @microsoft/rush
           
-      - run: rush lint
+      - run: rush lint --fix
 
   build:
     name: Build all packages
@@ -196,7 +196,7 @@ jobs:
       - run: echo 'implement database tests'
 
   publish:
-    name: Test database packages
+    name: Publish release packages
     needs: [test_1, test_2]
     runs-on: ubuntu-latest
     if: ${{ github.event.release.body != '' && success() }}
