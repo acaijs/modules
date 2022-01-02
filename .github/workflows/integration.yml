@@ -103,6 +103,7 @@ jobs:
 
   analyze:
     name: Analyze code for vulnerabilities
+    needs: setup
     runs-on: ubuntu-latest
     permissions:
       actions: read
@@ -111,8 +112,6 @@ jobs:
 
     strategy:
       fail-fast: false
-      matrix:
-        language: [ 'javascript' ]
 
     steps:
     - name: Checkout repository
@@ -121,7 +120,7 @@ jobs:
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v1
       with:
-        languages: ${{ matrix.language }}
+        languages: 'javascript'
 
     - name: Autobuild
       uses: github/codeql-action/autobuild@v1
