@@ -5,7 +5,7 @@ import SQL from ".."
 import adapterTests from "../../../../utils/tests"
 
 adapterTests("SQL", SQL, {
-	user		: "acai_user",
-	password	: "acai_password",
+	user		: process.env.DATABASE_USER,
+	password	: process.env.DATABASE_PASSWORD,
 	database	: "acai_query",
 })
