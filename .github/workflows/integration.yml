@@ -11,9 +11,6 @@ jobs:
   setup:
     name: Setup node and environment
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: AcaiJS
     steps:
       - name: Checkout
         uses: actions/checkout@v2
