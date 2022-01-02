@@ -285,6 +285,10 @@ packages:
     resolution: {integrity: sha512-KB0sixD67CeecHC33MYn+eYARkqTheIRNuu97y2XMjR7Wu3XibO1vaY6VBV6O/a89SPI81cEUIYT87UqUWlZNw==}
     dev: false
 
+  /@types/node/17.0.6:
+    resolution: {integrity: sha512-+XBAjfZmmivILUzO0HwBJoYkAyyySSLg5KCGBDFLomJo0sV6szvVLAf4ANZZ0pfWzgEds5KmGLG9D5hfEqOhaA==}
+    dev: false
+
   /@types/object-path/0.11.1:
     resolution: {integrity: sha512-219LSCO9HPcoXcRTC6DbCs0FRhZgBnEMzf16RRqkT40WbkKx3mOeQuz3e2XqbfhOz/AHfbru0kzB1n1RCAsIIg==}
     dev: false
@@ -2646,12 +2650,12 @@ packages:
     dev: false
 
   file:projects/query.tgz:
-    resolution: {integrity: sha512-PPVAHmY2knHFUWXU+rbP/HvlZLf3FE7hAKVBELmrK3m6Bw6+0SevCNJrR0+JRQU9d4XUQ4N8ByNKy5G7ZBh/Tg==, tarball: file:projects/query.tgz}
+    resolution: {integrity: sha512-4fgwbH7pl6Rn6IPivvaxzW1FrLPf4mHnj5eT7LXOL1A6/x6kmYfJIv2t8lNgGWbFqEzx1b2FKNsndF/oYYcciA==, tarball: file:projects/query.tgz}
     name: '@rush-temp/query'
     version: 0.0.0
     dependencies:
       '@acai/testing': 3.0.0-beta.4
-      '@types/node': 14.18.0
+      '@types/node': 17.0.6
       '@types/pg': 7.14.11
       '@typescript-eslint/eslint-plugin': 5.5.0_b885794d89d00e0b80d68a1b7275fb2c
       '@typescript-eslint/parser': 5.5.0_eslint@8.4.0+typescript@4.5.2
