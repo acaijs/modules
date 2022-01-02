@@ -81,10 +81,10 @@ export default abstract class BasePresenter {
 	}
 
 	protected async preparePaginatedData (data: GenericObject) {
-		if (data.data && Array.isArray(data.data))
-			return data.data
-		if (data.rows && Array.isArray(data.rows))
-			return data.rows
+		if (data?.data && Array.isArray(data?.data))
+			return data?.data
+		if (data?.rows && Array.isArray(data?.rows))
+			return data?.rows
 
 		return undefined
 	}
