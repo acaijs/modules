@@ -69,6 +69,7 @@ jobs:
         uses: advancedcsg-open/actions-rush@v1.4.5
 
       - name: Rush CLI
+        if: steps.cacheNode.outputs.cache-hit != 'true'
         run: npm install -g @microsoft/rush
           
       - run: rush audit
@@ -97,6 +98,7 @@ jobs:
         uses: advancedcsg-open/actions-rush@v1.4.5
 
       - name: Rush CLI
+        if: steps.cacheNode.outputs.cache-hit != 'true'
         run: npm install -g @microsoft/rush
           
       - run: rush lint --fix
@@ -180,9 +182,11 @@ jobs:
           build: true
 
       - name: Rush CLI
+        if: steps.cacheNode.outputs.cache-hit != 'true'
         run: npm install -g @microsoft/rush
 
       - name: Global ts-node-dev
+        if: steps.cacheNode.outputs.cache-hit != 'true'
         run: npm install -g ts-node-dev
           
       - run: rush test
@@ -213,9 +217,11 @@ jobs:
           build: true
 
       - name: Rush CLI
+        if: steps.cacheNode.outputs.cache-hit != 'true'
         run: npm install -g @microsoft/rush
 
       - name: Global ts-node-dev
+        if: steps.cacheNode.outputs.cache-hit != 'true'
         run: npm install -g ts-node-dev
           
       - run: echo 'implement database tests'
@@ -245,6 +251,7 @@ jobs:
         uses: advancedcsg-open/actions-rush@v1.4.5
 
       - name: Rush CLI
+        if: steps.cacheNode.outputs.cache-hit != 'true'
         run: npm install -g @microsoft/rush
           
       - name: Publish packages
