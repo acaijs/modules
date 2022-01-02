@@ -1,4 +1,4 @@
-name: '@acai build'
+name: 'Integration'
 
 on:
   pull_request:
