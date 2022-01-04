@@ -2,9 +2,9 @@ name: 'Integration'
 
 on:
   pull_request: 
-    branches: [ production, development ]
+    branches: [ development ]
   push:
-    branches: [ production, development ]
+    branches: [ development ]
 
 jobs:
   setup:
@@ -139,22 +139,38 @@ jobs:
           key: ${{ runner.os }}-${{ env.cache-name }}
           restore-keys: ${{ runner.os }}-${{ env.cache-name }}
           
+      - uses: getong/mariadb-action@v1.1
+        with:
+          mysql user: ${{ secrets.DATABASE_USER }}
+          mysql password: ${{ secrets.DATABASE_PASSWORD }}
+          mysql database: acai_query
+          
       - run: echo 'implement database tests'
 
-  publish:
-    name: Publish release packages
+  verify_publish:
+    name: Verify if all files changed will be published
     needs: [test_1, test_2]
     runs-on: ubuntu-latest
-    if: ${{ github.event.release.body != '' && success() }}
+    if: github.event_name != 'pull_request'
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
+
+      - name: Cache builds
+        id: cacheBuilds
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-builds
+        with:
+          path: ./packages/**/dist
+          key: ${{ runner.os }}-${{ env.cache-name }}
+          restore-keys: ${{ runner.os }}-${{ env.cache-name }}
           
-      - name: Publish packages
+      - name: Verify publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          RELEASE: ${{ github.event.release.body }}
-        run: node common/scripts/install-run-rush.js bump
+          PULL_REQUEST: ${{ github.event.number }}
+        run: node common/scripts/install-run-rush.js verify

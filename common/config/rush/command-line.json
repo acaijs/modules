@@ -47,10 +47,10 @@
 		},
 		{
 			"commandKind": "global",
-			"name": "bump",
-			"summary": "Publish packages described in the markdown env config",
-			"description": "Publish packages described in the markdown env config.\nMake sure rush builds the project before calling this command.",
-			"shellCommand": "cd commands && yarn run command:bump"
+			"name": "verify",
+			"summary": "Verify if every changed file is covered by a version change",
+			"description": "Verify if every package with any changed file is covered with a file changed",
+			"shellCommand": "cd commands && yarn run command:verify"
 		}
 	],
 	/**
