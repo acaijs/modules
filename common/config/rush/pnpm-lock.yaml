@@ -2780,7 +2780,7 @@ packages:
       - supports-color
       - typescript
     dev: false
-
+    
   file:projects/query.tgz:
     resolution: {integrity: sha512-dU/kCV5JHfRwNNYDcMOQhrnCYACUAZ5h+40x2eDBYNHWlGBPJV57G9zyZ2rV1Tqpow3I9OL26ZvosqiCOXjAug==, tarball: file:projects/query.tgz}
     name: '@rush-temp/query'
