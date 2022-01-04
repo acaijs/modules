@@ -17,22 +17,22 @@ jobs:
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
 
-      - name: List files
-        run: cd /usr/local/lib/node_modules && ls
-
       - name: Cache ts-node-dev
         id: cacheTsNodeDev
         uses: actions/cache@v2
         env:
           cache-name: cache-node-modules
         with:
-          path: /usr/local/lib/node_modules
+          path: /usr/local/lib/node_modules/ts-node-dev
           key: ${{ runner.os }}-${{ env.cache-name }}
           restore-keys: ${{ runner.os }}-${{ env.cache-name }}
 
       - name: Global ts-node-dev
         if: steps.cacheTsNodeDev.outputs.cache-hit != 'true'
         run: npm install -g ts-node-dev
+
+      - name: List files
+        run: cd /usr/local/lib/node_modules && ls
 
   audit:
     name: Audit for vulnerabilities
