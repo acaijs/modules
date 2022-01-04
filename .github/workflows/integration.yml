@@ -17,19 +17,21 @@ jobs:
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
 
-      - name: Cache ts-node-dev
+      - name: Cache ts-node-dev and rush
         id: cacheTsNodeDev
         uses: actions/cache@v2
         env:
-          cache-name: cache-node-modules
+          cache-name: cache-modules
         with:
-          path: /usr/local/lib/node_modules/ts-node-dev
+          path: |
+            /usr/local/lib/node_modules/ts-node-dev
+            /usr/local/lib/node_modules/@microsoft/rush
           key: ${{ runner.os }}-${{ env.cache-name }}
           restore-keys: ${{ runner.os }}-${{ env.cache-name }}
 
       - name: Global ts-node-dev
         if: steps.cacheTsNodeDev.outputs.cache-hit != 'true'
-        run: npm install -g ts-node-dev
+        run: npm install -g ts-node-dev @microsoft/rush
 
       - name: List files
         run: cd /usr/local/lib/node_modules && ls
