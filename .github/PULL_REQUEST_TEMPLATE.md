@@ -1,11 +1,3 @@
----
-name: 'Feature'
-about: A default template pull request to merge into development
-title: '[feature] '
-labels: ''
-assignees: ''
----
-
 <!--
 1. When creating pull requests, add a tag to the title that refers to the package you are altering, such as: [server] or [query]
 2. Make the title imperative and direct
