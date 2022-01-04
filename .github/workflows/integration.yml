@@ -17,7 +17,10 @@ jobs:
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
 
-      - name: Cache node modules
+      - name: List files
+        run: cd /usr/local/lib/node_modules && ls
+
+      - name: Cache ts-node-dev
         id: cacheTsNodeDev
         uses: actions/cache@v2
         env:
@@ -93,7 +96,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Cache node modules
+      - name: Cache ts-node-dev
         id: cacheTsNodeDev
         uses: actions/cache@v2
         env:
@@ -119,7 +122,7 @@ jobs:
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
 
-      - name: Cache node modules
+      - name: Cache ts-node-dev
         id: cacheTsNodeDev
         uses: actions/cache@v2
         env:
@@ -142,7 +145,7 @@ jobs:
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
 
-      - name: Cache node modules
+      - name: Cache ts-node-dev
         id: cacheTsNodeDev
         uses: actions/cache@v2
         env:
@@ -165,16 +168,6 @@ jobs:
 
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
-
-      - name: Cache node modules
-        id: cacheTsNodeDev
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: /usr/local/lib/node_modules
-          key: ${{ runner.os }}-${{ env.cache-name }}
-          restore-keys: ${{ runner.os }}-${{ env.cache-name }}
           
       - name: Publish packages
         env:
