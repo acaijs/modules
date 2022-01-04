@@ -148,7 +148,7 @@ jobs:
       - run: echo 'implement database tests'
 
   verify_publish:
-    name: Verify if all files changed will be published
+    name: Verify version bump
     needs: [test_1, test_2]
     runs-on: ubuntu-latest
     if: github.event_name != 'pull_request'
@@ -169,8 +169,14 @@ jobs:
           key: ${{ runner.os }}-${{ env.cache-name }}
           restore-keys: ${{ runner.os }}-${{ env.cache-name }}
           
-      - name: Verify publish
+      - name: Verify changes
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           PULL_REQUEST: ${{ github.event.number }}
         run: node common/scripts/install-run-rush.js verify
+          
+      - name: Verify publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          PULL_REQUEST: ${{ github.event.number }}
+        run: node common/scripts/install-run-rush.js duplicate

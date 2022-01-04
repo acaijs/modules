@@ -51,6 +51,13 @@
 			"summary": "Verify if every changed file is covered by a version change",
 			"description": "Verify if every package with any changed file is covered with a file changed",
 			"shellCommand": "cd commands && yarn run command:verify"
+		},
+		{
+			"commandKind": "global",
+			"name": "duplicate",
+			"summary": "Verify if every changed package has updated to a unpublished version",
+			"description": "Verify if every changed package has updated to a unpublished version",
+			"shellCommand": "cd commands && yarn run command:duplicate"
 		}
 	],
 	/**
