@@ -1,52 +1,37 @@
-name: '@acai build'
+name: 'Integration'
 
 on:
-  pull_request:
+  pull_request: [ production, development ]
   push:
     branches: [ production, development ]
-  release:
-    types: [ published ]
 
 jobs:
   setup:
     name: Setup node and environment
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: AcaiJS
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Setup Node
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16.x'
-          registry-url: https://registry.npmjs.org/
+      - name: Rush Install
+        uses: advancedcsg-open/actions-rush@v1.4.5
 
       - name: Cache node modules
-        id: cacheNode
+        id: cacheTsNodeDev
         uses: actions/cache@v2
         env:
           cache-name: cache-node-modules
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          path: /usr/local/lib/node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-name }}
           restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-${{ env.cache-name }}
             ${{ runner.os }}-build-
             ${{ runner.os }}-
 
-      - name: Rush CLI
-        if: steps.cacheNode.outputs.cache-hit != 'true'
-        run: npm install -g @microsoft/rush
-
       - name: Global ts-node-dev
-        if: steps.cacheNode.outputs.cache-hit != 'true'
+        if: steps.cacheTsNodeDev.outputs.cache-hit != 'true'
         run: npm install -g ts-node-dev
-
-      - name: Rush Install
-        uses: advancedcsg-open/actions-rush@v1.4.5
 
   audit:
     name: Audit for vulnerabilities
@@ -72,6 +57,7 @@ jobs:
         uses: advancedcsg-open/actions-rush@v1.4.5
 
       - name: Rush CLI
+        if: steps.cacheNode.outputs.cache-hit != 'true'
         run: npm install -g @microsoft/rush
           
       - run: rush audit
@@ -100,13 +86,42 @@ jobs:
         uses: advancedcsg-open/actions-rush@v1.4.5
 
       - name: Rush CLI
+        if: steps.cacheNode.outputs.cache-hit != 'true'
         run: npm install -g @microsoft/rush
           
-      - run: rush lint
+      - run: rush lint --fix
+
+  analyze:
+    name: Analyze code for vulnerabilities
+    needs: setup
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    strategy:
+      fail-fast: false
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v1
+      with:
+        languages: 'javascript'
+
+    - name: Autobuild
+      uses: github/codeql-action/autobuild@v1
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v1
+
 
   build:
     name: Build all packages
-    needs: [audit, lint]
+    needs: [audit, lint, analyze]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -155,9 +170,11 @@ jobs:
           build: true
 
       - name: Rush CLI
+        if: steps.cacheNode.outputs.cache-hit != 'true'
         run: npm install -g @microsoft/rush
 
       - name: Global ts-node-dev
+        if: steps.cacheNode.outputs.cache-hit != 'true'
         run: npm install -g ts-node-dev
           
       - run: rush test
@@ -188,15 +205,17 @@ jobs:
           build: true
 
       - name: Rush CLI
+        if: steps.cacheNode.outputs.cache-hit != 'true'
         run: npm install -g @microsoft/rush
 
       - name: Global ts-node-dev
+        if: steps.cacheNode.outputs.cache-hit != 'true'
         run: npm install -g ts-node-dev
           
       - run: echo 'implement database tests'
 
   publish:
-    name: Test database packages
+    name: Publish release packages
     needs: [test_1, test_2]
     runs-on: ubuntu-latest
     if: ${{ github.event.release.body != '' && success() }}
@@ -220,6 +239,7 @@ jobs:
         uses: advancedcsg-open/actions-rush@v1.4.5
 
       - name: Rush CLI
+        if: steps.cacheNode.outputs.cache-hit != 'true'
         run: npm install -g @microsoft/rush
           
       - name: Publish packages
