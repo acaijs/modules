@@ -10,14 +10,14 @@
 			"name": "test",
 			"summary": "Test all repositories",
 			"description": "Run the test suite for every repository",
-			"enableParallelism": false
+			"enableParallelism": true
 		},
 		{
 			"commandKind": "bulk",
 			"name": "lint",
 			"summary": "Run a lint check to all projects",
 			"description": "Will check the linting for every file on each project",
-			"enableParallelism": false
+			"enableParallelism": true
 		},
 		{
 			"commandKind": "global",

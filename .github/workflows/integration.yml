@@ -17,22 +17,6 @@ jobs:
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
 
-      - name: Cache ts-node-dev and rush
-        id: cacheTsNodeDev
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-modules
-        with:
-          path: |
-            /usr/local/lib/node_modules/ts-node-dev
-            /usr/local/lib/node_modules/@microsoft/rush
-          key: ${{ runner.os }}-${{ env.cache-name }}
-          restore-keys: ${{ runner.os }}-${{ env.cache-name }}
-
-      - name: Global dependencies
-        if: steps.cacheTsNodeDev.outputs.cache-hit != 'true'
-        run: npm install -g ts-node-dev @microsoft/rush
-
   audit:
     name: Audit for vulnerabilities
     needs: setup
@@ -95,6 +79,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Cache builds
+        id: cacheBuilds
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-builds
+        with:
+          path: ./packages/**/dist
+          key: ${{ runner.os }}-${{ env.cache-name }}
+          restore-keys: ${{ runner.os }}-${{ env.cache-name }}
+
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
         with:
@@ -110,8 +104,19 @@ jobs:
 
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
+
+      - name: Cache builds
+        id: cacheBuilds
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-builds
+        with:
+          path: ./packages/**/dist
+          key: ${{ runner.os }}-${{ env.cache-name }}
+          restore-keys: ${{ runner.os }}-${{ env.cache-name }}
           
-      - run: node common/scripts/install-run-rush.js test
+      - name: Test
+        run: node common/scripts/install-run-rush.js test
 
   test_2:
     name: Test database packages
@@ -123,6 +128,16 @@ jobs:
 
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
+
+      - name: Cache builds
+        id: cacheBuilds
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-builds
+        with:
+          path: ./packages/**/dist
+          key: ${{ runner.os }}-${{ env.cache-name }}
+          restore-keys: ${{ runner.os }}-${{ env.cache-name }}
           
       - run: echo 'implement database tests'
 
