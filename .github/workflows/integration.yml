@@ -1,7 +1,8 @@
 name: 'Integration'
 
 on:
-  pull_request: [ production, development ]
+  pull_request: 
+    branches: [ production, development ]
   push:
     branches: [ production, development ]
 
