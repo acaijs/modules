@@ -89,7 +89,7 @@ jobs:
 
   build:
     name: Build all packages
-    needs: [audit, lint, analyze]
+    needs: [audit, lint]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
