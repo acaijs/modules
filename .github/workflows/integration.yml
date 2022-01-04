@@ -29,12 +29,9 @@ jobs:
           key: ${{ runner.os }}-${{ env.cache-name }}
           restore-keys: ${{ runner.os }}-${{ env.cache-name }}
 
-      - name: Global ts-node-dev
+      - name: Global dependencies
         if: steps.cacheTsNodeDev.outputs.cache-hit != 'true'
         run: npm install -g ts-node-dev @microsoft/rush
-
-      - name: List files
-        run: cd /usr/local/lib/node_modules && ls
 
   audit:
     name: Audit for vulnerabilities
@@ -46,6 +43,18 @@ jobs:
 
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
+
+      - name: Cache ts-node-dev and rush
+        id: cacheTsNodeDev
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-modules
+        with:
+          path: |
+            /usr/local/lib/node_modules/ts-node-dev
+            /usr/local/lib/node_modules/@microsoft/rush
+          key: ${{ runner.os }}-${{ env.cache-name }}
+          restore-keys: ${{ runner.os }}-${{ env.cache-name }}
           
       - run: rush audit
 
@@ -59,6 +68,18 @@ jobs:
 
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
+
+      - name: Cache ts-node-dev and rush
+        id: cacheTsNodeDev
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-modules
+        with:
+          path: |
+            /usr/local/lib/node_modules/ts-node-dev
+            /usr/local/lib/node_modules/@microsoft/rush
+          key: ${{ runner.os }}-${{ env.cache-name }}
+          restore-keys: ${{ runner.os }}-${{ env.cache-name }}
           
       - run: rush lint
 
@@ -98,13 +119,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Cache ts-node-dev
+      - name: Cache ts-node-dev and rush
         id: cacheTsNodeDev
         uses: actions/cache@v2
         env:
-          cache-name: cache-node-modules
+          cache-name: cache-modules
         with:
-          path: /usr/local/lib/node_modules
+          path: |
+            /usr/local/lib/node_modules/ts-node-dev
+            /usr/local/lib/node_modules/@microsoft/rush
           key: ${{ runner.os }}-${{ env.cache-name }}
           restore-keys: ${{ runner.os }}-${{ env.cache-name }}
 
@@ -124,13 +147,15 @@ jobs:
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
 
-      - name: Cache ts-node-dev
+      - name: Cache ts-node-dev and rush
         id: cacheTsNodeDev
         uses: actions/cache@v2
         env:
-          cache-name: cache-node-modules
+          cache-name: cache-modules
         with:
-          path: /usr/local/lib/node_modules
+          path: |
+            /usr/local/lib/node_modules/ts-node-dev
+            /usr/local/lib/node_modules/@microsoft/rush
           key: ${{ runner.os }}-${{ env.cache-name }}
           restore-keys: ${{ runner.os }}-${{ env.cache-name }}
           
@@ -147,13 +172,15 @@ jobs:
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
 
-      - name: Cache ts-node-dev
+      - name: Cache ts-node-dev and rush
         id: cacheTsNodeDev
         uses: actions/cache@v2
         env:
-          cache-name: cache-node-modules
+          cache-name: cache-modules
         with:
-          path: /usr/local/lib/node_modules
+          path: |
+            /usr/local/lib/node_modules/ts-node-dev
+            /usr/local/lib/node_modules/@microsoft/rush
           key: ${{ runner.os }}-${{ env.cache-name }}
           restore-keys: ${{ runner.os }}-${{ env.cache-name }}
           
@@ -170,6 +197,18 @@ jobs:
 
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
+
+      - name: Cache ts-node-dev and rush
+        id: cacheTsNodeDev
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-modules
+        with:
+          path: |
+            /usr/local/lib/node_modules/ts-node-dev
+            /usr/local/lib/node_modules/@microsoft/rush
+          key: ${{ runner.os }}-${{ env.cache-name }}
+          restore-keys: ${{ runner.os }}-${{ env.cache-name }}
           
       - name: Publish packages
         env:
