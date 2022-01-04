@@ -43,20 +43,8 @@ jobs:
 
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
-
-      - name: Cache ts-node-dev and rush
-        id: cacheTsNodeDev
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-modules
-        with:
-          path: |
-            /usr/local/lib/node_modules/ts-node-dev
-            /usr/local/lib/node_modules/@microsoft/rush
-          key: ${{ runner.os }}-${{ env.cache-name }}
-          restore-keys: ${{ runner.os }}-${{ env.cache-name }}
           
-      - run: rush audit
+      - run: node common/scripts/install-run-rush.js audit
 
   lint:
     name: Lint code for standarlization
@@ -68,20 +56,8 @@ jobs:
 
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
-
-      - name: Cache ts-node-dev and rush
-        id: cacheTsNodeDev
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-modules
-        with:
-          path: |
-            /usr/local/lib/node_modules/ts-node-dev
-            /usr/local/lib/node_modules/@microsoft/rush
-          key: ${{ runner.os }}-${{ env.cache-name }}
-          restore-keys: ${{ runner.os }}-${{ env.cache-name }}
           
-      - run: rush lint
+      - run: node common/scripts/install-run-rush.js lint
 
   analyze:
     name: Analyze code for vulnerabilities
@@ -119,18 +95,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Cache ts-node-dev and rush
-        id: cacheTsNodeDev
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-modules
-        with:
-          path: |
-            /usr/local/lib/node_modules/ts-node-dev
-            /usr/local/lib/node_modules/@microsoft/rush
-          key: ${{ runner.os }}-${{ env.cache-name }}
-          restore-keys: ${{ runner.os }}-${{ env.cache-name }}
-
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
         with:
@@ -146,20 +110,8 @@ jobs:
 
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
-
-      - name: Cache ts-node-dev and rush
-        id: cacheTsNodeDev
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-modules
-        with:
-          path: |
-            /usr/local/lib/node_modules/ts-node-dev
-            /usr/local/lib/node_modules/@microsoft/rush
-          key: ${{ runner.os }}-${{ env.cache-name }}
-          restore-keys: ${{ runner.os }}-${{ env.cache-name }}
           
-      - run: rush test
+      - run: node common/scripts/install-run-rush.js test
 
   test_2:
     name: Test database packages
@@ -171,18 +123,6 @@ jobs:
 
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
-
-      - name: Cache ts-node-dev and rush
-        id: cacheTsNodeDev
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-modules
-        with:
-          path: |
-            /usr/local/lib/node_modules/ts-node-dev
-            /usr/local/lib/node_modules/@microsoft/rush
-          key: ${{ runner.os }}-${{ env.cache-name }}
-          restore-keys: ${{ runner.os }}-${{ env.cache-name }}
           
       - run: echo 'implement database tests'
 
@@ -197,21 +137,9 @@ jobs:
 
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
-
-      - name: Cache ts-node-dev and rush
-        id: cacheTsNodeDev
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-modules
-        with:
-          path: |
-            /usr/local/lib/node_modules/ts-node-dev
-            /usr/local/lib/node_modules/@microsoft/rush
-          key: ${{ runner.os }}-${{ env.cache-name }}
-          restore-keys: ${{ runner.os }}-${{ env.cache-name }}
           
       - name: Publish packages
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           RELEASE: ${{ github.event.release.body }}
-        run: rush bump
+        run: node common/scripts/install-run-rush.js bump
