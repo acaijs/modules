@@ -1,11 +1,10 @@
 name: 'Integration'
 
 on:
-  pull_request:
+  pull_request: 
+    branches: [ production, development ]
   push:
     branches: [ production, development ]
-  release:
-    types: [ published ]
 
 jobs:
   setup:
@@ -15,35 +14,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Setup Node
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16.x'
-          registry-url: https://registry.npmjs.org/
-
-      - name: Cache node modules
-        id: cacheNode
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-
-      - name: Rush CLI
-        if: steps.cacheNode.outputs.cache-hit != 'true'
-        run: npm install -g @microsoft/rush
-
-      - name: Global ts-node-dev
-        if: steps.cacheNode.outputs.cache-hit != 'true'
-        run: npm install -g ts-node-dev
-
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
+
+      - name: Cache ts-node-dev and rush
+        id: cacheTsNodeDev
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-modules
+        with:
+          path: |
+            /usr/local/lib/node_modules/ts-node-dev
+            /usr/local/lib/node_modules/@microsoft/rush
+          key: ${{ runner.os }}-${{ env.cache-name }}
+          restore-keys: ${{ runner.os }}-${{ env.cache-name }}
+
+      - name: Global dependencies
+        if: steps.cacheTsNodeDev.outputs.cache-hit != 'true'
+        run: npm install -g ts-node-dev @microsoft/rush
 
   audit:
     name: Audit for vulnerabilities
@@ -53,26 +41,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Cache node modules
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
-
-      - name: Rush CLI
-        if: steps.cacheNode.outputs.cache-hit != 'true'
-        run: npm install -g @microsoft/rush
           
-      - run: rush audit
+      - run: node common/scripts/install-run-rush.js audit
 
   lint:
     name: Lint code for standarlization
@@ -82,26 +54,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Cache node modules
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
-
-      - name: Rush CLI
-        if: steps.cacheNode.outputs.cache-hit != 'true'
-        run: npm install -g @microsoft/rush
           
-      - run: rush lint --fix
+      - run: node common/scripts/install-run-rush.js lint
 
   analyze:
     name: Analyze code for vulnerabilities
@@ -139,18 +95,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Cache node modules
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
         with:
@@ -164,32 +108,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Cache node modules
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
-        with:
-          build: true
-
-      - name: Rush CLI
-        if: steps.cacheNode.outputs.cache-hit != 'true'
-        run: npm install -g @microsoft/rush
-
-      - name: Global ts-node-dev
-        if: steps.cacheNode.outputs.cache-hit != 'true'
-        run: npm install -g ts-node-dev
           
-      - run: rush test
+      - run: node common/scripts/install-run-rush.js test
 
   test_2:
     name: Test database packages
@@ -199,30 +121,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Cache node modules
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
-        with:
-          build: true
-
-      - name: Rush CLI
-        if: steps.cacheNode.outputs.cache-hit != 'true'
-        run: npm install -g @microsoft/rush
-
-      - name: Global ts-node-dev
-        if: steps.cacheNode.outputs.cache-hit != 'true'
-        run: npm install -g ts-node-dev
           
       - run: echo 'implement database tests'
 
@@ -235,27 +135,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Cache node modules
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
-
-      - name: Rush CLI
-        if: steps.cacheNode.outputs.cache-hit != 'true'
-        run: npm install -g @microsoft/rush
           
       - name: Publish packages
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           RELEASE: ${{ github.event.release.body }}
-        run: rush bump
+        run: node common/scripts/install-run-rush.js bump
