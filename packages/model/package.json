@@ -1,6 +1,6 @@
 {
 	"name": "@acai/model",
-	"version": "0.8.0-beta.19",
+	"version": "0.8.0-beta.20",
 	"description": "Models are a easy way to group your data with methods to format it, save and other crud operations.",
 	"repository": {
 		"type": "git",
