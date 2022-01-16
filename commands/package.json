@@ -9,6 +9,7 @@
 		"test": "ts-node-dev ./test.ts",
 		"lint": "eslint .",
 		"audit": "yarn audit",
+		"command:publish": "yarn build && node dist/publish",
 		"command:duplicate": "yarn build && node dist/duplicate",
 		"command:verify": "yarn build && node dist/verify",
 		"command:bump": "yarn build && node dist/bump"

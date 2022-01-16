@@ -58,6 +58,13 @@
 			"summary": "Verify if every changed package has updated to a unpublished version",
 			"description": "Verify if every changed package has updated to a unpublished version",
 			"shellCommand": "cd commands && yarn run command:duplicate"
+		},
+		{
+			"commandKind": "global",
+			"name": "publish:new",
+			"summary": "Publish updated packages",
+			"description": "Verify if every changed package has updated to a unpublished version",
+			"shellCommand": "cd commands && yarn run command:publish"
 		}
 	],
 	/**
