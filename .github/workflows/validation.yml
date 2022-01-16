@@ -1,9 +1,7 @@
-name: 'Integration'
+name: 'Validation'
 
 on:
   pull_request: 
-    branches: [ development ]
-  push:
     branches: [ development ]
 
 jobs:
@@ -47,13 +45,6 @@ jobs:
     name: Analyze code for vulnerabilities
     needs: setup
     runs-on: ubuntu-latest
-    permissions:
-      actions: read
-      contents: read
-      security-events: write
-
-    strategy:
-      fail-fast: false
 
     steps:
     - name: Checkout repository
@@ -151,7 +142,6 @@ jobs:
     name: Verify version bump
     needs: [test_1, test_2]
     runs-on: ubuntu-latest
-    if: github.event_name != 'pull_request'
     steps:
       - name: Checkout
         uses: actions/checkout@v2
