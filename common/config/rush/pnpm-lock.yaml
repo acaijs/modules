@@ -34,6 +34,7 @@ specifiers:
   mysql2: ~2.3.3
   pg: ~8.7.1
   supertest: ^6.1.6
+  ts-node-dev: ~1.1.8
   tsup: ~5.11.4
   typescript: ^4.1.5
   uuid: ^8.3.2
@@ -72,6 +73,7 @@ dependencies:
   mysql2: 2.3.3
   pg: 8.7.1
   supertest: 6.1.6
+  ts-node-dev: 1.1.8_typescript@4.5.2
   tsup: 5.11.4_typescript@4.5.2
   typescript: 4.5.2
   uuid: 8.3.2
@@ -555,6 +557,14 @@ packages:
 
   /asynckit/0.4.0:
     resolution: {integrity: sha1-x57Zf380y48robyXkLzDZkdLS3k=}
+    dev: false
+
+  /axios/0.24.0:
+    resolution: {integrity: sha512-Q6cWsys88HoPgAaFAVUb0WpPk0O8iTeisR9IMqy9G8AbO4NlpVknrnQS03zzF9PGAWgO3cgletO3VjV/P7VztA==}
+    dependencies:
+      follow-redirects: 1.14.6
+    transitivePeerDependencies:
+      - debug
     dev: false
 
   /balanced-match/1.0.2:
@@ -1246,6 +1256,16 @@ packages:
 
   /flatted/3.2.4:
     resolution: {integrity: sha512-8/sOawo8tJ4QOBX8YlQBMxL8+RLZfxMQOif9o0KUKTNTjMYElWPE0r/m5VNFxTRd0NSw8qSy8dajrwX4RYI1Hw==}
+    dev: false
+
+  /follow-redirects/1.14.6:
+    resolution: {integrity: sha512-fhUl5EwSJbbl8AR+uYL2KQDxLkdSjZGR36xy46AO7cOMTrCMON6Sa28FmAnC2tRTDbd/Uuzz3aJBv7EBN7JH8A==}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
     dev: false
 
   /form-data/3.0.1:
@@ -2672,7 +2692,7 @@ packages:
     dev: false
 
   file:projects/commands.tgz:
-    resolution: {integrity: sha512-D7zKqGacQ8Zn5outJRAEY0AFUCP9yM6gHsq0BibZkqzReSobSVlawtTvPlt4S3qzHmt90/3iOSO67C0kS0C+oQ==, tarball: file:projects/commands.tgz}
+    resolution: {integrity: sha512-tuHztWHWxHtBAOp4OLYz0NpdNFP6Vusa1h9ISNn/TrQWIkiCJbY6ZcjWcdFLKvlq22EtlbD/3yDZ5PgiKuTKcw==, tarball: file:projects/commands.tgz}
     name: '@rush-temp/commands'
     version: 0.0.0
     dependencies:
@@ -2680,12 +2700,13 @@ packages:
       '@types/node': 14.18.0
       '@typescript-eslint/eslint-plugin': 5.5.0_b885794d89d00e0b80d68a1b7275fb2c
       '@typescript-eslint/parser': 5.5.0_eslint@8.4.0+typescript@4.5.2
+      axios: 0.24.0
       eslint: 8.4.0
       ts-node-dev: 1.1.8_typescript@4.5.2
       tsup: 5.11.4_typescript@4.5.2
       typescript: 4.5.2
     transitivePeerDependencies:
-      - node-notifier
+      - debug
       - supports-color
       - ts-node
     dev: false
@@ -2780,7 +2801,7 @@ packages:
       - supports-color
       - typescript
     dev: false
-    
+
   file:projects/query.tgz:
     resolution: {integrity: sha512-dU/kCV5JHfRwNNYDcMOQhrnCYACUAZ5h+40x2eDBYNHWlGBPJV57G9zyZ2rV1Tqpow3I9OL26ZvosqiCOXjAug==, tarball: file:projects/query.tgz}
     name: '@rush-temp/query'

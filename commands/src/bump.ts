@@ -4,10 +4,13 @@ import { promises as fs } from "fs"
 
 // Utils
 import { exists } from "./utils/file"
-import { bump } from "./utils/versioning"
+import { bump as bumpVersion } from "./utils/versioning"
 import { colored, exception, cli } from "./utils/terminal"
 
-async function main() {
+/**
+ * @deprecated
+ */
+async function bump() {
 	const body = process.env.RELEASE!
 
 	if (!body) {
@@ -65,7 +68,7 @@ async function main() {
 		versionList[module] = {
 			bump: version,
 			current: pckgjson.version,
-			next: bump(pckgjson.version, version),
+			next: bumpVersion(pckgjson.version, version),
 		}
 	}
 
@@ -92,4 +95,4 @@ async function main() {
 	)
 }
 
-main()
+bump()

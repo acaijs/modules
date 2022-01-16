@@ -1,10 +1,8 @@
-name: 'Integration'
+name: 'Validation'
 
 on:
   pull_request: 
-    branches: [ production, development ]
-  push:
-    branches: [ production, development ]
+    branches: [ development ]
 
 jobs:
   setup:
@@ -16,22 +14,6 @@ jobs:
 
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
-
-      - name: Cache ts-node-dev and rush
-        id: cacheTsNodeDev
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-modules
-        with:
-          path: |
-            /usr/local/lib/node_modules/ts-node-dev
-            /usr/local/lib/node_modules/@microsoft/rush
-          key: ${{ runner.os }}-${{ env.cache-name }}
-          restore-keys: ${{ runner.os }}-${{ env.cache-name }}
-
-      - name: Global dependencies
-        if: steps.cacheTsNodeDev.outputs.cache-hit != 'true'
-        run: npm install -g ts-node-dev @microsoft/rush
 
   audit:
     name: Audit for vulnerabilities
@@ -63,13 +45,6 @@ jobs:
     name: Analyze code for vulnerabilities
     needs: setup
     runs-on: ubuntu-latest
-    permissions:
-      actions: read
-      contents: read
-      security-events: write
-
-    strategy:
-      fail-fast: false
 
     steps:
     - name: Checkout repository
@@ -95,6 +70,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Cache builds
+        id: cacheBuilds
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-builds
+        with:
+          path: ./packages/**/dist
+          key: ${{ runner.os }}-${{ env.cache-name }}
+          restore-keys: ${{ runner.os }}-${{ env.cache-name }}
+
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
         with:
@@ -110,8 +95,19 @@ jobs:
 
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
+
+      - name: Cache builds
+        id: cacheBuilds
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-builds
+        with:
+          path: ./packages/**/dist
+          key: ${{ runner.os }}-${{ env.cache-name }}
+          restore-keys: ${{ runner.os }}-${{ env.cache-name }}
           
-      - run: node common/scripts/install-run-rush.js test
+      - name: Test
+        run: node common/scripts/install-run-rush.js test
 
   test_2:
     name: Test database packages
@@ -123,23 +119,54 @@ jobs:
 
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
+
+      - name: Cache builds
+        id: cacheBuilds
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-builds
+        with:
+          path: ./packages/**/dist
+          key: ${{ runner.os }}-${{ env.cache-name }}
+          restore-keys: ${{ runner.os }}-${{ env.cache-name }}
+          
+      - uses: getong/mariadb-action@v1.1
+        with:
+          mysql user: ${{ secrets.DATABASE_USER }}
+          mysql password: ${{ secrets.DATABASE_PASSWORD }}
+          mysql database: acai_query
           
       - run: echo 'implement database tests'
 
-  publish:
-    name: Publish release packages
+  verify_publish:
+    name: Verify version bump
     needs: [test_1, test_2]
     runs-on: ubuntu-latest
-    if: ${{ github.event.release.body != '' && success() }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
       - name: Rush Install
         uses: advancedcsg-open/actions-rush@v1.4.5
+
+      - name: Cache builds
+        id: cacheBuilds
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-builds
+        with:
+          path: ./packages/**/dist
+          key: ${{ runner.os }}-${{ env.cache-name }}
+          restore-keys: ${{ runner.os }}-${{ env.cache-name }}
           
-      - name: Publish packages
+      - name: Verify changes
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          RELEASE: ${{ github.event.release.body }}
-        run: node common/scripts/install-run-rush.js bump
+          PULL_REQUEST: ${{ github.event.number }}
+        run: node common/scripts/install-run-rush.js verify
+          
+      - name: Verify publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          PULL_REQUEST: ${{ github.event.number }}
+        run: node common/scripts/install-run-rush.js duplicate
