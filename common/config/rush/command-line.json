@@ -10,7 +10,7 @@
 			"name": "test",
 			"summary": "Test all repositories",
 			"description": "Run the test suite for every repository",
-			"enableParallelism": false
+			"enableParallelism": true
 		},
 		{
 			"commandKind": "bulk",
@@ -47,10 +47,24 @@
 		},
 		{
 			"commandKind": "global",
-			"name": "bump",
-			"summary": "Publish packages described in the markdown env config",
-			"description": "Publish packages described in the markdown env config.\nMake sure rush builds the project before calling this command.",
-			"shellCommand": "cd commands && yarn run command:bump"
+			"name": "verify",
+			"summary": "Verify if every changed file is covered by a version change",
+			"description": "Verify if every package with any changed file is covered with a file changed",
+			"shellCommand": "cd commands && yarn run command:verify"
+		},
+		{
+			"commandKind": "global",
+			"name": "duplicate",
+			"summary": "Verify if every changed package has updated to a unpublished version",
+			"description": "Verify if every changed package has updated to a unpublished version",
+			"shellCommand": "cd commands && yarn run command:duplicate"
+		},
+		{
+			"commandKind": "global",
+			"name": "publish:new",
+			"summary": "Publish updated packages",
+			"description": "Verify if every changed package has updated to a unpublished version",
+			"shellCommand": "cd commands && yarn run command:publish"
 		}
 	],
 	/**

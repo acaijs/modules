@@ -19,7 +19,7 @@ export const cli = (command: string) => {
 	)
 }
 
-export const colored = (message: string, color) => {
+export const colored = (message: string, color: keyof typeof colors) => {
 	console.log(colors[color || "white"] + message + "\x1b[0m")
 }
 

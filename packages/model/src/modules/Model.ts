@@ -279,22 +279,20 @@ export default class Model {
 	}
 
 	public fill <T extends typeof Model, I = InstanceType<T>> (this: I, fields: Partial<Omit<I, keyof Model>> & {[k in string]: any}) {
-		const $allFields 		= ((this as any).constructor.prototype as {$fields?: FieldInfoInterface[]}).$fields || []
-		const { $relations } 	= ((this as any).constructor.prototype as {$relations: RelationDataInterface[]})
+		const { $fields, $relations } 	= ((this as any).constructor.prototype as {$relations: RelationDataInterface[]; $fields?: FieldInfoInterface[]})
 
-		// set fields
-		for (let i = 0; i < $allFields.length; i++) {
-			const field 	= $allFields[i]
-			const foreign 	= ($relations || []).find(i => i.name === field.name)
+		Object.entries(fields).forEach(entry => {
+			// field filtered inside the model
+			const field = ($fields || []).find(i => i.name === entry[0])
+			const foreign = ($relations || []).find(i => i.name === entry[0] || i.foreignKey === entry[0])
+
 
 			if (foreign && foreign.type === "belongsTo") {
-				if (fields[foreign.foreignKey] || fields[field.name]) {
-					this[field.name].set(fields[foreign.foreignKey] || fields[field.name])
-				}
+				this[foreign.name].set(entry[1])
 			}
-			else {
-				this[field.name] = (fields || {})[field.name]
+			else if (field) {
+				this[entry[0]] = entry[1]
 			}
-		}
+		})
 	}
 }

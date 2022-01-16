@@ -8,6 +8,7 @@ import RequestInterface, { ICustomIncomingMessage } from "../interfaces/httpServ
 
 // Utils
 import censor from "./censor"
+import isHandable from "./isHandable"
 
 export default async function smartResponse (payload: [string | RequestInterface | ResponseInterface | Record<string, unknown> | (() => any), any], request: ICustomIncomingMessage, viewPrefix?: string) {
 	const headers = {} as Record<string, any>
@@ -48,22 +49,24 @@ export default async function smartResponse (payload: [string | RequestInterface
 		body = payload[0] as string | Record<string, unknown>
 	}
 
-	if (typeof body === "object") {
-		headers["Accept"]		= "application/json"
-		headers["Content-Type"] = "application/json"
+	if (!isHandable(body)) {
+		if (typeof body === "object") {
+			headers["Accept"]		= "application/json"
+			headers["Content-Type"] = "application/json"
 
-		if (body.toObject && typeof body.toObject === "function") {
-			body = body.toObject()
+			if (body.toObject && typeof body.toObject === "function") {
+				body = body.toObject()
+			}
 		}
-	}
-	else if (!headers["Content-Type"]) {
-		headers["Accept"]		= "text/plain"
-		headers["Content-Type"] = "text/plain"
+		else if (!headers["Content-Type"]) {
+			headers["Accept"]		= "text/plain"
+			headers["Content-Type"] = "text/plain"
+		}
 	}
 
 	// respond
 	return {
-		body: typeof body === "object" ? censor(body) : body,
+		body: typeof body === "object" && !isHandable(body) ? censor(body) : body,
 		headers,
 		status,
 	}

@@ -1,6 +1,7 @@
 // Interfaces
 import { ServerResponse }		from "http"
 import { ResponseInterface }	from "@acai/interfaces"
+import isHandable from "./isHandable"
 
 export default function respond (res: ServerResponse, { body, headers, status }: ResponseInterface = {}) {
 	// Status
@@ -15,7 +16,7 @@ export default function respond (res: ServerResponse, { body, headers, status }:
 	}
 
 	// Set body
-	if (body) res.write(typeof body === "string" ? body : JSON.stringify(body) || "")
+	if (body) res.write(typeof body === "string" || isHandable(body) ? body : JSON.stringify(body) || "")
 
 	// respond to server
 	res.end()
