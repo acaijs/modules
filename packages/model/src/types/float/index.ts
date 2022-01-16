@@ -2,7 +2,9 @@
 import ModelTypeInterface from "../../interfaces/modelType"
 
 const toFloat = ({value, args}) => {
-	const format = parseFloat(value)
+	const format = value ? parseFloat(value) : args.nullable !== true ? 0 : value
+
+	if (!format && format !== 0) return format
 
 	if (args) {
 		if (args.max && args.max < format)

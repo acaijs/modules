@@ -2,9 +2,9 @@
 import ModelTypeInterface from "../../interfaces/modelType"
 
 const toInt = ({value, args}) => {
-	if (args?.nullable && (value === null || value === undefined)) return null
+	const format = value ? parseInt(value) : args.nullable !== true ? 0 : value
 
-	const format = parseInt(value)
+	if (!format && format !== 0) return format
 
 	if (args) {
 		if (args.max && args.max < format)
