@@ -1,5 +1,5 @@
 // Utils
-import { exec } from "child_process"
+import dayjs from "dayjs"
 import axios from "./utils/request"
 import { cli, colored, exception } from "./utils/terminal"
 
@@ -9,6 +9,7 @@ async function publish () {
 	if (!commit) exception("You must provide a commit sha")
 
 	const { data } = await axios(`https://api.github.com/repos/AcaiJS/modules/commits/${commit}?per_page=1&sha=${commit}`)
+	const alterDate = data.commit.author.date
 	const configs = data.files.filter(i => i.filename.match(/packages\/.+\/package\.json/))
 	const packages = {}
 
@@ -27,7 +28,10 @@ async function publish () {
 		const [name, version] = pkg
 
 		try {
-			await axios(`https://registry.npmjs.org/@acai/${name}/${version}`)
+			const { data } = await axios(`https://registry.npmjs.org/@acai/${name}/${version}`)
+			const [,stamp] = data._npmOperationalInternal.tmp.split("_").reverse()
+
+			if (dayjs(stamp).isBefore(dayjs(alterDate).add(1, "hour"))) throw new Error("Release should happen after the commit")
 		}
 		// should publish
 		catch (e) {
